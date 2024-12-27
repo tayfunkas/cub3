@@ -1,0 +1,6 @@
+- 27 Dec
+    Initial checks for mapfile name, textures, player number, map characters, empty map are completed. 
+    Initialization and more robust exit is required in case of error. 
+    Map should be checked for being closed by '1' only.
+    Player count 0 should also be handled. 
+    Texture file type and accesibility needs to be checked.
