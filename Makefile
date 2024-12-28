@@ -4,29 +4,34 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -rf
 
-SOURCES = checks.c \
-	free.c \
-	initialize.c \
-	get_next_line.c \
-	get_next_line_utils.c \
-	parsing_utils.c \
-	libft.c
+SOURCES = sources/checks.c \
+	sources/free.c \
+	sources/initialize.c \
+	sources/get_next_line.c \
+	sources/get_next_line_utils.c \
+	sources/parsing_utils.c \
+	sources/border_check.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
 INCLUDES = -I./mlx
 
-MLX_DIR = ./mlx
+LIBFT_DIR = ./libft
+LIBFT_LIB = $(LIBFT_DIR)/libft.a
 
+MLX_DIR = ./mlx
 MLX_LIB = $(MLX_DIR)/libmlx.a
 
-MLX = -L$(MLX_DIR) -lmlx -lXext -lX11  # For Linux
-# MLX = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit  # For macOS
+# MLX = -L$(MLX_DIR) -lmlx -lXext -lX11  # For Linux
+MLX = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit  # For macOS
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) $(MLX_LIB)
-	$(CC) $(CFLAGS) $(OBJECTS) $(MLX) -o $(NAME)
+$(NAME): $(OBJECTS) $(LIBFT_LIB) $(MLX_LIB) 
+	$(CC) $(CFLAGS) $(OBJECTS) $(MLX) $(LIBFT_LIB) -o $(NAME)
+
+$(LIBFT_LIB):
+	make -C $(LIBFT_DIR)
 
 $(MLX_LIB):
 	make -C $(MLX_DIR)
@@ -37,10 +42,12 @@ $(MLX_LIB):
 clean:
 	$(RM) $(OBJECTS)
 	make -C $(MLX_DIR) clean
+	make -C $(LIBFT_DIR) clean
 
 fclean: clean
 	$(RM) $(NAME)
 	make -C $(MLX_DIR) clean
+	make -C $(LIBFT_DIR) fclean
 
 re: fclean all
 

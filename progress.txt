@@ -10,4 +10,7 @@
     New files added. Structure is still an issue.
     All structs are initialized (but we will need more structs or to expand the current structs).
     Freeing is very modular. We need to keep it that way.
-    Something compiles :D 
+    Border check is progressing. 
+    Added the libft dir and updated the makefile.
+    Example maps are added.
+    Empty xpm files are added (relevant checks will be added). 

@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include "get_next_line.h"
+#include "../libft/libft.h"
 
 typedef struct s_map
 {
@@ -75,6 +76,12 @@ char	*ft_strdup(char *src);
 char	**ft_split(const char *str, char c);
 int	ft_atoi(const char *str);
 size_t	ft_strlen(const char *s);
+//border_check.c
+void    normalize_map(t_game *game, t_map *map);
+int flood_fill(t_map *map, int x, int y);
+int validate_borders(t_map *map);
+int validate_map(t_game *game);
+
 
 
 
