@@ -11,6 +11,7 @@ typedef struct s_map
 {
     int     m_height;
     int     m_width;
+    char    **data;
 } t_map;
 
 typedef struct s_player
@@ -57,8 +58,8 @@ void    classify_line(t_game *game, char *line);
 void    parse_texture(t_game *game, char *line, char **texture_path);
 void    parse_color(t_game *game, char *line, t_color *color);
 void    parse_map(t_game *game, char *line);
-void    check_mapchars(char **map, char *line, t_game *game);
-void    check_spawn(char **map, char *line, t_game *game);
+void    check_mapchars(char *line, t_game *game);
+void    check_player(char **map, char *line, t_game *game);
 char    **append_line_to_map(char **map, char *line, t_game *game);
 int ft_arraylen(char **array);
 //free.c
@@ -67,8 +68,13 @@ void    handle_error(t_game *game, const char *error_message);
 //initialize.c
 void    initialize_game(t_game **game);
 void    initialize_player(t_game **game);
-
-
+//libft.c
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+int	ft_isdigit(int c);
+char	*ft_strdup(char *src);
+char	**ft_split(const char *str, char c);
+int	ft_atoi(const char *str);
+size_t	ft_strlen(const char *s);
 
 
 

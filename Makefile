@@ -5,11 +5,12 @@ CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -rf
 
 SOURCES = checks.c \
-	sources/free.c \
-	sources/initialize.c \
-	sources/get_next_line.c \
-	sources/get_next_line_utils.c \
-	sources/parsing_utils.c 
+	free.c \
+	initialize.c \
+	get_next_line.c \
+	get_next_line_utils.c \
+	parsing_utils.c \
+	libft.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

@@ -85,20 +85,21 @@ void    parse_color(t_game *game, char *line, t_color *color)
     color->b = ft_atoi(rgb[2]);
     if (color-> r < 0 || color-> r > 255 || color->g < 0 || color->g > 255 || color->b < 0 || color->b > 255)
         handle_error(game, "Color values must be in range 0-255");
-    ft_free_split(rgb);
+    //ft_free_split(rgb);
 }
 
 void    parse_map(t_game *game, char *line)
 {
-    static char **temp_map = NULL;
-
+    static char **temp_map;
+    
+    temp_map = NULL;
     temp_map = append_line_to_map(temp_map, line, game);
     if (!temp_map)
         handle_error(game, "Memory allocation failed for parsing the map.");
-    game->map = temp_map;
+    game->map->data = temp_map;
 }
 
-void    check_mapchars(char **map, char *line, t_game *game)
+void    check_mapchars(char *line, t_game *game)
 {
     int i;
 
@@ -111,7 +112,7 @@ void    check_mapchars(char **map, char *line, t_game *game)
     }
 }
 
-void    check_spawn(char **map, char *line, t_game *game)
+void    check_player(char **map, char *line, t_game *game)
 {
     int i;
 
@@ -136,18 +137,24 @@ char    **append_line_to_map(char **map, char *line, t_game *game)
     int map_len;
     char **new_map;
     int i;
+    int line_width;
 
     i = 0;
+    line_width = 0;
     map_len = ft_arraylen(map);
     new_map = malloc(sizeof(char *) * (map_len + 2));
     if (!new_map)
         handle_error(game, "Memory allocation failed while expanding the map");
-    check_mapchars(map, line, game);
+    check_mapchars(line, game);
     check_player(map, line, game);
     while (i < map_len)
         new_map[i] = map[i];
     new_map[map_len] = ft_strdup(line);
     new_map[map_len + 1] = NULL;
     free(map);
+    game->map->m_height = map_len + 1;
+    line_width = ft_strlen(line);
+    if (line_width > game->map->m_width)
+        game->map->m_width = line_width;
     return (new_map);
 }
