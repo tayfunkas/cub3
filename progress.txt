@@ -4,3 +4,9 @@
     Map should be checked for being closed by '1' only.
     Player count 0 should also be handled. 
     Texture file type and accesibility needs to be checked.
+
+- 28 Dec 
+    More dynamic error handling.
+    New files added. Structure is still an issue.
+    All structs are initialized (but we will need more structs or to expand the current structs).
+    Freeing is very modular. We need to keep it that way. 

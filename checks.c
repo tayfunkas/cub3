@@ -5,11 +5,7 @@ void    check_empty_map(t_game *game, int fd)
     char    buff;
 
     if (read(fd, &buff, 1) == 0)
-    {
-        printf("Error\nEmpty map.\n");
-        free(game);
-        exit(1);
-    }
+        handle_error(game, "Empty map.");
 }
 
 void    check_mapfile_name(t_game *game, char *map)
@@ -21,18 +17,10 @@ void    check_mapfile_name(t_game *game, char *map)
     while(map[len])
         len++;
     if (map[len - 4] != '.' || map[len - 3] != 'c' || map[len - 2] != 'u' || map[len - 1] != 'b')
-    {
-        printf("Error\nOnly .cub extension is accepted for maps.\n");
-        free(game);
-        exit(1);
-    }
+        handle_error(game, "Only .cub extension is accepted for maps");
     fd = open(map, O_RDWR);
     if (fd < 0)
-    {
-        printf("Error\nMap is not opened.\n");
-        free(game);
-        exit(1);
-    }
+        handle_error(game, "Map was not opened.");
     check_empty_map(game, fd);
     close(fd);
 }
@@ -44,11 +32,7 @@ void    parse_file(t_game *game, char *filepath)
 
     fd = open(filepath, O_RDONLY);
     if (fd < 0)
-    {
-        printf("Error\nFailed to open .cub file.\n");
-        free(game);
-        exit(1);
-    }
+        handle_error(game, "Failed to open .cub file.");
     while ((line = get_next_line(fd)) != NULL)
     {
         if(line[0] == '\n' || line[0] == '\0')
@@ -79,11 +63,7 @@ void    classify_line(t_game *game, char *line)
     else if(ft_isdigit(line[0]) || line[0] == ' ')
         parse_map(game, line);
     else
-    {
-        printf("Error\nInvalid line in .cun file: %s\n", line);
-        free(game);
-        exit(1);    
-    }
+        handle_error(game, "Invalid line in .cub file");   
 }
 
 void    parse_texture(t_game *game, char *line, char **texture_path)
@@ -92,31 +72,19 @@ void    parse_texture(t_game *game, char *line, char **texture_path)
         line++;
     *texture_path = ft_strdup(line);
     if (!*texture_path)
-    {
-        printf("Error\nInvalid texture path: %s\n", line);
-        free(game);
-        exit(1);
-    }
+        handle_error(game, "Invalid texture line");
 }
 
 void    parse_color(t_game *game, char *line, t_color *color)
 {
     char **rgb = ft_split(line, ',');
     if (!rgb || ft_arraylen(rgb) != 3)
-    {
-        printf("Error\nInvalid color format: %s\n", line);
-        free(game);
-        exit(1);
-    }
+        handle_error(game, "Invalid color format");
     color->r = ft_atoi(rgb[0]);
     color->g = ft_atoi(rgb[1]);
     color->b = ft_atoi(rgb[2]);
     if (color-> r < 0 || color-> r > 255 || color->g < 0 || color->g > 255 || color->b < 0 || color->b > 255)
-    {
-        printf("Error\nColor values must be in range 0-255: %s\n", line);
-        free(game);
-        exit(1);
-    }
+        handle_error(game, "Color values must be in range 0-255");
     ft_free_split(rgb);
 }
 
@@ -126,11 +94,7 @@ void    parse_map(t_game *game, char *line)
 
     temp_map = append_line_to_map(temp_map, line, game);
     if (!temp_map)
-    {
-        printf("Error\nMemory allocation failed for parsing the map.\n");
-        free(game);
-        exit(1);
-    }
+        handle_error(game, "Memory allocation failed for parsing the map.");
     game->map = temp_map;
 }
 
@@ -142,16 +106,12 @@ void    check_mapchars(char **map, char *line, t_game *game)
     while (line[i])
     {
         if (line[i] != '0' && line[i] != '1' && line[i] != 'N' && line[i] != 'S' && line[i] != 'W' && line[i] != 'E' && line[i] != ' ')
-        {
-            printf("Error\nInvalid character in the map: %c\n", line[i]);
-            free(game);
-            exit(1);
-        }
+            handle_error(game, "Invalid character in the map");
         i++;
     }
 }
 
-void    check_player(char **map, char *line, t_game *game)
+void    check_spawn(char **map, char *line, t_game *game)
 {
     int i;
 
@@ -162,11 +122,7 @@ void    check_player(char **map, char *line, t_game *game)
         {
             game->player->player_count++;
             if (game->player->player_count > 1)
-            {
-                printf("Error\nThere should be one starting position for the player\n");
-                free(game);
-                exit(1);
-            }
+                handle_error(game, "There should be one starting position for the player");
             game->player->player_dir = line[i];
             game->player->player_x = i;
             game->player->player_y = ft_arraylen(map);
@@ -185,11 +141,7 @@ char    **append_line_to_map(char **map, char *line, t_game *game)
     map_len = ft_arraylen(map);
     new_map = malloc(sizeof(char *) * (map_len + 2));
     if (!new_map)
-    {
-        printf("Error\nMemory allocation failed while expanding the map.\n");
-        free(game);
-        exit(1);
-    }
+        handle_error(game, "Memory allocation failed while expanding the map");
     check_mapchars(map, line, game);
     check_player(map, line, game);
     while (i < map_len)
@@ -198,14 +150,4 @@ char    **append_line_to_map(char **map, char *line, t_game *game)
     new_map[map_len + 1] = NULL;
     free(map);
     return (new_map);
-}
-
-int ft_arraylen(char **array)
-{
-    int len;
-
-    len = 0;
-    while (array && array[len])
-        len++;
-    return (len);
 }

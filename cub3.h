@@ -21,6 +21,21 @@ typedef struct s_player
     int     player_y;
 }   t_player;
 
+typedef struct s_ray
+{
+    double  ray_angle;
+    double  wall_distance;
+    int     hit_x;
+    int     hit_y;
+}   t_ray;
+
+typedef struct s_color
+{
+    int r;
+    int g;
+    int b;
+}   t_color;
+
 typedef struct s_game
 {
     char    *no_texture;
@@ -31,14 +46,29 @@ typedef struct s_game
     t_color ceiling_color;
     t_map   *map;
     t_player    *player;
+    t_ray   *rays;
 }   t_game;
 
-typedef struct s_color
-{
-    int r;
-    int g;
-    int b;
-}   t_color;
+//checks.c
+void    check_empty_map(t_game *game, int fd);
+void    check_mapfile_name(t_game *game, char *map);
+void    parse_file(t_game *game, char *filepath);
+void    classify_line(t_game *game, char *line);
+void    parse_texture(t_game *game, char *line, char **texture_path);
+void    parse_color(t_game *game, char *line, t_color *color);
+void    parse_map(t_game *game, char *line);
+void    check_mapchars(char **map, char *line, t_game *game);
+void    check_spawn(char **map, char *line, t_game *game);
+char    **append_line_to_map(char **map, char *line, t_game *game);
+int ft_arraylen(char **array);
+//free.c
+void    free_game(t_game *game);
+void    handle_error(t_game *game, const char *error_message);
+//initialize.c
+void    initialize_game(t_game **game);
+void    initialize_player(t_game **game);
+
+
 
 
 
