@@ -25,12 +25,12 @@ void    check_mapfile_name(t_game *game, char *map)
     close(fd);
 }
 
-void    parse_file(t_game *game, char *filepath)
+void    parse_file(t_game *game)
 {
     int fd;
     char    *line;
 
-    fd = open(filepath, O_RDONLY);
+    fd = open(game->map_file, O_RDONLY);
     if (fd < 0)
         handle_error(game, "Failed to open .cub file.");
     while ((line = get_next_line(fd)) != NULL)

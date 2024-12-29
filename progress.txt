@@ -14,3 +14,10 @@
     Added the libft dir and updated the makefile.
     Example maps are added.
     Empty xpm files are added (relevant checks will be added). 
+
+- 29 Dec
+    Initial checks for map file, map and textures are all in place
+    Files need to be structured better
+    Currently it compiles (without MLX) 
+    Not working correctly. Will require further check - but good progress nevertheless :)
+    Textures (MPM files) added.

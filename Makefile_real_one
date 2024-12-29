@@ -16,27 +16,39 @@ SOURCES = sources/checks.c \
 
 OBJECTS = $(SOURCES:.c=.o)
 
+INCLUDES = -I./mlx
+
 LIBFT_DIR = ./libft
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
 
+MLX_DIR = ./mlx
+MLX_LIB = $(MLX_DIR)/libmlx.a
+
+# MLX = -L$(MLX_DIR) -lmlx -lXext -lX11  # For Linux
+MLX = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit  # For macOS
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) $(LIBFT_LIB) 
-	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_LIB) -o $(NAME)
+$(NAME): $(OBJECTS) $(LIBFT_LIB) $(MLX_LIB) 
+	$(CC) $(CFLAGS) $(OBJECTS) $(MLX) $(LIBFT_LIB) -o $(NAME)
 
 $(LIBFT_LIB):
 	make -C $(LIBFT_DIR)
+
+$(MLX_LIB):
+	make -C $(MLX_DIR)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	$(RM) $(OBJECTS)
+	make -C $(MLX_DIR) clean
 	make -C $(LIBFT_DIR) clean
 
 fclean: clean
 	$(RM) $(NAME)
+	make -C $(MLX_DIR) clean
 	make -C $(LIBFT_DIR) fclean
 
 re: fclean all

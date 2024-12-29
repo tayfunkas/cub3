@@ -44,6 +44,7 @@ typedef struct s_game
     char    *so_texture;
     char    *we_texture;
     char    *ea_texture;
+    char    *map_file;
     t_color floor_color;
     t_color ceiling_color;
     t_map   *map;
@@ -54,7 +55,7 @@ typedef struct s_game
 //checks.c
 void    check_empty_map(t_game *game, int fd);
 void    check_mapfile_name(t_game *game, char *map);
-void    parse_file(t_game *game, char *filepath);
+void    parse_file(t_game *game);
 void    classify_line(t_game *game, char *line);
 void    parse_texture(t_game *game, char *line, char **texture_path);
 void    parse_color(t_game *game, char *line, t_color *color);
@@ -67,8 +68,8 @@ int ft_arraylen(char **array);
 void    free_game(t_game *game);
 void    handle_error(t_game *game, const char *error_message);
 //initialize.c
-void    initialize_game(t_game **game);
-void    initialize_player(t_game **game);
+void    initialize_game(t_game *game);
+void    initialize_player(t_game *game);
 //libft.c
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 int	ft_isdigit(int c);
@@ -81,8 +82,10 @@ void    normalize_map(t_game *game, t_map *map);
 int flood_fill(t_map *map, int x, int y);
 int validate_borders(t_map *map);
 int validate_map(t_game *game);
-
-
+//check_images.c
+int has_xpm_extension(const char *filename);
+void    check_texture(const char *path, const char *message, t_game *game);
+void    check_images(t_game *game);
 
 
 
