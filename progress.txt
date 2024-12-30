@@ -21,3 +21,12 @@
     Currently it compiles (without MLX) 
     Not working correctly. Will require further check - but good progress nevertheless :)
     Textures (MPM files) added.
+
+- 30 Dec
+    Parsing is actually taking place. 
+    Seg fault fixed. 
+    Map is parsed and values are correctly saved into structs.
+    Memory issue for parsing arguments need to be fixed. 
+    For non-rectangular maps, more work is needed.
+    End of line '\n' issue fixed for textures and lines.
+    

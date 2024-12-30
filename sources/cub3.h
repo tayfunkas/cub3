@@ -68,7 +68,7 @@ int ft_arraylen(char **array);
 void    free_game(t_game *game);
 void    handle_error(t_game *game, const char *error_message);
 //initialize.c
-void    initialize_game(t_game *game);
+void    initialize_game(t_game **game);
 void    initialize_player(t_game *game);
 //libft.c
 int	ft_strncmp(const char *s1, const char *s2, size_t n);

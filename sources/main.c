@@ -10,14 +10,21 @@ void    parse_arguments(int argc, char **argv, t_game *game)
 
 int main(int argc, char **argv)
 {
-    t_game game;
-
+    t_game *game;
+    
+    game = NULL;
     initialize_game(&game);
-    parse_arguments(argc, argv, &game);
-    parse_file(&game);
-    check_images(&game);
-    validate_map(&game);
+    printf("Game struct initialized succesfully!\n");
+    parse_arguments(argc, argv, game);
+    printf("Arguments parsed succesfully!\n");
+    parse_file(game);
+    printf("Map file parsed succesfully!\n");
+    check_images(game);
+    printf("Texture files are checked!\n");
+    validate_map(game);
+    printf("Map is valid!\n");
 
-    printf("Map and textures are loaded succesfully!");
-    free_game(&game);
+    free_game(game);
+    printf("All is freed. All good!\n");
+    return (0);
 }

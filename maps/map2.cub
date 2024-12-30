@@ -1,7 +1,7 @@
-NO assets/textures/NO.xpm
-SO assets/textures/SO.xpm
-EA assets/textures/EA.xpm
-WE assets/textures/WE.xpm
+NO textures/NO.xpm
+SO textures/SO.xpm
+EA textures/EA.xpm
+WE textures/WE.xpm
 
 F 127,0,255
 C 204,103,255

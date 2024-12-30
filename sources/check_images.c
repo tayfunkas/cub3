@@ -5,9 +5,11 @@ int has_xpm_extension(const char *filename)
     size_t  len;
     
     len = ft_strlen(filename);
+    printf("file name %slength = %zu\n", filename, len);
+    printf("%c\n", filename[len - 2]);
     if (len < 4)
         return (0);
-    if (filename[len - 1] != 'm' && filename[len - 2] != 'p' && filename[len - 3] != 'x' && filename[len - 4] != '.')
+    if (filename[len - 1] != 'm' || filename[len - 2] != 'p' || filename[len - 3] != 'x' || filename[len - 4] != '.')
         return (0);
     else
         return (1); 

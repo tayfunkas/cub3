@@ -68,9 +68,13 @@ void    classify_line(t_game *game, char *line)
 
 void    parse_texture(t_game *game, char *line, char **texture_path)
 {
+    char	*trimmed_line;
+    
     while (*line == ' ')
         line++;
-    *texture_path = ft_strdup(line);
+    trimmed_line = ft_strtrim(line, "\n");
+    *texture_path = trimmed_line;
+    
     if (!*texture_path)
         handle_error(game, "Invalid texture line");
 }
@@ -93,6 +97,7 @@ void    parse_map(t_game *game, char *line)
     static char **temp_map;
     
     temp_map = NULL;
+    line = ft_strtrim(line, "\n");
     temp_map = append_line_to_map(temp_map, line, game);
     if (!temp_map)
         handle_error(game, "Memory allocation failed for parsing the map.");
@@ -102,7 +107,7 @@ void    parse_map(t_game *game, char *line)
 void    check_mapchars(char *line, t_game *game)
 {
     int i;
-
+printf("Checking line: %s\n", line);
     i = 0;
     while (line[i])
     {
