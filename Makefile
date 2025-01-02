@@ -12,6 +12,7 @@ SOURCES = sources/checks.c \
 	sources/parsing_utils.c \
 	sources/border_check.c \
 	sources/check_images.c \
+	sources/parse_map.c \
 	sources/main.c 
 
 OBJECTS = $(SOURCES:.c=.o)
