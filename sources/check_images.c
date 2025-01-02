@@ -15,14 +15,17 @@
 int	has_xpm_extension(const char *filename)
 {
 	size_t	len;
-
-	len = ft_strlen(filename);
-	printf("file name %slength = %zu\n", filename, len);
-	printf("%c\n", filename[len - 2]);
+	char	*trimmed_fn;
+	
+	trimmed_fn = ft_strtrim(filename, "\n");
+	trimmed_fn = ft_strtrim(trimmed_fn, " ");
+	len = ft_strlen(trimmed_fn);
+	printf("file name %s length = %zu\n", trimmed_fn, len);
+	printf("%c\n", trimmed_fn[len - 2]);
 	if (len < 4)
 		return (0);
-	if (filename[len - 1] != 'm' || filename[len - 2] != 'p' 
-		|| filename[len - 3] != 'x' || filename[len - 4] != '.')
+	if (trimmed_fn[len - 1] != 'm' || trimmed_fn[len - 2] != 'p' 
+		|| trimmed_fn[len - 3] != 'x' || trimmed_fn[len - 4] != '.')
 		return (0);
 	else
 		return (1); 
@@ -35,6 +38,7 @@ void	parse_texture(t_game *game, char *line, char **texture_path)
 	while (*line == ' ')
 		line++;
 	trimmed_line = ft_strtrim(line, "\n");
+	trimmed_line = ft_strtrim(trimmed_line, " ");
 	*texture_path = trimmed_line;
 	if (!*texture_path)
 		handle_error(game, "Invalid texture line");

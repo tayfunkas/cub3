@@ -29,3 +29,13 @@ char	*ft_strtrim_spaces(char *line)
 	return (line);
 }
 
+int	ft_is_all_spaces(char *line)
+{
+	while (*line)
+	{
+		if (*line != ' ' || *line != '\t' || *line != '\n')
+			return (0);
+		line++;
+	}
+	return (1);
+}

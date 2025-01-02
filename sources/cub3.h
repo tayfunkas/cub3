@@ -94,5 +94,6 @@ void	parse_color(t_game *game, char *line, t_color *color);
 //parsing_utils.c
 char	*ft_strtrim_spaces(char *line);
 int		ft_arraylen(char **array);
+int		ft_is_all_spaces(char *line);
 
 #endif

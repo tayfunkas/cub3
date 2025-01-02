@@ -31,6 +31,8 @@ int	main(int argc, char **argv)
 	printf("Arguments parsed succesfully!\n");
 	parse_file(game);
 	printf("Map file parsed succesfully!\n");
+	if (game->player->player_count == 0)
+		handle_error(game, "No player on the map!");
 	check_images(game);
 	printf("Texture files are checked!\n");
 	validate_map(game);

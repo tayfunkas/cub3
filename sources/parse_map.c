@@ -22,11 +22,6 @@ void	parse_file(t_game *game)
 		handle_error(game, "Failed to open .cub file.");
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		if (line[0] == '\n' || line[0] == '\0')
-		{
-			free(line);
-			continue ;
-		}
 		classify_line(game, line);
 		free(line);
 	}
@@ -35,20 +30,29 @@ void	parse_file(t_game *game)
 
 void	classify_line(t_game *game, char *line)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0)
+	static int	parsing_map = 0;
+
+	while (parsing_map == 0 && (*line == ' ' || *line == '\n'))
+		line++; 
+	if (parsing_map == 0 && ft_strncmp(line, "NO ", 3) == 0)
 		parse_texture(game, line + 3, &(game->no_texture));
-	else if (ft_strncmp(line, "SO ", 3) == 0)
+	else if (parsing_map == 0 && ft_strncmp(line, "SO ", 3) == 0)
 		parse_texture(game, line + 3, &(game->so_texture));
-	else if (ft_strncmp(line, "WE ", 3) == 0)
+	else if (parsing_map == 0 && ft_strncmp(line, "WE ", 3) == 0)
 		parse_texture(game, line + 3, &(game->we_texture));
-	else if (ft_strncmp(line, "EA ", 3) == 0)
+	else if (parsing_map == 0 && ft_strncmp(line, "EA ", 3) == 0)
 		parse_texture(game, line + 3, &(game->ea_texture));
-	else if (ft_strncmp(line, "F ", 2) == 0)
+	else if (parsing_map == 0 && ft_strncmp(line, "F ", 2) == 0)
 		parse_color(game, line + 2, &(game->floor_color));
-	else if (ft_strncmp(line, "C ", 2) == 0)
+	else if (parsing_map == 0 && ft_strncmp(line, "C ", 2) == 0)
 		parse_color(game, line + 2, &(game->ceiling_color));
-	else if (ft_isdigit(line[0]) || line[0] == ' ')
+	else if (parsing_map == 0 && ft_is_all_spaces(line))
+		return ;
+	else if (ft_isdigit(line[0]) || (line[0] == ' '))
+	{
+		parsing_map = 1;
 		parse_map(game, line);
+	}
 	else
 		handle_error(game, "Invalid line in .cub file");
 }
@@ -56,8 +60,22 @@ void	classify_line(t_game *game, char *line)
 void	parse_map(t_game *game, char *line)
 {
 	static char	**temp_map;
-
+	int		i;
+	int		len;
+	int		s;
+	
+	s = 0;
+	i = 0;
+	len = ft_strlen(line); 
 	temp_map = NULL;
+	while (line[i] != '\n')
+	{
+		if (line[i] == ' ')
+			s++;
+		if ((len - 1) == s)
+			handle_error(game, "Invalid blank line within the map.");
+		i++;
+	}
 	line = ft_strtrim(line, "\n");
 	temp_map = append_line_to_map(temp_map, line, game);
 	if (!temp_map)

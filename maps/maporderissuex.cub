@@ -1,10 +1,12 @@
-NO textures/NO.xpm   
-SO textures/SO.xpm
-EA textures/EA.xpm
-WE textures/WE.xpm
-        
-C 153,204,255   
-F 164,169,20
+
+
+           NO textures/NO.xpm
+SO      textures/SO.xpm
+
+ C 153,          204           ,255
+ EA      textures/EA.xpm
+                       WE  textures/WE.xpm
+            
 
 111111111111111111111
 101000001000000000001
@@ -27,3 +29,4 @@ F 164,169,20
 101010111011111111101
 1N1000001000000000001
 111111111111111111111
+F 164,169 ,20
