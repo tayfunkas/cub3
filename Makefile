@@ -11,7 +11,8 @@ SOURCES = sources/checks.c \
 	sources/get_next_line_utils.c \
 	sources/parsing_utils.c \
 	sources/border_check.c \
-	sources/check_images.c \
+	sources/check_textures.c \
+	sources/check_colors.c \
 	sources/parse_map.c \
 	sources/main.c 
 

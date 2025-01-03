@@ -57,7 +57,7 @@ void	classify_line(t_game *game, char *line)
 		handle_error(game, "Invalid line in .cub file");
 }
 
-void	parse_map(t_game *game, char *line)
+/*void	parse_map(t_game *game, char *line)
 {
 	static char	**temp_map;
 	int		i;
@@ -81,7 +81,26 @@ void	parse_map(t_game *game, char *line)
 	if (!temp_map)
 		handle_error(game, "Memory allocation failed for parsing the map.");
 	game->map->data = temp_map;
+}*/
+
+void	parse_map(t_game *game, char *line)
+{
+	static char	**temp_map;
+	char		*trimmed_line;
+
+	temp_map = NULL;
+	if (line[ft_strlen(line) - 1] == '\n')
+		line[ft_strlen(line) - 1] = '\0';
+	trimmed_line = ft_strdup(line); // Simply duplicate the line without any additional trimming
+	if (!trimmed_line)
+		handle_error(game, "Memory allocation failed for parsing the map.");
+	temp_map = append_line_to_map(temp_map, trimmed_line, game);
+	free(trimmed_line); // Free the duplicated line after use
+	if (!temp_map)
+		handle_error(game, "Memory allocation failed for parsing the map.");
+	game->map->data = temp_map;
 }
+
 
 char	**append_line_to_map(char **map, char *line, t_game *game)
 {

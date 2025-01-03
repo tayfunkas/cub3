@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/01/02 13:05:36 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/01/02 20:28:05 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	has_xpm_extension(const char *filename)
 {
 	size_t	len;
 	char	*trimmed_fn;
-	
+
 	trimmed_fn = ft_strtrim(filename, "\n");
 	trimmed_fn = ft_strtrim(trimmed_fn, " ");
 	len = ft_strlen(trimmed_fn);
@@ -42,22 +42,6 @@ void	parse_texture(t_game *game, char *line, char **texture_path)
 	*texture_path = trimmed_line;
 	if (!*texture_path)
 		handle_error(game, "Invalid texture line");
-}
-
-void	parse_color(t_game *game, char *line, t_color *color)
-{
-	char	**rgb;
-
-	rgb = ft_split(line, ',');
-	if (!rgb || ft_arraylen(rgb) != 3)
-		handle_error(game, "Invalid color format");
-	color->r = ft_atoi(rgb[0]);
-	color->g = ft_atoi(rgb[1]);
-	color->b = ft_atoi(rgb[2]);
-	if (color-> r < 0 || color-> r > 255 || color->g < 0 
-		|| color->g > 255 || color->b < 0 || color->b > 255)
-		handle_error(game, "Color values must be in range 0-255");
-	//ft_free_split(rgb);
 }
 
 void	check_texture(const char *path, const char *message, t_game *game)

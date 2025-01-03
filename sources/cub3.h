@@ -85,12 +85,15 @@ void	normalize_map(t_game *game, t_map *map);
 int		flood_fill(t_map *map, int x, int y);
 int		validate_borders(t_map *map);
 int		validate_map(t_game *game);
-//check_images.c
+//check_textures.c
 int		has_xpm_extension(const char *filename);
 void	check_texture(const char *path, const char *message, t_game *game);
 void	check_images(t_game *game);
 void	parse_texture(t_game *game, char *line, char **texture_path);
+//check_colors.c
 void	parse_color(t_game *game, char *line, t_color *color);
+int		ft_alldigit(char *str);
+void	ft_free_split(char **array);
 //parsing_utils.c
 char	*ft_strtrim_spaces(char *line);
 int		ft_arraylen(char **array);

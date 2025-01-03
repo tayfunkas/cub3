@@ -42,4 +42,14 @@
     Issues:
     	- Open maps are not detected by the flood-fill it seems like. 
     	- Color values when non numeric doesnt return error.
+    	
+- 3 Jan
+    Resolved:
+    	- Color values when non-numberic now return error. 
+    Issues:
+    	- Trim function overall requires freeing which I did nto do a good job with so far. 
+    	- Open maps are not detected by the flood-fill it seems like. 
+    	
+    	
+    
 
