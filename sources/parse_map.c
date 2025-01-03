@@ -57,7 +57,7 @@ void	classify_line(t_game *game, char *line)
 		handle_error(game, "Invalid line in .cub file");
 }
 
-/*void	parse_map(t_game *game, char *line)
+void	parse_map(t_game *game, char *line)
 {
 	static char	**temp_map;
 	int		i;
@@ -81,9 +81,10 @@ void	classify_line(t_game *game, char *line)
 	if (!temp_map)
 		handle_error(game, "Memory allocation failed for parsing the map.");
 	game->map->data = temp_map;
-}*/
+	validate_map_lines(game);
+}
 
-void	parse_map(t_game *game, char *line)
+/*void	parse_map(t_game *game, char *line)
 {
 	static char	**temp_map;
 	char		*trimmed_line;
@@ -99,7 +100,7 @@ void	parse_map(t_game *game, char *line)
 	if (!temp_map)
 		handle_error(game, "Memory allocation failed for parsing the map.");
 	game->map->data = temp_map;
-}
+}*/
 
 
 char	**append_line_to_map(char **map, char *line, t_game *game)

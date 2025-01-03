@@ -85,6 +85,9 @@ void	normalize_map(t_game *game, t_map *map);
 int		flood_fill(t_map *map, int x, int y);
 int		validate_borders(t_map *map);
 int		validate_map(t_game *game);
+void	validate_line(t_game *game, char **map, int x, int height);
+void	validate_map_lines(t_game *game);
+void	validate_top_and_bottom(t_game *game, char **map, int height);
 //check_textures.c
 int		has_xpm_extension(const char *filename);
 void	check_texture(const char *path, const char *message, t_game *game);
