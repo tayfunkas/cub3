@@ -50,6 +50,14 @@
     	- Trim function overall requires freeing which I did nto do a good job with so far. 
     	- Open maps are not detected by the flood-fill it seems like. 
     	
+- 6 Jan
+    All parsing issues are resolved. Instead of flood fill, we check it all line by line.
+    Each 0 is checked left, right, up and down. If met with space, returns error. 
+    For unusual shapes, all emptiess is turned into space to check the 0.
+    Currently, all maps are working correctly. 
+    Feel free to create more maps and test. 
+    Maps are divided into 2 groups as passing and error. 
+    	
     	
     
 

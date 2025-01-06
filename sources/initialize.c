@@ -30,6 +30,7 @@ void	initialize_game(t_game **game)
 	(*game)->map->m_height = 0;
 	(*game)->map->m_width = 0;
 	(*game)->map->data = NULL;
+	(*game)->map->line_count = 0;
 	initialize_player(*game);
 }
 

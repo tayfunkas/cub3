@@ -12,11 +12,21 @@
 
 #include "cub3.h"
 
+static void	assign_check_color(t_game *game, t_color *color, char **rgb)
+{
+	color->r = ft_atoi(rgb[0]);
+	color->g = ft_atoi(rgb[1]);
+	color->b = ft_atoi(rgb[2]);
+	if (color-> r < 0 || color-> r > 255 || color->g < 0 
+		|| color->g > 255 || color->b < 0 || color->b > 255)
+		handle_error(game, "Color values must be in range 0-255");
+}
+
 void	parse_color(t_game *game, char *line, t_color *color)
 {
 	char	**rgb;
 	char	*trimmed;
-	int	i;
+	int		i;
 
 	i = 0;
 	rgb = ft_split(line, ',');
@@ -35,12 +45,7 @@ void	parse_color(t_game *game, char *line, t_color *color)
 		rgb[i] = trimmed;
 		i++;
 	}
-	color->r = ft_atoi(rgb[0]);
-	color->g = ft_atoi(rgb[1]);
-	color->b = ft_atoi(rgb[2]);
-	if (color-> r < 0 || color-> r > 255 || color->g < 0 
-		|| color->g > 255 || color->b < 0 || color->b > 255)
-		handle_error(game, "Color values must be in range 0-255");
+	assign_check_color(game, color, rgb);
 	ft_free_split(rgb);
 }
 

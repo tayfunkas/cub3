@@ -20,88 +20,132 @@ void	parse_file(t_game *game)
 	fd = open(game->map_file, O_RDONLY);
 	if (fd < 0)
 		handle_error(game, "Failed to open .cub file.");
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		classify_line(game, line);
 		free(line);
+		line = get_next_line(fd);
 	}
 	close(fd);
+}
+
+static int	assign_lines(t_game *game, char *line)
+{
+	if (ft_strncmp(line, "NO ", 3) == 0)
+		parse_texture(game, line + 3, &(game->no_texture));
+	else if (ft_strncmp(line, "SO ", 3) == 0)
+		parse_texture(game, line + 3, &(game->so_texture));
+	else if (ft_strncmp(line, "WE ", 3) == 0)
+		parse_texture(game, line + 3, &(game->we_texture));
+	else if (ft_strncmp(line, "EA ", 3) == 0)
+		parse_texture(game, line + 3, &(game->ea_texture));
+	else if (ft_strncmp(line, "F ", 2) == 0)
+		parse_color(game, line + 2, &(game->floor_color));
+	else if (ft_strncmp(line, "C ", 2) == 0)
+		parse_color(game, line + 2, &(game->ceiling_color));
+	else if (*line == '\0')
+		return (1);
+	else
+		return (0);
+	return (1);
 }
 
 void	classify_line(t_game *game, char *line)
 {
 	static int	parsing_map = 0;
+	char		*original_line;
 
-	while (parsing_map == 0 && (*line == ' ' || *line == '\n'))
-		line++; 
-	if (parsing_map == 0 && ft_strncmp(line, "NO ", 3) == 0)
-		parse_texture(game, line + 3, &(game->no_texture));
-	else if (parsing_map == 0 && ft_strncmp(line, "SO ", 3) == 0)
-		parse_texture(game, line + 3, &(game->so_texture));
-	else if (parsing_map == 0 && ft_strncmp(line, "WE ", 3) == 0)
-		parse_texture(game, line + 3, &(game->we_texture));
-	else if (parsing_map == 0 && ft_strncmp(line, "EA ", 3) == 0)
-		parse_texture(game, line + 3, &(game->ea_texture));
-	else if (parsing_map == 0 && ft_strncmp(line, "F ", 2) == 0)
-		parse_color(game, line + 2, &(game->floor_color));
-	else if (parsing_map == 0 && ft_strncmp(line, "C ", 2) == 0)
-		parse_color(game, line + 2, &(game->ceiling_color));
-	else if (parsing_map == 0 && ft_is_all_spaces(line))
+	original_line = line;
+	while (*line == ' ' || *line == '\n')
+		line++;
+	if (parsing_map)
+	{
+		if (ft_isdigit(*line) || *line == ' ')
+			parse_map(game, original_line);
+		else if (*line == '\0')
+			handle_error(game, "Empty line within the map");
+		else
+			handle_error(game, "Invalid line after map has started");
 		return ;
-	else if (ft_isdigit(line[0]) || (line[0] == ' '))
+	}
+	if (assign_lines(game, line))
+		return ;
+	else if (ft_isdigit(*line) || *line == ' ')
 	{
 		parsing_map = 1;
-		parse_map(game, line);
+		parse_map(game, original_line);
 	}
 	else
 		handle_error(game, "Invalid line in .cub file");
 }
 
-void	parse_map(t_game *game, char *line)
+/*void	classify_line(t_game *game, char *line)
 {
-	static char	**temp_map;
-	int		i;
-	int		len;
-	int		s;
-	
-	s = 0;
-	i = 0;
-	len = ft_strlen(line); 
-	temp_map = NULL;
-	while (line[i] != '\n')
+	static int	parsing_map = 0;
+	char		*original_line;
+
+	original_line = line;
+	while (*line == ' ' || *line == '\n')
+		line++;
+	if (parsing_map)
 	{
-		if (line[i] == ' ')
-			s++;
-		if ((len - 1) == s)
-			handle_error(game, "Invalid blank line within the map.");
-		i++;
+		if (ft_isdigit(*line) || *line == ' ')
+			parse_map(game, original_line);
+		else if (*line == '\0')
+			handle_error(game, "Empty line within the map");
+		else
+			handle_error(game, "Invalid line after map has started");
+		return ;
 	}
-	line = ft_strtrim(line, "\n");
-	temp_map = append_line_to_map(temp_map, line, game);
-	if (!temp_map)
-		handle_error(game, "Memory allocation failed for parsing the map.");
-	game->map->data = temp_map;
-	validate_map_lines(game);
-}
-
-/*void	parse_map(t_game *game, char *line)
-{
-	static char	**temp_map;
-	char		*trimmed_line;
-
-	temp_map = NULL;
-	if (line[ft_strlen(line) - 1] == '\n')
-		line[ft_strlen(line) - 1] = '\0';
-	trimmed_line = ft_strdup(line); // Simply duplicate the line without any additional trimming
-	if (!trimmed_line)
-		handle_error(game, "Memory allocation failed for parsing the map.");
-	temp_map = append_line_to_map(temp_map, trimmed_line, game);
-	free(trimmed_line); // Free the duplicated line after use
-	if (!temp_map)
-		handle_error(game, "Memory allocation failed for parsing the map.");
-	game->map->data = temp_map;
+	if (ft_strncmp(line, "NO ", 3) == 0)
+		parse_texture(game, line + 3, &(game->no_texture));
+	else if (ft_strncmp(line, "SO ", 3) == 0)
+		parse_texture(game, line + 3, &(game->so_texture));
+	else if (ft_strncmp(line, "WE ", 3) == 0)
+		parse_texture(game, line + 3, &(game->we_texture));
+	else if (ft_strncmp(line, "EA ", 3) == 0)
+		parse_texture(game, line + 3, &(game->ea_texture));
+	else if (ft_strncmp(line, "F ", 2) == 0)
+		parse_color(game, line + 2, &(game->floor_color));
+	else if (ft_strncmp(line, "C ", 2) == 0)
+		parse_color(game, line + 2, &(game->ceiling_color));
+	else if (*line == '\0')
+		return ;
+	else if (ft_isdigit(*line) || *line == ' ')
+	{
+		parsing_map = 1;
+		parse_map(game, original_line);
+	}
+	else
+		handle_error(game, "Invalid line in .cub file");
 }*/
 
+void	parse_map(t_game *game, char *line)
+{
+	static char	**temp_map = NULL;
+	int			len;
+	int			s;
+	int			i;
+
+	len = ft_strlen(line);
+	s = 0;
+	i = 0;
+	while (i < len && line[i] != '\n')
+	{
+		if (line[i] == ' ') 
+			s++;
+		i++;
+	}
+	if (len - 1 == s)
+		handle_error(game, "Invalid blank line within the map.");
+	line = ft_strtrim(line, "\n");
+	temp_map = append_line_to_map(temp_map, line, game);
+	game->map->line_count++;
+	if (!temp_map)
+		handle_error(game, "Memory allocation failed for parsing the map.");
+	game->map->data = temp_map;
+}
 
 char	**append_line_to_map(char **map, char *line, t_game *game)
 {
@@ -111,7 +155,6 @@ char	**append_line_to_map(char **map, char *line, t_game *game)
 	int		line_width;
 
 	i = 0;
-	line_width = 0;
 	map_len = ft_arraylen(map);
 	new_map = malloc(sizeof(char *) * (map_len + 2));
 	if (!new_map)
@@ -119,7 +162,10 @@ char	**append_line_to_map(char **map, char *line, t_game *game)
 	check_mapchars(line, game);
 	check_player(map, line, game);
 	while (i < map_len)
+	{
 		new_map[i] = map[i];
+		i++;
+	}
 	new_map[map_len] = ft_strdup(line);
 	new_map[map_len + 1] = NULL;
 	free(map);
