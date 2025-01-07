@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/01/02 13:02:48 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/01/07 10:08:54 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@
 # include <fcntl.h>
 # include "get_next_line.h"
 # include "../libft/libft.h"
+# include "../minilibx-linux/mlx.h"
+# include "cub3_keys.h"
+
+#define WIN_H 640
+#define WIN_W 480
 
 typedef struct s_map
 {
@@ -53,6 +58,8 @@ typedef struct s_color
 
 typedef struct s_game
 {
+	void		*mlx_ptr;
+	void		*mlx_window;
 	char		*no_texture;
 	char		*so_texture;
 	char		*we_texture;
