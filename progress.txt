@@ -57,7 +57,14 @@
     Currently, all maps are working correctly. 
     Feel free to create more maps and test. 
     Maps are divided into 2 groups as passing and error. 
-    	
-    	
+
+- 7 Jan - branch: Windows @ Gabriel Rial
+    mlx library is now linked with the game, in order to do that, I updated the Makefile, and also the t_game structure.
+    We have windows, the size of it we can set up on "cub3.h" WIN_W and WIN_H.
+    The windows also close itself when we press ESC.
+    I edited the function free_game. Now returns an int, and free the mlx_ptr, and windows.
+    #############################################################################
+    ### There are some memory leaks, most of them on pare_fiel and check_img. ###
+    #############################################################################
     
 

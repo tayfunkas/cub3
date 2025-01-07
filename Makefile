@@ -14,32 +14,40 @@ SOURCES = sources/checks.c \
 	sources/check_textures.c \
 	sources/check_colors.c \
 	sources/parse_map.c \
+	sources/init_game.c \
 	sources/main.c 
 
 OBJECTS = $(SOURCES:.c=.o)
 
-LIBFT_DIR = ./libft
-LIBFT_LIB = $(LIBFT_DIR)/libft.a
-
+LIBFT_PATH = ./libft
+LIBFT_LIB = $(LIBFT_PATH)/libft.a
+LBMLX_PATH = minilibx-linux
+LBMLX_LIB = $(LBMLX_PATH)/libmlx.a
+INC_LIB = -L$(LIBFT_PATH) -lft
+INC_MLX = -L$(LBMLX_PATH) -lmlx
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) $(LIBFT_LIB) 
-	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_LIB) -o $(NAME)
+$(NAME): $(OBJECTS) $(LIBFT_LIB) $(LBMLX_LIB)
+	$(CC) $(CFLAGS) $(OBJECTS) $(INC_LIB) $(INC_MLX) -lXext -lX11 -lm -lz -o $(NAME)
 
 $(LIBFT_LIB):
-	make -C $(LIBFT_DIR)
+	make -C $(LIBFT_PATH)
+
+$(LBMLX_LIB):
+	make -C $(LBMLX_PATH)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(LBMLX_PATH) -c $< -o $@
 
 clean:
 	$(RM) $(OBJECTS)
-	make -C $(LIBFT_DIR) clean
+	make -C $(LIBFT_PATH) clean
+	make -C $(LBMLX_PATH) clean
 
 fclean: clean
 	$(RM) $(NAME)
-	make -C $(LIBFT_DIR) fclean
+	make -C $(LIBFT_PATH) fclean
 
 re: fclean all
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/01/07 10:08:54 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/01/07 16:10:43 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include "get_next_line.h"
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
 # include "cub3_keys.h"
 
-#define WIN_H 640
-#define WIN_W 480
+# define WIN_W 640
+# define WIN_H 480
 
 typedef struct s_map
 {
@@ -83,7 +85,7 @@ void	classify_line(t_game *game, char *line);
 void	parse_map(t_game *game, char *line);
 char	**append_line_to_map(char **map, char *line, t_game *game);
 //free.c
-void	free_game(t_game *game);
+int		free_game(t_game *game);
 void	handle_error(t_game *game, const char *error_message);
 //initialize.c
 void	initialize_game(t_game **game);
@@ -105,5 +107,8 @@ void	ft_free_split(char **array);
 char	*ft_strtrim_spaces(char *line);
 int		ft_arraylen(char **array);
 int		ft_is_all_spaces(char *line);
+//init_game.c
+int		key_hook(int key, t_game *game);
+void	init_game(t_game *game);
 
 #endif

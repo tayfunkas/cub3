@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/01/02 09:33:53 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:15:55 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	initialize_game(t_game **game)
 	*game = malloc(sizeof(t_game));
 	if (!*game)
 		handle_error(*game, "Memory allocation failied for game structure.");
+	(*game)->mlx_ptr = NULL;
+	(*game)->mlx_window = NULL;
 	(*game)->no_texture = NULL;
 	(*game)->so_texture = NULL;
 	(*game)->we_texture = NULL;
