@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/01/07 16:15:55 by grial            ###   ########.fr       */
+/*   Updated: 2025/01/10 19:21:00 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	initialize_player(t_game *game)
 	if (!(game)->player)
 		handle_error(game, "Memory allocation failed for player structure.");
 	(game)->player->player_count = 0;
-	(game)->player->player_dir = '\0';
+	(game)->player->player_dir = 0;
 	(game)->player->player_x = -1;
 	(game)->player->player_y = -1;
 }

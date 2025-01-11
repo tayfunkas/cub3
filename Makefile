@@ -15,7 +15,8 @@ SOURCES = sources/checks.c \
 	sources/check_colors.c \
 	sources/parse_map.c \
 	sources/init_game.c \
-	sources/main.c 
+	sources/main.c \
+	move/direcction_player.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

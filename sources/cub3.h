@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/01/07 16:10:43 by grial            ###   ########.fr       */
+/*   Updated: 2025/01/10 19:22:08 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,18 @@
 # include "../minilibx-linux/mlx.h"
 # include "cub3_keys.h"
 
-# define WIN_W 640
-# define WIN_H 480
+# define WIN_W 1280
+# define WIN_H 720
+# define MIN_S 8
+
+typedef struct s_mini
+{
+	void	*wall;
+	void	*door;
+	void	*floor;
+	void	*player;
+	
+} t_mini;
 
 typedef struct s_map
 {
@@ -38,7 +48,7 @@ typedef struct s_map
 typedef struct s_player
 {
 	int		player_count;
-	char	player_dir;
+	int		player_dir;
 	int		player_x;
 	int		player_y;
 }	t_player;
@@ -72,6 +82,7 @@ typedef struct s_game
 	t_map		*map;
 	t_player	*player;
 	t_ray		*rays;
+	t_mini		*mini;
 }	t_game;
 
 //checks.c
@@ -110,5 +121,8 @@ int		ft_is_all_spaces(char *line);
 //init_game.c
 int		key_hook(int key, t_game *game);
 void	init_game(t_game *game);
+//direcction_player.c
+void	direcction_player(int key, t_game *game);
+void	move_player(int key, t_game *game);
 
 #endif
