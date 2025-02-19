@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:36:03 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/19 13:33:30 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/19 17:03:21 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ char	**append_line_to_map(char **map, char *line, t_game *game)
 	if (!new_map)
 		handle_error(game, "Memory allocation failed while expanding the map");
 	check_mapchars(line, game);
+	printf("hola\n");
 	check_player(map, line, game);
 	while (i < map_len)
 	{

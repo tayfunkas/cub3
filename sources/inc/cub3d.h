@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/19 13:37:53 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/19 16:55:04 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 # define WIN_W 1280
 # define WIN_H 720
 # define MIN_S 8
+
+void	get_player_init_position(t_map *map, t_player *player);
+int		is_player(char c);
 
 //checks.c
 void	check_empty_map(t_game *game, int fd);

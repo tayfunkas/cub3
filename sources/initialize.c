@@ -6,11 +6,13 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/19 13:35:54 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/19 16:58:58 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/cub3d.h"
+
+
 
 void	initialize_game(t_game **game)
 {
@@ -33,16 +35,47 @@ void	initialize_game(t_game **game)
 	(*game)->map->m_width = 0;
 	(*game)->map->data = NULL;
 	(*game)->map->line_count = 0;
-	initialize_player(*game);
 }
 
 void	initialize_player(t_game *game)
 {
-	(game)->player = malloc(sizeof(t_player));
-	if (!(game)->player)
+	game->player = malloc(sizeof(t_player));
+	if (!game->player)
 		handle_error(game, "Memory allocation failed for player structure.");
-	(game)->player->player_count = 0;
-	(game)->player->player_dir = 0;
-	(game)->player->player_x = -1;
-	(game)->player->player_y = -1;
+	game->player->player_count = 0;
+	game->player->player_dir = 0;
+	game->player->player_x = 0;
+	game->player->player_y = 0;
+	get_player_init_position(game->map, game->player);
+	//printf("PLAYER POS: X:%f Y:%f\n", game->player->player_x, game->player->player_y);
+}
+
+void	get_player_init_position(t_map *map, t_player *player)
+{
+	int	x;
+	int	y;
+	if (!map->data)
+		printf("Does not exist\n");
+	x = 0;
+	while (map->data[x])
+	{
+		y = 0;
+		while (map->data[x][y])
+		{
+			if (is_player(map->data[x][y]))
+			{
+				player->player_x = x;
+				player->player_y = y;
+			}
+			y++;
+		}
+		x++;
+	}
+}
+
+int	is_player(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
 }

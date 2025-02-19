@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/02/19 13:33:40 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/19 16:45:54 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@ void	move_player(int key, t_game *game)
 	if (game->player->player_dir > 359)
 		game->player->player_dir = 0;
 }
-
-void	move_foward(t_game *game)
-{
-	
-}
-
-void	trace(t_game *game)
-{
-	
-}
+//
+//void	move_foward(t_game *game)
+//{
+//	
+//}
+//
+//void	trace(t_game *game)
+//{
+//	
+//}
+//

@@ -1,4 +1,4 @@
-NAME = cub3
+NAME = cub3D
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
@@ -12,8 +12,6 @@ SOURCES = 	sources/map_parsing/checks.c \
 	sources/map_parsing/parse_map.c \
 	sources/free.c \
 	sources/initialize.c \
-	sources/get_next_line.c \
-	sources/get_next_line_utils.c \
 	sources/init_game.c \
 	sources/main.c \
 	sources/move/direcction_player.c

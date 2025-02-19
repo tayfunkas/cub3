@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/02/19 13:39:27 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/19 16:58:40 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct s_player
 {
 	int		player_count;
 	int		player_dir;
-	float	player_x;
-	float	player_y;
+	int	player_x;
+	int	player_y;
 }	t_player;
 
 typedef struct s_ray

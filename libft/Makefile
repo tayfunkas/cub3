@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+         #
+#    By: grial <grial@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 15:54:44 by tkasapog          #+#    #+#              #
-#    Updated: 2024/04/27 15:54:47 by tkasapog         ###   ########.fr        #
+#    Updated: 2025/02/19 16:42:45 by grial            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,9 @@ SRCS = ft_isalpha.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
 	ft_putnbr_fd.c \
-	ft_striteri.c 
+	ft_striteri.c \
+	get_next_line.c \
+	get_next_line_utils.c
 
 BSRCS = ft_lstnew_bonus.c \
 	ft_lstadd_front_bonus.c \
