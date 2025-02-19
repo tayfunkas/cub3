@@ -4,19 +4,19 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -rf
 
-SOURCES = sources/checks.c \
+SOURCES = 	sources/map_parsing/checks.c \
+	sources/map_parsing/parsing_utils.c \
+	sources/map_parsing/validate_map.c \
+	sources/map_parsing/check_textures.c \
+	sources/map_parsing/check_colors.c \
+	sources/map_parsing/parse_map.c \
 	sources/free.c \
 	sources/initialize.c \
 	sources/get_next_line.c \
 	sources/get_next_line_utils.c \
-	sources/parsing_utils.c \
-	sources/validate_map.c \
-	sources/check_textures.c \
-	sources/check_colors.c \
-	sources/parse_map.c \
 	sources/init_game.c \
 	sources/main.c \
-	move/direcction_player.c
+	sources/move/direcction_player.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

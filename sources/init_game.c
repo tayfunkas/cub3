@@ -6,11 +6,11 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/01/10 19:11:35 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/19 13:35:25 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3.h"
+#include "inc/cub3d.h"
 
 void	load_img(t_game *game);
 void	*hook_img(t_game *game, char c);
@@ -18,17 +18,16 @@ int		render(t_game *game);
 
 void	init_game(t_game *game)
 {
-    game->mlx_ptr = mlx_init();
+	game->mlx_ptr = mlx_init();
 	printf("%i x %i\n", game->map->m_height, game->map->m_width);
 	game->mlx_window = mlx_new_window(game->mlx_ptr, WIN_H, 
 			WIN_W, "so_long");
 	load_img(game);
 	mlx_loop_hook(game->mlx_ptr, render, game);
-    mlx_key_hook(game->mlx_window, key_hook, game);
+	mlx_key_hook(game->mlx_window, key_hook, game);
 	mlx_hook(game->mlx_window, DestroyNotify, ButtonPressMask, 
 		free_game, game);
 	mlx_loop(game->mlx_ptr);
-
 }
 
 int	key_hook(int key, t_game *game)

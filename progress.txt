@@ -66,5 +66,8 @@
     #############################################################################
     ### There are some memory leaks, most of them on pare_fiel and check_img. ###
     #############################################################################
-    
+
+
+- 19 Feb
+    Restructure of project files.
 

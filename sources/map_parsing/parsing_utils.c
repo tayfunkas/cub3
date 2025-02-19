@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:34:40 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/01/02 09:34:41 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:33:33 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3.h"
+#include "../inc/cub3d.h"
 
 int	ft_arraylen(char **array)
 {

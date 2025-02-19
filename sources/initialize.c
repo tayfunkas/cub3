@@ -6,11 +6,11 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/01/10 19:21:00 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/19 13:35:54 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3.h"
+#include "inc/cub3d.h"
 
 void	initialize_game(t_game **game)
 {

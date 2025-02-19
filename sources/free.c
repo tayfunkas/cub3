@@ -6,11 +6,11 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:44 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/01/07 16:16:41 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/19 13:38:58 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3.h"
+#include "inc/cub3d.h"
 
 int	free_game(t_game *game)
 {

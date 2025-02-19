@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3.h                                             :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/01/10 19:22:08 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/19 13:37:53 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3_H
-# define CUB3_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include <stdio.h>
 # include <unistd.h>
@@ -19,71 +19,15 @@
 # include <fcntl.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
-# include "get_next_line.h"
+# include "../libft/get_next_line.h"
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
-# include "cub3_keys.h"
+# include "cub3d_keys.h"
+# include "cub3d_struct.h"
 
 # define WIN_W 1280
 # define WIN_H 720
 # define MIN_S 8
-
-typedef struct s_mini
-{
-	void	*wall;
-	void	*door;
-	void	*floor;
-	void	*player;
-	
-} t_mini;
-
-typedef struct s_map
-{
-	int		m_height;
-	int		m_width;
-	char	**data;
-	int		line_count;
-}	t_map;
-
-typedef struct s_player
-{
-	int		player_count;
-	int		player_dir;
-	int		player_x;
-	int		player_y;
-}	t_player;
-
-typedef struct s_ray
-{
-	double	ray_angle;
-	double	wall_distance;
-	int		hit_x;
-	int		hit_y;
-}	t_ray;
-
-typedef struct s_color
-{
-	int	r;
-	int	g;
-	int	b;
-}	t_color;
-
-typedef struct s_game
-{
-	void		*mlx_ptr;
-	void		*mlx_window;
-	char		*no_texture;
-	char		*so_texture;
-	char		*we_texture;
-	char		*ea_texture;
-	char		*map_file;
-	t_color		floor_color;
-	t_color		ceiling_color;
-	t_map		*map;
-	t_player	*player;
-	t_ray		*rays;
-	t_mini		*mini;
-}	t_game;
 
 //checks.c
 void	check_empty_map(t_game *game, int fd);
