@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/02/19 16:55:37 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/20 19:00:00 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ int	key_hook(int key, t_game *game)
 		free_game(game);
 	else if (key == LEFT || key == RIGHT)
 		direcction_player(key, game);
+	else if (key == UP || key == DOWN)
+	{
+		move_player(key, game);
+	}
 	return (1);
 }
 
@@ -45,7 +49,7 @@ int render(t_game *game)
 	int	x = 0;
 	int	y = 0;
 
-	usleep(100000);
+	usleep(10000);
 	mlx_clear_window(game->mlx_ptr, game->mlx_window);
 	while (game->map->data[x])
 	{
@@ -57,7 +61,7 @@ int render(t_game *game)
 		}
 		x++;
 	}
-	//mlx_pixel_put(game->mlx_ptr, game->mlx_window, game->player->player_y * size,  game->player->player_x * size,9);
+	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player, game->player->player_y * size, game->player->player_x * size);
 	return (1);
 }
 

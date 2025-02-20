@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:34:02 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/19 16:57:08 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/20 16:09:23 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ int	main(int argc, char **argv)
 		handle_error(game, "No player on the map!");
 	check_images(game);
 	printf("Texture files are checked!\n");
+	get_player_init_position(game->map, game->player);
+	//printf("PLAYER POS: X:%ld Y:%ld\n", game->player->player_x, game->player->player_y);
 	validate_map(game);
 	printf("Map is valid!\n");
-	initialize_player(game);
 	init_game(game);
 	free_game(game);
 	printf("All is freed. All good!\n");

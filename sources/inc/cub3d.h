@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/19 16:55:04 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/20 18:39:09 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,13 @@
 # include "../minilibx-linux/mlx.h"
 # include "cub3d_keys.h"
 # include "cub3d_struct.h"
+# include <math.h>
 
-# define WIN_W 1280
-# define WIN_H 720
+# define M_PI 3.14159265358979323846
+# define WIN_W 640
+# define WIN_H 480
 # define MIN_S 8
+# define STEP 0.2
 
 void	get_player_init_position(t_map *map, t_player *player);
 int		is_player(char c);
