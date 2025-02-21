@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/20 18:39:09 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/21 16:02:40 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ int		ft_is_all_spaces(char *line);
 //init_game.c
 int		key_hook(int key, t_game *game);
 void	init_game(t_game *game);
-//direcction_player.c
-void	direcction_player(int key, t_game *game);
-void	move_player(int key, t_game *game);
+//player_move.c
+int		keys_player(int key, t_game *game);
+void	player_direction(t_player *player, int key);
+void	player_move(t_player *player, t_map *map, int key);
+int		check_collision(t_map *map, float x, float y);
 
 #endif

@@ -14,7 +14,7 @@ SOURCES = 	sources/map_parsing/checks.c \
 	sources/initialize.c \
 	sources/init_game.c \
 	sources/main.c \
-	sources/move/direcction_player.c
+	sources/move/move_player.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

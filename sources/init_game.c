@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/02/20 19:00:00 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/21 16:01:14 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,8 @@ void	init_game(t_game *game)
 			WIN_W, "so_long");
 	load_img(game);
 	mlx_loop_hook(game->mlx_ptr, render, game);
-	mlx_key_hook(game->mlx_window, key_hook, game);
-	mlx_hook(game->mlx_window, DestroyNotify, ButtonPressMask, 
-		free_game, game);
+	mlx_hook(game->mlx_window, 2, KeyPressMask, keys_player, game);
 	mlx_loop(game->mlx_ptr);
-}
-
-int	key_hook(int key, t_game *game)
-{
-	if (key == ESCAPE)
-		free_game(game);
-	else if (key == LEFT || key == RIGHT)
-		direcction_player(key, game);
-	else if (key == UP || key == DOWN)
-	{
-		move_player(key, game);
-	}
-	return (1);
 }
 
 int render(t_game *game)
@@ -109,13 +94,3 @@ void	load_img(t_game *game)
 		exit(EXIT_FAILURE);
 	}
 }
-
-//void ray_casting(t_game *game)
-//{
-//	int	i;
-//	
-//	while(i < 32)
-//	{
-//		mlx_pixel_put(game->mlx_ptr, game->mlx_window, game->player->player_dir, game.)
-//	}
-//}

@@ -68,7 +68,12 @@
     #############################################################################
 
 
-- 19 Feb
+- 19 Feb - branch: Windows
     Restructure of project files.
+
+- 20 Feb - branch: Movement
+    Player is moving arround the map
+
+- 21 Feb 
 
 
