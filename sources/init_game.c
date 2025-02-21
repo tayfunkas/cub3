@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/02/21 16:01:14 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/21 19:17:47 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int render(t_game *game)
 		x++;
 	}
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player, game->player->player_y * size, game->player->player_x * size);
+	rc_fov(game, game->player, game->map);
 	return (1);
 }
 
@@ -54,8 +55,6 @@ void	*hook_img(t_game *game, char c)
 {
 	if (c == '1')
 		return (game->mini->wall);
-	else if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (game->mini->player);
 	else
 		return (game->mini->floor);
 	return (NULL);

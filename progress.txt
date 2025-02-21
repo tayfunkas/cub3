@@ -75,5 +75,6 @@
     Player is moving arround the map
 
 - 21 Feb 
+    The player does not go through the wall, and we trace the midline of the ray casting (the player's direction).
 
 

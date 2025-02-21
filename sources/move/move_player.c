@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/02/21 16:03:43 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/21 18:45:23 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@ int	keys_player(int key, t_game *game)
 {
 	if (key == ESCAPE)
 		free_game(game);
-	if (key == UP || key == DOWN)
+	if (key == FORWARD || key == BACKWARD)
 		player_move(game->player, game->map, key);
-	if (key == LEFT || key == RIGHT)
+	if (key == TURN_L || key == TURN_R)
 		player_direction(game->player, key);
 	return (0);
 }
 
 void	player_direction(t_player *player, int key)
 {
-	if (key == LEFT)
-		player->player_dir = (player->player_dir + 4) % 360;  // Gira a la izquierda (1 grado)
-	else if (key == RIGHT)
-		player->player_dir = (player->player_dir - 4 + 360) % 360;  // Gira a la derecha (1 grado)
+	if (key == TURN_L)
+		player->player_dir = (player->player_dir + 4) % 360;
+	else if (key == TURN_R)
+		player->player_dir = (player->player_dir - 4 + 360) % 360;
 }
 
 void	player_move(t_player *player, t_map *map, int key)
@@ -39,15 +39,17 @@ void	player_move(t_player *player, t_map *map, int key)
 	double	new_x;
 	double	new_y;
 
+	new_x = 0.0;
+	new_y = 0.0;
 	angle = player->player_dir * M_PI / 180.0;
 	dy = cos(angle) * STEP;
 	dx = -sin(angle) * STEP;
-	if (key == UP)
+	if (key == FORWARD)
 	{
 		new_x = player->player_x + dx;
 		new_y = player->player_y + dy;
 	}
-	else if (key == DOWN)
+	else if (key == BACKWARD)
 	{
 		new_x = player->player_x - dx;
 		new_y = player->player_y - dy;

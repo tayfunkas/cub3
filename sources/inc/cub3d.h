@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/21 16:02:40 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/21 19:20:01 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define WIN_H 480
 # define MIN_S 8
 # define STEP 0.2
+# define FOV 90
 
 void	get_player_init_position(t_map *map, t_player *player);
 int		is_player(char c);
@@ -76,5 +77,7 @@ int		keys_player(int key, t_game *game);
 void	player_direction(t_player *player, int key);
 void	player_move(t_player *player, t_map *map, int key);
 int		check_collision(t_map *map, float x, float y);
+//rc_fov.c
+void	rc_fov(t_game *game, t_player *player, t_map *map);
 
 #endif
