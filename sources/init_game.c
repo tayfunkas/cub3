@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/02/21 19:17:47 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/25 16:13:57 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	init_game(t_game *game)
 
 int render(t_game *game)
 {
-	int	size = 8;
 	int	x = 0;
 	int	y = 0;
 
@@ -41,12 +40,12 @@ int render(t_game *game)
 		y = 0;
 		while (game->map->data[x][y])
 		{
-			mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, hook_img(game, game->map->data[x][y]), y * size, x * size);
+			mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, hook_img(game, game->map->data[x][y]), y * MIN_S, x * MIN_S);
 			y++;
 		}
 		x++;
 	}
-	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player, game->player->player_y * size, game->player->player_x * size);
+	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player, game->player->player_y * MIN_S, game->player->player_x * MIN_S);
 	rc_fov(game, game->player, game->map);
 	return (1);
 }
