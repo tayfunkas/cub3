@@ -5,6 +5,7 @@
         "math.h": "c",
         "unistd.h": "c",
         "cub3d_struct.h": "c",
-        "keysym.h": "c"
+        "keysym.h": "c",
+        "cub3d_keys.h": "c"
     }
 }

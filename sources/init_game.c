@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/02/25 16:13:57 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/27 15:48:34 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	init_game(t_game *game)
 {
 	game->mlx_ptr = mlx_init();
 	printf("%i x %i\n", game->map->m_height, game->map->m_width);
-	game->mlx_window = mlx_new_window(game->mlx_ptr, WIN_H, 
-			WIN_W, "so_long");
+	game->mlx_window = mlx_new_window(game->mlx_ptr, WIN_W, 
+			WIN_H, "so_long");
 	load_img(game);
 	mlx_loop_hook(game->mlx_ptr, render, game);
 	mlx_hook(game->mlx_window, 2, KeyPressMask, keys_player, game);
@@ -46,7 +46,7 @@ int render(t_game *game)
 		x++;
 	}
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player, game->player->player_y * MIN_S, game->player->player_x * MIN_S);
-	rc_fov(game, game->player, game->map);
+	draw_fov(game, game->player);
 	return (1);
 }
 

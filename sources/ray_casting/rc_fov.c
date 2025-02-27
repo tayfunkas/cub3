@@ -6,15 +6,32 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:55:33 by grial             #+#    #+#             */
-/*   Updated: 2025/02/25 18:05:42 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/27 15:46:53 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	draw_fov(t_game *game, t_player *player, t_map *map, int x)
+void	draw_fov(t_game *game, t_player *player)
 {
-	double	i;
+	float	ray_step;
+	float	x;
+	int	a;
+
+	ray_step = (float)FOV / (float)WIN_W;
+	x = -FOV / 2;
+	a = 0;
+	while (a < WIN_W)
+	{
+		draw_ray_line(game, player, a, x);
+		x += ray_step;
+		a++;
+	}
+}
+
+void	draw_ray_line(t_game *game, t_player *player, int x_width, float x)
+{
+	double	ray_line;
 	double	angle;
 	double	dx;
 	double	dy;
@@ -22,41 +39,27 @@ void	draw_fov(t_game *game, t_player *player, t_map *map, int x)
 	double	new_y;
 
 	angle = (player->player_dir + x) * M_PI / 180.0;
-	i = STEP;
+	ray_line = STEP;
 	while (1)
 	{
-		dy = cos(angle) * i;
-		dx = -sin(angle) * i;
+		dy = cos(angle) * ray_line;
+		dx = -sin(angle) * ray_line;
 		new_x = player->player_x + dx;
 		new_y = player->player_y + dy;
-		if (draw_check_collision(game, map, new_x, new_y))
+		if (draw_check_collision(game, x_width, new_x, new_y))
 			break ;
-		mlx_pixel_put(game->mlx_ptr, game->mlx_window, new_y * MIN_S, new_x * MIN_S, 0x00FF00);
-		i += 0.2;
+		//mlx_pixel_put(game->mlx_ptr, game->mlx_window, new_y * MIN_S, new_x * MIN_S, 0x00FF00);
+		ray_line += 0.02;
 	}
 }
 
-void	rc_fov(t_game *game, t_player *player, t_map *map)
-{
-	int	x;
-	int	a;
-
-	x = -FOV / 2;
-	a = 0;
-	while (a < FOV)
-	{
-		draw_fov(game, player, map, x);
-		x++;
-		a++;
-	}
-}
 
 double	distance(double x1, double y1, double x2, double y2)
 {
 	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
 }
 
-void	draw_wall(t_game *game, float x, float y)
+void	draw_wall(t_game *game, int x_width, float x, float y)
 {
 	float	v_ray;
 	int		i;
@@ -71,21 +74,21 @@ void	draw_wall(t_game *game, float x, float y)
 	i = -v_ray / 2;
 	while (a < v_ray)
 	{
-		mlx_pixel_put(game->mlx_ptr, game->mlx_window, y * 40, (x * 40) + a, 0x00FF00);
+		mlx_pixel_put(game->mlx_ptr, game->mlx_window, x_width, (WIN_H / 2) + i + a ,0x00FF00);
 		a++;
 	}
 }
 
-int	draw_check_collision(t_game *game, t_map *map, float x, float y)
+int	draw_check_collision(t_game *game, int x_width, float x, float y)
 {
 	int	new_x;
 	int	new_y;
 
 	new_x = (int) floorf(x);
 	new_y = (int) floorf(y);
-	if (map->data[new_x][new_y] == '1')
+	if (game->map->data[new_x][new_y] == '1')
 	{
-		draw_wall(game, x, y);
+		draw_wall(game, x_width, x, y);
 		return (1);
 	}
 	return (0);
