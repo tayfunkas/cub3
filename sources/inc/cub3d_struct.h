@@ -6,12 +6,18 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/02/20 16:15:56 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/27 18:44:06 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_STRUCT_H
 # define CUB3D_STRUCT_H
+
+typedef struct s_engine 
+{
+	float	ang_step;
+}	t_engine;
+
 
 typedef struct s_mini
 {

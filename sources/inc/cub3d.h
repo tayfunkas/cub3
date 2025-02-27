@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/27 18:26:48 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/27 18:43:36 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,6 @@ void	draw_ray_line(t_game *game, t_player *player, int x_width, float x);
 void	draw_fov(t_game *game, t_player *player);
 void	draw_wall(t_game *game, int x_width, float x, float y, float ang);
 int     draw_check_collision(t_game *game, int x_width, float x, float y, float ang);
-double	distance(double x1, double y1, double x2, double y2);
+float	distance(float x1, float y1, float x2, float y2);
 
 #endif
