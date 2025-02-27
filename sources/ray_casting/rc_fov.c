@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:55:33 by grial             #+#    #+#             */
-/*   Updated: 2025/02/27 15:46:53 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/27 18:27:08 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	draw_ray_line(t_game *game, t_player *player, int x_width, float x)
 		dx = -sin(angle) * ray_line;
 		new_x = player->player_x + dx;
 		new_y = player->player_y + dy;
-		if (draw_check_collision(game, x_width, new_x, new_y))
+		if (draw_check_collision(game, x_width, new_x, new_y, x))
 			break ;
-		//mlx_pixel_put(game->mlx_ptr, game->mlx_window, new_y * MIN_S, new_x * MIN_S, 0x00FF00);
-		ray_line += 0.02;
+		mlx_pixel_put(game->mlx_ptr, game->mlx_window, new_y * MIN_S, new_x * MIN_S, 0x00FF00);
+		ray_line += 0.01;
 	}
 }
 
@@ -59,7 +59,7 @@ double	distance(double x1, double y1, double x2, double y2)
 	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
 }
 
-void	draw_wall(t_game *game, int x_width, float x, float y)
+void	draw_wall(t_game *game, int x_width, float x, float y, float ang)
 {
 	float	v_ray;
 	int		i;
@@ -67,7 +67,7 @@ void	draw_wall(t_game *game, int x_width, float x, float y)
 
 	a = 0;
 	i = 0;
-	v_ray = distance(x, y, game->player->player_x, game->player->player_y);
+	v_ray = distance(x, y, game->player->player_x, game->player->player_y) * cos(ang * M_PI / 180.0);
 	v_ray = (MIN_S * WIN_H) / v_ray;
 	if (v_ray > WIN_H)
 		v_ray = WIN_H;
@@ -79,7 +79,8 @@ void	draw_wall(t_game *game, int x_width, float x, float y)
 	}
 }
 
-int	draw_check_collision(t_game *game, int x_width, float x, float y)
+
+int	draw_check_collision(t_game *game, int x_width, float x, float y, float ang)
 {
 	int	new_x;
 	int	new_y;
@@ -88,7 +89,7 @@ int	draw_check_collision(t_game *game, int x_width, float x, float y)
 	new_y = (int) floorf(y);
 	if (game->map->data[new_x][new_y] == '1')
 	{
-		draw_wall(game, x_width, x, y);
+		draw_wall(game, x_width, x, y, ang);
 		return (1);
 	}
 	return (0);

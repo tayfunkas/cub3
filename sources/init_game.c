@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/02/27 15:48:34 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/27 18:28:37 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int render(t_game *game)
 	int	x = 0;
 	int	y = 0;
 
-	usleep(10000);
+	usleep(70000);
 	mlx_clear_window(game->mlx_ptr, game->mlx_window);
 	while (game->map->data[x])
 	{

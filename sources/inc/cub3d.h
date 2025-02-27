@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/27 15:48:53 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/27 18:26:48 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ int		check_collision(t_map *map, float x, float y);
 //rc_fov.c
 void	draw_ray_line(t_game *game, t_player *player, int x_width, float x);
 void	draw_fov(t_game *game, t_player *player);
-void	draw_wall(t_game *game, int x_width, float x, float y);
-int	draw_check_collision(t_game *game, int x_width, float x, float y);
+void	draw_wall(t_game *game, int x_width, float x, float y, float ang);
+int     draw_check_collision(t_game *game, int x_width, float x, float y, float ang);
 double	distance(double x1, double y1, double x2, double y2);
 
 #endif
