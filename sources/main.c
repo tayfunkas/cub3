@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:34:02 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/21 14:37:18 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/28 15:49:36 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int argc, char **argv)
 
 	game = NULL;
 	initialize_game(&game);
+	printf("todo bien\n");
 	printf("Game struct initialized succesfully!\n");
 	parse_arguments(argc, argv, game);
 	printf("Arguments parsed succesfully!\n");

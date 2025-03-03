@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/27 18:43:36 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/03 17:24:07 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@
 # include <math.h>
 
 # define M_PI 3.14159265358979323846
-# define WIN_W 720
+# define WIN_W 640
 # define WIN_H 480
 # define MIN_S 8
+# define CUB_S 64
 # define STEP 0.2
 # define FOV 90
 
@@ -52,6 +53,7 @@ void	handle_error(t_game *game, const char *error_message);
 //initialize.c
 void	initialize_game(t_game **game);
 void	initialize_player(t_game *game);
+t_text	*initialize_text(void);
 //validate_map.c
 void	pad_map_to_rectangle(t_game *game);
 void	validate_map(t_game *game);
@@ -72,6 +74,8 @@ int		ft_is_all_spaces(char *line);
 //init_game.c
 int		key_hook(int key, t_game *game);
 void	init_game(t_game *game);
+t_img_add	*init_img_add(t_text *texture);
+
 //player_move.c
 int		keys_player(int key, t_game *game);
 void	player_direction(t_player *player, int key);

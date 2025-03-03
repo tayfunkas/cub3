@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/20 15:57:02 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/03 15:57:08 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,7 @@ void	initialize_game(t_game **game)
 		handle_error(*game, "Memory allocation failied for game structure.");
 	(*game)->mlx_ptr = NULL;
 	(*game)->mlx_window = NULL;
-	(*game)->no_texture = NULL;
-	(*game)->so_texture = NULL;
-	(*game)->we_texture = NULL;
-	(*game)->ea_texture = NULL;
 	(*game)->map_file = NULL;
-	(*game)->floor_color = (t_color){.r = -1, .g = -1, .b = -1};
-	(*game)->ceiling_color = (t_color){.r = -1, .g = -1, .b = -1};
 	(*game)->map = malloc(sizeof(t_map));
 	if (!(*game)->map)
 		handle_error(*game, "Memory allocation failed for map structure.");
@@ -34,6 +28,25 @@ void	initialize_game(t_game **game)
 	(*game)->map->data = NULL;
 	(*game)->map->line_count = 0;
 	initialize_player(*game);
+	(*game)->text = initialize_text();
+}
+
+t_text	*initialize_text(void)
+{
+	t_text	*text;
+
+	text = malloc(sizeof(t_text));
+	if (!text)
+		return (NULL);
+	text->NO = init_img_add(text);
+	text->EA = init_img_add(text);
+	text->SO = init_img_add(text);
+	text->WE = init_img_add(text);
+	text->floor = NULL;
+	text->ceiling = NULL;
+	text->floor_color = (t_color){.r = -1, .g = -1, .b = -1};
+	text->ceiling_color = (t_color){.r = -1, .g = -1, .b = -1};
+	return (text);
 }
 
 void	initialize_player(t_game *game)
@@ -76,4 +89,21 @@ int	is_player(char c)
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
 	return (0);
+}
+
+t_img_add	*init_img_add(t_text *texture)
+{
+	t_img_add	*ptr;
+
+	ptr = malloc(sizeof(t_img_add));
+	
+	ptr->img = NULL;
+	ptr->addr = NULL;
+	ptr->width = 0;
+	ptr->height = 0;
+	ptr->bpp = 0;
+	ptr->line_len = 0;
+	ptr->endian = 0;
+	return (ptr);
+
 }

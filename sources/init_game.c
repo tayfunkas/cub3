@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/02/27 18:28:37 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/03 16:03:47 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int render(t_game *game)
 	int	x = 0;
 	int	y = 0;
 
-	usleep(70000);
+	usleep(10000);
 	mlx_clear_window(game->mlx_ptr, game->mlx_window);
 	while (game->map->data[x])
 	{
@@ -91,4 +91,36 @@ void	load_img(t_game *game)
 		ft_putstr_fd("Error: Failed to load player texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
+	game->text->NO->img = mlx_xpm_file_to_image(game->mlx_ptr, 
+		"textures/NO.xpm", &game->text->NO->width, &game->text->NO->height);
+	if (!game->text->NO->img)
+	{
+		ft_putstr_fd("Error: Failed to load player texture\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	game->text->EA->img = mlx_xpm_file_to_image(game->mlx_ptr, 
+		"textures/EA.xpm", &game->text->EA->width, &game->text->EA->height);
+	if (!game->text->EA->img)
+	{
+		ft_putstr_fd("Error: Failed to load player texture\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	game->text->SO->img = mlx_xpm_file_to_image(game->mlx_ptr, 
+		"textures/SO.xpm", &game->text->SO->width, &game->text->SO->height);
+	if (!game->text->SO->img)
+	{
+		ft_putstr_fd("Error: Failed to load player texture\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	game->text->WE->img = mlx_xpm_file_to_image(game->mlx_ptr, 
+		"textures/WE.xpm", &game->text->WE->width, &game->text->WE->height);
+	if (!game->text->WE->img)
+	{
+		ft_putstr_fd("Error: Failed to load player texture\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	game->text->NO->addr = mlx_get_data_addr(game->text->NO->img, &game->text->NO->bpp, &game->text->NO->line_len, &game->text->NO->endian);
+	game->text->EA->addr = mlx_get_data_addr(game->text->EA->img, &game->text->EA->bpp, &game->text->EA->line_len, &game->text->EA->endian);
+	game->text->SO->addr = mlx_get_data_addr(game->text->SO->img, &game->text->SO->bpp, &game->text->SO->line_len, &game->text->SO->endian);
+	game->text->WE->addr = mlx_get_data_addr(game->text->WE->img, &game->text->WE->bpp, &game->text->WE->line_len, &game->text->WE->endian);
 }

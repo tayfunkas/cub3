@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:55:33 by grial             #+#    #+#             */
-/*   Updated: 2025/02/27 18:43:10 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/03 17:24:59 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	draw_fov(t_game *game, t_player *player)
 	{
 		draw_ray_line(game, player, a, x);
 		x += ray_step;
-		a++;
+		a ++;
 	}
 }
 
@@ -48,8 +48,8 @@ void	draw_ray_line(t_game *game, t_player *player, int x_width, float x)
 		new_y = player->player_y + dy;
 		if (draw_check_collision(game, x_width, new_x, new_y, x))
 			break ;
-		mlx_pixel_put(game->mlx_ptr, game->mlx_window, new_y * MIN_S, new_x
-			* MIN_S, 0x005500);
+	//	mlx_pixel_put(game->mlx_ptr, game->mlx_window, new_y * MIN_S, new_x
+	//		* MIN_S, 0x005500);
 		ray_line += STEP;
 	}
 }
@@ -64,27 +64,46 @@ float	distance(float x1, float y1, float x2, float y2)
 	return (sqrt(dx * dx + dy * dy));
 }
 
-void	draw_wall(t_game *game, int x_width, float x, float y, float ang)
+void	draw_wall_texture(t_game *game, int x_width, float x, float y, float ang, float hit_x, float hit_y)
 {
-	float	v_ray;
-	int		i;
-	int		a;
+	t_img_add	*texture;
+	float		wall_height;
+	int			texX;
+	int			texY;
+	int			color;
+	int			screenY;
+	int			a;
 
+	// Determinar qué textura usar según la orientación del impacto
+	if (hit_x > hit_y)
+		texture = game->text->NO;
+	else
+		texture = game->text->EA;
+
+	// Calcular la distancia corregida con perspectiva
+	wall_height = distance(x, y, game->player->player_x, game->player->player_y) * cos(ang * M_PI / 180.0);
+	wall_height = (MIN_S * WIN_H) / wall_height;
+	if (wall_height > WIN_H)
+		wall_height = WIN_H;
+
+	// Determinar la coordenada X de la textura
+	texX = (int)(hit_x * texture->width);
+	if (texX < 0) texX = 0;
+	if (texX >= texture->width) texX = texture->width - 1;
+
+	// Dibujar cada píxel de la pared en la pantalla
 	a = 0;
-	i = 0;
-	v_ray = distance(x, y, game->player->player_x, game->player->player_y)
-		* cos(ang * M_PI / 180.0);
-	v_ray = (MIN_S * WIN_H) / v_ray;
-	if (v_ray > WIN_H)
-		v_ray = WIN_H;
-	i = -v_ray / 2;
-	while (a < v_ray)
+	while (a < wall_height)
 	{
-		mlx_pixel_put(game->mlx_ptr, game->mlx_window, x_width, (WIN_H / 2) + i
-			+ a, 0x005500);
+		texY = (a * texture->height) / wall_height;
+		color = *(int *)(texture->addr + (texY * texture->line_len + texX * (texture->bpp / 8)));
+		screenY = (WIN_H / 2) - (wall_height / 2) + a;
+		if (screenY >= 0 && screenY < WIN_H)
+			mlx_pixel_put(game->mlx_ptr, game->mlx_window, x_width, screenY, color);
 		a++;
 	}
 }
+
 
 int	draw_check_collision(t_game *game, int x_width, float x, float y, float ang)
 {

@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:44 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/19 13:38:58 by grial            ###   ########.fr       */
+/*   Updated: 2025/02/28 17:12:58 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	free_game(t_game *game)
 		free(game->mlx_ptr);
 		game->mlx_ptr = NULL;
 	}
-	free(game->no_texture);
-	free(game->so_texture);
-	free(game->we_texture);
-	free(game->ea_texture);
+	free(game->text->NO);
+	free(game->text->EA);
+	free(game->text->SO);
+	free(game->text->WE);
 	if (game->map)
 		free(game->map);
 	if (game->player)
