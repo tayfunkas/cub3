@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/03/03 17:24:07 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/05 15:15:08 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ char	**append_line_to_map(char **map, char *line, t_game *game);
 int		free_game(t_game *game);
 void	handle_error(t_game *game, const char *error_message);
 //initialize.c
-void	initialize_game(t_game **game);
+t_game	*initialize_game(void);
 void	initialize_player(t_game *game);
-t_text	*initialize_text(void);
+
 //validate_map.c
 void	pad_map_to_rectangle(t_game *game);
 void	validate_map(t_game *game);
@@ -62,7 +62,7 @@ int		validate_borders(t_map *map);
 int		has_xpm_extension(const char *filename);
 void	check_texture(const char *path, const char *message, t_game *game);
 void	check_images(t_game *game);
-void	parse_texture(t_game *game, char *line, char **texture_path);
+void	parse_texture(t_game *game, char *line, char *texture_path);
 //check_colors.c
 void	parse_color(t_game *game, char *line, t_color *color);
 int		ft_alldigit(char *str);
@@ -74,7 +74,7 @@ int		ft_is_all_spaces(char *line);
 //init_game.c
 int		key_hook(int key, t_game *game);
 void	init_game(t_game *game);
-t_img_add	*init_img_add(t_text *texture);
+t_engine	*init_engine(void);
 
 //player_move.c
 int		keys_player(int key, t_game *game);

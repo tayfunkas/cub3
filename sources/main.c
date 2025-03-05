@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:34:02 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/28 15:49:36 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/05 13:28:40 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,25 @@ int	main(int argc, char **argv)
 	t_game	*game;
 
 	game = NULL;
-	initialize_game(&game);
-	printf("todo bien\n");
+	game = initialize_game();
 	printf("Game struct initialized succesfully!\n");
+	
 	parse_arguments(argc, argv, game);
 	printf("Arguments parsed succesfully!\n");
+	
 	parse_file(game);
 	printf("Map file parsed succesfully!\n");
+	
 	if (game->player->player_count == 0)
 		handle_error(game, "No player on the map!");
+
 	check_images(game);
 	printf("Texture files are checked!\n");
+	
 	get_player_init_position(game->map, game->player);
 	validate_map(game);
 	printf("Map is valid!\n");
+	
 	init_game(game);
 	free_game(game);
 	printf("All is freed. All good!\n");
