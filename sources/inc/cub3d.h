@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/03/05 15:15:08 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/05 17:27:07 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		validate_borders(t_map *map);
 int		has_xpm_extension(const char *filename);
 void	check_texture(const char *path, const char *message, t_game *game);
 void	check_images(t_game *game);
-void	parse_texture(t_game *game, char *line, char *texture_path);
+void	parse_texture(t_game *game, char *line, char **texture_path);
 //check_colors.c
 void	parse_color(t_game *game, char *line, t_color *color);
 int		ft_alldigit(char *str);

@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:36:03 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/03/05 15:11:08 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/05 17:27:31 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@ void	parse_file(t_game *game)
 static int	assign_lines(t_game *game, char *line)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
-		parse_texture(game, line + 3, game->engine->NO);
+		parse_texture(game, line + 3, &game->engine->NO);
 	else if (ft_strncmp(line, "EA ", 3) == 0)
-		parse_texture(game, line + 3, game->engine->EA);
+		parse_texture(game, line + 3, &game->engine->EA);
 	else if (ft_strncmp(line, "SO ", 3) == 0)
-		parse_texture(game, line + 3, game->engine->SO);
+		parse_texture(game, line + 3, &game->engine->SO);
 	else if (ft_strncmp(line, "WE ", 3) == 0)
-		parse_texture(game, line + 3, game->engine->WE);
+		parse_texture(game, line + 3, &game->engine->WE);
 	else if (ft_strncmp(line, "F ", 2) == 0)
-		parse_color(game, line + 2, &(game->engine->floor));
+		parse_color(game, line + 2, &game->engine->floor);
 	else if (ft_strncmp(line, "C ", 2) == 0)
-		parse_color(game, line + 2, &(game->engine->ceiling));
+		parse_color(game, line + 2, &game->engine->ceiling);
 	else if (*line == '\0')
 		return (1);
 	else

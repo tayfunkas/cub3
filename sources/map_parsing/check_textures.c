@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/03/05 15:12:31 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/05 17:26:44 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,18 @@ int	has_xpm_extension(const char *filename)
 		return (1); 
 }
 
-void	parse_texture(t_game *game, char *line, char *texture_path)
+void	parse_texture(t_game *game, char *line, char **texture_path)
 {
 	char	*trimmed_line;
+	char	*tmp;
 	
-	printf("%c\n", *line);
 	while (*line == ' ')
 		line++;
-	printf("hola\n");
-	trimmed_line = ft_strtrim(line, "\n");
-	trimmed_line = ft_strtrim(trimmed_line, " ");
-	texture_path = trimmed_line;
+	tmp = ft_strtrim(line, "\n");
+	trimmed_line = ft_strtrim(tmp, " ");
+	*texture_path = ft_strdup(trimmed_line);
+	free(tmp);
+	free(trimmed_line);
 	if (!*texture_path)
 		handle_error(game, "Invalid texture line");
 }
