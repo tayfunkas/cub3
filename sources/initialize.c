@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/20 15:57:02 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/28 15:52:57 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	get_player_init_position(t_map *map, t_player *player)
 		}
 		x++;
 	}
+	printf("Player initialized at: (%f, %f), direction: %d\n", player->player_x, player->player_y, player->player_dir);
 }
 
 int	is_player(char c)

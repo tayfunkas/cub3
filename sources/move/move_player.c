@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/02/25 18:01:17 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/28 16:30:57 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	keys_player(int key, t_game *game)
 		free_game(game);
 	if (key == FORWARD || key == BACKWARD)
 		player_move(game->player, game->map, key);
+	if (key == LEFT || key == RIGHT)
+		player_strafe(game->player, game->map, key);
 	if (key == TURN_L || key == TURN_R)
 		player_direction(game->player, key);
 	return (0);
@@ -25,9 +27,9 @@ int	keys_player(int key, t_game *game)
 
 void	player_direction(t_player *player, int key)
 {
-	if (key == TURN_L)
+	if (key == TURN_R)
 		player->player_dir = (player->player_dir + 4) % 360;
-	else if (key == TURN_R)
+	else if (key == TURN_L)
 		player->player_dir = (player->player_dir - 4 + 360) % 360;
 }
 
@@ -54,6 +56,30 @@ void	player_move(t_player *player, t_map *map, int key)
 		new_x = player->player_x - dx;
 		new_y = player->player_y - dy;
 	}
+	if (check_collision(map, new_x, new_y))
+	{
+		player->player_x = new_x;
+		player->player_y = new_y;
+	}
+}
+
+void	player_strafe(t_player *player, t_map *map, int key)
+{
+	double	angle;
+	double	dx;
+	double	dy;
+	double	new_x; 
+	double	new_y;
+
+	angle = 0.00;
+	if (key == RIGHT)
+		angle = (player->player_dir + 90) * M_PI / 180.0;
+	else if (key == LEFT)
+		angle = (player->player_dir - 90) * M_PI / 180.0;
+	dy = cos(angle) * STEP;
+	dx = -sin(angle) * STEP;
+	new_x = player->player_x + dx;
+	new_y = player->player_y + dy;
 	if (check_collision(map, new_x, new_y))
 	{
 		player->player_x = new_x;

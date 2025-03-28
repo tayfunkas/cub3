@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/02/27 18:28:37 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/28 15:57:02 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	init_game(t_game *game)
 	mlx_loop(game->mlx_ptr);
 }
 
-int render(t_game *game)
+int	render(t_game *game)
 {
 	int	x = 0;
 	int	y = 0;
 
-	usleep(70000);
+	usleep(16000);
 	mlx_clear_window(game->mlx_ptr, game->mlx_window);
 	while (game->map->data[x])
 	{

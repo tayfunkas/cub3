@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/27 18:43:36 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/28 16:22:00 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	init_game(t_game *game);
 int		keys_player(int key, t_game *game);
 void	player_direction(t_player *player, int key);
 void	player_move(t_player *player, t_map *map, int key);
+void	player_strafe(t_player *player, t_map *map, int key);
 int		check_collision(t_map *map, float x, float y);
 //rc_fov.c
 void	draw_ray_line(t_game *game, t_player *player, int x_width, float x);
