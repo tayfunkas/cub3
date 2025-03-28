@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/03/28 16:22:00 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:02:29 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int		ft_is_all_spaces(char *line);
 //init_game.c
 int		key_hook(int key, t_game *game);
 void	init_game(t_game *game);
+int     mouse_move(int x, int y, t_game *game);
 //player_move.c
 int		keys_player(int key, t_game *game);
 void	player_direction(t_player *player, int key);
