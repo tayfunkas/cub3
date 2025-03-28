@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/03/28 18:31:22 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/28 19:24:35 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	init_game(t_game *game)
 	load_img(game);
 	mlx_loop_hook(game->mlx_ptr, render, game);
 	mlx_hook(game->mlx_window, 2, KeyPressMask, keys_player, game);
+	mlx_hook(game->mlx_window, 6, PointerMotionMask, mouse_move, game);
 	mlx_loop(game->mlx_ptr);
 }
 
@@ -111,4 +112,28 @@ void	load_img(t_game *game)
 		ft_putstr_fd("Error: Failed to load player texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
+}
+
+int	mouse_move(int x, int y, t_game *game)
+{
+	static int	last_x = -1;
+	int	delta_x;
+
+	(void)y;
+	if (last_x == -1)
+	{
+		last_x = x;
+		return (0);
+	}
+	delta_x = x - last_x;
+	if(delta_x != 0)
+	{
+		game->player->player_dir -= delta_x * 0.5;
+		if (game->player->player_dir < 0)
+			game->player->player_dir += 360;
+		if (game->player->player_dir >= 360)
+			game->player->player_dir -= 360;
+		last_x = x;
+	}
+	return (0);
 }

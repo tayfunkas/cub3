@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/03/28 15:23:30 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/28 19:24:42 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	get_player_init_position(t_map *map, t_player *player)
 		}
 		x++;
 	}
+	printf("Player initialized at: (%f, %f), direction: %d\n", player->player_x, player->player_y, player->player_dir);
 }
 
 int	is_player(char c)
