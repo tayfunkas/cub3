@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:55:33 by grial             #+#    #+#             */
-/*   Updated: 2025/02/27 18:43:10 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/28 19:19:21 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	draw_ray_line(t_game *game, t_player *player, int x_width, float x)
 		new_y = player->player_y + dy;
 		if (draw_check_collision(game, x_width, new_x, new_y, x))
 			break ;
-		mlx_pixel_put(game->mlx_ptr, game->mlx_window, new_y * MIN_S, new_x
-			* MIN_S, 0x005500);
+		//mlx_pixel_put(game->mlx_ptr, game->mlx_window, new_y * MIN_S, new_x
+		//	* MIN_S, 0x005500);
 		ray_line += STEP;
 	}
 }
@@ -63,28 +63,40 @@ float	distance(float x1, float y1, float x2, float y2)
 	dy = y2 - y1;
 	return (sqrt(dx * dx + dy * dy));
 }
+void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x >= 0 && x < WIN_W && y >= 0 && y < WIN_H) // Evitar desbordamiento
+	{
+		dst = game->addr + (y * game->line_length + x * (game->bpp / 8));
+		*(unsigned int*)dst = color;
+	}
+}
 
 void	draw_wall(t_game *game, int x_width, float x, float y, float ang)
 {
-	float	v_ray;
-	int		i;
-	int		a;
+	float	dist;
+	float	height;
+	int		start;
+	int		end;
+	int		y_pos;
 
-	a = 0;
-	i = 0;
-	v_ray = distance(x, y, game->player->player_x, game->player->player_y)
+	dist = distance(x, y, game->player->player_x, game->player->player_y)
 		* cos(ang * M_PI / 180.0);
-	v_ray = (MIN_S * WIN_H) / v_ray;
-	if (v_ray > WIN_H)
-		v_ray = WIN_H;
-	i = -v_ray / 2;
-	while (a < v_ray)
+	height = (BLOCK / dist) * (WIN_W / 2);
+	if (height > (float)WIN_H)
+		height = WIN_H;
+	start = (WIN_H / 2) - (height / 2);
+	end = (WIN_H / 2) + (height / 2);
+	y_pos = start;
+	while (y_pos < end)
 	{
-		mlx_pixel_put(game->mlx_ptr, game->mlx_window, x_width, (WIN_H / 2) + i
-			+ a, 0x005500);
-		a++;
+		my_mlx_pixel_put(game, x_width, y_pos, 0x005500);
+		y_pos++;
 	}
 }
+
 
 int	draw_check_collision(t_game *game, int x_width, float x, float y, float ang)
 {

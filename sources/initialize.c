@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/20 15:57:02 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/28 15:23:30 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	initialize_game(t_game **game)
 		handle_error(*game, "Memory allocation failied for game structure.");
 	(*game)->mlx_ptr = NULL;
 	(*game)->mlx_window = NULL;
+	(*game)->img_buffer = NULL;
 	(*game)->no_texture = NULL;
 	(*game)->so_texture = NULL;
 	(*game)->we_texture = NULL;

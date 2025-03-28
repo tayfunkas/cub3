@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/27 18:43:36 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/28 18:29:23 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define WIN_W 720
 # define WIN_H 480
 # define MIN_S 8
+# define BLOCK 8
 # define STEP 0.2
 # define FOV 90
 
@@ -83,5 +84,6 @@ void	draw_fov(t_game *game, t_player *player);
 void	draw_wall(t_game *game, int x_width, float x, float y, float ang);
 int     draw_check_collision(t_game *game, int x_width, float x, float y, float ang);
 float	distance(float x1, float y1, float x2, float y2);
+void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 
 #endif

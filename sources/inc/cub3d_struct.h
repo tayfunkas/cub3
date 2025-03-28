@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/02/27 18:44:06 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/28 15:26:03 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ typedef struct s_game
 {
 	void		*mlx_ptr;
 	void		*mlx_window;
+	void		*img_buffer;
+	void		*img_addr;
+	char		*addr;
+	int			bpp;
+	int			line_length;
+	int			endian;
 	char		*no_texture;
 	char		*so_texture;
 	char		*we_texture;
