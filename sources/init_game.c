@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/03/31 18:41:41 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/31 19:19:33 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void	load_img(t_game *game)
 	int	img_height;
 
 	game->mini = malloc(sizeof(t_mini));
+	
+	//	 ###     MINIMAP     ###
 	if (!game->mini)
 	{
 		ft_putstr_fd("Error: game->mini not initialized\n", 2);
@@ -113,6 +115,9 @@ void	load_img(t_game *game)
 		ft_putstr_fd("Error: Failed to load player texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
+
+	//	 ###     TEXTURE     ###
+	
 	game->engine->no_img->img = mlx_xpm_file_to_image(game->mlx_ptr, 
 		"textures/NO.xpm", &img_width, &img_height);
 	if (!game->engine->no_img->img)
@@ -120,6 +125,8 @@ void	load_img(t_game *game)
 		ft_putstr_fd("Error: Failed to load player texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
+	game->engine->no_img->addr = mlx_get_data_addr(game->engine->no_img->img, &game->engine->no_img->bpp, &game->engine->no_img->line_length, &game->engine->no_img->endian);
+	
 	game->engine->ea_img->img = mlx_xpm_file_to_image(game->mlx_ptr, 
 		"textures/EA.xpm", &img_width, &img_height);
 	if (!game->engine->ea_img)
@@ -127,6 +134,9 @@ void	load_img(t_game *game)
 		ft_putstr_fd("Error: Failed to load player texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
+	game->engine->ea_img->addr = mlx_get_data_addr(game->engine->ea_img->img, &game->engine->ea_img->bpp, &game->engine->ea_img->line_length, &game->engine->ea_img->endian);
+
+	
 	game->engine->so_img->img = mlx_xpm_file_to_image(game->mlx_ptr, 
 		"textures/SO.xpm", &img_width, &img_height);
 	if (!game->engine->so_img)
@@ -134,6 +144,9 @@ void	load_img(t_game *game)
 		ft_putstr_fd("Error: Failed to load player texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
+	game->engine->so_img->addr = mlx_get_data_addr(game->engine->so_img->img, &game->engine->so_img->bpp, &game->engine->so_img->line_length, &game->engine->so_img->endian);
+
+	
 	game->engine->we_img->img = mlx_xpm_file_to_image(game->mlx_ptr, 
 		"textures/WE.xpm", &img_width, &img_height);
 	if (!game->engine->we_img)
@@ -141,6 +154,8 @@ void	load_img(t_game *game)
 		ft_putstr_fd("Error: Failed to load player texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
+	game->engine->we_img->addr = mlx_get_data_addr(game->engine->we_img->img, &game->engine->we_img->bpp, &game->engine->we_img->line_length, &game->engine->we_img->endian);
+
 	
 }
 

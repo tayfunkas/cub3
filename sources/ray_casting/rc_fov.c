@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:55:33 by grial             #+#    #+#             */
-/*   Updated: 2025/03/31 14:57:53 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/31 19:33:14 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,16 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
 	}
 }
 
+int get_pixel_color(t_img *texture, int x, int y)
+{
+    char    *pixel;
+    int     color;
+
+    pixel = texture->addr + (y * texture->line_length + x * (texture->bpp / 8));
+    color = *(int *)pixel;
+    return (color);
+}
+
 void	draw_wall(t_game *game, int x_width, float x, float y, float ang)
 {
 	float	dist;
@@ -81,7 +91,11 @@ void	draw_wall(t_game *game, int x_width, float x, float y, float ang)
 	int		start;
 	int		end;
 	int		y_pos;
+	int		tex_x;
+	int		tex_y;
+	t_img	*texture = game->engine->no_img; // Siempre usamos la textura del muro norte
 
+	// Corregir distancia con FOV
 	dist = distance(x, y, game->player->player_x, game->player->player_y)
 		* cos(ang * M_PI / 180.0);
 	height = (BLOCK / (dist * BLOCK)) * (WIN_H / 2);
@@ -90,12 +104,24 @@ void	draw_wall(t_game *game, int x_width, float x, float y, float ang)
 	start = (WIN_H / 2) - (height / 2);
 	end = (WIN_H / 2) + (height / 2);
 	y_pos = start;
+
+	// Calcular la coordenada X en la textura
+	tex_x = (int)(x * 64) % 64;
+
 	while (y_pos < end)
 	{
-		my_mlx_pixel_put(game, x_width, y_pos, 0x005500);
+		// Calcular la coordenada Y en la textura
+		tex_y = ((y_pos - start) * 64) / height;
+
+		// Obtener el color del píxel de la textura
+		int color = get_pixel_color(texture, tex_x, tex_y);
+
+		// Dibujar el píxel en la imagen principal
+		my_mlx_pixel_put(game, x_width, y_pos, color);
 		y_pos++;
 	}
 }
+
 
 
 int	draw_check_collision(t_game *game, int x_width, float x, float y, float ang)
@@ -112,3 +138,5 @@ int	draw_check_collision(t_game *game, int x_width, float x, float y, float ang)
 	}
 	return (0);
 }
+
+
