@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/03/28 16:30:57 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:01:16 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	check_collision(t_map *map, float x, float y)
 
 	new_x = (int) floorf(x);
 	new_y = (int) floorf(y);
-	if (map->data[new_x][new_y] == '0')
+	if (map->data[new_x][new_y] != '1')
 		return (1);
 	return (0);
 }

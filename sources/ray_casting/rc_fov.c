@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:55:33 by grial             #+#    #+#             */
-/*   Updated: 2025/03/28 19:19:21 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/31 14:04:15 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	draw_ray_line(t_game *game, t_player *player, int x_width, float x)
 			break ;
 		//mlx_pixel_put(game->mlx_ptr, game->mlx_window, new_y * MIN_S, new_x
 		//	* MIN_S, 0x005500);
-		ray_line += STEP;
+		ray_line += 0.01 ;
 	}
 }
 
@@ -61,13 +61,13 @@ float	distance(float x1, float y1, float x2, float y2)
 
 	dx = x2 - x1;
 	dy = y2 - y1;
-	return (sqrt(dx * dx + dy * dy));
+	return (sqrt((dx * dx) + (dy * dy)));
 }
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x >= 0 && x < WIN_W && y >= 0 && y < WIN_H) // Evitar desbordamiento
+	if (x >= 0 && x < WIN_W && y >= 0 && y < WIN_H)
 	{
 		dst = game->addr + (y * game->line_length + x * (game->bpp / 8));
 		*(unsigned int*)dst = color;
@@ -84,7 +84,7 @@ void	draw_wall(t_game *game, int x_width, float x, float y, float ang)
 
 	dist = distance(x, y, game->player->player_x, game->player->player_y)
 		* cos(ang * M_PI / 180.0);
-	height = (BLOCK / dist) * (WIN_W / 2);
+	height = (BLOCK / (dist * BLOCK)) * (WIN_H / 2);
 	if (height > (float)WIN_H)
 		height = WIN_H;
 	start = (WIN_H / 2) - (height / 2);

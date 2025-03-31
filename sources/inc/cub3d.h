@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/03/28 19:24:46 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/31 14:02:25 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@
 # include <math.h>
 
 # define M_PI 3.14159265358979323846
-# define WIN_W 720
-# define WIN_H 480
+# define WIN_W 1280
+# define WIN_H 720
 # define MIN_S 8
-# define BLOCK 8
-# define STEP 0.2
+# define BLOCK 64
+# define STEP 0.07
 # define FOV 90
 
 void	get_player_init_position(t_map *map, t_player *player);
