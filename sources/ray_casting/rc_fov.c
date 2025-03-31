@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:55:33 by grial             #+#    #+#             */
-/*   Updated: 2025/03/31 14:04:15 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/31 14:57:53 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
 
 	if (x >= 0 && x < WIN_W && y >= 0 && y < WIN_H)
 	{
-		dst = game->addr + (y * game->line_length + x * (game->bpp / 8));
+		dst = game->engine->frame->addr + (y * game->engine->frame->line_length + x * (game->engine->frame->bpp / 8));
 		*(unsigned int*)dst = color;
 	}
 }

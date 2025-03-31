@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/03/28 19:24:42 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/31 15:48:33 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ void	initialize_game(t_game **game)
 		handle_error(*game, "Memory allocation failied for game structure.");
 	(*game)->mlx_ptr = NULL;
 	(*game)->mlx_window = NULL;
-	(*game)->img_buffer = NULL;
-	(*game)->no_texture = NULL;
-	(*game)->so_texture = NULL;
-	(*game)->we_texture = NULL;
-	(*game)->ea_texture = NULL;
 	(*game)->map_file = NULL;
 	(*game)->floor_color = (t_color){.r = -1, .g = -1, .b = -1};
 	(*game)->ceiling_color = (t_color){.r = -1, .g = -1, .b = -1};
@@ -35,6 +30,21 @@ void	initialize_game(t_game **game)
 	(*game)->map->data = NULL;
 	(*game)->map->line_count = 0;
 	initialize_player(*game);
+	initialize_engine(*game);
+}
+
+void	initialize_engine(t_game *game)
+{
+	game->engine = malloc(sizeof(t_engine));
+	if (!game->engine)
+		return ;
+	game->engine->ang_step = 0;
+	game->engine->frame = malloc(sizeof(t_img)); 
+	game->engine->frame->img_buffer = NULL;
+	game->engine->no_texture = NULL;
+	game->engine->so_texture = NULL;
+	game->engine->we_texture = NULL;
+	game->engine->ea_texture = NULL;
 }
 
 void	initialize_player(t_game *game)

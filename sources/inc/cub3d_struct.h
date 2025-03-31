@@ -6,16 +6,36 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/03/28 15:26:03 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/31 15:12:30 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_STRUCT_H
 # define CUB3D_STRUCT_H
 
+typedef struct s_img
+{
+	void		*img_buffer;
+	void		*img_addr;
+	char		*addr;
+	int			bpp;
+	int			line_length;
+	int			endian;
+	
+}	t_img;
+
 typedef struct s_engine 
 {
+	t_img	*frame;
 	float	ang_step;
+	void	*no_img;
+	void	*so_img;
+	void	*we_img;
+	void	*ea_img;
+	char	*no_texture;
+	char	*so_texture;
+	char	*we_texture;
+	char	*ea_texture;
 }	t_engine;
 
 
@@ -62,17 +82,8 @@ typedef struct s_game
 {
 	void		*mlx_ptr;
 	void		*mlx_window;
-	void		*img_buffer;
-	void		*img_addr;
-	char		*addr;
-	int			bpp;
-	int			line_length;
-	int			endian;
-	char		*no_texture;
-	char		*so_texture;
-	char		*we_texture;
-	char		*ea_texture;
 	char		*map_file;
+	t_engine	*engine;
 	t_color		floor_color;
 	t_color		ceiling_color;
 	t_map		*map;

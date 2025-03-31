@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:36:03 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/20 18:28:08 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/31 15:48:12 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ void	parse_file(t_game *game)
 static int	assign_lines(t_game *game, char *line)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
-		parse_texture(game, line + 3, &(game->no_texture));
+		parse_texture(game, line + 3, &(game->engine->no_texture));
 	else if (ft_strncmp(line, "SO ", 3) == 0)
-		parse_texture(game, line + 3, &(game->so_texture));
+		parse_texture(game, line + 3, &(game->engine->so_texture));
 	else if (ft_strncmp(line, "WE ", 3) == 0)
-		parse_texture(game, line + 3, &(game->we_texture));
+		parse_texture(game, line + 3, &(game->engine->we_texture));
 	else if (ft_strncmp(line, "EA ", 3) == 0)
-		parse_texture(game, line + 3, &(game->ea_texture));
+		parse_texture(game, line + 3, &(game->engine->ea_texture));
 	else if (ft_strncmp(line, "F ", 2) == 0)
 		parse_color(game, line + 2, &(game->floor_color));
 	else if (ft_strncmp(line, "C ", 2) == 0)

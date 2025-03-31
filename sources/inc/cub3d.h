@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/03/31 14:02:25 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/31 15:02:26 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	handle_error(t_game *game, const char *error_message);
 //initialize.c
 void	initialize_game(t_game **game);
 void	initialize_player(t_game *game);
+void	initialize_engine(t_game *game);
 //validate_map.c
 void	pad_map_to_rectangle(t_game *game);
 void	validate_map(t_game *game);
