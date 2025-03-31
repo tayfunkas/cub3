@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/03/31 15:48:33 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/31 18:47:48 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,27 @@ void	initialize_engine(t_game *game)
 		return ;
 	game->engine->ang_step = 0;
 	game->engine->frame = malloc(sizeof(t_img)); 
-	game->engine->frame->img_buffer = NULL;
+	game->engine->frame->img = NULL;
 	game->engine->no_texture = NULL;
 	game->engine->so_texture = NULL;
 	game->engine->we_texture = NULL;
 	game->engine->ea_texture = NULL;
+	game->engine->no_img = malloc(sizeof(t_img));
+	if (!game->engine->no_img)
+		return ;
+	game->engine->no_img->img = NULL;
+	game->engine->so_img = malloc(sizeof(t_img));
+	if (!game->engine->so_img)
+		return ;
+	game->engine->so_img->img = NULL;
+	game->engine->we_img = malloc(sizeof(t_img));
+	if (!game->engine->we_img)
+		return ;
+	game->engine->we_img->img = NULL;
+	game->engine->ea_img = malloc(sizeof(t_img));
+	if (!game->engine->ea_img)
+		return ;
+	game->engine->ea_img->img = NULL;
 }
 
 void	initialize_player(t_game *game)

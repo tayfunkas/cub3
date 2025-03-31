@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/03/31 15:01:00 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/31 18:41:41 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	init_game(t_game *game)
 	game->mlx_ptr = mlx_init();
 	game->mlx_window = mlx_new_window(game->mlx_ptr, WIN_W, 
 		WIN_H, "cub3D");
-	game->engine->frame->img_buffer = mlx_new_image(game->mlx_ptr, WIN_W, WIN_H);
-	game->engine->frame->addr = mlx_get_data_addr(game->engine->frame->img_buffer, &game->engine->frame->bpp, 
+	game->engine->frame->img = mlx_new_image(game->mlx_ptr, WIN_W, WIN_H);
+	game->engine->frame->addr = mlx_get_data_addr(game->engine->frame->img, &game->engine->frame->bpp, 
 		&game->engine->frame->line_length, &game->engine->frame->endian);
 	load_img(game);
 	mlx_loop_hook(game->mlx_ptr, render, game);
@@ -68,7 +68,7 @@ int	render(t_game *game)
 	//}
 //	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player, game->player->player_y * MIN_S, game->player->player_x * MIN_S);
 	draw_fov(game, game->player);
-	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->engine->frame->img_buffer, 0, 0);
+	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->engine->frame->img, 0, 0);
 	return (1);
 }
 
@@ -113,28 +113,28 @@ void	load_img(t_game *game)
 		ft_putstr_fd("Error: Failed to load player texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	game->engine->no_img = mlx_xpm_file_to_image(game->mlx_ptr, 
+	game->engine->no_img->img = mlx_xpm_file_to_image(game->mlx_ptr, 
 		"textures/NO.xpm", &img_width, &img_height);
-	if (!game->engine->no_img)
+	if (!game->engine->no_img->img)
 	{
 		ft_putstr_fd("Error: Failed to load player texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	game->engine->ea_img = mlx_xpm_file_to_image(game->mlx_ptr, 
+	game->engine->ea_img->img = mlx_xpm_file_to_image(game->mlx_ptr, 
 		"textures/EA.xpm", &img_width, &img_height);
 	if (!game->engine->ea_img)
 	{
 		ft_putstr_fd("Error: Failed to load player texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	game->engine->so_img = mlx_xpm_file_to_image(game->mlx_ptr, 
+	game->engine->so_img->img = mlx_xpm_file_to_image(game->mlx_ptr, 
 		"textures/SO.xpm", &img_width, &img_height);
 	if (!game->engine->so_img)
 	{
 		ft_putstr_fd("Error: Failed to load player texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	game->engine->we_img = mlx_xpm_file_to_image(game->mlx_ptr, 
+	game->engine->we_img->img = mlx_xpm_file_to_image(game->mlx_ptr, 
 		"textures/WE.xpm", &img_width, &img_height);
 	if (!game->engine->we_img)
 	{

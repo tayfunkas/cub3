@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/03/31 15:12:30 by grial            ###   ########.fr       */
+/*   Updated: 2025/03/31 18:40:45 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 typedef struct s_img
 {
-	void		*img_buffer;
+	void		*img;
 	void		*img_addr;
 	char		*addr;
 	int			bpp;
@@ -28,10 +28,10 @@ typedef struct s_engine
 {
 	t_img	*frame;
 	float	ang_step;
-	void	*no_img;
-	void	*so_img;
-	void	*we_img;
-	void	*ea_img;
+	t_img	*no_img;
+	t_img	*so_img;
+	t_img	*we_img;
+	t_img	*ea_img;
 	char	*no_texture;
 	char	*so_texture;
 	char	*we_texture;
