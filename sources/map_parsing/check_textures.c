@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/01 13:42:10 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/01 18:37:51 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,37 @@
 int	has_xpm_extension(const char *filename)
 {
 	size_t	len;
+	int		result;
 	char	*trimmed_fn;
 	char	*trimmed_fn1;
 
 	trimmed_fn = ft_strtrim(filename, "\n");
 	trimmed_fn1 = ft_strtrim(trimmed_fn, " ");
 	free(trimmed_fn);
+	if (!trimmed_fn1)
+		return (0);
 	len = ft_strlen(trimmed_fn1);
 	if (len < 4)
 		return (0);
 	if (trimmed_fn1[len - 1] != 'm' || trimmed_fn1[len - 2] != 'p' 
 		|| trimmed_fn1[len - 3] != 'x' || trimmed_fn1[len - 4] != '.')
-		return (0);
+		result = 0;
 	else
-		return (1); 
+		result = 1; 
+	free(trimmed_fn1);
+	return (result);
 }
 
 void	parse_texture(t_game *game, char *line, char **texture_path)
 {
 	char	*trimmed_line;
+	char	*temp;
 
 	while (*line == ' ')
 		line++;
-	trimmed_line = ft_strtrim(line, "\n");
-	trimmed_line = ft_strtrim(trimmed_line, " ");
+	temp = ft_strtrim(line, "\n");
+	trimmed_line = ft_strtrim(temp, " ");
+	free(temp);
 	*texture_path = trimmed_line;
 	if (!*texture_path)
 		handle_error(game, "Invalid texture line");

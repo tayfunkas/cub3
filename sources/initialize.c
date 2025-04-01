@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/01 13:44:38 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/01 20:16:43 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	initialize_game(t_game **game)
 	(*game)->map->line_count = 0;
 	initialize_player(*game);
 	initialize_engine(*game);
+	initialize_mini(*game);
 }
 
 void	initialize_engine(t_game *game)
@@ -100,6 +101,18 @@ void	get_player_init_position(t_map *map, t_player *player)
 		x++;
 	}
 	printf("Initial position of the player acquired\n");
+}
+
+void	initialize_mini(t_game *game)
+{
+	game->mini = ft_calloc(1, sizeof(t_mini));
+	if (!game->mini)
+		handle_error(game, "Failed to allocate mini");
+	game->mini->wall = NULL;
+	game->mini->door = NULL;
+	game->mini->floor = NULL;
+	game->mini->player = NULL;
+	printf("Allocated mini struct: %p\n", game->mini);
 }
 
 int	is_player(char c)

@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/04/01 12:39:50 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/01 20:16:30 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ typedef struct s_engine
 typedef struct s_mini
 {
 	void	*wall;
-	void	*door;
 	void	*floor;
+	void	*door;
 	void	*player;
 }	t_mini;
 

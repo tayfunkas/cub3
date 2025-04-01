@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/01 15:35:39 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/01 20:14:23 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,15 @@ char	**append_line_to_map(char **map, char *line, t_game *game);
 //free.c
 int		free_game(t_game *game);
 void	handle_error(t_game *game, const char *error_message);
+void	free_engine_images(t_engine *engine, void *mlx_ptr);
+void	free_engine_texture(t_engine *engine);
+void	free_mini(t_mini *mini, void *mlx_ptr);
+void	free_map(t_map *map);
 //initialize.c
 void	initialize_game(t_game **game);
 void	initialize_player(t_game *game);
 void	initialize_engine(t_game *game);
+void	initialize_mini(t_game *game);
 //validate_map.c
 void	pad_map_to_rectangle(t_game *game);
 void	validate_map(t_game *game);

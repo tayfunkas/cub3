@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/04/01 15:51:20 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/01 20:08:31 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	load_img(t_game *game)
 	int	img_width;
 	int	img_height;
 
-	game->mini = malloc(sizeof(t_mini));
+	//game->mini = malloc(sizeof(t_mini));
 	
 	//	 ###     MINIMAP     ###
 	if (!game->mini)

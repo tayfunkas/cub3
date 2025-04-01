@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:37 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/01 13:48:31 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/01 18:40:21 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ void	check_mapfile_name(t_game *game, char *map)
 
 void	check_mapchars(char *line, t_game *game)
 {
-	int	i;
+	int		i;
+	char	*trimmed;
 
 	printf("Checking line: %s\n", line);
 	i = 0;
-	ft_strtrim(line, "\n");
+	trimmed = ft_strtrim(line, "\n");
+	line = trimmed;
 	while (line[i])
 	{
 		if (line[i] != '0' && line[i] != '1' && line[i] != 'N' 
@@ -53,6 +55,7 @@ void	check_mapchars(char *line, t_game *game)
 			handle_error(game, "Invalid character in the map");
 		i++;
 	}
+	free(trimmed);
 }
 
 void	check_player(char **map, char *line, t_game *game)
