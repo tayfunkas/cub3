@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/03/31 15:52:33 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/01 13:42:10 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@ int	has_xpm_extension(const char *filename)
 {
 	size_t	len;
 	char	*trimmed_fn;
+	char	*trimmed_fn1;
 
 	trimmed_fn = ft_strtrim(filename, "\n");
-	trimmed_fn = ft_strtrim(trimmed_fn, " ");
-	len = ft_strlen(trimmed_fn);
+	trimmed_fn1 = ft_strtrim(trimmed_fn, " ");
+	free(trimmed_fn);
+	len = ft_strlen(trimmed_fn1);
 	if (len < 4)
 		return (0);
-	if (trimmed_fn[len - 1] != 'm' || trimmed_fn[len - 2] != 'p' 
-		|| trimmed_fn[len - 3] != 'x' || trimmed_fn[len - 4] != '.')
+	if (trimmed_fn1[len - 1] != 'm' || trimmed_fn1[len - 2] != 'p' 
+		|| trimmed_fn1[len - 3] != 'x' || trimmed_fn1[len - 4] != '.')
 		return (0);
 	else
 		return (1); 

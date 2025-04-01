@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:44 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/03/31 15:48:26 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/01 12:46:12 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	free_game(t_game *game)
 	free(game->engine->so_texture);
 	free(game->engine->we_texture);
 	free(game->engine->ea_texture);
+	if (game->keys)
+		free(game->keys);
 	if (game->map)
 		free(game->map);
 	if (game->player)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_keys.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:54 by grial             #+#    #+#             */
-/*   Updated: 2025/02/21 18:21:11 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/01 12:39:16 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 # define RIGHT 100
 # define TURN_L 65361
 # define TURN_R 65363
+# define MAX_KEYCODE 70000
 
 #endif

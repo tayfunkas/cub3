@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/03/31 15:02:26 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/01 15:35:39 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,14 @@ int		key_hook(int key, t_game *game);
 void	init_game(t_game *game);
 int     mouse_move(int x, int y, t_game *game);
 //player_move.c
-int		keys_player(int key, t_game *game);
+void	handle_movement(t_game *game);
 void	player_direction(t_player *player, int key);
 void	player_move(t_player *player, t_map *map, int key);
 void	player_strafe(t_player *player, t_map *map, int key);
 int		check_collision(t_map *map, float x, float y);
+//keys.c
+int     key_press(int key, t_game *game);
+int     key_release(int key, t_game *game);
 //rc_fov.c
 void	draw_ray_line(t_game *game, t_player *player, int x_width, float x);
 void	draw_fov(t_game *game, t_player *player);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rc_fov.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:55:33 by grial             #+#    #+#             */
-/*   Updated: 2025/03/31 19:33:14 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/01 15:47:51 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
 {
 	char	*dst;
 
+	if (!game || !game->engine || !game->engine->frame || !game->engine->frame->addr)
+	{
+		printf("Invalid pointer in my_mlx_pixel_put\n");
+		return;
+	}
 	if (x >= 0 && x < WIN_W && y >= 0 && y < WIN_H)
 	{
 		dst = game->engine->frame->addr + (y * game->engine->frame->line_length + x * (game->engine->frame->bpp / 8));

@@ -3,26 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/03/31 14:01:16 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/01 15:36:55 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	keys_player(int key, t_game *game)
+void	handle_movement(t_game *game)
 {
-	if (key == ESCAPE)
+	t_player	*player;
+	t_map		*map;
+
+	player = game->player;
+	map = game->map;
+	if (game->keys[FORWARD])
+		player_move(player, map, FORWARD);
+	if (game->keys[BACKWARD])
+		player_move(player, map, BACKWARD);
+	if (game->keys[LEFT])
+		player_strafe(player, map, LEFT);
+	if (game->keys[RIGHT])
+		player_strafe(player, map, RIGHT);
+	if (game->keys[TURN_L])
+		player_direction(player, TURN_L);
+	if (game->keys[TURN_R])
+		player_direction(player, TURN_R);
+	if (game->keys[ESCAPE])
 		free_game(game);
-	if (key == FORWARD || key == BACKWARD)
-		player_move(game->player, game->map, key);
-	if (key == LEFT || key == RIGHT)
-		player_strafe(game->player, game->map, key);
-	if (key == TURN_L || key == TURN_R)
-		player_direction(game->player, key);
-	return (0);
 }
 
 void	player_direction(t_player *player, int key)

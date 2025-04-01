@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/03/31 18:47:48 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/01 13:44:38 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void	initialize_game(t_game **game)
 	(*game)->map_file = NULL;
 	(*game)->floor_color = (t_color){.r = -1, .g = -1, .b = -1};
 	(*game)->ceiling_color = (t_color){.r = -1, .g = -1, .b = -1};
+	(*game)->keys = ft_calloc(MAX_KEYCODE, sizeof(int));
+	if (!(*game)->keys)
+		handle_error(*game, "Memory allocation failed for keys array.");
 	(*game)->map = malloc(sizeof(t_map));
 	if (!(*game)->map)
 		handle_error(*game, "Memory allocation failed for map structure.");
@@ -79,7 +82,7 @@ void	get_player_init_position(t_map *map, t_player *player)
 	int	x;
 	int	y;
 
-	if (!map->data)
+	if (!map || !map->data)
 		printf("Does not exist\n");
 	x = 0;
 	while (map->data[x])
@@ -96,7 +99,7 @@ void	get_player_init_position(t_map *map, t_player *player)
 		}
 		x++;
 	}
-	printf("Player initialized at: (%f, %f), direction: %d\n", player->player_x, player->player_y, player->player_dir);
+	printf("Initial position of the player acquired\n");
 }
 
 int	is_player(char c)
