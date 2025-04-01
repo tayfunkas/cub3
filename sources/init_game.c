@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/04/01 15:29:44 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:51:20 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init_game(t_game *game)
 	if (!game->engine->frame->img || !game->engine->frame->addr)
 		handle_error(game, "Failed to create or retrieve image data");
 	load_img(game);
+	mlx_hook(game->mlx_window, 17, 0, free_game, game);
 	mlx_hook(game->mlx_window, 2, 1L << 0, key_press, game);
 	mlx_hook(game->mlx_window, 3, 1L << 1, key_release, game);
 	mlx_hook(game->mlx_window, 6, PointerMotionMask, mouse_move, game);
