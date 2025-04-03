@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:22 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/01 15:13:37 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:29:42 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	validate_map(t_game *game)
 	int		y;
 
 	x = 0;
+	if (!game || !game->map || !game->map->data)
+		handle_error(game, "Map data is not initialized in validate_map");
 	map = game->map->data;
 	pad_map_to_rectangle(game);
 	while (x < game->map->m_height)

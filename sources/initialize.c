@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/01 20:16:43 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/03 18:00:37 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	initialize_game(t_game **game)
 	*game = malloc(sizeof(t_game));
 	if (!*game)
 		handle_error(*game, "Memory allocation failied for game structure.");
+	ft_bzero(*game, sizeof(t_game));
 	(*game)->mlx_ptr = NULL;
 	(*game)->mlx_window = NULL;
 	(*game)->map_file = NULL;
@@ -34,6 +35,7 @@ void	initialize_game(t_game **game)
 	(*game)->map->line_count = 0;
 	initialize_player(*game);
 	initialize_engine(*game);
+	initialize_config(*game);
 	initialize_mini(*game);
 }
 
@@ -84,7 +86,10 @@ void	get_player_init_position(t_map *map, t_player *player)
 	int	y;
 
 	if (!map || !map->data)
-		printf("Does not exist\n");
+	{
+		printf("Map does not exist\n");
+		return;
+	}
 	x = 0;
 	while (map->data[x])
 	{
@@ -95,12 +100,12 @@ void	get_player_init_position(t_map *map, t_player *player)
 			{
 				player->player_x = x;
 				player->player_y = y;
+				player->player_count++;
 			}
 			y++;
 		}
 		x++;
 	}
-	printf("Initial position of the player acquired\n");
 }
 
 void	initialize_mini(t_game *game)
@@ -112,7 +117,6 @@ void	initialize_mini(t_game *game)
 	game->mini->door = NULL;
 	game->mini->floor = NULL;
 	game->mini->player = NULL;
-	printf("Allocated mini struct: %p\n", game->mini);
 }
 
 int	is_player(char c)
@@ -120,4 +124,17 @@ int	is_player(char c)
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
 	return (0);
+}
+
+void	initialize_config(t_game *game)
+{
+	game->config = malloc(sizeof(t_config));
+	if (!game->config)
+		handle_error(game, "Memory allocation failed for config structure.");
+	game->config->no = 0;
+	game->config->so = 0;
+	game->config->ea = 0;
+	game->config->we = 0;
+	game->config->f = 0;
+	game->config->c = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:55:33 by grial             #+#    #+#             */
-/*   Updated: 2025/04/01 15:47:51 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:33:24 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,11 @@ int	draw_check_collision(t_game *game, int x_width, float x, float y, float ang)
 
 	new_x = (int)floorf(x);
 	new_y = (int)floorf(y);
+	if (new_x < 0 || new_y < 0 ||
+		new_x >= game->map->m_height ||
+		new_y >= (int)ft_strlen(game->map->data[new_x]) || 
+		!game->map->data[new_x])
+		return (0);
 	if (game->map->data[new_x][new_y] == '1')
 	{
 		draw_wall(game, x_width, x, y, ang);

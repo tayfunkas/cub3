@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/01 18:37:51 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:04:28 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	check_texture(const char *path, const char *message, t_game *game)
 
 void	check_images(t_game *game)
 {
+	if (!game->engine)
+		handle_error(game, "Engine not initialized before checking textures.");
 	if (!game->engine->no_texture || !game->engine->so_texture || !game->engine->we_texture 
 		|| !game->engine->ea_texture)
 		handle_error(game, "Missing texture file.");

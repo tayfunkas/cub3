@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/04/01 20:08:31 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:31:39 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		render(t_game *game);
 void	init_game(t_game *game)
 {
 	game->mlx_ptr = mlx_init();
+	if (!game->mlx_ptr)
+		handle_error(game, "Failed to initialize MLX");
 	game->mlx_window = mlx_new_window(game->mlx_ptr, WIN_W, 
 		WIN_H, "cub3D");
 	game->engine->frame->img = mlx_new_image(game->mlx_ptr, WIN_W, WIN_H);

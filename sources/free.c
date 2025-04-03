@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:44 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/01 20:16:17 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:49:06 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	free_game(t_game *game)
 		return (0);
 	free_engine_images(game->engine, game->mlx_ptr);
 	free_engine_texture(game->engine);
+	if (game->engine)
+		free(game->engine);
 	free_mini(game->mini, game->mlx_ptr);
 	if (game->mlx_window)
 	{
@@ -35,6 +37,8 @@ int	free_game(t_game *game)
 	free_map(game->map);
 	if (game->player)
 		free(game->player);
+	if (game->config)
+		free(game->config);
 	free(game);
 	exit(0);
 }
@@ -82,6 +86,8 @@ void	free_engine_images(t_engine *engine, void *mlx_ptr)
 
 void	free_engine_texture(t_engine *engine)
 {
+	if (!engine)
+		return ;
 	if (engine->no_texture)
 		free(engine->no_texture);
 	if (engine->so_texture)
@@ -90,51 +96,7 @@ void	free_engine_texture(t_engine *engine)
 		free(engine->we_texture);
 	if (engine->ea_texture)
 		free(engine->ea_texture);
-	if (engine)
-		free(engine);
 }
-
-/*void	free_mini(t_mini *mini, void *mlx_ptr)
-{
-	if (!mini || !mlx_ptr)
-		return ;
-	if (mini->wall)
-		mlx_destroy_image(mlx_ptr, mini->wall);
-	if (mini->door)
-		mlx_destroy_image(mlx_ptr, mini->door);
-	if (mini->floor)
-		mlx_destroy_image(mlx_ptr, mini->floor);
-	if (mini->player)
-		mlx_destroy_image(mlx_ptr, mini->player);
-	free(mini);
-}*/
-
-/*void	free_mini(t_mini *mini, void *mlx_ptr)
-{
-	if (!mini || !mlx_ptr)
-		return ;
-	if (mini->wall)
-	{
-		mlx_destroy_image(mlx_ptr, mini->wall);
-		mini->wall = NULL;
-	}
-	if (mini->door)
-	{
-		mlx_destroy_image(mlx_ptr, mini->door);
-		mini->door = NULL;
-	}
-	if (mini->floor)
-	{
-		mlx_destroy_image(mlx_ptr, mini->floor);
-		mini->floor = NULL;
-	}
-	if (mini->player)
-	{
-		mlx_destroy_image(mlx_ptr, mini->player);
-		mini->player = NULL;
-	}
-	free(mini);
-}*/
 
 void	free_mini(t_mini *mini, void *mlx_ptr)
 {
@@ -184,6 +146,7 @@ void	free_map(t_map *map)
 void	handle_error(t_game *game, const char *error_message)
 {
 	printf("Error\n%s\n", error_message);
-	free_game(game);
+	if (game)
+		free_game(game);
 	exit(1);
 }

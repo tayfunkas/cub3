@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/01 20:14:23 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:02:20 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	parse_file(t_game *game);
 void	classify_line(t_game *game, char *line);
 void	parse_map(t_game *game, char *line);
 char	**append_line_to_map(char **map, char *line, t_game *game);
+void	check_line_config(t_game *game, char *line);
+void	check_duplicates_or_missing(t_game *game);
 //free.c
 int		free_game(t_game *game);
 void	handle_error(t_game *game, const char *error_message);
@@ -59,6 +61,7 @@ void	initialize_game(t_game **game);
 void	initialize_player(t_game *game);
 void	initialize_engine(t_game *game);
 void	initialize_mini(t_game *game);
+void	initialize_config(t_game *game);
 //validate_map.c
 void	pad_map_to_rectangle(t_game *game);
 void	validate_map(t_game *game);

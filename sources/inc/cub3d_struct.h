@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/04/01 20:16:30 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:56:28 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,23 @@ typedef struct s_color
 	int	b;
 }	t_color;
 
+typedef struct s_config
+{
+	int	no;
+	int	so;
+	int	we;
+	int	ea;
+	int	f;
+	int	c;
+}	t_config;
+
 typedef struct s_game
 {
 	void		*mlx_ptr;
 	void		*mlx_window;
 	char		*map_file;
 	int			*keys;
+	t_config	*config;
 	t_engine	*engine;
 	t_color		floor_color;
 	t_color		ceiling_color;

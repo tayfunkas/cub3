@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:37 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/01 18:40:21 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:26:30 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void	check_mapchars(char *line, t_game *game)
 
 void	check_player(char **map, char *line, t_game *game)
 {
-	int	i;
+	static int	player = 0; 
+	int			i;
 
 	i = 0;
 	while (line[i])
@@ -68,8 +69,8 @@ void	check_player(char **map, char *line, t_game *game)
 		if (line[i] == 'N' || line[i] == 'S' 
 			|| line[i] == 'W' || line[i] == 'E')
 		{
-			game->player->player_count++;
-			if (game->player->player_count > 1)
+			player++;
+			if (player > 1)
 				handle_error(game, 
 					"There should be one starting position for the player");
 			game->player->player_dir = line[i];

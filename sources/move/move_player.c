@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/04/01 15:36:55 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/03 18:22:50 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,11 @@ int	check_collision(t_map *map, float x, float y)
 
 	new_x = (int) floorf(x);
 	new_y = (int) floorf(y);
+	if (new_x < 0 || new_y < 0 ||
+		new_x >= map->m_height ||
+		new_y >= (int)ft_strlen(map->data[new_x]) || 
+		!map->data[new_x])
+		return (0); 
 	if (map->data[new_x][new_y] != '1')
 		return (1);
 	return (0);
