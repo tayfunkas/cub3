@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:44 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/07 15:56:43 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:58:08 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ void	free_map(t_map *map)
 void	handle_error(t_game *game, const char *error_message)
 {
 	printf("Error\n%s\n", error_message);
+
 	if (game)
 		free_game(game);
 	exit(1);

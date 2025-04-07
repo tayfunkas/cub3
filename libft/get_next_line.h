@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 13:16:44 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/07 16:28:09 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:58:19 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,5 @@ char	*get_first_line(char *line);
 size_t	gnl_len(char *s);
 char	*gnl_strchr(char *s, int c);
 char	*gnl_strjoin(char *s1, char *s2);
-void	clean_gnl(void);
-char	**get_gnl_static(void);
 
 #endif
