@@ -3,33 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/22 11:41:14 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/27 17:48:58 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/24 18:18:23 by grial             #+#    #+#             */
+/*   Updated: 2024/05/08 11:34:26 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
 #include "libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	if (n == 0)
-		return (0);
-	n--;
-	while (n-- && *s1 && *s2 && *s1 == *s2)
+	size_t			i;
+	unsigned char	c1;
+	unsigned char	c2;
+
+	i = 0;
+	while ((s1[i] || s2[i]) && i < n)
 	{
-		s1++;
-		s2++;
+		c1 = (unsigned char)s1[i];
+		c2 = (unsigned char)s2[i];
+		if (c1 == c2)
+			i++;
+		else
+			return (c1 - c2);
 	}
-	return ((unsigned char)*s1 - (unsigned char)*s2);
+	return (0);
 }
-/*int main ()
+/*
+#include <stdio.h>
+#include <string.h>
+
+int main(void)
 {
-        char str1[] = "Selamlar";
-        char str2[] = "Salamlar";
-   	unsigned char n = 5;
-   	printf("%d", ft_strncmp(str1, str2, n));
-        return (0);
+	printf("%i\n", ft_strncmp("1234", "1235", -1));
+	printf("%i\n", ft_strncmp("1234", "1235", -1));
+	printf("%i\n", ft_strncmp("Tripouille", "TriPouille", 42));
+	printf("%i\n", ft_strncmp("Tripouille", "TripouillE", 42));
+	printf("%i\n", ft_strncmp("Tripouille", "TripouilleX", 42));
+	printf("%i\n", ft_strncmp("Tripouille", "Tripouill", 42));
+	printf("%d\n", ft_strncmp("test\200", "test\0", 6));
+	printf("%d\n", strncmp("test\200", "test\0", 6));
+	return 0;
 }*/

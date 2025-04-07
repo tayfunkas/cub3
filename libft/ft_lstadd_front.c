@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 15:39:23 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/30 15:51:03 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/05/03 15:07:51 by grial             #+#    #+#             */
+/*   Updated: 2024/05/03 15:07:53 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	if (new == NULL)
-		return ;
-	new -> next = *lst;
+	new->next = *lst;
 	*lst = new;
 }

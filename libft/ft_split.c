@@ -3,110 +3,101 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 16:36:53 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/29 17:10:23 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/05/08 11:32:36 by grial             #+#    #+#             */
+/*   Updated: 2024/09/01 18:57:47 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
 #include "libft.h"
 
-static int	ft_free(char **str, int size)
+static void	*ft_free(char **strs, size_t count)
 {
-	while (size--)
-		free(str[size]);
-	return (-1);
-}
+	size_t	i;
 
-static int	count_words(const char *str, char charset)
-{
-	int	i;
-	int	words;
-
-	words = 0;
 	i = 0;
-	while (str[i] != '\0')
+	while (i < count)
 	{
-		if ((str[i + 1] == charset || str[i + 1] == '\0')
-			&& (str[i] == charset || str [i] == '\0') == 0)
-			words++;
+		free(strs[i]);
 		i++;
 	}
-	return (words);
+	free(strs);
+	return (NULL);
 }
 
-static void	w_word(char *dest, const char *from, char charset)
+static int	count_word(const char *s, char c)
 {
-	int	i;
+	int	count;
 
-	i = 0;
-	while (!(from[i] == charset || from [i] == '\0'))
+	count = 0;
+	while (*s)
 	{
-		dest[i] = from[i];
-		i++;
-	}
-	dest[i] = '\0';
-}
-
-static int	w_split(char **split, const char *str, char charset)
-{
-	int	i;
-	int	j;
-	int	word;
-
-	word = 0;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if ((str[i] == charset || str[i] == '\0') == 1)
-			i++;
-		else
+		while (*s && *s == c)
+			s++;
+		if (*s && *s != c)
 		{
-			j = 0;
-			while ((str[i + j] == charset || str[i + j] == '\0') == 0)
-				j++;
-			split[word] = (char *)malloc(sizeof(char) * (j + 1));
-			if (split[word] == NULL)
-				return (ft_free(split, word - 1));
-			w_word(split[word], str + i, charset);
-			i += j;
-			word++;
+			count++;
+			while (*s && *s != c)
+				s++;
 		}
 	}
-	return (0);
+	return (count);
 }
 
-char	**ft_split(const char *str, char c)
+static char	*alloc_word(const char *start, int len)
 {
-	char	**res;
-	int		words;
+	char	*word;
+	int		i;
 
-	words = count_words(str, c);
-	res = (char **)malloc(sizeof(char *) * (words + 1));
-	if (res == NULL)
+	word = malloc(len + 1);
+	if (!word)
 		return (NULL);
-	res[words] = 0;
-	if (w_split(res, str, c) == -1)
-		return (NULL);
-	return (res);
+	i = 0;
+	if (word)
+	{
+		while (i < len)
+		{
+			word[i] = start[i];
+			i++;
+		}
+		word[len] = '\0';
+	}
+	return (word);
 }
-/*
-int main() {
-    const char *str = "Hello,world,this,is,a,test";
-    char **split = ft_split(str, ',');
 
-    if (split == NULL) {
-        printf("Error: Memory allocation failed\n");
-        return 1;
-    }
+char	*ft_strartword(const char *s, char c)
+{
+	while (*s == c)
+		s++;
+	return ((char *)s);
+}
 
-    printf("Splitting string \"%s\" using ',' delimiter:\n", str);
-    for (int i = 0; split[i] != NULL; i++) {
-        printf("%s\n", split[i]);
-        free(split[i]); 
-    }
-    free(split); 
-    return 0;
-}*/
+char	**ft_split(char const *s, char c)
+{
+	char		**str;
+	int			i;
+	const char	*start;
+
+	str = malloc((count_word(s, c) + 1) * sizeof(char *));
+	if (!str || !s)
+		return (NULL);
+	i = 0;
+	while (*s)
+	{
+		while (*s == c)
+			s++;
+		start = s;
+		while (*s && *s != c)
+			s++;
+		if (s > start)
+		{
+			str[i] = alloc_word(start, s - start);
+			if (!(str[i]))
+				return (ft_free(str, i));
+			i++;
+		}
+	}
+	str[i] = NULL;
+	return (str);
+}

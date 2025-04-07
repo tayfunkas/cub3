@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/04/03 16:56:28 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:12:06 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_STRUCT_H
 # define CUB3D_STRUCT_H
+
+typedef struct s_color
+{
+	int	r;
+	int	g;
+	int	b;
+	int	color;
+}	t_color;
 
 typedef struct s_img
 {
@@ -35,6 +43,8 @@ typedef struct s_engine
 	char	*so_texture;
 	char	*we_texture;
 	char	*ea_texture;
+	t_color	*floor_color;
+	t_color	*ceiling_color;
 }	t_engine;
 
 typedef struct s_mini
@@ -69,13 +79,6 @@ typedef struct s_ray
 	int		hit_y;
 }	t_ray;
 
-typedef struct s_color
-{
-	int	r;
-	int	g;
-	int	b;
-}	t_color;
-
 typedef struct s_config
 {
 	int	no;
@@ -94,8 +97,6 @@ typedef struct s_game
 	int			*keys;
 	t_config	*config;
 	t_engine	*engine;
-	t_color		floor_color;
-	t_color		ceiling_color;
 	t_map		*map;
 	t_player	*player;
 	t_ray		*rays;

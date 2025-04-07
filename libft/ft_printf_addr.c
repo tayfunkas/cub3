@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_printf_addr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 12:48:47 by grial             #+#    #+#             */
-/*   Updated: 2024/04/24 12:50:14 by grial            ###   ########.fr       */
+/*   Created: 2024/05/13 15:48:05 by grial             #+#    #+#             */
+/*   Updated: 2024/05/15 13:18:02 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+static void	ft_address(unsigned long i, int *count)
 {
-	unsigned int	i;
+	unsigned long	tmp;
 
-	i = 0;
-	while (s[i] != '\0')
+	if (i > 15)
 	{
-		f(i, &s[i]);
-		i++;
+		tmp = i / 16;
+		ft_address(tmp, count);
+		ft_address((i % 16), count);
 	}
-}
-/*
-#include <stdio.h>
-
-void	function(unsigned int i, char *c)
-{
-	if ((*c + i) < 126)
-		*c = *c + i;
+	else
+		ft_printf_char(ft_hexadecimal(i), count);
 }
 
-int	main(void)
+void	ft_printf_addr(unsigned long i, int *count)
 {
-	char str[10] = "file name";
-	ft_striteri(str, function);
-	printf("%s", str);
-}*/
+	if (!i)
+	{
+		ft_printf_str("(nil)", count);
+		return ;
+	}
+	ft_printf_str("0x", count);
+	ft_address(i, count);
+}

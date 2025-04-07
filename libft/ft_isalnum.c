@@ -3,30 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 12:42:32 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/18 17:36:04 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/24 18:17:21 by grial             #+#    #+#             */
+/*   Updated: 2024/04/24 18:17:26 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
+#include "libft.h"
 
 int	ft_isalnum(int c)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
-		|| (c >= '0' && c <= '9'))
+	if (ft_isalpha(c) || ft_isdigit(c))
 		return (1);
 	else
 		return (0);
 }
-/*
-
-int	main()
-{
-	printf("Is 'b' alphanumberic? %d\n", ft_isalnum('b'));
-	printf("Is '9' alphanumberic? %d\n", ft_isalnum('9'));
-	printf("Is 'b' alphanumberic? %d\n", ft_isalnum(' '));
-	printf("Is 'b' alphanumberic? %d\n", ft_isalnum('*'));
-	return (0);
-}*/

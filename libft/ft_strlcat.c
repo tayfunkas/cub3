@@ -3,49 +3,84 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 17:56:38 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/29 14:59:02 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/18 12:42:51 by grial             #+#    #+#             */
+/*   Updated: 2024/05/07 23:02:49 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
 #include "libft.h"
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
 	size_t	i;
-	size_t	t1;
-	size_t	t2;
+	size_t	x;
+	size_t	dlen;
+	size_t	srclen;
 
-	if (size == 0)
-		return (ft_strlen(src));
+	x = 0;
 	i = 0;
-	t1 = ft_strlen(dst);
-	t2 = ft_strlen(src);
-	if (size <= t1)
-		return (t2 + size);
-	while (t1 + i < size - 1 && src[i] != '\0')
-	{
-		dst[t1 + i] = src[i];
+	dlen = ft_strlen(dst);
+	srclen = ft_strlen(src);
+	if (size <= dlen)
+		return (size + srclen);
+	while (dst[i] && i < size - 1)
 		i++;
+	while (src[x] && i < size - 1)
+	{
+		dst[i] = src[x];
+		i++;
+		x++;
 	}
-	dst[t1 + i] = '\0';
-	return (t1 + t2);
+	dst[i] = '\0';
+	return (dlen + srclen);
 }
 /*
-int	main()
+size_t strlcat(dst, src, siz)
+char *dst;
+const char *src;
+size_t siz;
 {
-	char dst[20] = "Hello";
-	const char *src = " World!";
+	char *d = dst;
+	const char *s = src;
+	size_t n = siz;
+	size_t dlen;
 
-	printf("Before strlcat:\n");
-	printf("dst: %s\n", dst);
-	printf("src: %s\n", src);
+	while (n-- != 0 && *d != '\0')
+		d++;
+	dlen = d - dst;
+	n = siz - dlen;
 
-	size_t result = ft_strlcat(dst, src, sizeof(dst));
-	printf("\nAfter strlcat:\n");
-	printf("Resulting length: %zu\n", result);
-	return(0);
+	if (n == 0)
+		return (dlen + strlen(s));
+	while (*s != '\0')
+	{
+		if (n != 1)
+		{
+			*d++ = *s;
+			n--;
+		}
+		s++;
+	}
+	*d = '\0';
+
+	return (dlen + (s - src));
+}
+
+#include <stdio.h>
+#include <string.h>
+
+int main(void)
+{
+	char *src = "Go";
+	char ft_dst[11] = "Hi, ?";
+	char dst[11] = "Hi, ?";
+	size_t size = 1;
+
+	size_t ft_dst_len = ft_strlcat(ft_dst, src, size);
+	size_t dst_len = strlcat(dst, src, size);
+
+	printf("Output ft_strlcat:	%zu String:	%s\n", ft_dst_len, ft_dst);
+	printf("Output strlcat:		%zu String:	%s\n", dst_len, dst);
 }*/

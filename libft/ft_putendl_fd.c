@@ -3,47 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 17:22:48 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/26 17:04:10 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/24 18:06:33 by grial             #+#    #+#             */
+/*   Updated: 2024/04/24 18:06:35 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <unistd.h>
-//#include <fcntl.h>
-//#include <stdio.h> 
 #include "libft.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	int	i;
+	unsigned int	i;
 
-	i = 0;
-	while (s[i] != '\0')
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
+	i = ft_strlen(s);
+	write(fd, s, i);
 	write(fd, "\n", 1);
 }
 /*
-int	main()
-{
-	int	fd;
-	char	str[] = "Hello world!";
+#include <fcntl.h>  
+#include <stdlib.h> 
 
-	fd = open("examplestr.text", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd == -1)
-	{
-		perror("open");
-		return (1);
-	}
-	ft_putstr_fd(str, fd);
-	if (close(fd) == -1)
-	{
-		perror("close");
-		return (1);
-	}
-	return (0);
+int main(void)
+{
+	int fd = open("mensaje.txt", O_WRONLY | O_CREAT);
+
+	char *message = "¡Hola, mundo!";
+	ft_putendl_fd(message, fd);
+	close(fd);
 }*/

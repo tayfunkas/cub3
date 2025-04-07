@@ -3,72 +3,97 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 10:34:04 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/27 14:50:12 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/24 18:25:22 by grial             #+#    #+#             */
+/*   Updated: 2024/05/08 11:35:04 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
 #include "libft.h"
 
-static int	is_set(char c, char const *set)
+static char	*chr_in_start(const char *s1, const char *set)
 {
-	while (*set)
+	size_t	i;
+	size_t	s;
+
+	i = 0;
+	s = 0;
+	while (set[s] != '\0')
 	{
-		if (c == *set)
-			return (1);
-		set++;
+		if (s1[i] == set[s])
+		{
+			i++;
+			s = 0;
+			if (s1[i] == '\0')
+				return (NULL);
+		}
+		else
+			s++;
 	}
-	return (0);
+	return ((char *)s1 + i);
 }
 
-static size_t	find_trimmed_indices(char const *s1, char const *set,
-size_t *start, size_t *end)
+static char	*chr_in_end(const char *s1, const char *set)
 {
-	*start = 0;
-	while (s1[*start] && is_set(s1[*start], set))
-		(*start)++;
-	*end = *start;
-	while (s1[*end])
-		(*end)++;
-	while (*end > *start && is_set(s1[*end - 1], set))
-		(*end)--;
-	return (*end - *start);
+	size_t	i;
+	size_t	s;
+
+	s = 0;
+	i = ft_strlen(s1) - 1;
+	while (set[s] != '\0')
+	{
+		if (s1[i] == set[s])
+		{
+			i--;
+			s = 0;
+			if (i == 0)
+				return (NULL);
+		}
+		else
+			s++;
+	}
+	return ((char *)s1 + i);
+}
+
+static char	*return_empty(void)
+{
+	char	*str;
+
+	str = (char *)malloc(sizeof(char) * 1);
+	str[0] = 0;
+	return (str);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	len;
-	size_t	start;
-	size_t	end;
-	size_t	i;
-	char	*trimmed;
+	char	*str;
+	char	*start;
+	char	*finish;
+	size_t	size;
 
-	start = 0;
 	if (!s1 || !set)
 		return (NULL);
-	len = find_trimmed_indices(s1, set, &start, &end);
-	i = 0;
-	trimmed = (char *)malloc((len + 1) * sizeof(char));
-	if (!trimmed)
-		return (NULL);
-	while (i < len)
-	{
-		trimmed[i] = s1[start + i];
-		i++;
-	}
-	trimmed[len] = '\0';
-	return (trimmed);
+	start = chr_in_start(s1, set);
+	finish = chr_in_end(s1, set);
+	if (start == NULL || finish == NULL)
+		return (return_empty());
+	size = (size_t)(finish - start + 2);
+	str = (char *)malloc(sizeof(char) * (size));
+	if (!str)
+		return (0);
+	ft_strlcpy(str, start, (size));
+	return (str);
 }
 /*
-int	main()
+#include <stdio.h>
+
+int main(void)
 {
-	char *s = "  hello world  ";
-	char *set = " ";
-	char *result = ft_strtrim(s, set);
-	printf("%s\n", result);
-	free(result);
-	return 0;
+	// char *s1 = "lorem \n ipsum \t dolor \n sit \t amet";
+	// char *a = "ab";
+	char *c = "";
+	printf("Contendio de s: %d\n", c[0]);
+	printf("Funcion: %s", ft_strtrim("", "123"));
+	return (0);
 }*/

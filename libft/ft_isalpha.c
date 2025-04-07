@@ -3,24 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 12:32:48 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/18 17:25:26 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/24 18:22:39 by grial             #+#    #+#             */
+/*   Updated: 2024/04/24 18:22:41 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
+#include "libft.h"
 
 int	ft_isalpha(int c)
 {
-	return ((c >= 97 && c <= 122) || (c >= 65 && c <= 90));
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+		return (1);
+	else
+		return (0);
 }
-/*
-
-int	main()
-{
-	printf("Is 'b' alphabetic? %d\n", ft_isalpha('b'));
-	printf("Is '9' alphabetic? %d\n", ft_isalpha('9'));
-	return (0);
-}*/

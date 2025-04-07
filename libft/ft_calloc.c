@@ -3,40 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/22 18:30:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/29 17:58:01 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/24 17:58:44 by grial             #+#    #+#             */
+/*   Updated: 2024/05/06 11:59:06 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	*allocate_and_zero_memory(size_t total_size)
-{
-	void	*ptr;
-
-	ptr = malloc(total_size);
-	if (ptr != NULL)
-		ft_memset(ptr, 0, total_size);
-	return (ptr);
-}
-
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	size_t			total_size;
+	size_t	i;
+	void	*mem;
+	size_t	index;
 
-	if (nmemb == 0 || size == 0)
-		return (allocate_and_zero_memory(1));
-	if (nmemb > SIZE_MAX / size)
+	index = 0;
+	if (size > 0 && (nmemb > (4294967295 / size)))
+		return (0);
+	if (size == 0 && nmemb == 0)
+	{
+		mem = (char *)malloc(sizeof(char *) * index);
+		return (mem);
+	}
+	i = (size * nmemb);
+	mem = malloc(i);
+	if (mem == NULL)
 		return (NULL);
-	total_size = nmemb * size;
-	return (allocate_and_zero_memory(total_size));
+	while (i > 0)
+	{
+		((char *)mem)[index] = 0;
+		i--;
+		index++;
+	}
+	return (mem);
 }
 /*
-int	main()
+#include <string.h>
+#include <stdio.h>
+
+int main(void)
 {
-	int	*arr = (int *)ft_calloc(5, sizeof(int));
-	free(arr);
-	return(0);
+    char*    x;
+    char*    y;
+
+    x = ft_calloc(5, 2147483648);
+    y = calloc(5, 65535);
 }*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/03 18:00:37 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:04:57 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	initialize_game(t_game **game)
 	(*game)->mlx_ptr = NULL;
 	(*game)->mlx_window = NULL;
 	(*game)->map_file = NULL;
-	(*game)->floor_color = (t_color){.r = -1, .g = -1, .b = -1};
-	(*game)->ceiling_color = (t_color){.r = -1, .g = -1, .b = -1};
 	(*game)->keys = ft_calloc(MAX_KEYCODE, sizeof(int));
 	if (!(*game)->keys)
 		handle_error(*game, "Memory allocation failed for keys array.");
@@ -67,6 +65,18 @@ void	initialize_engine(t_game *game)
 	if (!game->engine->ea_img)
 		return ;
 	game->engine->ea_img->img = NULL;
+	game->engine->floor_color = malloc(sizeof(t_color));
+	if (!game->engine->floor_color)
+		return ;
+	game->engine->floor_color->r = -1;
+	game->engine->floor_color->g = -1;
+	game->engine->floor_color->b = -1;
+	game->engine->ceiling_color = malloc(sizeof(t_color));
+	if (!game->engine->ceiling_color)
+		return ;
+	game->engine->ceiling_color->r = -1;
+	game->engine->ceiling_color->g = -1;
+	game->engine->ceiling_color->b = -1;
 }
 
 void	initialize_player(t_game *game)

@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   render_background.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 12:48:47 by grial             #+#    #+#             */
-/*   Updated: 2024/04/24 12:50:14 by grial            ###   ########.fr       */
+/*   Created: 2025/04/07 16:17:44 by grial             #+#    #+#             */
+/*   Updated: 2025/04/07 17:25:46 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/cub3d.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+void	render_background(t_game *game)
 {
-	unsigned int	i;
+	int	x;
+	int	y;
 
-	i = 0;
-	while (s[i] != '\0')
+	x = 0;
+	y = 0;
+	while (y < WIN_H)
 	{
-		f(i, &s[i]);
-		i++;
+		x = 0;
+		while (x < WIN_W)
+		{
+			if (y < WIN_H / 2)
+				my_mlx_pixel_put(game, x, y, game->engine->ceiling_color->color);
+			if (y >= WIN_H / 2)  // Cambié x por y
+				my_mlx_pixel_put(game, x, y, game->engine->floor_color->color);
+			x++;
+		}
+		y++;
 	}
 }
-/*
-#include <stdio.h>
-
-void	function(unsigned int i, char *c)
-{
-	if ((*c + i) < 126)
-		*c = *c + i;
-}
-
-int	main(void)
-{
-	char str[10] = "file name";
-	ft_striteri(str, function);
-	printf("%s", str);
-}*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:22 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/03 17:29:42 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:21:59 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	pad_map_to_rectangle(t_game *game)
 	i = 0;
 	while (i < game->map->m_height)
 	{
-		if (ft_strlen(map[i]) < game->map->m_width)
+		if (ft_strlen(map[i]) < (size_t)game->map->m_width)
 		{
 			padded_line = malloc(sizeof(char) * (game->map->m_width + 1));
 			ft_strlcpy(padded_line, map[i], ft_strlen(map[i]) + 1);

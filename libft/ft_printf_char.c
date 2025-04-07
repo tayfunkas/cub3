@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_printf_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 16:05:58 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/30 16:07:53 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/05/09 18:07:30 by grial             #+#    #+#             */
+/*   Updated: 2024/05/14 12:54:35 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_printf_char(char c, int *count)
 {
-	if (lst == NULL)
-		return ;
-	if (del != NULL)
-		del (lst -> content);
-	free(lst);
+	write(1, &c, 1);
+	(*count)++;
 }

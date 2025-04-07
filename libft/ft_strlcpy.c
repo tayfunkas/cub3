@@ -3,44 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 15:43:04 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/26 16:46:30 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/24 18:14:29 by grial             #+#    #+#             */
+/*   Updated: 2024/04/24 18:14:43 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
 #include "libft.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
-	size_t	src_len;
+	size_t	siz_cpy;
 
+	siz_cpy = size;
 	i = 0;
-	src_len = 0;
-	while (src[src_len] != '\0')
-		src_len++;
-	if (size == 0)
-		return (src_len);
-	while (src[i] != '\0' && i < size - 1)
+	while (size-- != 0 && src[i] != '\0')
 	{
 		dst[i] = src[i];
+		if (size == 0)
+			break ;
 		i++;
 	}
-	dst[i] = '\0';
-	return (src_len);
+	if (size == 0 || src[i] == '\0')
+	{
+		if (siz_cpy != 0)
+			dst[i] = '\0';
+	}
+	while (src[i] != '\0')
+		i++;
+	return (i);
 }
 /*
-int	main()
-{
-	size_t	len;
+#include <stdio.h>
+#include <string.h>
 
-	const char src[] = "Hello world!";
+int main(void)
+{
+	char *src;
 	char dst[20];
-	len = ft_strlcpy(dst, src, sizeof(dst));
-	printf("Copied string: %s\n", dst);
-	printf("Length of copied string: %zu\n", len);
-	return (0);
+	int i;
+
+	src = "Hola como estas";
+	i = ft_strlcpy(dst, src, 18);
+	printf("Output: %i\nString: %s\n", i, dst);
+	i = strlcpy(dst, src, 18);
+	printf("Output: %i\nString: %s", i, dst);
 }*/

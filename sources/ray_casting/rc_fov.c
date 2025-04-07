@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:55:33 by grial             #+#    #+#             */
-/*   Updated: 2025/04/07 15:51:12 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/07 16:14:57 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	draw_ray_line(t_game *game, t_player *player, int x_width, float ang)
 		new_y = player->player_y + dy;
 		if (draw_check_collision(game, x_width, new_x, new_y, ang))
 			break ;
-		ray_line += 0.01;
+		ray_line += 0.05;
 	}
 }
 
@@ -109,6 +109,22 @@ int get_texture_offset(float scale)
 	return (init_point);
 }
 
+t_img *get_texture_from_direction(t_game *game, float angle)
+{
+	angle = fmod(angle, 360.0);
+	if (angle < 0)
+		angle += 360.0;
+
+	if (angle >= 45 && angle < 135)
+		return game->engine->ea_img;
+	else if (angle >= 135 && angle < 225)
+		return game->engine->so_img;
+	else if (angle >= 225 && angle < 315)
+		return game->engine->we_img;
+	else
+		return game->engine->no_img;
+}
+
 void	draw_wall(t_game *game, int x_width, float x, float y, float ang)
 {
 	float	height;
@@ -130,13 +146,13 @@ void	draw_wall(t_game *game, int x_width, float x, float y, float ang)
 	draw_end = draw_start + height;
 	if (draw_end > WIN_H)
 		draw_end = WIN_H;
-	texture = game->engine->no_img;
 	tex_x = (int)(x * 64) % 64;
 	step_tex_y = 64.0f / height;
 	tex_pos = (draw_start - WIN_H / 2 + height / 2) * step_tex_y;
 	screen_y = draw_start;
 	while (screen_y < draw_end)
 	{
+		texture = get_texture_from_direction(game, ang);
 		tex_y = (int)tex_pos & (64 - 1);
 		tex_pos += step_tex_y;
 		color = get_pixel_color(texture, tex_x, tex_y);

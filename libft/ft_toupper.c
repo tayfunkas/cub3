@@ -3,28 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 12:16:46 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/27 16:00:44 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/24 18:18:55 by grial             #+#    #+#             */
+/*   Updated: 2024/04/24 18:19:03 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
+#include "libft.h"
 
 int	ft_toupper(int c)
 {
-	if (c >= 'a' && c <= 'z')
-		c = c - ('a' - 'A');
-	return (c);
+	if (c >= 97 && c <= 122)
+		return (c - 32);
+	else
+		return (c);
 }
-/*
-int	main()
-{
-	char	input[] = "Hello, 42student. How are you?";
-	char	*result;
-	
-	result = ft_toupper(input);
-	printf("%s\n", result);
-	return(0);
-}*/

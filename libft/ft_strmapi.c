@@ -3,58 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 14:35:49 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/26 17:02:47 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/24 11:52:45 by grial             #+#    #+#             */
+/*   Updated: 2024/04/24 18:11:25 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h> 
 #include "libft.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	unsigned int	len;
-	unsigned int	i;
-	char			*result;
+	char	*dst;
+	int		i;
 
 	if (!s || !f)
 		return (NULL);
-	i = 0;
-	len = 0;
-	while (s[len])
-		len++;
-	result = (char *)malloc(sizeof(char) * (len + 1));
-	if (!result)
+	dst = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!dst)
 		return (NULL);
-	while (i < len)
+	i = 0;
+	while (s[i])
 	{
-		result[i] = f(i, s[i]);
-		i++;
+		dst[i] = f(i, s[i]);
+		++i;
 	}
-	result[len] = '\0';
-	return (result);
+	dst[i] = '\0';
+	return (dst);
 }
 /*
-char	decrement_char(unsigned int index, char c)
-{
-	(void)index;
-	return (c - 1);
-}
+#include <stdio.h>
 
-int	main()
+int	main(void)
 {
-	char	*original = "Hey there";
-	char	*result = ft_strmapi(original, &decrement_char);
-	
-	if (result != NULL)
-	{
-		printf("Original: %s\n", original);
-		printf("New: %s\n", result);
-		free(result);
-	}
-	else
-	printf("Error");
-	return (0);
+        char    *str;
+        char    *dst;
+
+        str = "123";
+        dst = ft_strmapi(str, function);
+	printf("%s", dst);
 }*/

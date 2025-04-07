@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_printf_numb.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 12:48:47 by grial             #+#    #+#             */
-/*   Updated: 2024/04/24 12:50:14 by grial            ###   ########.fr       */
+/*   Created: 2024/05/13 16:43:15 by grial             #+#    #+#             */
+/*   Updated: 2024/05/14 12:26:57 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+void	ft_printf_numb(int n, int *count)
 {
-	unsigned int	i;
+	char	c;
 
-	i = 0;
-	while (s[i] != '\0')
+	if (n == -2147483648)
 	{
-		f(i, &s[i]);
-		i++;
+		ft_printf_str("-2147483648", count);
+		return ;
 	}
+	if (n < 0)
+	{
+		ft_printf_char('-', count);
+		n = n * (-1);
+	}
+	if (n > 9)
+		ft_printf_numb((n / 10), count);
+	c = n % 10 + '0';
+	ft_printf_char(c, count);
 }
-/*
-#include <stdio.h>
-
-void	function(unsigned int i, char *c)
-{
-	if ((*c + i) < 126)
-		*c = *c + i;
-}
-
-int	main(void)
-{
-	char str[10] = "file name";
-	ft_striteri(str, function);
-	printf("%s", str);
-}*/

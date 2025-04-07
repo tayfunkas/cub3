@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:37 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/03 17:26:30 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:36:33 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,12 @@ void	check_player(char **map, char *line, t_game *game)
 		{
 			player++;
 			if (player > 1)
+			{
+				free(line);
+				line = NULL;
 				handle_error(game, 
 					"There should be one starting position for the player");
+				}
 			game->player->player_dir = line[i];
 			game->player->player_x = i;
 			game->player->player_y = ft_arraylen(map);

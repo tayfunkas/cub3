@@ -3,47 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/22 11:17:34 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/27 14:26:07 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/25 18:21:49 by grial             #+#    #+#             */
+/*   Updated: 2024/04/25 18:21:56 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
 #include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int		s_length;
+	int		i;
+	char	chr;
 
-	s_length = 0;
-	if (s == NULL)
-		return (NULL);
-	while (s[s_length] != '\0')
+	chr = (char)c;
+	i = ft_strlen(s);
+	while (i >= 0)
 	{
-		s_length++;
+		if (s[i] == chr)
+			return ((char *)(s + i));
+		i--;
 	}
-	while (s_length >= 0)
-	{
-		if (s[s_length] == (char)c)
-		{
-			return ((char *)&s[s_length]);
-		}
-		s_length--;
-	}
-	return (NULL);
+	return (0);
 }
 /*
-int	main()
-{
-	const char	*str = "Hello, world!";
-	char	target = 'o';
+#include <stdio.h>
+#include <string.h>
 
-	char	*result = ft_strrchr(str, target);
-	if (result != 0)
-		printf("Found at the position: %ld\n", result - str);
-	else
-		printf("Not found in the string.\n");
-	return (0);
+int main(void)
+{
+	char s[] = "tripouille";
+
+	printf("Output memmove:	%s\nOutput ft_strrchr:	%s\n")
+	printf("Output memmove:	%s\nOutput ft_strrchr:	%s\n");
+	printf("Output memmove:	%s\nOutput ft_strrchr:	%s\n");
+	printf("Output memmove:	%s\nOutput ft_strrchr:	%s\n");
 }*/

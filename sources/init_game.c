@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/04/03 17:31:39 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:26:14 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,9 @@ void	clear_image(t_game *game, int color)
 
 int	render(t_game *game)
 {
-	//int	x = 0;
-	//int	y = 0;
-
-/*printf("Frame image pointer: %p\n", game->engine->frame->img);
-printf("Frame addr pointer: %p\n", game->engine->frame->addr);
-printf("bpp: %d, line_length: %d, endian: %d\n",
-    game->engine->frame->bpp, game->engine->frame->line_length, game->engine->frame->endian);*/
+	render_background(game);
 	handle_movement(game);
 	usleep(10000);
-	clear_image(game, 0x000000);
 	mlx_clear_window(game->mlx_ptr, game->mlx_window);
 	//while (game->map->data[x])
 	//{

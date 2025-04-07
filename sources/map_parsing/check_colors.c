@@ -6,17 +6,23 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/19 13:33:45 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/07 17:14:14 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+int	rgb_to_hex(int r, int g, int b)
+{
+	return (r << 16) | (g << 8) | b;
+}
 
 static void	assign_check_color(t_game *game, t_color *color, char **rgb)
 {
 	color->r = ft_atoi(rgb[0]);
 	color->g = ft_atoi(rgb[1]);
 	color->b = ft_atoi(rgb[2]);
+	color->color = rgb_to_hex(color->r, color->g, color->b);
 	if (color-> r < 0 || color-> r > 255 || color->g < 0 
 		|| color->g > 255 || color->b < 0 || color->b > 255)
 		handle_error(game, "Color values must be in range 0-255");

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 14:49:34 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/18 17:43:49 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/24 18:16:56 by grial             #+#    #+#             */
+/*   Updated: 2024/04/24 18:16:58 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
+#include "libft.h"
 
 int	ft_isprint(int c)
 {
@@ -19,10 +19,3 @@ int	ft_isprint(int c)
 	else
 		return (0);
 }
-/*
-int	main()
-{
-	printf("Is 'b' printible? %d\n", ft_isprint('b'));
-	printf("Is '\n' printable? %d\n", ft_isprint('\n'));
-	return (0);
-}*/

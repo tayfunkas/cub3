@@ -3,49 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 14:40:21 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/26 16:45:55 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/25 15:45:33 by grial             #+#    #+#             */
+/*   Updated: 2024/04/25 15:46:01 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char			*d;
-	const unsigned char		*s;
-	size_t					i;
+	size_t	i;
 
-	i = 0;
-	d = dest;
-	s = src;
-	if (d < s)
+	if (!dst && !src)
+		return (NULL);
+	if ((char *)dst > (char *)src)
 	{
-		while (i < n)
-		{
-			d[i] = s[i];
-			i++;
-		}
-	}
-	else if (d > s)
-	{
-		i = n;
+		i = len;
 		while (i > 0)
 		{
-			d[i - 1] = s[i - 1];
+			((char *)dst)[i - 1] = ((const char *)src)[i - 1];
 			i--;
 		}
 	}
-	return (dest);
+	else
+	{
+		i = 0;
+		while (i < len)
+		{
+			((char *)dst)[i] = ((const char *)src)[i];
+			i++;
+		}
+	}
+	return (dst);
 }
 /*
-int	main()
+#include <string.h>
+#include <stdio.h>
+
+int main(void)
 {
-	char	str[50] = "memmove can be very useful.....";
-	ft_memmove(str + 20, str + 15, 11);
-	printf("After memmove: %s\n", str);
-	return (0);
+	char a[10] = "123456789";
+	char b[10] = "123456789";
+
+	char c[5] = "1234";
+	char d[5] = "abcd";
+
+	char e[5] = "1234";
+	char f[5] = "abcd";
+
+	memmove(&b[2], b, 4);
+	ft_memmove(&a[2], a, 4);
+	memmove(c, d, 4);
+	ft_memmove(e, f, 4);
+
+	printf("Output memmove:		%s\nOutput ft_memmove:	%s\n", b, a);
+	printf("Output memmove:		%s\nOutput ft_memmove:	%s\n", c, e);
 }*/

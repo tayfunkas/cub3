@@ -1,40 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_hexadecimal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 12:48:47 by grial             #+#    #+#             */
-/*   Updated: 2024/04/24 12:50:14 by grial            ###   ########.fr       */
+/*   Created: 2024/05/13 15:55:12 by grial             #+#    #+#             */
+/*   Updated: 2024/05/15 12:03:53 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+char	ft_hexadecimal(unsigned int i)
 {
-	unsigned int	i;
+	char	*hex;
 
-	i = 0;
-	while (s[i] != '\0')
-	{
-		f(i, &s[i]);
-		i++;
-	}
+	hex = "0123456789abcdef";
+	return (hex[i]);
 }
-/*
-#include <stdio.h>
-
-void	function(unsigned int i, char *c)
-{
-	if ((*c + i) < 126)
-		*c = *c + i;
-}
-
-int	main(void)
-{
-	char str[10] = "file name";
-	ft_striteri(str, function);
-	printf("%s", str);
-}*/

@@ -3,94 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 11:58:40 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/26 17:01:31 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/24 11:42:01 by grial             #+#    #+#             */
+/*   Updated: 2024/05/13 13:56:39 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h> 
 #include "libft.h"
 
-static int	get_length(int n)
+static void	ft_itoa_storing(char *str, int size, int n)
 {
-	int	length;
-
-	length = 0;
-	if (n == 0)
-		return (1);
-	if (n == -2147483648)
-		return (12);
-	if (n < 0)
+	while (n > 0)
 	{
-		length++;
-		n = -n;
+		size--;
+		str[size] = (n % 10) + '0';
+		n /= 10;
 	}
-	while (n != 0)
-	{
-		length++;
-		n = (n / 10);
-	}
-	return (length);
 }
 
-static void	convert_to_string(int n, char *str, int length)
+static size_t	ft_itoa_char_count(int n)
 {
-	int	sign;
-	int	index;
+	int	i;
 
-	sign = 1;
-	index = length - 1;
+	i = 1;
 	if (n < 0)
 	{
-		sign = -1;
-		n = -n;
+		i++;
+		n = n * (-1);
 	}
-	while (index >= 0)
+	while (n > 9)
 	{
-		str[index] = '0' + (n % 10);
-		n /= 10;
-		index--;
+		if (n > 9)
+			n = n / 10;
+		i++;
 	}
-	if (sign == -1)
-		str[0] = '-';
+	return (i);
 }
 
 char	*ft_itoa(int n)
 {
-	int		length;
 	char	*str;
+	size_t	size;
 
 	if (n == -2147483648)
 	{
-		str = (char *)malloc(12 * sizeof(char));
-		if (str == NULL)
-			return (NULL);
-		ft_strlcpy (str, "-2147483648", 12);
-		return (str);
+		return (ft_strdup("-2147483648"));
 	}
-	length = get_length(n);
-	str = (char *)malloc((length + 1) * sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	convert_to_string(n, str, length);
-	str[length] = '\0';
+	size = ft_itoa_char_count(n);
+	str = malloc(sizeof(char) * (size + 1));
+	if (!str)
+		return (0);
+	if (n < 0)
+	{
+		str[0] = '-';
+		ft_itoa_storing(str, size, -n);
+	}
+	else if (n == 0)
+		ft_strlcpy(str, "0", 2);
+	else
+		ft_itoa_storing(str, size, n);
+	str[size] = '\0';
 	return (str);
 }
 /*
-int main(void)
+#include <stdio.h>
+
+int	main(void)
 {
-	printf("%s\n", ft_itoa(33));
-	printf("%s\n", ft_itoa(-33));
-	printf("%s\n", ft_itoa(12345));
-	printf("%s\n", ft_itoa(-12345));
-	printf("%s\n", ft_itoa(98765));
-	printf("%s\n", ft_itoa(-98765));
-	printf("%s\n", ft_itoa(45));
-	printf("%s\n", ft_itoa(-45));
-	printf("%s\n", ft_itoa(-2147483648));
-	printf("%s\n", ft_itoa(2147483647));
-	printf("%s\n", ft_itoa(0));
-	return (0);
+	int i;
+	i = INT_MIN;
+	char *str = ft_itoa(i);
+	printf("%s", str);
 }*/

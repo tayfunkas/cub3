@@ -3,52 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 14:18:55 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/29 15:23:55 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/18 20:11:41 by grial             #+#    #+#             */
+/*   Updated: 2024/04/24 19:07:23 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
+#include "libft.h"
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *nptr)
 {
 	int	i;
-	int	sign;
-	int	result;
+	int	num;
+	int	sig;
 
+	sig = 1;
+	num = 0;
 	i = 0;
-	sign = 1;
-	result = 0;
-	while (str[i] && (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)))
+	while (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
 		i++;
-	while (str[i] == '-' || str[i] == '+')
+	if (nptr[i] == '-' || nptr[i] == '+')
 	{
-		if (str[i] == '-')
-			sign = sign * -1;
-		if (str[i + 1] == '+' || str [i + 1] == '-')
-			return (0);
+		if (nptr[i] == '-')
+			sig = -1;
 		i++;
 	}
-	while (str[i] <= '9' && str[i] >= '0')
+	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		if ((result == 214748364) && (str[i] == '8') && (sign % 2 == 1))
-			return (-2147483648);
-		result = result * 10 + (str[i] - '0');
+		num = num * 10 + (nptr[i] - '0');
 		i++;
 	}
-	return (result * sign);
+	return (num * sig);
 }
 /*
-int	main(int argc, char **argv)
+#include <stdio.h>
+
+int	main(void)
 {
-	if (argc < 2)
-	{
-		printf("Usage: %s <string>\n", argv[0]);
-		return 1; 
-	}
-	char *str = argv[1];
-	int num = ft_atoi(str);
-	printf("The converted integer is: %d\n", num);
+
+	char	*c = "    123456a7";
+	int	x = ft_atoi(c);
+	printf("%s", c);
 }*/

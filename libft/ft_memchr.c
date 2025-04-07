@@ -3,41 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/22 11:58:21 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/26 16:52:47 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/25 17:30:16 by grial             #+#    #+#             */
+/*   Updated: 2024/04/25 17:30:18 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
 #include "libft.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	const unsigned char	*p = s;
-	size_t				i;
+	size_t			i;
+	unsigned char	*str;
+	unsigned char	ch;
 
 	i = 0;
+	str = (unsigned char *)s;
+	ch = (unsigned char)c;
 	while (i < n)
 	{
-		if (p[i] == (unsigned char)c)
-			return ((void *)(p + i));
+		if (str[i] == ch)
+			return ((void *)s + i);
 		i++;
 	}
 	return (NULL);
 }
 /*
-int	main()
+#include <stdio.h>
+#include <string.h>
+
+int main(void)
 {
-	const char str[] = "Hello, world!";
-	int target = 'o';
-	size_t n = 14;
-	void	*result = ft_memchr(str, target, n);
-	if (result != NULL)
-		printf("Character at position: %ld\n", 
-			(unsigned char *)result - (unsigned char *)str);
-	else 
-		printf("Character '%c' not found in the string.\n", target);
-	return (0);
+	char	*str;
+	char	to_find;
+	char	*myFun;
+	char	*memch;
+	size_t	l;
+
+	l = 4;
+	str = "Hola";
+	to_find = 0;
+
+	myFun = ft_memchr(str, to_find, l);
+	memch = memchr(str, to_find, l);
+
+	printf("Output ft_memchr: %s\nOutpur memchr:	  %s", myFun, memch);
 }*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:44 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/03 17:49:06 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:10:41 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	free_game(t_game *game)
 
 void	free_engine_images(t_engine *engine, void *mlx_ptr)
 {
-	if (!engine || !mlx_ptr)
+	if (!engine)
 		return ;
 	if (engine->no_img)
 	{

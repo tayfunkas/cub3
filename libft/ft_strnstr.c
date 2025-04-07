@@ -3,51 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/22 15:47:32 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/27 18:03:26 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/18 16:49:14 by grial             #+#    #+#             */
+/*   Updated: 2024/04/24 18:29:19 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
 #include "libft.h"
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
-	size_t	j;
-	size_t	little_len;
+	size_t	x;
 
 	i = 0;
-	j = 0;
-	little_len = ft_strlen(little);
-	if (*little == '\0')
+	if (!*little)
 		return ((char *)big);
-	if (len == 0 || len < little_len)
-		return (NULL);
-	while (i < len && big[i] != '\0')
+	while (big[i] != '\0' && i < len && little[0] != '\0')
 	{
-		j = 0;
-		while (little[j] != '\0' && i + j < len && big[i + j] == little[j])
-			j++;
-		if (little[j] == '\0')
-			return ((char *)(big + i));
-		i++;
+		x = 0;
+		while (big[i] != '\0' && big[i] == little[x] && i < len)
+		{
+			i++;
+			x++;
+			if (little[x] == '\0')
+				return ((char *)big + (i - x));
+		}
+		i = i - x + 1;
 	}
-	return (NULL);
+	return (0);
 }
 /*
-int	main()
-{
-	const char *big = "Hello worl! I am testing my code.";
-	const char *little = "test";
-	size_t len = 30;
+#include <stdio.h>
+#include <string.h>
 
-	char	*result = ft_strnstr(big, little, len);
-	if (result != 0)
-		printf("'%s' found at position %ld.\n", little, result - big);
-	else
-		printf("'%s' not found.\n", little);
-	return (0);
+char *strnstr(const char *s, const char *find, size_t slen)
+{
+	char c, sc;
+	size_t len;
+
+	if ((c = *find++) != '\0') {
+		len = strlen(find);
+		do {
+			do {
+				if (slen-- < 1 || (sc = *s++) == '\0')
+					return (NULL);
+			} while (sc != c);
+			if (len > slen)
+				return (NULL);
+		} while (strncmp(s, find, len) != 0);
+		s--;
+	}
+	return ((char *)s);
+}
+
+int	main(void)
+{
+	char	*str = "Holaoolcwwa";
+	char	*to_find = "";
+
+	printf("Output ft_strnstr:	%s\n", ft_strnstr(str, to_find, -1));
+	printf("Output strnstr:		%s", strnstr(str, to_find, -1));
 }*/

@@ -3,37 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 14:29:56 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/26 16:55:54 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/24 18:24:04 by grial             #+#    #+#             */
+/*   Updated: 2024/08/06 17:05:28 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(char *src)
+char	*ft_strdup(const char *s)
 {
 	int		i;
-	int		j;	
-	char	*new_str;
+	int		j;
+	char	*str;
 
-	if (src == 0)
-		return (0);
 	i = 0;
-	while (src[i] != '\0')
+	j = ft_strlen_gnl(s);
+	str = (char *)malloc(sizeof(*str) * (j + 1));
+	while (i < j)
 	{
+		str[i] = s[i];
 		i++;
 	}
-	new_str = (char *)malloc((i + 1) * sizeof(char));
-	if (new_str == NULL)
-		return (NULL);
-	j = 0;
-	while (src[j] != '\0')
-	{
-		new_str[j] = src[j];
-		j++;
-	}
-	new_str[j] = '\0';
-	return (new_str);
+	str[i] = '\0';
+	return (str);
 }

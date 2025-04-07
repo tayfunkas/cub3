@@ -3,38 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 21:20:33 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/04/27 18:21:29 by tkasapog         ###   ########.fr       */
+/*   Created: 2024/04/25 18:04:53 by grial             #+#    #+#             */
+/*   Updated: 2024/09/01 18:57:41 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
 #include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s != '\0')
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
-	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (NULL);
-}
-/*
-int	main()
-{
-	const char	*str = "Hello, world!";
-	char target = 'o';
+	size_t	i;
+	size_t	size;
+	char	chr;
 
-	char *result = ft_strchr(str, target);
-	if (result != 0)
-		printf("Found at position: %ld\n", result - str);
-	else
-		printf("Not found in the string.\n");
+	chr = (char) c;
+	size = ft_strlen(s) + 1;
+	i = 0;
+	while (i < size)
+	{
+		if (s[i] == chr)
+			return ((char *)(s + i));
+		i++;
+	}
 	return (0);
-}*/
+}

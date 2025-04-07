@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:36:03 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/03 17:01:32 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:33:33 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static int	assign_lines(t_game *game, char *line)
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 		parse_texture(game, line + 3, &(game->engine->ea_texture));
 	else if (ft_strncmp(line, "F ", 2) == 0)
-		parse_color(game, line + 2, &(game->floor_color));
+		parse_color(game, line + 2, (game->engine->floor_color));
 	else if (ft_strncmp(line, "C ", 2) == 0)
-		parse_color(game, line + 2, &(game->ceiling_color));
+		parse_color(game, line + 2, (game->engine->ceiling_color));
 	else if (*line == '\0')
 		return (1);
 	else
