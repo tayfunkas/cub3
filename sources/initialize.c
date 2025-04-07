@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/03/31 18:47:48 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/03 18:00:37 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@ void	initialize_game(t_game **game)
 	*game = malloc(sizeof(t_game));
 	if (!*game)
 		handle_error(*game, "Memory allocation failied for game structure.");
+	ft_bzero(*game, sizeof(t_game));
 	(*game)->mlx_ptr = NULL;
 	(*game)->mlx_window = NULL;
 	(*game)->map_file = NULL;
 	(*game)->floor_color = (t_color){.r = -1, .g = -1, .b = -1};
 	(*game)->ceiling_color = (t_color){.r = -1, .g = -1, .b = -1};
+	(*game)->keys = ft_calloc(MAX_KEYCODE, sizeof(int));
+	if (!(*game)->keys)
+		handle_error(*game, "Memory allocation failed for keys array.");
 	(*game)->map = malloc(sizeof(t_map));
 	if (!(*game)->map)
 		handle_error(*game, "Memory allocation failed for map structure.");
@@ -31,6 +35,8 @@ void	initialize_game(t_game **game)
 	(*game)->map->line_count = 0;
 	initialize_player(*game);
 	initialize_engine(*game);
+	initialize_config(*game);
+	initialize_mini(*game);
 }
 
 void	initialize_engine(t_game *game)
@@ -79,8 +85,11 @@ void	get_player_init_position(t_map *map, t_player *player)
 	int	x;
 	int	y;
 
-	if (!map->data)
-		printf("Does not exist\n");
+	if (!map || !map->data)
+	{
+		printf("Map does not exist\n");
+		return;
+	}
 	x = 0;
 	while (map->data[x])
 	{
@@ -91,12 +100,23 @@ void	get_player_init_position(t_map *map, t_player *player)
 			{
 				player->player_x = x;
 				player->player_y = y;
+				player->player_count++;
 			}
 			y++;
 		}
 		x++;
 	}
-	printf("Player initialized at: (%f, %f), direction: %d\n", player->player_x, player->player_y, player->player_dir);
+}
+
+void	initialize_mini(t_game *game)
+{
+	game->mini = ft_calloc(1, sizeof(t_mini));
+	if (!game->mini)
+		handle_error(game, "Failed to allocate mini");
+	game->mini->wall = NULL;
+	game->mini->door = NULL;
+	game->mini->floor = NULL;
+	game->mini->player = NULL;
 }
 
 int	is_player(char c)
@@ -104,4 +124,17 @@ int	is_player(char c)
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
 	return (0);
+}
+
+void	initialize_config(t_game *game)
+{
+	game->config = malloc(sizeof(t_config));
+	if (!game->config)
+		handle_error(game, "Memory allocation failed for config structure.");
+	game->config->no = 0;
+	game->config->so = 0;
+	game->config->ea = 0;
+	game->config->we = 0;
+	game->config->f = 0;
+	game->config->c = 0;
 }

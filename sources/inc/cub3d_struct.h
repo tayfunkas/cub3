@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/03/31 18:40:45 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/03 16:56:28 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ typedef struct s_img
 	char		*addr;
 	int			bpp;
 	int			line_length;
-	int			endian;
-	
+	int			endian;	
 }	t_img;
 
 typedef struct s_engine 
@@ -38,12 +37,11 @@ typedef struct s_engine
 	char	*ea_texture;
 }	t_engine;
 
-
 typedef struct s_mini
 {
 	void	*wall;
-	void	*door;
 	void	*floor;
+	void	*door;
 	void	*player;
 }	t_mini;
 
@@ -78,11 +76,23 @@ typedef struct s_color
 	int	b;
 }	t_color;
 
+typedef struct s_config
+{
+	int	no;
+	int	so;
+	int	we;
+	int	ea;
+	int	f;
+	int	c;
+}	t_config;
+
 typedef struct s_game
 {
 	void		*mlx_ptr;
 	void		*mlx_window;
 	char		*map_file;
+	int			*keys;
+	t_config	*config;
 	t_engine	*engine;
 	t_color		floor_color;
 	t_color		ceiling_color;

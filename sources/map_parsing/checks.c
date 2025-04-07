@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:37 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/20 15:56:55 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/03 17:26:30 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ void	check_mapfile_name(t_game *game, char *map)
 
 void	check_mapchars(char *line, t_game *game)
 {
-	int	i;
+	int		i;
+	char	*trimmed;
 
 	printf("Checking line: %s\n", line);
 	i = 0;
-	ft_strtrim(line, "\n");
+	trimmed = ft_strtrim(line, "\n");
+	line = trimmed;
 	while (line[i])
 	{
 		if (line[i] != '0' && line[i] != '1' && line[i] != 'N' 
@@ -53,11 +55,13 @@ void	check_mapchars(char *line, t_game *game)
 			handle_error(game, "Invalid character in the map");
 		i++;
 	}
+	free(trimmed);
 }
 
 void	check_player(char **map, char *line, t_game *game)
 {
-	int	i;
+	static int	player = 0; 
+	int			i;
 
 	i = 0;
 	while (line[i])
@@ -65,8 +69,8 @@ void	check_player(char **map, char *line, t_game *game)
 		if (line[i] == 'N' || line[i] == 'S' 
 			|| line[i] == 'W' || line[i] == 'E')
 		{
-			game->player->player_count++;
-			if (game->player->player_count > 1)
+			player++;
+			if (player > 1)
 				handle_error(game, 
 					"There should be one starting position for the player");
 			game->player->player_dir = line[i];

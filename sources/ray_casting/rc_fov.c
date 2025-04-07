@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:55:33 by grial             #+#    #+#             */
-/*   Updated: 2025/04/07 15:01:47 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/07 15:33:31 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
 {
 	char	*dst;
 
+	if (!game || !game->engine || !game->engine->frame || !game->engine->frame->addr)
+	{
+		printf("Invalid pointer in my_mlx_pixel_put\n");
+		return;
+	}
 	if (x >= 0 && x < WIN_W && y >= 0 && y < WIN_H)
 	{
 		dst = game->engine->frame->addr + (y * game->engine->frame->line_length
@@ -118,7 +123,7 @@ void	draw_wall(t_game *game, int x_width, float x, float y, float ang)
 	int		tex_x;
 	int		tex_ys;
 
-	steps = BLOCK / WIN_H;
+	steps = (float)BLOCK / WIN_H;
 	height = get_height(game, x, y, ang);
 	if (height > WIN_H)
 		scale = height / (float)WIN_H;
@@ -133,13 +138,14 @@ void	draw_wall(t_game *game, int x_width, float x, float y, float ang)
 	}
 	tex_x = ((int)x % BLOCK); // o según la dirección
 	texture = game->engine->no_img;
-	while (y_pos < WIN_H)
+	while (tx_start < tx_end)
 	{
 		tex_ys = ((steps * y_pos) / scale) + tx_start;
 		color = get_pixel_color(texture, tex_x, y);
 		// Dibujar el píxel en pantalla
 		my_mlx_pixel_put(game, x_width, y_pos, color);
 		y_pos++;
+		tx_start++;
 	} 
 }
 
@@ -151,6 +157,11 @@ int	draw_check_collision(t_game *game, int x_width, float x, float y, float ang)
 
 	new_x = (int)floorf(x);
 	new_y = (int)floorf(y);
+	if (new_x < 0 || new_y < 0 ||
+		new_x >= game->map->m_height ||
+		new_y >= (int)ft_strlen(game->map->data[new_x]) || 
+		!game->map->data[new_x])
+		return (0);
 	if (game->map->data[new_x][new_y] == '1')
 	{
 		draw_wall(game, x_width, x, y, ang);

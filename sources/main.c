@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:34:02 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/21 14:37:18 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/03 17:23:44 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ int	main(int argc, char **argv)
 	printf("Arguments parsed succesfully!\n");
 	parse_file(game);
 	printf("Map file parsed succesfully!\n");
-	if (game->player->player_count == 0)
-		handle_error(game, "No player on the map!");
 	check_images(game);
 	printf("Texture files are checked!\n");
+	printf("game->map pointer: %p\n", (void *)game->map);
 	get_player_init_position(game->map, game->player);
+	printf("Player count after getting position = %d\n", game->player->player_count);
+	if (game->player->player_count == 0)
+		handle_error(game, "No player on the map!");
 	validate_map(game);
 	printf("Map is valid!\n");
 	init_game(game);

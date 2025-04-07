@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/03/31 19:19:33 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/03 17:31:39 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,21 @@ int		render(t_game *game);
 void	init_game(t_game *game)
 {
 	game->mlx_ptr = mlx_init();
+	if (!game->mlx_ptr)
+		handle_error(game, "Failed to initialize MLX");
 	game->mlx_window = mlx_new_window(game->mlx_ptr, WIN_W, 
 		WIN_H, "cub3D");
 	game->engine->frame->img = mlx_new_image(game->mlx_ptr, WIN_W, WIN_H);
 	game->engine->frame->addr = mlx_get_data_addr(game->engine->frame->img, &game->engine->frame->bpp, 
 		&game->engine->frame->line_length, &game->engine->frame->endian);
+	if (!game->engine->frame->img || !game->engine->frame->addr)
+		handle_error(game, "Failed to create or retrieve image data");
 	load_img(game);
-	mlx_loop_hook(game->mlx_ptr, render, game);
-	mlx_hook(game->mlx_window, 2, KeyPressMask, keys_player, game);
+	mlx_hook(game->mlx_window, 17, 0, free_game, game);
+	mlx_hook(game->mlx_window, 2, 1L << 0, key_press, game);
+	mlx_hook(game->mlx_window, 3, 1L << 1, key_release, game);
 	mlx_hook(game->mlx_window, 6, PointerMotionMask, mouse_move, game);
+	mlx_loop_hook(game->mlx_ptr, render, game);
 	mlx_loop(game->mlx_ptr);
 }
 
@@ -53,6 +59,11 @@ int	render(t_game *game)
 	//int	x = 0;
 	//int	y = 0;
 
+/*printf("Frame image pointer: %p\n", game->engine->frame->img);
+printf("Frame addr pointer: %p\n", game->engine->frame->addr);
+printf("bpp: %d, line_length: %d, endian: %d\n",
+    game->engine->frame->bpp, game->engine->frame->line_length, game->engine->frame->endian);*/
+	handle_movement(game);
 	usleep(10000);
 	clear_image(game, 0x000000);
 	mlx_clear_window(game->mlx_ptr, game->mlx_window);
@@ -86,7 +97,7 @@ void	load_img(t_game *game)
 	int	img_width;
 	int	img_height;
 
-	game->mini = malloc(sizeof(t_mini));
+	//game->mini = malloc(sizeof(t_mini));
 	
 	//	 ###     MINIMAP     ###
 	if (!game->mini)

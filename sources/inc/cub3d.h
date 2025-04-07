@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/03/31 15:02:26 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/03 17:02:20 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,21 @@ void	parse_file(t_game *game);
 void	classify_line(t_game *game, char *line);
 void	parse_map(t_game *game, char *line);
 char	**append_line_to_map(char **map, char *line, t_game *game);
+void	check_line_config(t_game *game, char *line);
+void	check_duplicates_or_missing(t_game *game);
 //free.c
 int		free_game(t_game *game);
 void	handle_error(t_game *game, const char *error_message);
+void	free_engine_images(t_engine *engine, void *mlx_ptr);
+void	free_engine_texture(t_engine *engine);
+void	free_mini(t_mini *mini, void *mlx_ptr);
+void	free_map(t_map *map);
 //initialize.c
 void	initialize_game(t_game **game);
 void	initialize_player(t_game *game);
 void	initialize_engine(t_game *game);
+void	initialize_mini(t_game *game);
+void	initialize_config(t_game *game);
 //validate_map.c
 void	pad_map_to_rectangle(t_game *game);
 void	validate_map(t_game *game);
@@ -76,11 +84,14 @@ int		key_hook(int key, t_game *game);
 void	init_game(t_game *game);
 int     mouse_move(int x, int y, t_game *game);
 //player_move.c
-int		keys_player(int key, t_game *game);
+void	handle_movement(t_game *game);
 void	player_direction(t_player *player, int key);
 void	player_move(t_player *player, t_map *map, int key);
 void	player_strafe(t_player *player, t_map *map, int key);
 int		check_collision(t_map *map, float x, float y);
+//keys.c
+int     key_press(int key, t_game *game);
+int     key_release(int key, t_game *game);
 //rc_fov.c
 void	draw_ray_line(t_game *game, t_player *player, int x_width, float x);
 void	draw_fov(t_game *game, t_player *player);
