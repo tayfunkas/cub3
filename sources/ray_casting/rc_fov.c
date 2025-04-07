@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:55:33 by grial             #+#    #+#             */
-/*   Updated: 2025/04/04 18:50:44 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/07 15:01:47 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,58 +83,60 @@ int	get_pixel_color(t_img *texture, int x, int y)
 	return (color);
 }
 
-void	draw_wall(t_game *game, int x_width, float x, float y, float ang)
+float	get_height(t_game *game, float x, float y, float ang)
 {
 	float	dist;
 	float	height;
-	int		start;
-	int		end;
-	int		y_pos;
-	int		tex_x;
-	int		tex_ys;
-	int		tex_start;
+
+	dist = distance(x, y, game->player->player_x, game->player->player_y)
+	* cos(ang);
+	height = (BLOCK / (dist * BLOCK)) * (WIN_H / 2);
+	return (height);
+}
+
+int get_texture_offset(float scale)
+{
+	int	mid_point;	// change name, is not the mid_point
+	int	init_point;
+
+	mid_point = (BLOCK / scale);
+	init_point = (BLOCK / 2) - (mid_point / 2);
+	return (init_point);
+}
+
+void	draw_wall(t_game *game, int x_width, float x, float y, float ang)
+{
+	float	height;
+	int		tx_start;
+	int		tx_end;
+	int		steps;
+	float	scale;
 	t_img	*texture;
 	int		color;
-	float	scale;
+	
+	int		y_pos = 0;
+	int		tex_x;
+	int		tex_ys;
 
-	texture = game->engine->no_img;
-	// Calcular la distancia desde el jugador hasta la pared y proyectar la altura
-	dist = distance(x, y, game->player->player_x, game->player->player_y)
-		* cos(ang);
-	height = (BLOCK / (dist * BLOCK)) * (WIN_H / 2);
-
-	// Ajustar la textura cuando la pared es más grande que la ventana
-	tex_start = 0;
+	steps = BLOCK / WIN_H;
+	height = get_height(game, x, y, ang);
 	if (height > WIN_H)
-	{
 		scale = height / (float)WIN_H;
-		tex_start = ((height - WIN_H) / 2) * (64 / height); // Ajuste en la textura
-		height = WIN_H;
-	}
-
-	// Calcular los puntos de inicio y final en la ventana
-	start = (WIN_H / 2) - (height / 2);
-	end = (WIN_H / 2) + (height / 2);
-
-	// Si la pared empieza fuera de la pantalla, ajustar el inicio de la textura
-	if (start < 0)
+	else 
+		scale = 1;
+	tx_start = get_texture_offset(scale); // when scale is 2, this is 16
+	tx_end = tx_start + (BLOCK / 2);
+	if (scale <= 1)
 	{
-		tex_start += (-start) * (64 / height);
-		start = 0;
+		tx_start = 0;
+		tx_end = BLOCK;
 	}
-	if (end > WIN_H)
-		end = WIN_H;
-
-	// Iniciar la posición vertical en la pantalla
-	y_pos = start;
-	// Calcular la posición de la textura horizontalmente
-	tex_x = (int)(x * 64) % 64;
-
-	// Dibujar la textura de la pared
-	while (y_pos < end)
+	tex_x = ((int)x % BLOCK); // o según la dirección
+	texture = game->engine->no_img;
+	while (y_pos < WIN_H)
 	{
-		// Obtener el color del píxel de la textura
-		color = get_pixel_color(texture, tex_x, floorf(tex_ys * scale));
+		tex_ys = ((steps * y_pos) / scale) + tx_start;
+		color = get_pixel_color(texture, tex_x, y);
 		// Dibujar el píxel en pantalla
 		my_mlx_pixel_put(game, x_width, y_pos, color);
 		y_pos++;
