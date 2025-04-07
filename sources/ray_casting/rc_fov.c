@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:55:33 by grial             #+#    #+#             */
-/*   Updated: 2025/04/07 15:47:24 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/07 15:51:12 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,29 +130,20 @@ void	draw_wall(t_game *game, int x_width, float x, float y, float ang)
 	draw_end = draw_start + height;
 	if (draw_end > WIN_H)
 		draw_end = WIN_H;
-
-	// Selección de textura (por ahora solo norte)
 	texture = game->engine->no_img;
 	tex_x = (int)(x * 64) % 64;
-
-	// Relación entre altura de pared en pantalla y textura
 	step_tex_y = 64.0f / height;
 	tex_pos = (draw_start - WIN_H / 2 + height / 2) * step_tex_y;
-
 	screen_y = draw_start;
 	while (screen_y < draw_end)
 	{
-		tex_y = (int)tex_pos & (64 - 1); // asumiendo textura 64x64
+		tex_y = (int)tex_pos & (64 - 1);
 		tex_pos += step_tex_y;
-
 		color = get_pixel_color(texture, tex_x, tex_y);
 		my_mlx_pixel_put(game, x_width, screen_y, color);
 		screen_y++;
 	}
 }
-
-
-
 
 int	draw_check_collision(t_game *game, int x_width, float x, float y, float ang)
 {
