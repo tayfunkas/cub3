@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:36:03 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/03 17:01:32 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:19:48 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	parse_file(t_game *game)
 		free(line);
 		line = get_next_line(fd);
 	}
-	check_line_config(game, line);
+	free(line);
+	//check_line_config(game, line);
 	close(fd);
 }
 

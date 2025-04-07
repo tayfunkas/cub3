@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 12:38:32 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/08/07 15:20:14 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:29:58 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,10 @@ char	*get_remaining(char *line)
 char	*get_next_line(int fd)
 {
 	char		*process;
-	static char	*line[4096];
+	static char	**line;
 	char		*temp;
 
+	line = get_gnl_static();
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
 	line[fd] = read_it(fd, line[fd]);

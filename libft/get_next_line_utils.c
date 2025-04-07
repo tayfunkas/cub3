@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 13:09:29 by tkasapog          #+#    #+#             */
-/*   Updated: 2024/08/07 15:19:58 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:27:57 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,30 @@ char	*gnl_strjoin(char *s1, char *s2)
 	j_str[i] = '\0';
 	free(s1);
 	return (j_str);
+}
+
+void	cleanup_gnl(void)
+{
+	static char	**line = NULL;
+	int			i;
+
+	if (!line)
+		return ;
+	i = 0;
+	while (i < 4096)
+	{
+		if (line[i])
+		{
+			free(line[i]);
+			line[i] = NULL;
+		}
+		i++;
+	}
+}
+
+char	**get_gnl_static(void)
+{
+	static char	*line[4096];
+
+	return (line);
 }
