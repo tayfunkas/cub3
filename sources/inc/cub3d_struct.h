@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/04/03 16:56:28 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/10 18:16:02 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct s_game
 	void		*mlx_window;
 	char		*map_file;
 	int			*keys;
+	int			error;
 	t_config	*config;
 	t_engine	*engine;
 	t_color		floor_color;

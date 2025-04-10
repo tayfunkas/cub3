@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:37 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/03 17:26:30 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:27:47 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ void	check_mapchars(char *line, t_game *game)
 		if (line[i] != '0' && line[i] != '1' && line[i] != 'N' 
 			&& line[i] != 'S' && line[i] != 'W' 
 			&& line[i] != 'E' && line[i] != ' ')
+		{
+			free(trimmed);
 			handle_error(game, "Invalid character in the map");
+		}
 		i++;
 	}
 	free(trimmed);
@@ -71,8 +74,11 @@ void	check_player(char **map, char *line, t_game *game)
 		{
 			player++;
 			if (player > 1)
+			{
+				free(line);
 				handle_error(game, 
 					"There should be one starting position for the player");
+			}
 			game->player->player_dir = line[i];
 			game->player->player_x = i;
 			game->player->player_y = ft_arraylen(map);

@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:44 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/07 16:58:08 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/10 18:26:07 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ int	free_game(t_game *game)
 		free(game->player);
 	if (game->config)
 		free(game->config);
+	if (game-> error == 1)
+	{
+		free(game);
+		exit(1);
+	}
 	free(game);
 	exit(0);
 }
@@ -147,6 +152,7 @@ void	handle_error(t_game *game, const char *error_message)
 {
 	printf("Error\n%s\n", error_message);
 
+	game->error = 1;
 	if (game)
 		free_game(game);
 	exit(1);

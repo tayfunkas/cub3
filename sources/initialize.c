@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/03 18:00:37 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/10 18:16:38 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	initialize_game(t_game **game)
 	(*game)->map_file = NULL;
 	(*game)->floor_color = (t_color){.r = -1, .g = -1, .b = -1};
 	(*game)->ceiling_color = (t_color){.r = -1, .g = -1, .b = -1};
+	(*game)->error = 0;
 	(*game)->keys = ft_calloc(MAX_KEYCODE, sizeof(int));
 	if (!(*game)->keys)
 		handle_error(*game, "Memory allocation failed for keys array.");
