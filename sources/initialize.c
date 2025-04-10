@@ -6,13 +6,13 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/07 17:04:57 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/10 16:42:57 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/cub3d.h"
 
-void	initialize_game(t_game **game)
+int	initialize_game(t_game **game)
 {
 	*game = malloc(sizeof(t_game));
 	if (!*game)
@@ -31,13 +31,11 @@ void	initialize_game(t_game **game)
 	(*game)->map->m_width = 0;
 	(*game)->map->data = NULL;
 	(*game)->map->line_count = 0;
-	initialize_player(*game);
-	initialize_engine(*game);
-	initialize_config(*game);
-	initialize_mini(*game);
+	if (!initialize_player(*game) || !initialize_engine(*game) || !initialize_config(*game) || !initialize_mini(*game))
+		return (0);
 }
 
-void	initialize_engine(t_game *game)
+int	initialize_engine(t_game *game)
 {
 	game->engine = malloc(sizeof(t_engine));
 	if (!game->engine)
@@ -65,6 +63,7 @@ void	initialize_engine(t_game *game)
 	if (!game->engine->ea_img)
 		return ;
 	game->engine->ea_img->img = NULL;
+	
 	game->engine->floor_color = malloc(sizeof(t_color));
 	if (!game->engine->floor_color)
 		return ;
@@ -77,17 +76,23 @@ void	initialize_engine(t_game *game)
 	game->engine->ceiling_color->r = -1;
 	game->engine->ceiling_color->g = -1;
 	game->engine->ceiling_color->b = -1;
+
+	game->engine->cam = malloc(sizeof(t_cam));
+	if (!game->engine->cam)
+		return;
+
+	game->engine->fov = M_PI / 3;
 }
 
-void	initialize_player(t_game *game)
+int	initialize_player(t_game *game)
 {
 	(game)->player = malloc(sizeof(t_player));
 	if (!game->player)
 		handle_error(game, "Memory allocation failed for player structure.");
 	(game)->player->player_count = 0;
-	(game)->player->player_dir = 0;
-	(game)->player->player_x = 0;
-	(game)->player->player_y = 0;
+	(game)->player->dir = 0;
+	(game)->player->pos_x = 0;
+	(game)->player->pos_y = 0;
 }
 
 void	get_player_init_position(t_map *map, t_player *player)
@@ -108,8 +113,8 @@ void	get_player_init_position(t_map *map, t_player *player)
 		{
 			if (is_player(map->data[x][y]))
 			{
-				player->player_x = x;
-				player->player_y = y;
+				player->pos_x = x;
+				player->pos_y = y;
 				player->player_count++;
 			}
 			y++;
@@ -118,7 +123,7 @@ void	get_player_init_position(t_map *map, t_player *player)
 	}
 }
 
-void	initialize_mini(t_game *game)
+int	initialize_mini(t_game *game)
 {
 	game->mini = ft_calloc(1, sizeof(t_mini));
 	if (!game->mini)
@@ -136,7 +141,7 @@ int	is_player(char c)
 	return (0);
 }
 
-void	initialize_config(t_game *game)
+int	initialize_config(t_game *game)
 {
 	game->config = malloc(sizeof(t_config));
 	if (!game->config)

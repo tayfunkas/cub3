@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/07 17:23:16 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/10 15:53:45 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define MIN_S 8
 # define BLOCK 64
 # define STEP 0.07
-# define FOV 90
+# define FOV 60
 
 void	get_player_init_position(t_map *map, t_player *player);
 int		is_player(char c);

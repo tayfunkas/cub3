@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/04/07 17:12:06 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/10 16:42:57 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@ typedef struct s_color
 	int	color;
 }	t_color;
 
+typedef struct s_cam
+{
+	float	x;
+	float	ray_x;
+	float	ray_y;
+	
+}	t_cam;
+
 typedef struct s_img
 {
 	void		*img;
@@ -34,6 +42,8 @@ typedef struct s_img
 typedef struct s_engine 
 {
 	t_img	*frame;
+	t_cam	*cam;
+	float	fov;
 	float	ang_step;
 	t_img	*no_img;
 	t_img	*so_img;
@@ -66,9 +76,9 @@ typedef struct s_map
 typedef struct s_player
 {
 	int		player_count;
-	int		player_dir;
-	float	player_x;
-	float	player_y;
+	int		dir;
+	float	pos_x;
+	float	pos_y;
 }	t_player;
 
 typedef struct s_ray

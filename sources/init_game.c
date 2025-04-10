@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/04/07 17:26:14 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/10 16:42:57 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,17 @@ int	render(t_game *game)
 	handle_movement(game);
 	usleep(10000);
 	mlx_clear_window(game->mlx_ptr, game->mlx_window);
-	//while (game->map->data[x])
-	//{
-	//	y = 0;
-	//	while (game->map->data[x][y])
-	//	{
-	//		mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, hook_img(game, game->map->data[x][y]), y * MIN_S, x * MIN_S);
-	//		y++;
-	//	}
-	//	x++;
-	//}
-//	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player, game->player->player_y * MIN_S, game->player->player_x * MIN_S);
+	while (game->map->data[x])
+	{
+		y = 0;
+		while (game->map->data[x][y])
+		{
+			mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, hook_img(game, game->map->data[x][y]), y * MIN_S, x * MIN_S);
+			y++;
+		}
+		x++;
+	}
+	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player, game->player->pos_y * MIN_S, game->player->pos_x * MIN_S);
 	draw_fov(game, game->player);
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->engine->frame->img, 0, 0);
 	return (1);
@@ -177,11 +177,11 @@ int	mouse_move(int x, int y, t_game *game)
 	delta_x = x - last_x;
 	if(delta_x != 0)
 	{
-		game->player->player_dir -= delta_x * 0.5;
-		if (game->player->player_dir < 0)
-			game->player->player_dir += 360;
-		if (game->player->player_dir >= 360)
-			game->player->player_dir -= 360;
+		game->player->dir -= delta_x * 0.5;
+		if (game->player->dir < 0)
+			game->player->dir += 360;
+		if (game->player->dir >= 360)
+			game->player->dir -= 360;
 		last_x = x;
 	}
 	return (0);
