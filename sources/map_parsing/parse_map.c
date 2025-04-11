@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:36:03 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/10 19:29:20 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:17:45 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	parse_file(t_game *game)
 		line = get_next_line(fd);
 	}
 	free(line);
-	//check_line_config(game, line);
 	close(fd);
 }
 
@@ -165,8 +164,11 @@ char	**append_line_to_map(char **map, char *line, t_game *game)
 	new_map = malloc(sizeof(char *) * (map_len + 2));
 	if (!new_map)
 		handle_error(game, "Memory allocation failed while expanding the map");
-	check_mapchars(line, game);
-	check_player(map, line, game); 
+	if (!check_mapchars(line, game) || !check_player(map, line, game))
+	{
+		free(new_map);
+		handle_error(game, "Issue with character on the map\n");
+	} 
 	while (i < map_len)
 	{
 		new_map[i] = ft_strdup(map[i]);
@@ -182,4 +184,3 @@ char	**append_line_to_map(char **map, char *line, t_game *game)
 		game->map->m_width = line_width;
 	return (new_map);
 }
-

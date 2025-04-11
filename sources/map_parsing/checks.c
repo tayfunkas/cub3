@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:37 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/10 19:27:47 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:00:32 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ void	check_mapfile_name(t_game *game, char *map)
 	close(fd);
 }
 
-void	check_mapchars(char *line, t_game *game)
+bool	check_mapchars(char *line, t_game *game)
 {
 	int		i;
 	char	*trimmed;
 
+	(void)game;
 	printf("Checking line: %s\n", line);
 	i = 0;
 	trimmed = ft_strtrim(line, "\n");
@@ -54,14 +55,15 @@ void	check_mapchars(char *line, t_game *game)
 			&& line[i] != 'E' && line[i] != ' ')
 		{
 			free(trimmed);
-			handle_error(game, "Invalid character in the map");
+			return (false);
 		}
 		i++;
 	}
 	free(trimmed);
+	return (true);
 }
 
-void	check_player(char **map, char *line, t_game *game)
+bool	check_player(char **map, char *line, t_game *game)
 {
 	static int	player = 0; 
 	int			i;
@@ -76,8 +78,7 @@ void	check_player(char **map, char *line, t_game *game)
 			if (player > 1)
 			{
 				free(line);
-				handle_error(game, 
-					"There should be one starting position for the player");
+				return (false);
 			}
 			game->player->player_dir = line[i];
 			game->player->player_x = i;
@@ -85,4 +86,5 @@ void	check_player(char **map, char *line, t_game *game)
 		}
 		i++;
 	}
+	return (true);
 }

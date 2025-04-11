@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/03 17:02:20 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:59:31 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <fcntl.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -40,8 +41,8 @@ int		is_player(char c);
 //checks.c
 void	check_empty_map(t_game *game, int fd);
 void	check_mapfile_name(t_game *game, char *map);
-void	check_mapchars(char *line, t_game *game);
-void	check_player(char **map, char *line, t_game *game);
+bool    check_mapchars(char *line, t_game *game);
+bool	check_player(char **map, char *line, t_game *game);
 //parse_map.c
 void	parse_file(t_game *game);
 void	classify_line(t_game *game, char *line);
