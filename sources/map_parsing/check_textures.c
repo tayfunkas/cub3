@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/11 17:10:10 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:38:08 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	parse_texture(t_game *game, char *line, char **texture_path)
 	if (!*texture_path)
 	{
 		free(trimmed_line);
-		handle_error(game, "Invalid texture line");
+		game->error = 1;
 	}
 }
 

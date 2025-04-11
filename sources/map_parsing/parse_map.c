@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:36:03 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/11 17:17:45 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:58:20 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,17 @@ void	check_line_config(t_game *game, char *line)
 void	check_duplicates_or_missing(t_game *game)
 {
 	if (game->config->no > 1 || game->config->no == 0)
-		handle_error(game, "Duplicate or no NO texture");
+		game->error = 1;
 	if (game->config->so > 1 || game->config->so == 0)
-		handle_error(game, "Duplicate or no SO texture");
+		game->error = 1;
 	if (game->config->we > 1 || game->config->we == 0)
-		handle_error(game, "Duplicate or no WE texture");
+		game->error = 1;
 	if (game->config->ea > 1 || game->config->ea == 0)
-		handle_error(game, "Duplicate or no EA texture");
+		game->error = 1;
 	if (game->config->f > 1 || game->config->f == 0)
-		handle_error(game, "Duplicate or no floor color (F)");
+		game->error = 1;
 	if (game->config->c > 1 || game->config->c == 0)
-		handle_error(game, "Duplicate or no ceiling color (C)");
+		game->error = 1;
 }
 
 void	classify_line(t_game *game, char *line)
@@ -167,7 +167,7 @@ char	**append_line_to_map(char **map, char *line, t_game *game)
 	if (!check_mapchars(line, game) || !check_player(map, line, game))
 	{
 		free(new_map);
-		handle_error(game, "Issue with character on the map\n");
+		game->error = 1;
 	} 
 	while (i < map_len)
 	{
