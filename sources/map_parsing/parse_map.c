@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:36:03 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/11 17:58:20 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/13 16:40:54 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ void	classify_line(t_game *game, char *line)
 		if (ft_isdigit(*line) || *line == ' ')
 			parse_map(game, original_line);
 		else if (*line == '\0')
-			handle_error(game, "Empty line within the map");
+			game->error = 1; //empty line within the map
 		else
-			handle_error(game, "Invalid line after map has started");
+			game ->error = 1; //handle_error(game, "Invalid line after map has started");
 		return ;
 	}
 	check_line_config(game, line);

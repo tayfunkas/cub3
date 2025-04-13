@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:34:02 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/11 17:58:08 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/13 16:36:07 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ int	main(int argc, char **argv)
 	parse_arguments(argc, argv, game);
 	printf("Arguments parsed succesfully!\n");
 	parse_file(game);
-	if (game->error == 1)
-		handle_error(game, "Issue with the map\n");
 	printf("Map file parsed succesfully!\n");
 	check_images(game);
 	printf("Texture files are checked!\n");
+	if (game->error == 1)
+		handle_error(game, "Issue with the map\n");
 	printf("game->map pointer: %p\n", (void *)game->map);
 	get_player_init_position(game->map, game->player);
 	printf("Player count after getting position = %d\n", game->player->player_count);
