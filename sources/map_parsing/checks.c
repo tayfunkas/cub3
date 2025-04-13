@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:37 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/11 17:00:32 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/13 19:14:22 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,7 @@ bool	check_player(char **map, char *line, t_game *game)
 		{
 			player++;
 			if (player > 1)
-			{
-				free(line);
 				return (false);
-			}
 			game->player->player_dir = line[i];
 			game->player->player_x = i;
 			game->player->player_y = ft_arraylen(map);

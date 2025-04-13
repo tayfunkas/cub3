@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/11 17:33:36 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/13 18:02:20 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,17 @@ void	parse_color(t_game *game, char *line, t_color *color)
 	{
 		ft_free_split(rgb);
 		game->error = 1;
+		return ;
 	}
 	while (i < 3)
 	{
 		trimmed = ft_strtrim(rgb[i], " \n");
 		if (!trimmed || !ft_alldigit(trimmed))
-		{
-			free(trimmed);
-			ft_free_split(rgb);
 			game->error = 1;
-		}
 		free(rgb[i]);
-		// free(trimmed);
 		rgb[i] = trimmed;
 		i++;
 	}
-	// free(trimmed);
 	assign_check_color(game, color, rgb);
 	ft_free_split(rgb);
 }

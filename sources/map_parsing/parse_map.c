@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:36:03 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/13 16:40:54 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/13 17:54:57 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	parse_file(t_game *game)
 	close(fd);
 }
 
-static int	assign_lines(t_game *game, char *line)
+/*static int	assign_lines(t_game *game, char *line)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
 		parse_texture(game, line + 3, &(game->engine->no_texture));
@@ -41,6 +41,43 @@ static int	assign_lines(t_game *game, char *line)
 		parse_texture(game, line + 3, &(game->engine->we_texture));
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 		parse_texture(game, line + 3, &(game->engine->ea_texture));
+	else if (ft_strncmp(line, "F ", 2) == 0)
+		parse_color(game, line + 2, &(game->floor_color));
+	else if (ft_strncmp(line, "C ", 2) == 0)
+		parse_color(game, line + 2, &(game->ceiling_color));
+	else if (*line == '\0')
+		return (1);
+	else
+		return (0);
+	return (1);
+}*/
+
+static int	assign_lines(t_game *game, char *line)
+{
+	if (ft_strncmp(line, "NO ", 3) == 0)
+	{
+		if (game->engine->no_texture)
+			return (1);
+		parse_texture(game, line + 3, &(game->engine->no_texture));
+	}
+	else if (ft_strncmp(line, "SO ", 3) == 0)
+	{
+		if (game->engine->so_texture)
+			return (1);
+		parse_texture(game, line + 3, &(game->engine->so_texture));
+	}
+	else if (ft_strncmp(line, "WE ", 3) == 0)
+	{
+		if (game->engine->we_texture)
+			return (1);
+		parse_texture(game, line + 3, &(game->engine->we_texture));
+	}
+	else if (ft_strncmp(line, "EA ", 3) == 0)
+	{
+		if (game->engine->ea_texture)
+			return (1);
+		parse_texture(game, line + 3, &(game->engine->ea_texture));
+	}
 	else if (ft_strncmp(line, "F ", 2) == 0)
 		parse_color(game, line + 2, &(game->floor_color));
 	else if (ft_strncmp(line, "C ", 2) == 0)
@@ -165,10 +202,7 @@ char	**append_line_to_map(char **map, char *line, t_game *game)
 	if (!new_map)
 		handle_error(game, "Memory allocation failed while expanding the map");
 	if (!check_mapchars(line, game) || !check_player(map, line, game))
-	{
-		free(new_map);
 		game->error = 1;
-	} 
 	while (i < map_len)
 	{
 		new_map[i] = ft_strdup(map[i]);

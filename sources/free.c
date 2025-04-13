@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:44 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/11 17:08:26 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/13 18:58:45 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	free_game(t_game *game)
 	free_engine_texture(game->engine);
 	if (game->engine)
 		free(game->engine);
-	free_mini(game->mini, game->mlx_ptr);
+	if (game->mini)
+		free_mini(game->mini, game->mlx_ptr);
 	if (game->mlx_window)
 	{
 		mlx_clear_window(game->mlx_ptr, game->mlx_window);
@@ -34,12 +35,13 @@ int	free_game(t_game *game)
 	}
 	if (game->keys)
 		free(game->keys);
-	free_map(game->map);
 	if (game->player)
 		free(game->player);
 	if (game->config)
 		free(game->config);
-	if (game-> error == 1)
+	if (game->map)
+		free_map(game->map);
+	if (game->error == 1)
 	{
 		free(game);
 		exit(1);

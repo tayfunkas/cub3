@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:22 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/03 17:29:42 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/13 17:27:34 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,26 +99,3 @@ void	pad_map_to_rectangle(t_game *game)
 		i++;
 	}
 }
-
-/*void	pad_map_to_rectangle(t_game *game)
-{
-	char **map;
-	int max_width;
-
-	max_width = game->map->m_width;
-	map = game->map->data;
-	for (int i = 0; i < game->map->m_height; i++)
-	{
-		int current_len = ft_strlen(map[i]);
-		if (current_len < max_width)
-		{
-			char *padded_line = malloc(sizeof(char) * (max_width + 1));
-			ft_strlcpy(padded_line, map[i], current_len + 1);
-			for (int j = current_len; j < max_width; j++)
-				padded_line[j] = ' ';
-			padded_line[max_width] = '\0';
-			free(map[i]);
-			map[i] = padded_line;
-		}
-	}
-}*/
