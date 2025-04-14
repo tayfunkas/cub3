@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/04/10 16:42:57 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/14 15:28:39 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ typedef struct s_color
 typedef struct s_cam
 {
 	float	x;
-	float	ray_x;
-	float	ray_y;
+	double	ray_x;
+	double	ray_y;
+	double	delta_x;
+	double	delta_y;
 	
 }	t_cam;
 

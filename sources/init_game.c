@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/04/10 16:42:57 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/14 16:07:02 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,16 @@ int	render(t_game *game)
 	handle_movement(game);
 	usleep(10000);
 	mlx_clear_window(game->mlx_ptr, game->mlx_window);
-	while (game->map->data[x])
-	{
-		y = 0;
-		while (game->map->data[x][y])
-		{
-			mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, hook_img(game, game->map->data[x][y]), y * MIN_S, x * MIN_S);
-			y++;
-		}
-		x++;
-	}
+	//while (game->map->data[x])
+	//{
+	//	y = 0;
+	//	while (game->map->data[x][y])
+	//	{
+	//		mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, hook_img(game, game->map->data[x][y]), y * MIN_S, x * MIN_S);
+	//		y++;
+	//	}
+	//	x++;
+	//}
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player, game->player->pos_y * MIN_S, game->player->pos_x * MIN_S);
 	draw_fov(game, game->player);
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->engine->frame->img, 0, 0);

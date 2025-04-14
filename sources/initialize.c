@@ -6,13 +6,13 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/10 16:42:57 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/14 16:06:37 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/cub3d.h"
 
-int	initialize_game(t_game **game)
+void	initialize_game(t_game **game)
 {
 	*game = malloc(sizeof(t_game));
 	if (!*game)
@@ -31,11 +31,14 @@ int	initialize_game(t_game **game)
 	(*game)->map->m_width = 0;
 	(*game)->map->data = NULL;
 	(*game)->map->line_count = 0;
-	if (!initialize_player(*game) || !initialize_engine(*game) || !initialize_config(*game) || !initialize_mini(*game))
-		return (0);
+	initialize_player(*game);
+	initialize_engine(*game);
+	initialize_config(*game);
+	initialize_mini(*game);
+		return ;
 }
 
-int	initialize_engine(t_game *game)
+void	initialize_engine(t_game *game)
 {
 	game->engine = malloc(sizeof(t_engine));
 	if (!game->engine)
@@ -84,7 +87,7 @@ int	initialize_engine(t_game *game)
 	game->engine->fov = M_PI / 3;
 }
 
-int	initialize_player(t_game *game)
+void	initialize_player(t_game *game)
 {
 	(game)->player = malloc(sizeof(t_player));
 	if (!game->player)
@@ -123,7 +126,7 @@ void	get_player_init_position(t_map *map, t_player *player)
 	}
 }
 
-int	initialize_mini(t_game *game)
+void	initialize_mini(t_game *game)
 {
 	game->mini = ft_calloc(1, sizeof(t_mini));
 	if (!game->mini)
@@ -141,7 +144,7 @@ int	is_player(char c)
 	return (0);
 }
 
-int	initialize_config(t_game *game)
+void	initialize_config(t_game *game)
 {
 	game->config = malloc(sizeof(t_config));
 	if (!game->config)

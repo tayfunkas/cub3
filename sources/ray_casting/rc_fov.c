@@ -6,32 +6,171 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:55:33 by grial             #+#    #+#             */
-/*   Updated: 2025/04/10 16:42:57 by grial            ###   ########.fr       */
+/*   Updated: 2025/04/14 16:08:48 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	draw_fov(t_game *game, t_player *player)
+void cast_single_ray(t_game *game, int x_width, double ray_angle)
 {
-	int		i;
-	int		dir;
-	double	ray_angle;
+	double ray_dir_x = cos(ray_angle);
+	double ray_dir_y = sin(ray_angle);
+	double ray_x = game->player->pos_x;
+	double ray_y = game->player->pos_y;
 
-	i = 0;
-	while (i < WIN_H)
+	double delta_dist_x = fabs(1.0 / ray_dir_x);
+	double delta_dist_y = fabs(1.0 / ray_dir_y);
+
+	int step_x = (ray_dir_x < 0) ? -1 : 1;
+	int step_y = (ray_dir_y < 0) ? -1 : 1;
+
+	int map_x = (int)ray_x;
+	int map_y = (int)ray_y;
+
+	double side_dist_x = (ray_dir_x < 0)
+		? (ray_x - map_x) * delta_dist_x
+		: (map_x + 1.0 - ray_x) * delta_dist_x;
+
+	double side_dist_y = (ray_dir_y < 0)
+		? (ray_y - map_y) * delta_dist_y
+		: (map_y + 1.0 - ray_y) * delta_dist_y;
+
+	int hit = 0;
+
+	while (!hit)
 	{
-		ray_angle = player->dir - (game->engine->fov / 2.0) + (i
-				* (game->engine->fov / ((float)WIN_H - 1)));
+		if (side_dist_x < side_dist_y)
+		{
+			side_dist_x += delta_dist_x;
+			map_x += step_x;
+		}
+		else
+		{
+			side_dist_y += delta_dist_y;
+			map_y += step_y;
+		}
+		if (map_x >= 0 && map_x < game->map->m_height
+			&& map_y >= 0 && map_y < (int)ft_strlen(game->map->data[map_x])
+			&& game->map->data[map_x][map_y] == '1')
+		{
+			hit = 1;
+		}
+	}
+
+	// Dibuja la pared una vez que se detecta colisión
+	draw_wall(game, x_width, ray_x + ray_dir_x, ray_y + ray_dir_y, ray_angle);
+}
+
+
+void draw_fov(t_game *game, t_player *player)
+{
+	int i = 0;
+	double ray_angle;
+
+	while (i < WIN_W) // Debe ser ancho de la ventana, no alto
+	{
+		ray_angle = player->dir - (game->engine->fov / 2.0)
+			+ (i * (game->engine->fov / ((float)WIN_W - 1)));
+
 		if (ray_angle < 0)
 			ray_angle += 2 * M_PI;
 		else if (ray_angle > 2 * M_PI)
 			ray_angle -= 2 * M_PI;
-		get_ang(game->engine->cam, ray_angle);
-		delta_dist(game->player, game->engine->cam);
+
+		cast_single_ray(game, i, ray_angle);
 		i++;
 	}
 }
+
+
+
+//void	draw_fov(t_game *game, t_player *player)
+//{
+//	int		i;
+//	int		dir;
+//	double	ray_angle;
+//
+//	i = 0;
+//	while (i < WIN_W)
+//	{
+//		ray_angle = player->dir - (game->engine->fov / 2.0) + (i
+//				* (game->engine->fov / ((float)WIN_W - 1)));
+//		if (ray_angle < 0)
+//			ray_angle += 2 * M_PI;
+//		else if (ray_angle > 2 * M_PI)
+//			ray_angle -= 2 * M_PI;
+//		get_ang(game->engine->cam, ray_angle);
+//		calculate_side_distances(game->player, ray_angle, &game->engine->cam->ray_x, &game->engine->cam->ray_y);
+//		
+//		i++;
+//	}
+//}
+
+void	perform_dda(t_game *game, t_ray *ray, t_player *player)
+{
+	int	map_x = (int)player->pos_x;
+	int	map_y = (int)player->pos_y;
+
+	double	side_dist_x;
+	double	side_dist_y;
+
+	double	delta_dist_x = fabs(1 / cos(ray->ray_angle));
+	double	delta_dist_y = fabs(1 / sin(ray->ray_angle));
+
+	int	step_x;
+	int	step_y;
+
+	if (cos(ray->ray_angle) < 0)
+	{
+		step_x = -1;
+		side_dist_x = (player->pos_x - map_x) * delta_dist_x;
+	}
+	else
+	{
+		step_x = 1;
+		side_dist_x = (map_x + 1.0 - player->pos_x) * delta_dist_x;
+	}
+	if (sin(ray->ray_angle) < 0)
+	{
+		step_y = -1;
+		side_dist_y = (player->pos_y - map_y) * delta_dist_y;
+	}
+	else
+	{
+		step_y = 1;
+		side_dist_y = (map_y + 1.0 - player->pos_y) * delta_dist_y;
+	}
+
+	int hit = 0;
+	while (!hit)
+	{
+		if (side_dist_x < side_dist_y)
+		{
+			side_dist_x += delta_dist_x;
+			map_x += step_x;
+		}
+		else
+		{
+			side_dist_y += delta_dist_y;
+			map_y += step_y;
+		}
+		if (game->map->data[map_y][map_x] == '1') // muro
+			hit = 1;
+	}
+
+	// Distancia final al muro
+	double dist;
+	if (side_dist_x < side_dist_y)
+		dist = side_dist_x - delta_dist_x;
+	else
+		dist = side_dist_y - delta_dist_y;
+
+	ray->wall_distance = dist;
+	ray->hit_x = map_x;
+	ray->hit_y = map_y;
+}
+
 
 void	calculate_side_distances(t_player *player, double ray_angle,
 		double *side_dist_x, double *side_dist_y)
@@ -56,11 +195,8 @@ void	calculate_side_distances(t_player *player, double ray_angle,
 
 void	get_ang(t_cam *cam, double ray_angle)
 {
-	double	ray_dir_x;
-	double	ray_dir_y;
-
-	ray_dir_x = cos(ray_angle);
-	ray_dir_y = sin(ray_angle);
+	cam->ray_x = cos(ray_angle);
+	cam->ray_y = sin(ray_angle);
 }
 
 void	draw_ray_line(t_game *game, t_player *player, int x_width, float ang)
@@ -165,7 +301,7 @@ void	draw_wall(t_game *game, int x_width, float x, float y, float ang)
 	float	height;
 	int		draw_start;
 	int		draw_end;
-	t_img	*texture;
+	//t_img	*texture;
 	int		color;
 	int		screen_y;
 	int		tex_x;
@@ -186,10 +322,10 @@ void	draw_wall(t_game *game, int x_width, float x, float y, float ang)
 	screen_y = draw_start;
 	while (screen_y < draw_end)
 	{
-		texture = get_texture_from_direction(game, ang);
+		//texture = get_texture_from_direction(game, ang);
 		tex_y = (int)tex_pos & (64 - 1);
 		tex_pos += step_tex_y;
-		color = get_pixel_color(texture, tex_x, tex_y);
+		color = get_pixel_color(game->engine->no_img, tex_x, tex_y);
 		my_mlx_pixel_put(game, x_width, screen_y, color);
 		screen_y++;
 	}
