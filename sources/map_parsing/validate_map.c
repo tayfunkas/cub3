@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:22 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/13 17:27:34 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:04:12 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,19 @@ int	validate_borders(t_map *map)
 	return (1);
 }
 
-void	validate_map(t_game *game)
+static void	check_map_tile(t_game *game, char **map, int x, int y)
+{
+	if (map[x][y] != '0')
+		return ;
+	if (y == 0 || y == game->map->m_width - 1 
+		|| map[x][y - 1] == ' ' || map[x][y + 1] == ' ')
+		handle_error(game, "Open map");
+	if (x == 0 || x == game->map->m_height - 1 
+		|| map[x - 1][y] == ' ' || map[x + 1][y] == ' ')
+		handle_error(game, "Open map");
+}
+
+/*void	validate_map(t_game *game)
 {
 	char	**map;
 	int		x;
@@ -65,6 +77,29 @@ void	validate_map(t_game *game)
 					|| map[x - 1][y] == ' ' || map[x + 1][y] == ' ')
 					handle_error(game, "Open map");
 			}
+			y++;
+		}
+		x++;
+	}
+}*/
+
+void	validate_map(t_game *game)
+{
+	char	**map;
+	int		x;
+	int		y;
+
+	if (!game || !game->map || !game->map->data)
+		handle_error(game, "Map data is not initialized in validate_map");
+	map = game->map->data;
+	pad_map_to_rectangle(game);
+	x = 0;
+	while (x < game->map->m_height)
+	{
+		y = 0;
+		while (y < game->map->m_width)
+		{
+			check_map_tile(game, map, x, y);
 			y++;
 		}
 		x++;

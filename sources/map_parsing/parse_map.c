@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:36:03 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/13 17:54:57 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:00:40 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,153 +31,31 @@ void	parse_file(t_game *game)
 	close(fd);
 }
 
-/*static int	assign_lines(t_game *game, char *line)
+static void	check_blank_line(t_game *game, char *line, int len)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0)
-		parse_texture(game, line + 3, &(game->engine->no_texture));
-	else if (ft_strncmp(line, "SO ", 3) == 0)
-		parse_texture(game, line + 3, &(game->engine->so_texture));
-	else if (ft_strncmp(line, "WE ", 3) == 0)
-		parse_texture(game, line + 3, &(game->engine->we_texture));
-	else if (ft_strncmp(line, "EA ", 3) == 0)
-		parse_texture(game, line + 3, &(game->engine->ea_texture));
-	else if (ft_strncmp(line, "F ", 2) == 0)
-		parse_color(game, line + 2, &(game->floor_color));
-	else if (ft_strncmp(line, "C ", 2) == 0)
-		parse_color(game, line + 2, &(game->ceiling_color));
-	else if (*line == '\0')
-		return (1);
-	else
-		return (0);
-	return (1);
-}*/
+	int	i;
+	int	space_count;
 
-static int	assign_lines(t_game *game, char *line)
-{
-	if (ft_strncmp(line, "NO ", 3) == 0)
+	i = 0;
+	space_count = 0;
+	while (i < len && line[i] != '\n')
 	{
-		if (game->engine->no_texture)
-			return (1);
-		parse_texture(game, line + 3, &(game->engine->no_texture));
+		if (line[i] == ' ')
+			space_count++;
+		i++;
 	}
-	else if (ft_strncmp(line, "SO ", 3) == 0)
-	{
-		if (game->engine->so_texture)
-			return (1);
-		parse_texture(game, line + 3, &(game->engine->so_texture));
-	}
-	else if (ft_strncmp(line, "WE ", 3) == 0)
-	{
-		if (game->engine->we_texture)
-			return (1);
-		parse_texture(game, line + 3, &(game->engine->we_texture));
-	}
-	else if (ft_strncmp(line, "EA ", 3) == 0)
-	{
-		if (game->engine->ea_texture)
-			return (1);
-		parse_texture(game, line + 3, &(game->engine->ea_texture));
-	}
-	else if (ft_strncmp(line, "F ", 2) == 0)
-		parse_color(game, line + 2, &(game->floor_color));
-	else if (ft_strncmp(line, "C ", 2) == 0)
-		parse_color(game, line + 2, &(game->ceiling_color));
-	else if (*line == '\0')
-		return (1);
-	else
-		return (0);
-	return (1);
-}
-
-void	check_line_config(t_game *game, char *line)
-{
-	if (!line)
-		return ;
-	if (ft_strncmp(line, "NO ", 3) == 0)
-		game->config->no++;
-	else if (ft_strncmp(line, "SO ", 3) == 0)
-		game->config->so++;
-	else if (ft_strncmp(line, "WE ", 3) == 0)
-		game->config->we++;
-	else if (ft_strncmp(line, "EA ", 3) == 0)
-		game->config->ea++;
-	else if (ft_strncmp(line, "F ", 2) == 0)
-		game->config->f++;
-	else if (ft_strncmp(line, "C ", 2) == 0)
-		game->config->c++;
-}
-
-void	check_duplicates_or_missing(t_game *game)
-{
-	if (game->config->no > 1 || game->config->no == 0)
-		game->error = 1;
-	if (game->config->so > 1 || game->config->so == 0)
-		game->error = 1;
-	if (game->config->we > 1 || game->config->we == 0)
-		game->error = 1;
-	if (game->config->ea > 1 || game->config->ea == 0)
-		game->error = 1;
-	if (game->config->f > 1 || game->config->f == 0)
-		game->error = 1;
-	if (game->config->c > 1 || game->config->c == 0)
-		game->error = 1;
-}
-
-void	classify_line(t_game *game, char *line)
-{
-	static int	parsing_map = 0;
-	static int	checked_config = 0;
-	char		*original_line;
-
-	original_line = line;
-	while (*line == ' ' || *line == '\n')
-		line++;
-	if (parsing_map)
-	{
-		if (ft_isdigit(*line) || *line == ' ')
-			parse_map(game, original_line);
-		else if (*line == '\0')
-			game->error = 1; //empty line within the map
-		else
-			game ->error = 1; //handle_error(game, "Invalid line after map has started");
-		return ;
-	}
-	check_line_config(game, line);
-	if (assign_lines(game, line))
-		return ;
-	else if (ft_isdigit(*line) || *line == ' ')
-	{
-		parsing_map = 1;
-		if (!checked_config)
-		{
-			check_duplicates_or_missing(game);
-			checked_config = 1;
-		}
-		parse_map(game, original_line);
-	}
-	else
-		handle_error(game, "Invalid line in .cub file");
+	if (len - 1 == space_count)
+		handle_error(game, "Invalid blank line within the map.");
 }
 
 void	parse_map(t_game *game, char *line)
 {
 	static char	**temp_map = NULL;
 	int			len;
-	int			s;
-	int			i;
 	char		*trimmed;
 
 	len = ft_strlen(line);
-	s = 0;
-	i = 0;
-	while (i < len && line[i] != '\n')
-	{
-		if (line[i] == ' ') 
-			s++;
-		i++;
-	}
-	if (len - 1 == s)
-		handle_error(game, "Invalid blank line within the map.");
+	check_blank_line(game, line, len);
 	trimmed = ft_strtrim(line, "\n");
 	if (!trimmed)
 		handle_error(game, "Memory allocation failed while trimming");
@@ -189,7 +67,46 @@ void	parse_map(t_game *game, char *line)
 	game->map->data = temp_map;
 }
 
+static char	**create_expanded_map(char **map, char *line, 
+	t_game *game, int *map_len)
+{
+	char	**new_map;
+
+	*map_len = ft_arraylen(map);
+	new_map = malloc(sizeof(char *) * (*map_len + 2));
+	if (!new_map)
+		handle_error(game, "Memory allocation failed while expanding the map");
+	if (!check_mapchars(line, game) || !check_player(map, line, game))
+		game->error = 1;
+	return (new_map);
+}
+
 char	**append_line_to_map(char **map, char *line, t_game *game)
+{
+	char	**new_map;
+	int		map_len;
+	int		i;
+	int		line_width;
+
+	i = 0;
+	new_map = create_expanded_map(map, line, game, &map_len);
+	while (i < map_len)
+	{
+		new_map[i] = ft_strdup(map[i]);
+		free(map[i]);
+		i++;
+	}
+	new_map[map_len] = ft_strdup(line);
+	new_map[map_len + 1] = NULL;
+	free(map);
+	game->map->m_height = map_len + 1;
+	line_width = ft_strlen(line);
+	if (line_width > game->map->m_width)
+		game->map->m_width = line_width;
+	return (new_map);
+}
+
+/*char	**append_line_to_map(char **map, char *line, t_game *game)
 {
 	int		map_len;
 	char	**new_map;
@@ -217,4 +134,4 @@ char	**append_line_to_map(char **map, char *line, t_game *game)
 	if (line_width > game->map->m_width)
 		game->map->m_width = line_width;
 	return (new_map);
-}
+}*/
