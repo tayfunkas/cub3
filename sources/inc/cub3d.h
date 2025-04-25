@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/13 18:46:49 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/25 19:49:14 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,20 @@
 void	get_player_init_position(t_map *map, t_player *player);
 int		is_player(char c);
 
+//map_parsing
+//assign_line.c
+void	check_line_config(t_game *game, char *line);
+void	classify_line(t_game *game, char *line);
+//check_colors.c
+void	parse_color(t_game *game, char *line, t_color *color);
+int		ft_alldigit(char *str);
+void	ft_free_split(char **array);
+//check_textures.c
+int		has_xpm_extension(const char *filename);
+void	check_texture(const char *path, const char *message, t_game *game);
+void	check_images(t_game *game);
+void	parse_texture(t_game *game, char *line, char **texture_path);
+void	check_duplicates_or_missing(t_game *game);
 //checks.c
 void	check_empty_map(t_game *game, int fd);
 void	check_mapfile_name(t_game *game, char *map);
@@ -45,54 +59,27 @@ bool    check_mapchars(char *line, t_game *game);
 bool	check_player(char **map, char *line, t_game *game);
 //parse_map.c
 void	parse_file(t_game *game);
-void	classify_line(t_game *game, char *line);
 void	parse_map(t_game *game, char *line);
 char	**append_line_to_map(char **map, char *line, t_game *game);
-void	check_line_config(t_game *game, char *line);
-void	check_duplicates_or_missing(t_game *game);
-//free.c
-int		free_game(t_game *game);
-void	handle_error(t_game *game, const char *error_message);
-void	free_engine_images(t_engine *engine, void *mlx_ptr);
-void	free_engine_texture(t_engine *engine);
-void	free_mini(t_mini *mini, void *mlx_ptr);
-void	free_map(t_map *map);
-//initialize.c
-void	initialize_game(t_game **game);
-void	initialize_player(t_game *game);
-void	initialize_engine(t_game *game);
-void	initialize_mini(t_game *game);
-void	initialize_config(t_game *game);
-//validate_map.c
-void	pad_map_to_rectangle(t_game *game);
-void	validate_map(t_game *game);
-int		validate_borders(t_map *map);
-//check_textures.c
-int		has_xpm_extension(const char *filename);
-void	check_texture(const char *path, const char *message, t_game *game);
-void	check_images(t_game *game);
-void	parse_texture(t_game *game, char *line, char **texture_path);
-//check_colors.c
-void	parse_color(t_game *game, char *line, t_color *color);
-int		ft_alldigit(char *str);
-void	ft_free_split(char **array);
 //parsing_utils.c
 char	*ft_strtrim_spaces(char *line);
 int		ft_arraylen(char **array);
 int		ft_is_all_spaces(char *line);
-//init_game.c
-int		key_hook(int key, t_game *game);
-void	init_game(t_game *game);
-int     mouse_move(int x, int y, t_game *game);
+//validate_map.c
+void	pad_map_to_rectangle(t_game *game);
+void	validate_map(t_game *game);
+int		validate_borders(t_map *map);
+//move
+//keys.c
+int     key_press(int key, t_game *game);
+int     key_release(int key, t_game *game);
 //player_move.c
 void	handle_movement(t_game *game);
 void	player_direction(t_player *player, int key);
 void	player_move(t_player *player, t_map *map, int key);
 void	player_strafe(t_player *player, t_map *map, int key);
 int		check_collision(t_map *map, float x, float y);
-//keys.c
-int     key_press(int key, t_game *game);
-int     key_release(int key, t_game *game);
+//ray_casting
 //rc_fov.c
 void	draw_ray_line(t_game *game, t_player *player, int x_width, float x);
 void	draw_fov(t_game *game, t_player *player);
@@ -100,5 +87,23 @@ void	draw_wall(t_game *game, int x_width, float x, float y, float ang);
 int     draw_check_collision(t_game *game, int x_width, float x, float y, float ang);
 float	distance(float x1, float y1, float x2, float y2);
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
+//free_engine.c
+void	free_engine_images(t_engine *engine, void *mlx_ptr);
+void	free_engine_texture(t_engine *engine);
+void	handle_error(t_game *game, const char *error_message);
+//free.c
+int		free_game(t_game *game);
+void	free_mini(t_mini *mini, void *mlx_ptr);
+void	free_map(t_map *map);
+//init_game.c
+int		key_hook(int key, t_game *game);
+void	init_game(t_game *game);
+int     mouse_move(int x, int y, t_game *game);
+//initialize.c
+void	initialize_game(t_game **game);
+void	initialize_player(t_game *game);
+void	initialize_engine(t_game *game);
+void	initialize_mini(t_game *game);
+void	initialize_config(t_game *game);
 
 #endif

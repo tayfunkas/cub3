@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/13 18:47:09 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/25 18:58:26 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,15 @@ void	initialize_game(t_game **game)
 	initialize_mini(*game);
 }
 
+static	void	initialize_textures(t_game *game)
+{
+	game->engine->frame->img = NULL;
+	game->engine->no_texture = NULL;
+	game->engine->so_texture = NULL;
+	game->engine->we_texture = NULL;
+	game->engine->ea_texture = NULL;
+}
+
 void	initialize_engine(t_game *game)
 {
 	game->engine = malloc(sizeof(t_engine));
@@ -47,11 +56,7 @@ void	initialize_engine(t_game *game)
 		return ;
 	game->engine->ang_step = 0;
 	game->engine->frame = malloc(sizeof(t_img)); 
-	game->engine->frame->img = NULL;
-	game->engine->no_texture = NULL;
-	game->engine->so_texture = NULL;
-	game->engine->we_texture = NULL;
-	game->engine->ea_texture = NULL;
+	initialize_textures(game);
 	game->engine->no_img = malloc(sizeof(t_img));
 	if (!game->engine->no_img)
 		return ;
@@ -89,7 +94,7 @@ void	get_player_init_position(t_map *map, t_player *player)
 	if (!map || !map->data)
 	{
 		printf("Map does not exist\n");
-		return;
+		return ;
 	}
 	x = 0;
 	while (map->data[x])

@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/04/03 17:31:39 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/25 18:56:34 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ void	init_game(t_game *game)
 	if (!game->mlx_ptr)
 		handle_error(game, "Failed to initialize MLX");
 	game->mlx_window = mlx_new_window(game->mlx_ptr, WIN_W, 
-		WIN_H, "cub3D");
+			WIN_H, "cub3D");
 	game->engine->frame->img = mlx_new_image(game->mlx_ptr, WIN_W, WIN_H);
-	game->engine->frame->addr = mlx_get_data_addr(game->engine->frame->img, &game->engine->frame->bpp, 
-		&game->engine->frame->line_length, &game->engine->frame->endian);
+	game->engine->frame->addr = mlx_get_data_addr(game->engine->frame->img, 
+			&game->engine->frame->bpp, &game->engine->frame->line_length, 
+			&game->engine->frame->endian);
 	if (!game->engine->frame->img || !game->engine->frame->addr)
 		handle_error(game, "Failed to create or retrieve image data");
 	load_img(game);
@@ -39,7 +40,8 @@ void	init_game(t_game *game)
 
 void	clear_image(t_game *game, int color)
 {
-	int	x, y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < WIN_H)
