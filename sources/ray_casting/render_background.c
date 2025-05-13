@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_background.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 16:17:44 by grial             #+#    #+#             */
-/*   Updated: 2025/04/07 17:25:46 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/07 17:52:43 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	render_background(t_game *game)
 		{
 			if (y < WIN_H / 2)
 				my_mlx_pixel_put(game, x, y, game->engine->ceiling_color->color);
-			if (y >= WIN_H / 2)  // Cambié x por y
+			if (y >= WIN_H / 2)
 				my_mlx_pixel_put(game, x, y, game->engine->floor_color->color);
 			x++;
 		}
