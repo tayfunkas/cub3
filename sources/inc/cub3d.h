@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/07 17:20:44 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/13 16:05:19 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 //# define M_PI 3.14159265358979323846
 # define WIN_W 1280
 # define WIN_H 720
-# define MIN_S 8
+# define MIN_S 20
 # define BLOCK 64
 # define STEP 0.07
 # define FOV 60

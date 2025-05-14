@@ -6,7 +6,7 @@
 /*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:54 by grial             #+#    #+#             */
-/*   Updated: 2025/05/13 14:31:45 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/05/13 16:19:46 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # define BACKWARD 1
 # define LEFT 2
 # define RIGHT 0
-# define TURN_L 65361
-# define TURN_R 65363
+# define TURN_L 123
+# define TURN_R 124
 # define MAX_KEYCODE 70000
 
 #endif

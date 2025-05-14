@@ -6,7 +6,7 @@
 /*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/05/07 18:23:22 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/05/13 16:21:29 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	load_img(t_game *game);
 void	*hook_img(t_game *game, char c);
 int		render(t_game *game);
+void	raycasting(t_game *game);
 
 void	init_game(t_game *game)
 {
@@ -84,17 +85,19 @@ void draw_minimap(t_game *game)
 
 void draw_miniplayer(t_game *game)
 {
-	int center_x = (int)(game->player->pos_y * MIN_S);
-	int center_y = (int)(game->player->pos_x * MIN_S);
-	int color = 0xFF0000; // rojo
+    int center_x = (int)(game->player->pos_y * MIN_S);
+    int center_y = (int)(game->player->pos_x * MIN_S);
+    int color = 0xFF0000; // Rojo para el jugador
+    int size = 8; // Tamaño del jugador (8x8 píxeles)
 
-	for (int y = -2 / 2; y < 2 / 2; y++)
-	{
-		for (int x = -2 / 2; x < 2 / 2; x++)
-		{
-			my_mlx_pixel_put(game, center_x + x, center_y + y, color);
-		}
-	}
+    // Dibujamos un cuadrado de 8x8 alrededor de la posición del jugador
+    for (int y = center_y - size / 2; y < center_y + size / 2; y++)
+    {
+        for (int x = center_x - size / 2; x < center_x + size / 2; x++)
+        {
+            my_mlx_pixel_put(game, x, y, color);
+        }
+    }
 }
 
 
@@ -106,8 +109,9 @@ int	render(t_game *game)
 	mlx_clear_window(game->mlx_ptr, game->mlx_window);
 	draw_minimap(game);
 	draw_miniplayer(game);
+	raycasting(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player, game->player->pos_y * MIN_S, game->player->pos_x * MIN_S);
-	draw_fov(game, game->player);
+	//draw_fov(game, game->player);
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->engine->frame->img, 0, 0);
 	return (1);
 }
@@ -202,7 +206,8 @@ void	load_img(t_game *game)
 int	mouse_move(int x, int y, t_game *game)
 {
 	static int	last_x = -1;
-	int	delta_x;
+	int			delta_x;
+	double		rotation_speed;
 
 	(void)y;
 	if (last_x == -1)
@@ -211,14 +216,36 @@ int	mouse_move(int x, int y, t_game *game)
 		return (0);
 	}
 	delta_x = x - last_x;
-	if(delta_x != 0)
+	if (delta_x != 0)
 	{
-		game->player->dir -= delta_x * 0.5;
+		rotation_speed = 0.003;
+		game->player->dir -= delta_x * rotation_speed;
 		if (game->player->dir < 0)
-			game->player->dir += 360;
-		if (game->player->dir >= 360)
-			game->player->dir -= 360;
+			game->player->dir += 2 * M_PI;
+		else if (game->player->dir >= 2 * M_PI)
+			game->player->dir -= 2 * M_PI;
+
 		last_x = x;
 	}
 	return (0);
+}
+
+void raycasting(t_game *game)
+{
+    double i;
+    int color;
+    double dx, dy;
+    double angle = game->player->dir; // Suponiendo que tenés esto
+    int start_x = (int)(game->player->pos_y * MIN_S);
+    int start_y = (int)(game->player->pos_x * MIN_S);
+
+    i = 0;
+    while (i < 50) // Línea más larga
+    {
+        dx = cos(angle) * i;
+        dy = -sin(angle) * i;
+        color = 0xFF0F0F;
+        my_mlx_pixel_put(game, start_x + (int)dx, start_y + (int)dy, color);
+        i += 1;
+    }
 }
