@@ -6,7 +6,7 @@
 /*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/05/16 13:32:18 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/05/16 15:12:30 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ void	player_strafe(t_player *player, t_map *map, int key)
 		angle = player->dir - M_PI_2; // -90° en radianes para moverse a la izquierda
 
 	// Calcular los desplazamientos en X y Y
-	dy = cos(angle) * STEP;
-	dx = -sin(angle) * STEP; // El signo negativo es necesario para ajustarse a la dirección correcta
+	dx = cos(angle) * STEP;
+	dy = -sin(angle) * STEP; // El signo negativo es necesario para ajustarse a la dirección correcta
 
 	// Calcular la nueva posición
 	new_x = player->pos_x + dx;

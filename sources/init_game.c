@@ -6,7 +6,7 @@
 /*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/05/16 13:26:03 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/05/16 14:50:01 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,7 +238,7 @@ void raycasting(t_game *game)
 	int start_y = (int)(game->player->pos_y * MIN_S);
 
 	i = 0;
-	while (i < 20) // hasta chocar con pared (solo para debug visual)
+	while (i < 50) // hasta chocar con pared (solo para debug visual)
 	{
 		dx = cos(angle) * i;
 		dy = -sin(angle) * i;
@@ -249,46 +249,49 @@ void raycasting(t_game *game)
 	check_wall(game);
 }
 
-void check_wall(t_game *game)
+void	check_wall(t_game *game)
 {
-	float rx;
-	float ry;
-	float aTan;
-	float xo;
-	float yo;
-	int mx;
-	int my;
-	int dof = 0;
+	float	rx, ry;
+	float	aTan;
+	float	xo, yo;
+	int		mx, my;
+	int		dof = 0;
+	int		max_dof = 50; // puedes ajustar esto según el tamaño del mapa
 
-	aTan = -1 / tan(game->player->dir);
+	t_player *p = game->player;
+	t_map *map = game->map;
 
-	if (game->player->dir > M_PI) // mirando hacia arriba
+	aTan = -1 / tan(p->dir);
+
+	if (p->dir > M_PI) // mirando hacia arriba
 	{
-		ry = (((int)game->player->pos_y / BLOCK) * BLOCK) - 0.0001;
-		rx = (game->player->pos_y - ry) * aTan + game->player->pos_x;
+		ry = ((int)(p->pos_y / BLOCK)) * BLOCK - 0.0001;
+		rx = (p->pos_y - ry) * aTan + p->pos_x;
 		yo = -BLOCK;
-		xo = yo * aTan;
+		xo = -yo * aTan;
 	}
-	else if (game->player->dir < M_PI) // mirando hacia abajo
+	else if (p->dir < M_PI) // mirando hacia abajo
 	{
-		ry = (((int)game->player->pos_y / BLOCK) * BLOCK) + BLOCK;
-		rx = (game->player->pos_y - ry) * aTan + game->player->pos_x;
+		ry = ((int)(p->pos_y / BLOCK)) * BLOCK + BLOCK;
+		rx = (p->pos_y - ry) * aTan + p->pos_x;
 		yo = BLOCK;
 		xo = -yo * aTan;
 	}
-	else // mirando horizontalmente exacto
+	else // mirando horizontal exacto
 	{
-		rx = game->player->pos_x;
-		ry = game->player->pos_y;
-		dof = 8;
+		rx = p->pos_x;
+		ry = p->pos_y;
+		dof = max_dof;
 	}
 
-	while (dof < 8)
+	while (dof < max_dof)
 	{
 		mx = (int)(rx) / BLOCK;
 		my = (int)(ry) / BLOCK;
 
-		if (mx >= 0 && my >= 0 && game->map->data[my][mx] == 1)
+		if (my >= 0 && my < map->m_height &&
+			mx >= 0 && mx < (int)ft_strlen(map->data[my]) &&
+			map->data[my][mx] == '1')
 		{
 			break; // pared encontrada
 		}
@@ -299,8 +302,14 @@ void check_wall(t_game *game)
 			dof++;
 		}
 	}
-	//draw_line(game, game->player->pos_x, game->player->pos_y, rx, ry, 0xFF0000);
+	draw_line(game,
+		p->pos_x * BLOCK,
+		p->pos_y * BLOCK,
+		rx * BLOCK,
+		ry * BLOCK,
+		0xFF0000);
 }
+
 
 void draw_line(t_game *game, float x0, float y0, float x1, float y1, int color)
 {
