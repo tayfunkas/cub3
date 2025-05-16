@@ -6,7 +6,7 @@
 /*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/05/13 16:17:17 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/05/16 13:32:18 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	player_move(t_player *player, t_map *map, int key)
 
 	new_x = 0.0;
 	new_y = 0.0;
-	dy = cos(player->dir) * STEP;
-	dx = -sin(player->dir) * STEP;
+	dx = cos(player->dir) * STEP;
+	dy = -sin(player->dir) * STEP;
 	if (key == FORWARD)
 	{
 		new_x = player->pos_x + dx;
@@ -116,12 +116,11 @@ int	check_collision(t_map *map, float x, float y)
 
 	new_x = (int) floorf(x);
 	new_y = (int) floorf(y);
-	if (new_x < 0 || new_y < 0 ||
-		new_x >= map->m_height ||
-		new_y >= (int)ft_strlen(map->data[new_x]) || 
-		!map->data[new_x])
-		return (0); 
-	if (map->data[new_x][new_y] != '1')
+	if (new_y < 0 || new_y >= map->m_height ||
+		new_x < 0 || new_x >= (int)ft_strlen(map->data[new_y]) || 
+		!map->data[new_y])
+		return (0);
+	if (map->data[new_y][new_x] != '1')
 		return (1);
-	return (0);
+	return (0);	
 }

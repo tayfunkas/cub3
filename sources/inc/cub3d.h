@@ -6,7 +6,7 @@
 /*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/13 16:05:19 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/05/14 14:36:01 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define WIN_W 1280
 # define WIN_H 720
 # define MIN_S 20
-# define BLOCK 64
+# define BLOCK 20
 # define STEP 0.07
 # define FOV 60
 

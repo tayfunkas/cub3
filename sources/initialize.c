@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/14 16:06:37 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/16 13:20:52 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ void	get_player_init_position(t_map *map, t_player *player)
 		{
 			if (is_player(map->data[x][y]))
 			{
-				player->pos_x = x;
-				player->pos_y = y;
+				player->pos_x = y;
+				player->pos_y = x;
 				player->player_count++;
 			}
 			y++;
