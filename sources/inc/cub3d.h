@@ -6,7 +6,7 @@
 /*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/14 14:36:01 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/05/16 15:26:26 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-//# define M_PI 3.14159265358979323846
+# define M_PIC 3.14159265358979323846
 # define WIN_W 1280
 # define WIN_H 720
 # define MIN_S 20

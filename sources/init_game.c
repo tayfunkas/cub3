@@ -6,7 +6,7 @@
 /*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/05/16 14:50:01 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/05/16 16:52:58 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,8 +234,8 @@ void raycasting(t_game *game)
 	int color;
 	double dx, dy;
 	double angle = game->player->dir;
-	int start_x = (int)(game->player->pos_x * MIN_S);
-	int start_y = (int)(game->player->pos_y * MIN_S);
+	int start_x = (int)(game->player->pos_x * BLOCK);
+	int start_y = (int)(game->player->pos_y * BLOCK);
 
 	i = 0;
 	while (i < 50) // hasta chocar con pared (solo para debug visual)
@@ -249,65 +249,67 @@ void raycasting(t_game *game)
 	check_wall(game);
 }
 
-void	check_wall(t_game *game)
+void check_wall(t_game *game)
 {
-	float	rx, ry;
-	float	aTan;
-	float	xo, yo;
-	int		mx, my;
-	int		dof = 0;
-	int		max_dof = 50; // puedes ajustar esto según el tamaño del mapa
+    float rx, ry;    // punto de intersección candidato (en unidades mapa)
+    float aTan;      // inversa de la tangente del ángulo (para cálculo horizontal)
+    float xo, yo;    // offset en unidades mapa para avanzar el rayo
+    int mx, my;      // indices del mapa (celda) para comprobar pared
+    int dof = 0;     // depth of field, cuántos pasos llevamos
+    int max_dof = 8; // límite de pasos, ajustable según tamaño mapa
 
-	t_player *p = game->player;
-	t_map *map = game->map;
+    t_player *p = game->player;
+    t_map *map = game->map;
 
-	aTan = -1 / tan(p->dir);
+    aTan = 1 / tan(p->dir);
 
-	if (p->dir > M_PI) // mirando hacia arriba
-	{
-		ry = ((int)(p->pos_y / BLOCK)) * BLOCK - 0.0001;
-		rx = (p->pos_y - ry) * aTan + p->pos_x;
-		yo = -BLOCK;
-		xo = -yo * aTan;
-	}
-	else if (p->dir < M_PI) // mirando hacia abajo
-	{
-		ry = ((int)(p->pos_y / BLOCK)) * BLOCK + BLOCK;
-		rx = (p->pos_y - ry) * aTan + p->pos_x;
-		yo = BLOCK;
-		xo = -yo * aTan;
-	}
-	else // mirando horizontal exacto
-	{
-		rx = p->pos_x;
-		ry = p->pos_y;
-		dof = max_dof;
-	}
+    if (p->dir > M_PI) // mirando hacia arriba
+    {
+        ry = (int)(p->pos_y); // fila actual del jugador
+        ry -= 0.0001f;        // para evitar problemas con borde
+        rx = p->pos_x + (p->pos_y - ry) * aTan;
+        yo = -1;              // subimos una fila en el mapa
+        xo = -yo * aTan;      // cambio horizontal correspondiente
+    }
+    else if (p->dir < M_PI) // mirando hacia abajo
+    {
+        ry = (int)(p->pos_y) + 1; // fila siguiente hacia abajo
+        rx = p->pos_x + (p->pos_y - ry) * aTan;
+        yo = 1;               // bajamos una fila en el mapa
+        xo = -yo * aTan;      // cambio horizontal correspondiente
+    }
+    else // dirección exacta horizontal (0 o PI)
+    {
+        rx = p->pos_x;
+        ry = p->pos_y;
+        dof = max_dof; // no avanzamos
+    }
 
-	while (dof < max_dof)
-	{
-		mx = (int)(rx) / BLOCK;
-		my = (int)(ry) / BLOCK;
+    while (dof < max_dof)
+    {
+        mx = (int)(rx);
+        my = (int)(ry);
 
-		if (my >= 0 && my < map->m_height &&
-			mx >= 0 && mx < (int)ft_strlen(map->data[my]) &&
-			map->data[my][mx] == '1')
-		{
-			break; // pared encontrada
-		}
-		else
-		{
-			rx += xo;
-			ry += yo;
-			dof++;
-		}
-	}
-	draw_line(game,
-		p->pos_x * BLOCK,
-		p->pos_y * BLOCK,
-		rx * BLOCK,
-		ry * BLOCK,
-		0xFF0000);
+        if (my >= 0 && my < map->m_height &&
+            mx >= 0 && mx < (int)ft_strlen(map->data[my]) &&
+            map->data[my][mx] == '1')
+        {
+            // Pared encontrada, dibujamos la línea en pixeles:
+            draw_line(game,
+                p->pos_x * BLOCK,
+                p->pos_y * BLOCK,
+                rx * BLOCK,
+                ry * BLOCK,
+                0xFF0000);
+            break;
+        }
+        else
+        {
+            rx += xo;
+            ry += yo;
+            dof++;
+        }
+    }
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/05/13 15:18:38 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/05/16 15:26:53 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_map
 typedef struct s_player
 {
 	int		player_count;
-	float	dir;
+	double	dir;
 	float	pos_x;
 	float	pos_y;
 }	t_player;
