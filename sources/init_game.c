@@ -6,7 +6,7 @@
 /*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/05/16 16:52:58 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/05/17 23:43:00 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,38 +251,48 @@ void raycasting(t_game *game)
 
 void check_wall(t_game *game)
 {
-    float rx, ry;    // punto de intersección candidato (en unidades mapa)
-    float aTan;      // inversa de la tangente del ángulo (para cálculo horizontal)
-    float xo, yo;    // offset en unidades mapa para avanzar el rayo
-    int mx, my;      // indices del mapa (celda) para comprobar pared
-    int dof = 0;     // depth of field, cuántos pasos llevamos
-    int max_dof = 8; // límite de pasos, ajustable según tamaño mapa
+    float rx, ry;
+    float aTan;
+    float xo, yo;
+    int mx, my;
+    int dof = 0;
+    int max_dof = 8;
 
     t_player *p = game->player;
     t_map *map = game->map;
 
-    aTan = 1 / tan(p->dir);
+    // Calcular dirección opuesta
+    float ray_angle = p->dir + M_PI;
+    if (ray_angle >= 2 * M_PI)
+        ray_angle -= 2 * M_PI;
 
-    if (p->dir > M_PI) // mirando hacia arriba
+    // Calcular aTan con protección
+    if (tan(ray_angle) == 0)
+        aTan = 999999;
+    else
+        aTan = 1 / tan(ray_angle);
+
+    if (ray_angle > M_PI) // rayo apunta hacia arriba
     {
-        ry = (int)(p->pos_y); // fila actual del jugador
-        ry -= 0.0001f;        // para evitar problemas con borde
+        ry = (int)(p->pos_y);
+        ry -= 0.0001f;
         rx = p->pos_x + (p->pos_y - ry) * aTan;
-        yo = -1;              // subimos una fila en el mapa
-        xo = -yo * aTan;      // cambio horizontal correspondiente
+        yo = -1;
+        xo = -yo * aTan;
     }
-    else if (p->dir < M_PI) // mirando hacia abajo
+    else if (ray_angle < M_PI) // rayo apunta hacia abajo
     {
-        ry = (int)(p->pos_y) + 1; // fila siguiente hacia abajo
-        rx = p->pos_x + (p->pos_y - ry) * aTan;
-        yo = 1;               // bajamos una fila en el mapa
-        xo = -yo * aTan;      // cambio horizontal correspondiente
+        ry = (int)(p->pos_y);
+		//ry += 0.0001f;
+        rx = p->pos_x + (ry - p->pos_y) * aTan;
+        yo = 1;
+        xo = -yo * aTan;
     }
-    else // dirección exacta horizontal (0 o PI)
+    else // mirando horizontal exacto
     {
         rx = p->pos_x;
         ry = p->pos_y;
-        dof = max_dof; // no avanzamos
+        dof = max_dof;
     }
 
     while (dof < max_dof)
@@ -294,13 +304,12 @@ void check_wall(t_game *game)
             mx >= 0 && mx < (int)ft_strlen(map->data[my]) &&
             map->data[my][mx] == '1')
         {
-            // Pared encontrada, dibujamos la línea en pixeles:
             draw_line(game,
                 p->pos_x * BLOCK,
                 p->pos_y * BLOCK,
                 rx * BLOCK,
                 ry * BLOCK,
-                0xFF0000);
+                0x00FF00); // verde para distinguir
             break;
         }
         else
@@ -311,6 +320,7 @@ void check_wall(t_game *game)
         }
     }
 }
+
 
 
 void draw_line(t_game *game, float x0, float y0, float x1, float y1, int color)
