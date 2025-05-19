@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/16 15:26:26 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/05/19 16:19:05 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 # include "../minilibx-mac/mlx.h"
 # include "cub3d_keys.h"
 # include "cub3d_struct.h"
-//# include <X11/X.h>
-//# include <X11/keysym.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
-# define M_PIC 3.14159265358979323846
+# define M_PI 3.14159265358979323846
 # define WIN_W 1280
 # define WIN_H 720
 # define MIN_S 20

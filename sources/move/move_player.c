@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/05/16 15:12:30 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/05/19 17:23:23 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,34 @@ void	handle_movement(t_game *game)
 void	player_direction(t_player *player, int key)
 {
 	if (key == TURN_R)
-		player->dir -= 0.05;
+		player->dir -= 3; // 3 grados por paso, podés ajustar la sensibilidad
 	else if (key == TURN_L)
-		player->dir += 0.05;
+		player->dir += 3;
+
 	if (player->dir < 0)
-		player->dir += 2 * M_PI;
-	else if (player->dir >= 2 * M_PI)
-		player->dir -= 2 * M_PI;
-	printf("D: %f\n", player->dir);
+		player->dir = 359;
+	else if (player->dir > 359)
+		player->dir = 0;
+
+	printf("D: %f°\n", player->dir);
 }
 
 void	player_move(t_player *player, t_map *map, int key)
 {
+	double	angle;
 	double	dx;
 	double	dy;
 	double	new_x;
 	double	new_y;
 
-	new_x = 0.0;
-	new_y = 0.0;
-	dx = cos(player->dir) * STEP;
-	dy = -sin(player->dir) * STEP;
+	new_x = 0;
+	new_y = 0;
+	
+	
+	angle = player->dir * M_PI / 180.0;
+	dx = cos(angle) * STEP;
+	dy = -sin(angle) * STEP;
+
 	if (key == FORWARD)
 	{
 		new_x = player->pos_x + dx;
@@ -84,30 +91,23 @@ void	player_strafe(t_player *player, t_map *map, int key)
 	double	new_x;
 	double	new_y;
 
-	angle = 0.0;
-	// Calcular el ángulo de movimiento lateral en función de la dirección del jugador
+	angle = 0;
 	if (key == RIGHT)
-		angle = player->dir + M_PI_2; // 90° en radianes para moverse a la derecha
+		angle = (player->dir + 90.0) * M_PI / 180.0;
 	else if (key == LEFT)
-		angle = player->dir - M_PI_2; // -90° en radianes para moverse a la izquierda
+		angle = (player->dir - 90.0) * M_PI / 180.0;
 
-	// Calcular los desplazamientos en X y Y
 	dx = cos(angle) * STEP;
-	dy = -sin(angle) * STEP; // El signo negativo es necesario para ajustarse a la dirección correcta
+	dy = sin(angle) * STEP;
 
-	// Calcular la nueva posición
 	new_x = player->pos_x + dx;
 	new_y = player->pos_y + dy;
-
-	// Verificar colisiones antes de actualizar la posición
 	if (check_collision(map, new_x, new_y))
 	{
 		player->pos_x = new_x;
 		player->pos_y = new_y;
 	}
 }
-
-
 
 int	check_collision(t_map *map, float x, float y)
 {
@@ -116,11 +116,7 @@ int	check_collision(t_map *map, float x, float y)
 
 	new_x = (int) floorf(x);
 	new_y = (int) floorf(y);
-	if (new_y < 0 || new_y >= map->m_height ||
-		new_x < 0 || new_x >= (int)ft_strlen(map->data[new_y]) || 
-		!map->data[new_y])
-		return (0);
 	if (map->data[new_y][new_x] != '1')
 		return (1);
-	return (0);	
+	return (0);
 }
