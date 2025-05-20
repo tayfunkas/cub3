@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/19 16:19:05 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/20 18:00:07 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,25 @@ int		key_release(int key, t_game *game);
 void	draw_ray_line(t_game *game, t_player *player, int x_width, float x);
 void	draw_fov(t_game *game, t_player *player);
 void	draw_wall(t_game *game, int x_width, float x, float y, float ang);
-int		draw_check_collision(t_game *game, int x_width, float x, float y, float ang);
+int		draw_check_collision(t_game *game, int x_width, float x, float y,
+			float ang);
 float	distance(float x1, float y1, float x2, float y2);
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 // render_background.c
 void	render_background(t_game *game);
+
+//	check_wall.c
+void	check_wall(t_game *game, t_map *map, t_ray *ray);
+void	vertical_values(t_game *game, t_ray *ray);
+void	horizontal_values(t_game *game, t_ray *ray);
+void	ray_dist(t_game *game, t_map *map, t_ray *ray);
+
+//  raycasting.c
+void	raycasting(t_game *game, t_ray *ray);
+void	ray_ang(t_ray *ray, int p_ang, int i);
+
+//  raycasting_utils.c
+double	to_rad(double ang);
+void	ray_ang(t_ray *ray, int p_ang, int i);
 
 #endif

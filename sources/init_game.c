@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/05/19 19:01:31 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/20 18:08:10 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
 			int color);
-void	check_wall(t_game *game);
 void	load_img(t_game *game);
 void	*hook_img(t_game *game, char c);
 int		render(t_game *game);
-void	raycasting(t_game *game);
+//void	raycasting(t_game *game);
 
 void	init_game(t_game *game)
 {
@@ -113,7 +112,7 @@ int	render(t_game *game)
 	mlx_clear_window(game->mlx_ptr, game->mlx_window);
 	draw_minimap(game);
 	draw_miniplayer(game);
-	raycasting(game);
+	raycasting(game, game->engine->ray);
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player,
 		game->player->pos_y * MIN_S, game->player->pos_x * MIN_S);
 	// draw_fov(game, game->player);
@@ -231,95 +230,126 @@ int	mouse_move(int x, int y, t_game *game)
 	return (0);
 }
 
-double	to_rad(double ang)
-{
-	double	rad;
 
-	rad = ang * (M_PI / 180.0);
-	return (rad);
-}
+//void	raycasting(t_game *game)
+//{
+//	int	i;
+//	int	color;
+//	int	start_x;
+//	int	start_y;
+//
+//	double dx, dy;
+//	start_x = (int)(game->player->pos_x * BLOCK);
+//	start_y = (int)(game->player->pos_y * BLOCK);
+//	i = 0;
+//	while (i < 50) // hasta chocar con pared (solo para debug visual)
+//	{
+//		dx = cos(to_rad(game->player->dir)) * i;
+//		dy = -sin(to_rad(game->player->dir)) * i;
+//		color = 0xFF0F0F;
+//		my_mlx_pixel_put(game, start_x + (int)dx, start_y + (int)dy, color);
+//		i += 1;
+//	}
+//	check_wall(game);
+//}
 
-void	raycasting(t_game *game)
-{
-	int	i;
-	int	color;
-	int	start_x;
-	int	start_y;
-
-	double dx, dy;
-	start_x = (int)(game->player->pos_x * BLOCK);
-	start_y = (int)(game->player->pos_y * BLOCK);
-	i = 0;
-	while (i < 50) // hasta chocar con pared (solo para debug visual)
-	{
-		dx = cos(to_rad(game->player->dir)) * i;
-		dy = -sin(to_rad(game->player->dir)) * i;
-		color = 0xFF0F0F;
-		my_mlx_pixel_put(game, start_x + (int)dx, start_y + (int)dy, color);
-		i += 1;
-	}
-	check_wall(game);
-}
-
-void	check_wall(t_game *game)
-{
-	double		aTan;
-	int			dof;
-	int			max_dof;
-	t_map		*map;
-
-	float rx, ry;
-	float xo, yo;
-	int mx, my;
-	dof = 0;
-	max_dof = 8;
-	map = game->map;
-	
-	aTan = 1.0 / tan(to_rad(game->player->dir));
-	if (game->player->dir > 180.0)
-	{
-		printf("hola\n");
-		ry = floor(game->player->pos_y) + 1;
-		printf("player_pos : %f\n", ry);
-		rx= (game->player->pos_y - ry) * aTan + game->player->pos_x;
-		printf("player_pos : %f\n", rx);
-		yo = 1;
-		xo = -yo * aTan;
-		printf(" incremento; %f, %f\n", xo, yo);
-	}
-	else if (game->player->dir < 180.0)
-	{
-		ry = floor(game->player->pos_y) + 0.0001;
-		printf("player_pos : %f\n", ry);
-		rx= (game->player->pos_y - ry) * aTan + game->player->pos_x;
-		printf("player_pos : %f\n", rx);
-		yo = -1;
-		xo = -yo * aTan;
-		printf(" dincremento; %f, %f\n", xo, yo);
-	}
-	else if (game->player->dir == 0 || game->player->dir == 180)
-		return ;
-	while (dof < max_dof)
-	{
-		mx = (int)(rx);
-		my = (int)(ry);
-		if (my >= 0 && my < map->m_height && mx >= 0
-			&& mx < (int)ft_strlen(map->data[my]) && map->data[my][mx] == '1')
-		{
-			printf("hit : %i : %i\n", my, mx);
-			draw_line(game, game->player->pos_x * BLOCK, game->player->pos_y * BLOCK, rx * BLOCK, ry
-				* BLOCK,
-						0x00FF00); // verde para distinguir
-			break ;
-		}
-		else
-		{
-			rx += xo;
-			ry += yo;
-			dof++;
-		}
-	}
-}
+//void	check_wall(t_game *game)
+//{
+//	double	aTan;
+//	int		dof;
+//	int		max_dof;
+//	t_map	*map;
+//	double	dist_v = 0.0;
+//	double	dist_h = 0.0;
+//
+//	float	rx = 0.0; 
+//	float	ry = 0.0;
+//	float xo, yo = 0.0;
+//	int mx, my = 0;
+//	dof = 0;
+//	max_dof = 50;
+//	map = game->map;
+//	aTan = 1.0 / tan(to_rad(game->player->dir));
+//	
+//	// HORIZONTAL
+//	if (game->player->dir > 180.0)
+//	{
+//		ry = floor(game->player->pos_y) + 1;
+//		rx = (game->player->pos_y - ry) * aTan + game->player->pos_x;
+//		yo = 1;
+//		xo = -yo * aTan;
+//	}
+//	else if (game->player->dir < 180.0)
+//	{
+//		ry = floor(game->player->pos_y) + 0.0001;
+//		rx = (game->player->pos_y - ry) * aTan + game->player->pos_x;
+//		yo = -1;
+//		xo = -yo * aTan;
+//	}
+//	else if (game->player->dir == 0 || game->player->dir == 180)
+//		return ;
+//	while (dof < max_dof)
+//	{
+//		mx = (int)(rx);
+//		my = (int)(ry);
+//		if (my >= 0 && my < map->m_height && mx >= 0
+//			&& mx < (int)ft_strlen(map->data[my]) && map->data[my][mx] == '1')
+//		{
+//			dist_h = sqrt((rx - game->player->pos_x) * (rx - game->player->pos_x)
+//				+ (ry - game->player->pos_y) * (ry - game->player->pos_y));
+//			//draw_line(game, game->player->pos_x * BLOCK, game->player->pos_y
+//			//	* BLOCK, rx * BLOCK, ry * BLOCK, 0x00FF00);
+//			break ;
+//		}
+//		else
+//		{
+//			rx += xo;
+//			ry += yo;
+//			dof++;
+//		}
+//	}
+//	
+//	// VERTICAL
+//	dof = 0;
+//	aTan = tan(to_rad(game->player->dir));
+//	if (game->player->dir < 90 || game->player->dir > 270)
+//	{
+//		rx = ((int)game->player->pos_x) + 1;
+//		ry = (game->player->pos_x - rx) * aTan + game->player->pos_y;
+//		xo = 1;
+//		yo = -xo * aTan;
+//	}
+//	else if (game->player->dir > 90 && game->player->dir < 270)
+//	{
+//		printf("hola2\n");
+//		rx = ((int)game->player->pos_x) - 1;
+//		ry = (game->player->pos_x - rx) * aTan + game->player->pos_y;
+//		xo = -1;
+//		yo = -xo * aTan;
+//	}
+//	while (dof < max_dof)
+//	{
+//		mx = (int)(rx);
+//		my = (int)(ry);
+//		if (my >= 0 && my < map->m_height && mx >= 0
+//			&& mx < (int)ft_strlen(map->data[my]) && map->data[my][mx] == '1')
+//		{
+//			printf("hit : %i : %i\n", my, mx);
+//			dist_v = sqrt((rx - game->player->pos_x) * (rx - game->player->pos_x)
+//				+ (ry - game->player->pos_y) * (ry - game->player->pos_y));
+//			printf("dv: %f\n", dist_v);
+//			//draw_line(game, game->player->pos_x * BLOCK, game->player->pos_y
+//			//	* BLOCK, rx * BLOCK, ry * BLOCK, 0x00FF00);
+//			break ;
+//		}
+//		else
+//		{
+//			rx += xo;
+//			ry += yo;
+//			dof++;
+//		}
+//	}
+//}
 
 void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
 		int color)

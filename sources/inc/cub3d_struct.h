@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/05/19 17:07:13 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/20 18:07:17 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,18 @@ typedef struct s_color
 	int	color;
 }	t_color;
 
-typedef struct s_cam
+typedef struct s_ray
 {
-	float	x;
+	int		ray;
+	int		ray_a;
+	double	ray_t;
 	double	ray_x;
 	double	ray_y;
 	double	delta_x;
 	double	delta_y;
-	
-}	t_cam;
+	double	dist_h;
+	double	dist_v;
+}	t_ray;
 
 typedef struct s_img
 {
@@ -44,7 +47,7 @@ typedef struct s_img
 typedef struct s_engine 
 {
 	t_img	*frame;
-	t_cam	*cam;
+	t_ray	*ray;
 	float	fov;
 	float	ang_step;
 	t_img	*no_img;
@@ -73,6 +76,7 @@ typedef struct s_map
 	int		m_width;
 	char	**data;
 	int		line_count;
+	int		max_size;
 }	t_map;
 
 typedef struct s_player
@@ -82,14 +86,6 @@ typedef struct s_player
 	float	pos_x;
 	float	pos_y;
 }	t_player;
-
-typedef struct s_ray
-{
-	double	ray_angle;
-	double	wall_distance;
-	int		hit_x;
-	int		hit_y;
-}	t_ray;
 
 typedef struct s_config
 {
@@ -111,7 +107,7 @@ typedef struct s_game
 	t_engine	*engine;
 	t_map		*map;
 	t_player	*player;
-	t_ray		*rays;
+	t_ray		*ray;
 	t_mini		*mini;
 }	t_game;
 

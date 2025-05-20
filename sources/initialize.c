@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/16 13:20:52 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/05/20 18:07:50 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	initialize_engine(t_game *game)
 	game->engine->ceiling_color->g = -1;
 	game->engine->ceiling_color->b = -1;
 
-	game->engine->cam = malloc(sizeof(t_cam));
-	if (!game->engine->cam)
+	game->engine->ray = malloc(sizeof(t_ray));
+	if (!game->engine->ray)
 		return;
 
 	game->engine->fov = M_PI / 3;

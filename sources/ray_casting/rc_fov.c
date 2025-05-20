@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rc_fov.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:55:33 by grial             #+#    #+#             */
-/*   Updated: 2025/05/07 18:09:32 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/05/20 18:02:47 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,69 +99,6 @@ void draw_fov(t_game *game, t_player *player)
 //	}
 // }
 
-void perform_dda(t_game *game, t_ray *ray, t_player *player)
-{
-	int map_x = (int)player->pos_x;
-	int map_y = (int)player->pos_y;
-
-	double side_dist_x;
-	double side_dist_y;
-
-	double delta_dist_x = fabs(1 / cos(ray->ray_angle));
-	double delta_dist_y = fabs(1 / sin(ray->ray_angle));
-
-	int step_x;
-	int step_y;
-
-	if (cos(ray->ray_angle) < 0)
-	{
-		step_x = -1;
-		side_dist_x = (player->pos_x - map_x) * delta_dist_x;
-	}
-	else
-	{
-		step_x = 1;
-		side_dist_x = (map_x + 1.0 - player->pos_x) * delta_dist_x;
-	}
-	if (sin(ray->ray_angle) < 0)
-	{
-		step_y = -1;
-		side_dist_y = (player->pos_y - map_y) * delta_dist_y;
-	}
-	else
-	{
-		step_y = 1;
-		side_dist_y = (map_y + 1.0 - player->pos_y) * delta_dist_y;
-	}
-
-	int hit = 0;
-	while (!hit)
-	{
-		if (side_dist_x < side_dist_y)
-		{
-			side_dist_x += delta_dist_x;
-			map_x += step_x;
-		}
-		else
-		{
-			side_dist_y += delta_dist_y;
-			map_y += step_y;
-		}
-		if (game->map->data[map_y][map_x] == '1') // muro
-			hit = 1;
-	}
-
-	// Distancia final al muro
-	double dist;
-	if (side_dist_x < side_dist_y)
-		dist = side_dist_x - delta_dist_x;
-	else
-		dist = side_dist_y - delta_dist_y;
-
-	ray->wall_distance = dist;
-	ray->hit_x = map_x;
-	ray->hit_y = map_y;
-}
 
 void calculate_side_distances(t_player *player, double ray_angle,
 							  double *side_dist_x, double *side_dist_y)
@@ -184,7 +121,7 @@ void calculate_side_distances(t_player *player, double ray_angle,
 		*side_dist_y = INFINITY;
 }
 
-void get_ang(t_cam *cam, double ray_angle)
+void get_ang(t_ray *cam, double ray_angle)
 {
 	cam->ray_x = cos(ray_angle);
 	cam->ray_y = sin(ray_angle);
