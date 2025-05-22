@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/05/20 19:06:41 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/22 11:56:37 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,20 @@ void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
 void	raycasting(t_game *game, t_ray *ray)
 {
 	int	i;
-	int	a;
+	int	init_dir;
 	int	color;
-	int	start_x;
-	int	start_y;
+	//int	start_x;
+	//int	start_y;
 
 	double dx = 0.0;
 	double dy = 0.0;
-	start_x = (int)(game->player->pos_x * BLOCK);
-	start_y = (int)(game->player->pos_y * BLOCK);
 	i = 0;
-	a = game->player->dir - FOV / 2;
+	//start_x = (int)(game->player->pos_x * BLOCK);
+	//start_y = (int)(game->player->pos_y * BLOCK);
+	init_dir = game->player->dir - (FOV / 2);
 	while (i < FOV)
 	{
-		ray_ang(ray, a, i);
+		ray_ang(ray, init_dir, i);
 		dx = cos(to_rad(ray->ray_a));
 		dy = -sin(to_rad(ray->ray_a));
 		color = 0xFF0F0F;
@@ -67,12 +67,12 @@ void	raycasting(t_game *game, t_ray *ray)
 
 void	draw_ray(t_game *game, t_ray *ray)
 {
-	float	dist_ray;
-	float		end_x;
-	float		end_y;
+	double	dist_ray;
+	double	end_x;
+	double	end_y;
 
 	dist_ray = ray->dist_v;
-	if (ray->dist_h > ray->dist_v)
+	if (ray->dist_h < ray->dist_v)
 		dist_ray = ray->dist_h;
 	end_x = game->player->pos_x + cos(to_rad(ray->ray_a)) * dist_ray;
 	end_y = game->player->pos_y - sin(to_rad(ray->ray_a)) * dist_ray;

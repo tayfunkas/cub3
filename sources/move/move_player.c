@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/05/19 17:23:23 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/22 11:54:53 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,13 @@ void	handle_movement(t_game *game)
 void	player_direction(t_player *player, int key)
 {
 	if (key == TURN_R)
-		player->dir -= 3; // 3 grados por paso, podés ajustar la sensibilidad
+		player->dir -= 3;
 	else if (key == TURN_L)
 		player->dir += 3;
-
 	if (player->dir < 0)
 		player->dir = 359;
 	else if (player->dir > 359)
 		player->dir = 0;
-
-	printf("D: %f°\n", player->dir);
 }
 
 void	player_move(t_player *player, t_map *map, int key)

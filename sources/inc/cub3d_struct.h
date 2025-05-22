@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/05/20 18:07:17 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/22 10:37:37 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ typedef struct s_ray
 {
 	int		ray;
 	int		ray_a;
-	double	ray_t;
 	double	ray_x;
 	double	ray_y;
+	double	ray_t;
 	double	delta_x;
 	double	delta_y;
 	double	dist_h;
