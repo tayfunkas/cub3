@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/05/22 15:15:56 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/22 17:42:30 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	player_strafe(t_player *player, t_map *map, int key)
 	else if (key == LEFT)
 		angle = (player->dir - 90.0) * M_PI / 180.0;
 
-	dx = cos(angle) * STEP;
+	dx = -cos(angle) * STEP;
 	dy = sin(angle) * STEP;
 
 	new_x = player->pos_x + dx;

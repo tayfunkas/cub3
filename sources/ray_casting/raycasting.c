@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/05/22 15:35:00 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/22 18:12:38 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,21 @@ void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
 }
 void	raycasting(t_game *game, t_ray *ray)
 {
-	int	i;
-	int	init_dir;
-	int	color;
-	//int	start_x;
-	//int	start_y;
+	int		i;
+	int		init_dir;
+	double	dx;
+	double	dy;
 
-	double dx = 0.0;
-	double dy = 0.0;
+	dx = 0.0;
+	dy = 0.0;
 	i = 0;
-	//start_x = (int)(game->player->pos_x * BLOCK);
-	//start_y = (int)(game->player->pos_y * BLOCK);
-	init_dir = game->player->dir - (3 / 2);
-	while (i < 3)
+	init_dir = game->player->dir - (FOV / 2);
+	while (i < FOV)
 	{
 		ray_ang(ray, init_dir, i);
 		dx = cos(to_rad(ray->ray_a));
 		dy = -sin(to_rad(ray->ray_a));
-		color = 0xFF0F0F;
-		//draw_line(game, game->player->pos_x * BLOCK, game->player->pos_y * BLOCK, game->player->pos_x * BLOCK + dx * 100, game->player->pos_y * BLOCK + dy * 100, color);
-		//my_mlx_pixel_put(game, start_x + (int)dx, start_y + (int)dy, color);
-		printf("%i\n", ray->ray_a);
-        check_wall(game, game->map, ray);
+		check_wall(game, game->map, ray);
 		draw_ray(game, ray);
 		i += 1;
 	}
@@ -72,20 +65,12 @@ void	draw_ray(t_game *game, t_ray *ray)
 	double	end_x;
 	double	end_y;
 
-	printf("dh: %f, dv: %f\n", ray->dist_h, ray->dist_v);
 	dist_ray = ray->dist_v;
-	if (ray->dist_h < ray->dist_v)
+	if (ray->dist_h < ray->dist_v && ray->dist_h > 0.0)
 		dist_ray = ray->dist_h;
-	printf("dist: %f\n", dist_ray);
 	end_x = game->player->pos_x + cos(to_rad(ray->ray_a)) * dist_ray;
 	end_y = game->player->pos_y - sin(to_rad(ray->ray_a)) * dist_ray;
-	printf("y:%f x:%f\n", end_y, end_y);
-	printf("\n");
-		draw_line(game,
-		game->player->pos_x * BLOCK,
-		game->player->pos_y * BLOCK,
-		end_x * BLOCK,
-		end_y * BLOCK,
+	draw_line(game, game->player->pos_x * (double)BLOCK, game->player->pos_y
+		* (double)BLOCK, end_x * (double)BLOCK, end_y * (double)BLOCK,
 		0xFF0F0F);
 }
-
