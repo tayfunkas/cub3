@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/22 18:15:08 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/22 18:18:44 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	render_background(t_game *game);
 void	check_wall(t_game *game, t_map *map, t_ray *ray);
 void	vertical_values(t_game *game, t_ray *ray);
 void	horizontal_values(t_game *game, t_ray *ray);
-void	ray_dist(t_game *game, t_map *map, t_ray *ray);
+void	ray_dist(t_game *game, t_map *map, t_ray *ray, double *dist);
 
 //  raycasting.c
 void	raycasting(t_game *game, t_ray *ray);

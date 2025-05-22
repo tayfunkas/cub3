@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:36:40 by grial             #+#    #+#             */
-/*   Updated: 2025/05/22 18:14:28 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/22 18:19:35 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	ray_dist_h(t_game *game, t_map *map, t_ray *ray)
 void	check_wall(t_game *game, t_map *map, t_ray *ray)
 {
 	vertical_values(game, ray);
-	ray_dist(game, map, ray);
+	ray_dist(game, map, ray, &ray->dist_v);
 	horizontal_values(game, ray);
-	ray_dist_h(game, map, ray);
+	ray_dist(game, map, ray, &ray->dist_h);
 }
 
 void	vertical_values(t_game *game, t_ray *ray)
@@ -107,7 +107,7 @@ void	horizontal_values(t_game *game, t_ray *ray)
 	}
 }
 
-void	ray_dist(t_game *game, t_map *map, t_ray *ray)
+void	ray_dist(t_game *game, t_map *map, t_ray *ray, double *dist)
 {
 	int	int_x;
 	int	int_y;
@@ -123,7 +123,7 @@ void	ray_dist(t_game *game, t_map *map, t_ray *ray)
 			&& int_x < (int)ft_strlen(map->data[int_y])
 			&& map->data[int_y][int_x] == '1' && map->data[int_y])
 		{
-			ray->dist_v = (cos(to_rad(ray->ray_a)) * (ray->ray_x
+			*dist = (cos(to_rad(ray->ray_a)) * (ray->ray_x
 						- game->player->pos_x)) - (sin(to_rad(ray->ray_a))
 					* (ray->ray_y - game->player->pos_y));
 			break ;
