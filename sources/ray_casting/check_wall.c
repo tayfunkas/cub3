@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:36:40 by grial             #+#    #+#             */
-/*   Updated: 2025/05/22 11:57:56 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/22 15:56:30 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	vertical_values(t_game *game, t_ray *ray)
 {
 	ray->dist_v = 1000000;
 	ray->ray_t = tan(to_rad(ray->ray_a));
+	printf("rad_v: %f\n", ray->ray_t);
 	if (ray->ray_a < 90.0 || ray->ray_a > 270.0)
 	{
 		ray->ray_x = (int)game->player->pos_x + 1;
@@ -73,8 +74,8 @@ void	vertical_values(t_game *game, t_ray *ray)
 	{
 		ray->ray_x = game->player->pos_x;
 		ray->ray_y = game->player->pos_y;
-		ray->delta_x = 1;
-		ray->delta_y = 0;
+//		ray->delta_x = 0;
+//		ray->delta_y = 0;
 	}
 }
 
@@ -82,6 +83,7 @@ void	horizontal_values(t_game *game, t_ray *ray)
 {
 	ray->dist_h = 1000000;
 	ray->ray_t = 1.0 / tan(to_rad(ray->ray_a));
+	printf("rad_h: %f\n", ray->ray_t);
 	if (ray->ray_a > 0.0 && ray->ray_a < 180.0) // Looking up
 	{
 		ray->ray_y = (int)game->player->pos_y - 0.0001;
@@ -102,8 +104,8 @@ void	horizontal_values(t_game *game, t_ray *ray)
 	{
 		ray->ray_x = game->player->pos_x;
 		ray->ray_y = game->player->pos_y;
-		ray->delta_x = 0;
-		ray->delta_y = 0;
+//		ray->delta_x = 0;
+//		ray->delta_y = 0;
 	}
 }
 
@@ -122,7 +124,7 @@ void	ray_dist(t_game *game, t_map *map, t_ray *ray)
 			&& int_x < (int)ft_strlen(map->data[int_y])
 			&& map->data[int_y][int_x] == '1')
 		{
-			//draw_int(game, int_x, int_y);
+			printf("px: %f\npy: %f\n", game->player->pos_x, game->player->pos_y);
 			ray->dist_v = cos(to_rad(ray->ray_a)) * (ray->ray_x
 					- game->player->pos_x) - sin(to_rad(ray->ray_a))
 				* (ray->ray_y - game->player->pos_y);

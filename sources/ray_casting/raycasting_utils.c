@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/05/22 11:56:58 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/22 15:39:26 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ double	to_rad(double ang)
 	double	rad;
 
 	rad = ang * (M_PI / 180.0);
+	printf("rad %f\n", rad);
 	return (rad);
 }
 

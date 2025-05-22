@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/05/22 11:54:53 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/22 15:15:56 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	handle_movement(t_game *game)
 void	player_direction(t_player *player, int key)
 {
 	if (key == TURN_R)
-		player->dir -= 3;
+		player->dir -= 1;
 	else if (key == TURN_L)
-		player->dir += 3;
+		player->dir += 1;
 	if (player->dir < 0)
 		player->dir = 359;
 	else if (player->dir > 359)
