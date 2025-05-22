@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/04/25 18:56:34 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:31:10 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,28 +170,4 @@ void	load_img(t_game *game)
 	game->engine->we_img->addr = mlx_get_data_addr(game->engine->we_img->img, &game->engine->we_img->bpp, &game->engine->we_img->line_length, &game->engine->we_img->endian);
 
 	
-}
-
-int	mouse_move(int x, int y, t_game *game)
-{
-	static int	last_x = -1;
-	int	delta_x;
-
-	(void)y;
-	if (last_x == -1)
-	{
-		last_x = x;
-		return (0);
-	}
-	delta_x = x - last_x;
-	if(delta_x != 0)
-	{
-		game->player->player_dir -= delta_x * 0.5;
-		if (game->player->player_dir < 0)
-			game->player->player_dir += 360;
-		if (game->player->player_dir >= 360)
-			game->player->player_dir -= 360;
-		last_x = x;
-	}
-	return (0);
 }

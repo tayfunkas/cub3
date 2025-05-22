@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/25 19:49:14 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:39:32 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@
 
 void	get_player_init_position(t_map *map, t_player *player);
 int		is_player(char c);
-
 //map_parsing
 //assign_line.c
 void	check_line_config(t_game *game, char *line);
@@ -55,7 +54,7 @@ void	check_duplicates_or_missing(t_game *game);
 //checks.c
 void	check_empty_map(t_game *game, int fd);
 void	check_mapfile_name(t_game *game, char *map);
-bool    check_mapchars(char *line, t_game *game);
+bool	check_mapchars(char *line, t_game *game);
 bool	check_player(char **map, char *line, t_game *game);
 //parse_map.c
 void	parse_file(t_game *game);
@@ -71,8 +70,8 @@ void	validate_map(t_game *game);
 int		validate_borders(t_map *map);
 //move
 //keys.c
-int     key_press(int key, t_game *game);
-int     key_release(int key, t_game *game);
+int		key_press(int key, t_game *game);
+int		key_release(int key, t_game *game);
 //player_move.c
 void	handle_movement(t_game *game);
 void	player_direction(t_player *player, int key);
