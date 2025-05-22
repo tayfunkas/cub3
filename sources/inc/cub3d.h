@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/22 18:18:44 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/22 19:29:59 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # define M_PI 3.14159265358979323846
 # define WIN_W 1280
 # define WIN_H 720
-# define MIN_S 20
-# define BLOCK 20
+# define MIN_S 8
+# define BLOCK 64
 # define STEP 0.07
 # define FOV 60
 
@@ -61,6 +61,7 @@ void	initialize_player(t_game *game);
 void	initialize_engine(t_game *game);
 void	initialize_mini(t_game *game);
 void	initialize_config(t_game *game);
+void	initialize_ray(t_game *game);
 // validate_map.c
 void	pad_map_to_rectangle(t_game *game);
 void	validate_map(t_game *game);
@@ -94,7 +95,7 @@ int		key_release(int key, t_game *game);
 // rc_fov.c
 void	draw_ray_line(t_game *game, t_player *player, int x_width, float x);
 void	draw_fov(t_game *game, t_player *player);
-void	draw_wall(t_game *game, int x_width, float x, float y, float ang);
+//void	draw_wall(t_game *game, int x_width, float x, float y, float ang);
 int		draw_check_collision(t_game *game, int x_width, float x, float y,
 			float ang);
 float	distance(float x1, float y1, float x2, float y2);
@@ -113,6 +114,6 @@ void	raycasting(t_game *game, t_ray *ray);
 
 //  raycasting_utils.c
 double	to_rad(double ang);
-void	ray_ang(t_ray *ray, double player_dir, int i);
+void	fix_ang(t_ray *ray, double player_dir, int i);
 
 #endif

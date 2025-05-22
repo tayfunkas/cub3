@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/20 18:07:50 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/22 18:47:45 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,28 @@ void	initialize_game(t_game **game)
 	initialize_engine(*game);
 	initialize_config(*game);
 	initialize_mini(*game);
+	initialize_ray(*game);
 		return ;
+}
+
+void	initialize_ray(t_game *game)
+{
+	game->ray = malloc(sizeof(t_ray));
+	if (!game->ray)
+	{
+		printf("Error initialize_ray()");
+		return ;
+	}
+	game->ray->r_dir = 0;
+	game->ray->r_step = (double)FOV / (double)WIN_W;
+	game->ray->ray_x = 0.0;
+	game->ray->ray_y = 0.0;
+	game->ray->ray_t = 0.0;
+	game->ray->del_x = 0.0;
+	game->ray->del_y = 0.0;
+	game->ray->dis_h = 0.0;
+	game->ray->dis_v = 0.0;
+	return;
 }
 
 void	initialize_engine(t_game *game)

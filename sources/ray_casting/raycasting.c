@@ -6,13 +6,15 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/05/22 18:12:38 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/22 19:43:26 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
 void	draw_ray(t_game *game, t_ray *ray);
+void	draw_wall1(t_game *game, int x_width);
+
 
 void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
 		int color)
@@ -39,38 +41,75 @@ void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
 }
 void	raycasting(t_game *game, t_ray *ray)
 {
-	int		i;
-	int		init_dir;
-	double	dx;
-	double	dy;
+	int	init_dir;
+	int	i;
 
-	dx = 0.0;
-	dy = 0.0;
 	i = 0;
 	init_dir = game->player->dir - (FOV / 2);
 	while (i < FOV)
 	{
-		ray_ang(ray, init_dir, i);
-		dx = cos(to_rad(ray->ray_a));
-		dy = -sin(to_rad(ray->ray_a));
+		fix_ang(ray, init_dir, i);
 		check_wall(game, game->map, ray);
 		draw_ray(game, ray);
+		draw_wall1(game, i);
 		i += 1;
 	}
 }
 
 void	draw_ray(t_game *game, t_ray *ray)
 {
-	double	dist_ray;
 	double	end_x;
 	double	end_y;
 
-	dist_ray = ray->dist_v;
-	if (ray->dist_h < ray->dist_v && ray->dist_h > 0.0)
-		dist_ray = ray->dist_h;
-	end_x = game->player->pos_x + cos(to_rad(ray->ray_a)) * dist_ray;
-	end_y = game->player->pos_y - sin(to_rad(ray->ray_a)) * dist_ray;
-	draw_line(game, game->player->pos_x * (double)BLOCK, game->player->pos_y
-		* (double)BLOCK, end_x * (double)BLOCK, end_y * (double)BLOCK,
+	ray->dis_f = ray->dis_v;
+	if (ray->dis_h < ray->dis_v && ray->dis_h > 0.0)
+		ray->dis_f = ray->dis_h;
+	end_x = game->player->pos_x + cos(to_rad(ray->r_dir)) * ray->dis_f;
+	end_y = game->player->pos_y - sin(to_rad(ray->r_dir)) * ray->dis_f;
+	draw_line(game, game->player->pos_x * (double)MIN_S, game->player->pos_y
+		* (double)MIN_S, end_x * (double)MIN_S, end_y * (double)MIN_S,
 		0xFF0F0F);
+}
+
+//float get_height(t_game *game, float x, float y, float ang)
+//{
+//	float dist;
+//	float height;
+//
+//	dist = game->ray->dis_f;
+//	height = (BLOCK / (dist * BLOCK)) * (WIN_H / 2);
+//	return (height);
+//}
+
+//int get_pixel_color(t_img *texture, int x, int y)
+//{
+//	char *pixel;
+//	int color;
+//
+//	pixel = texture->addr + (y * texture->line_length + x * (texture->bpp / 8));
+//	color = *(int *)pixel;
+//	return (color);
+//}
+
+void draw_wall1(t_game *game, int x_width)
+{
+	float height;
+	int draw_start;
+	int draw_end;
+
+	height = ((BLOCK * WIN_H) / game->ray->dis_f) / BLOCK;
+	if (height > WIN_H)
+		height = WIN_H;
+
+	draw_start = (WIN_H / 2) - (height / 2);
+	if (draw_start < 0)
+		draw_start = 0;
+
+	draw_end = draw_start + height;
+	if (draw_end > WIN_H)
+		draw_end = WIN_H;
+
+	// Aquí renderizas el muro (ejemplo básico con color sólido)
+	for (int y = draw_start; y < draw_end; y++)
+		my_mlx_pixel_put(game, x_width, y, 0xFF55FF); // blanco
 }

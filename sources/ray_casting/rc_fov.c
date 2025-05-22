@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:55:33 by grial             #+#    #+#             */
-/*   Updated: 2025/05/20 18:02:47 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/22 19:34:16 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void cast_single_ray(t_game *game, int x_width, double ray_angle)
 {
+	(void)x_width;
 	double ray_dir_x = cos(ray_angle);
 	double ray_dir_y = sin(ray_angle);
 	double ray_x = game->player->pos_x;
@@ -57,7 +58,7 @@ void cast_single_ray(t_game *game, int x_width, double ray_angle)
 	}
 
 	// Dibuja la pared una vez que se detecta colisión
-	draw_wall(game, x_width, ray_x + ray_dir_x, ray_y + ray_dir_y, ray_angle);
+	//draw_wall(game, x_width, ray_x + ray_dir_x, ray_y + ray_dir_y, ray_angle);
 }
 
 void draw_fov(t_game *game, t_player *player)
