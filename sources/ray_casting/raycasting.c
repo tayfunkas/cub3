@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/05/23 13:01:49 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/23 14:08:53 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ void	raycasting(t_game *game, t_ray *ray)
 
 	i = 0.0;
 	a = 0;
-	init_dir = game->player->dir - (FOV / 2);
+	init_dir = game->player->dir + (FOV / 2);
 	ray->r_step = (double)FOV / (double)WIN_W;
-	while (i < FOV)
+	while (a < WIN_W)
 	{
-		fix_ang(ray, init_dir, i);
+		fix_ang(ray, init_dir, -i);
 		check_wall(game, game->map, ray);
 		draw_ray(game, ray);
 		texture_wall(game, ray);
@@ -59,7 +59,6 @@ void	raycasting(t_game *game, t_ray *ray)
 		i += ray->r_step;
 		a += 1;
 	}
-	printf("%f\n", i);
 }
 
 void	draw_ray(t_game *game, t_ray *ray)
@@ -111,7 +110,7 @@ int	get_texture_offset_x(t_game *game, t_ray *ray)
 	else
 		wall_hit = game->player->pos_x + ray->dis_f * cos(to_rad(ray->r_dir));
 	wall_hit -= floor(wall_hit);
-	offset_x = (int)(wall_hit * (double)64);
+	offset_x = (int)(wall_hit * (double)BLOCK);
 	return (offset_x);
 }
 
@@ -145,7 +144,7 @@ void	draw_wall1(t_game *game, t_ray *ray, int x_width)
 	while (y < draw_end)
 	{
 		double tex_pos = (double)(y - draw_start) / (double)(draw_end - draw_start);
-		offset_y = (int)(tex_pos * 64);
+		offset_y = (int)(tex_pos * BLOCK);
 		color = get_pixel_color(texture, offset_x, offset_y);
 		my_mlx_pixel_put(game, x_width, y, color);
 		y++;
