@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/05/23 12:29:02 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/23 12:42:11 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	draw_wall1(t_game *game, t_ray *ray, int x_width)
 	if (draw_end > WIN_H)
 		draw_end = WIN_H;
 	y = draw_start;
+	
 	// Aquí renderizas el muro (ejemplo básico con color sólido)
 	while (y < draw_end)
 	{
@@ -119,3 +120,8 @@ void	draw_wall1(t_game *game, t_ray *ray, int x_width)
 		y++; // blanco
 	}
 }
+
+//void	pick_texture(t_game *game, t_ray *ray)
+//{
+//	if (ray.)
+//}
