@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/23 12:26:27 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/23 13:03:22 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int		key_press(int key, t_game *game);
 int		key_release(int key, t_game *game);
 // rc_fov.c
 void	draw_ray_line(t_game *game, t_player *player, int x_width, float x);
-void	draw_fov(t_game *game, t_player *player);
 //void	draw_wall(t_game *game, int x_width, float x, float y, float ang);
 int		draw_check_collision(t_game *game, int x_width, float x, float y,
 			float ang);

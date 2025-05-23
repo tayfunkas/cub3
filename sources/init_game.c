@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/05/23 12:41:59 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/23 12:44:03 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	init_game(t_game *game)
 	mlx_hook(game->mlx_window, 2, 1L << 0, key_press, game);
 	mlx_hook(game->mlx_window, 3, 1L << 1, key_release, game);
 	mlx_hook(game->mlx_window, 6, PointerMotionMask, mouse_move, game);
-	printf("rendering\n");
 	mlx_loop_hook(game->mlx_ptr, render, game);
 	mlx_loop(game->mlx_ptr);
 }

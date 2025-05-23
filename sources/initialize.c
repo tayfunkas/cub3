@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/23 12:01:49 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/23 13:00:44 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	initialize_engine(t_game *game)
 	game->engine = malloc(sizeof(t_engine));
 	if (!game->engine)
 		return ;
-	game->engine->ang_step = 0;
 	game->engine->frame = malloc(sizeof(t_img)); 
 	game->engine->frame->img = NULL;
 	game->engine->no_texture = NULL;
@@ -101,7 +100,6 @@ void	initialize_engine(t_game *game)
 	game->engine->ceiling_color->r = -1;
 	game->engine->ceiling_color->g = -1;
 	game->engine->ceiling_color->b = -1;
-	game->engine->fov = 0;
 }
 
 void	initialize_player(t_game *game)

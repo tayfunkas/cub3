@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/05/23 12:42:11 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/23 13:01:49 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	draw_ray(t_game *game, t_ray *ray);
 void	draw_wall1(t_game *game, t_ray *ray, int x_width);
+void	texture_wall(t_game *game, t_ray *ray);
 
 void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
 		int color)
@@ -53,6 +54,7 @@ void	raycasting(t_game *game, t_ray *ray)
 		fix_ang(ray, init_dir, i);
 		check_wall(game, game->map, ray);
 		draw_ray(game, ray);
+		texture_wall(game, ray);
 		draw_wall1(game, game->ray, a);
 		i += ray->r_step;
 		a += 1;
@@ -66,8 +68,12 @@ void	draw_ray(t_game *game, t_ray *ray)
 	double	end_y;
 
 	ray->dis_f = ray->dis_v;
+	ray->r_side = 0;
 	if (ray->dis_h < ray->dis_v && ray->dis_h > 0.0)
+	{
+		ray->r_side = 1;
 		ray->dis_f = ray->dis_h;
+	}
 	end_x = game->player->pos_x + cos(to_rad(ray->r_dir)) * ray->dis_f;
 	end_y = game->player->pos_y - sin(to_rad(ray->r_dir)) * ray->dis_f;
 	draw_line(game, game->player->pos_x * (double)MIN_S, game->player->pos_y
@@ -85,15 +91,30 @@ void	draw_ray(t_game *game, t_ray *ray)
 //	return (height);
 //}
 
-// int get_pixel_color(t_img *texture, int x, int y)
-//{
-//	char *pixel;
-//	int color;
-//
-//	pixel = texture->addr + (y * texture->line_length + x * (texture->bpp / 8));
-//	color = *(int *)pixel;
-//	return (color);
-//}
+ int get_pixel_color(t_img *texture, int x, int y)
+{
+	char *pixel;
+	int color;
+
+	pixel = texture->addr + (y * texture->line_length + x * (texture->bpp / 8));
+	color = *(int *)pixel;
+	return (color);
+}
+
+int	get_texture_offset_x(t_game *game, t_ray *ray)
+{
+	double	wall_hit;
+	int		offset_x;
+
+	if (ray->r_side == 0)
+		wall_hit = game->player->pos_y + ray->dis_f * -sin(to_rad(ray->r_dir));
+	else
+		wall_hit = game->player->pos_x + ray->dis_f * cos(to_rad(ray->r_dir));
+	wall_hit -= floor(wall_hit);
+	offset_x = (int)(wall_hit * (double)64);
+	return (offset_x);
+}
+
 
 void	draw_wall1(t_game *game, t_ray *ray, int x_width)
 {
@@ -101,27 +122,52 @@ void	draw_wall1(t_game *game, t_ray *ray, int x_width)
 	int		draw_start;
 	int		draw_end;
 	int		y;
+	int		offset_x;
+	int		offset_y;
+	t_img	*texture = game->engine->current;
+	int		color;
 
 	height = ((BLOCK * WIN_H) / (ray->dis_f * BLOCK));
 	if (height > WIN_H)
 		height = WIN_H;
+
 	draw_start = (WIN_H / 2) - (height / 2);
 	if (draw_start < 0)
 		draw_start = 0;
+
 	draw_end = draw_start + height;
 	if (draw_end > WIN_H)
 		draw_end = WIN_H;
+
+	offset_x = get_texture_offset_x(game, ray);
+
 	y = draw_start;
-	
-	// Aquí renderizas el muro (ejemplo básico con color sólido)
 	while (y < draw_end)
 	{
-		my_mlx_pixel_put(game, x_width, y, 0xF3552F);
-		y++; // blanco
+		double tex_pos = (double)(y - draw_start) / (double)(draw_end - draw_start);
+		offset_y = (int)(tex_pos * 64);
+		color = get_pixel_color(texture, offset_x, offset_y);
+		my_mlx_pixel_put(game, x_width, y, color);
+		y++;
 	}
 }
 
-//void	pick_texture(t_game *game, t_ray *ray)
-//{
-//	if (ray.)
-//}
+
+void	texture_wall(t_game *game, t_ray *ray)
+{
+	if (!ray->r_side)
+	{
+		if (ray->r_dir >= 90 && ray->r_dir <= 270)
+			game->engine->current = game->engine->so_img;
+		else
+			game->engine->current = game->engine->no_img;
+	}
+	else
+	{
+		if (ray->r_dir >= 180 && ray->r_dir <= 360)
+			game->engine->current = game->engine->we_img;
+		else
+			game->engine->current = game->engine->ea_img;
+	}
+}
+
