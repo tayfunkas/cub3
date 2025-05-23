@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/05/22 18:39:32 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/23 12:32:18 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ double	to_rad(double ang)
 	return (rad);
 }
 
-void	fix_ang(t_ray *ray, double	player_dir, int i)
+void	fix_ang(t_ray *ray, double	player_dir, double i)
 {
 	ray->r_dir = player_dir + i;
 	if (ray->r_dir < 0)
-		ray->r_dir += 360;
-	if (ray->r_dir >= 360)
-		ray->r_dir %= 360;
+		ray->r_dir += 360.0;
+	if (ray->r_dir >= 360.0)
+		ray->r_dir = fmod(ray->r_dir, 360.0);
 }

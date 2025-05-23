@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/22 19:29:59 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/23 12:26:27 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,6 @@ void	raycasting(t_game *game, t_ray *ray);
 
 //  raycasting_utils.c
 double	to_rad(double ang);
-void	fix_ang(t_ray *ray, double player_dir, int i);
+void	fix_ang(t_ray *ray, double	player_dir, double i);
 
 #endif

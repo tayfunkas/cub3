@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/22 18:47:45 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/23 12:01:49 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	initialize_ray(t_game *game)
 	game->ray->ray_t = 0.0;
 	game->ray->del_x = 0.0;
 	game->ray->del_y = 0.0;
+	game->ray->dis_f = 0.0;
 	game->ray->dis_h = 0.0;
 	game->ray->dis_v = 0.0;
 	return;
@@ -100,12 +101,7 @@ void	initialize_engine(t_game *game)
 	game->engine->ceiling_color->r = -1;
 	game->engine->ceiling_color->g = -1;
 	game->engine->ceiling_color->b = -1;
-
-	game->engine->ray = malloc(sizeof(t_ray));
-	if (!game->engine->ray)
-		return;
-
-	game->engine->fov = M_PI / 3;
+	game->engine->fov = 0;
 }
 
 void	initialize_player(t_game *game)

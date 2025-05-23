@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/05/22 19:04:19 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/23 12:31:09 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_color
 
 typedef struct s_ray
 {
-	int		r_dir;
+	double	r_dir;
 	double	r_step;
 	double	ray_x;
 	double	ray_y;
@@ -48,7 +48,6 @@ typedef struct s_img
 typedef struct s_engine 
 {
 	t_img	*frame;
-	t_ray	*ray;
 	float	fov;
 	float	ang_step;
 	t_img	*no_img;
