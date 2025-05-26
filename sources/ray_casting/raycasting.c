@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/05/23 14:08:53 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/26 12:55:57 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	draw_ray(t_game *game, t_ray *ray)
 		0xFF0F0F);
 }
 
-// float get_height(t_game *game, float x, float y, float ang)
+//double get_height(t_game *game, float x, float y, float ang)
 //{
 //	float dist;
 //	float height;
@@ -125,8 +125,21 @@ void	draw_wall1(t_game *game, t_ray *ray, int x_width)
 	int		offset_y;
 	t_img	*texture = game->engine->current;
 	int		color;
+	double	fish;
+
+	// change function *void* fix_ang to *double* fix_ang
+	//to replace
+	fish = (double)game->player->dir - ray->r_dir;
+		if (fish < 0)
+		fish += 360.0;
+	if (fish >= 360.0)
+		fish = fmod(fish, 360.0);
+	// untill here
+	fish = to_rad(fish);
+	ray->dis_f = ray->dis_f * cos(fish);
 
 	height = ((BLOCK * WIN_H) / (ray->dis_f * BLOCK));
+	
 	if (height > WIN_H)
 		height = WIN_H;
 
@@ -150,6 +163,42 @@ void	draw_wall1(t_game *game, t_ray *ray, int x_width)
 		y++;
 	}
 }
+
+//void	draw_wall(t_game *game, int x_width, float x, float y, float ang)
+//{
+//	int		draw_start;
+//	int		draw_end;
+//	double	height;
+//	t_img	*texture;
+//	int		color;
+//
+//	int		screen_y;
+//	int		tex_x;
+//	int		tex_y;
+//	float	step_tex_y;
+//	float	tex_pos;
+//
+//	height = get_height(game, x, y, ang);
+//	draw_start = (WIN_H / 2) - (height / 2);
+//	if (draw_start < 0)
+//		draw_start = 0;
+//	draw_end = draw_start + height;
+//	if (draw_end > WIN_H)
+//		draw_end = WIN_H;
+//	texture = game->engine->no_img;
+//	tex_x = (int)(x * 64) % 64;
+//	step_tex_y = 64.0f / height;
+//	tex_pos = (draw_start - WIN_H / 2 + height / 2) * step_tex_y;
+//	screen_y = draw_start;
+//	while (screen_y < draw_end)
+//	{
+//		tex_y = (int)tex_pos & (64 - 1);
+//		tex_pos += step_tex_y;
+//		color = get_pixel_color(texture, tex_x, tex_y);
+//		my_mlx_pixel_put(game, x_width, screen_y, color);
+//		screen_y++;
+//	}
+//}
 
 
 void	texture_wall(t_game *game, t_ray *ray)
