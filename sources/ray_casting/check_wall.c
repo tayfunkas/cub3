@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:36:40 by grial             #+#    #+#             */
-/*   Updated: 2025/05/22 18:49:58 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/27 17:48:14 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ray_dist_h(t_game *game, t_map *map, t_ray *ray)
 	}
 }
 
-void	check_wall(t_game *game, t_map *map, t_ray *ray)
+void	wall_dist(t_game *game, t_map *map, t_ray *ray)
 {
 	vertical_values(game, ray);
 	ray_dist(game, map, ray, &ray->dis_v);

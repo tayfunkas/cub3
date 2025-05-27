@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/26 12:44:33 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/27 17:48:14 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 void	render_background(t_game *game);
 
 //	check_wall.c
-void	check_wall(t_game *game, t_map *map, t_ray *ray);
+void	wall_dist(t_game *game, t_map *map, t_ray *ray);
 void	vertical_values(t_game *game, t_ray *ray);
 void	horizontal_values(t_game *game, t_ray *ray);
 void	ray_dist(t_game *game, t_map *map, t_ray *ray, double *dist);

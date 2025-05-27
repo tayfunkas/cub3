@@ -6,15 +6,15 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/05/26 17:51:58 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/27 17:49:31 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
 void	draw_ray(t_game *game, t_ray *ray);
-void	draw_wall1(t_game *game, t_ray *ray, int x_width);
-void	texture_wall(t_game *game, t_ray *ray);
+void	draw_wall(t_game *game, t_ray *ray, int win_x);
+void	get_tex(t_game *game, t_ray *ray);
 
 void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
 		int color)
@@ -41,23 +41,24 @@ void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
 }
 void	raycasting(t_game *game, t_ray *ray)
 {
-	int		init_dir;
-	double	i;
-	int		a;
+	int		dir_i;
+	int		win_x;
+	double	ang_d;
 
-	i = 0.0;
-	a = 0;
-	init_dir = game->player->dir + (FOV / 2);
+	dir_i = game->player->dir + (FOV / 2);
+	win_x = 0;
+	ang_d = 0.0;
 	ray->r_step = (double)FOV / (double)WIN_W;
-	while (a < WIN_W)
+	while (win_x < WIN_W)
 	{
-		fix_ang(ray, init_dir, -i);
-		check_wall(game, game->map, ray);
+		printf("%f\n", game->player->dir);
+		fix_ang(ray, dir_i, -ang_d);
+		wall_dist(game, game->map, ray);
 		draw_ray(game, ray);
-		texture_wall(game, ray);
-		draw_wall1(game, game->ray, a);
-		i += ray->r_step;
-		a += 1;
+		get_tex(game, ray);
+		draw_wall(game, ray, win_x);
+		ang_d += ray->r_step;
+		win_x += 1;
 	}
 }
 
@@ -80,26 +81,6 @@ void	draw_ray(t_game *game, t_ray *ray)
 		0xFF0F0F);
 }
 
-//double get_height(t_game *game, float x, float y, float ang)
-//{
-//	float dist;
-//	float height;
-//
-//	dist = game->ray->dis_f;
-//	height = (BLOCK / (dist * BLOCK)) * (WIN_H / 2);
-//	return (height);
-//}
-
- int get_pixel_color(t_img *texture, int x, int y)
-{
-	char *pixel;
-	int color;
-
-	pixel = texture->addr + (y * texture->line_length + x * (texture->bpp / 8));
-	color = *(int *)pixel;
-	return (color);
-}
-
 int	get_texture_offset_x(t_game *game, t_ray *ray)
 {
 	double	wall_hit;
@@ -114,63 +95,31 @@ int	get_texture_offset_x(t_game *game, t_ray *ray)
 	return (offset_x);
 }
 
-
-void	draw_wall1(t_game *game, t_ray *ray, int x_width)
+void	draw_wall(t_game *game, t_ray *ray, int win_x)
 {
-	double	height;
-	int		draw_start;
-	int		draw_end;
+	t_rcast	*rcast;
 	int		y;
-	int		offset_x;
-	int		offset_y;
-	t_img	*texture = game->engine->current;
-	int		color;
-	double	fish;
-	double	step_texture;
-	double	tex_pos;
 
-	// Corregir fish-eye
-	fish = (double)game->player->dir - ray->r_dir;
-	if (fish < 0)
-		fish += 360.0;
-	if (fish >= 360.0)
-		fish = fmod(fish, 360.0);
-	fish = to_rad(fish);
-	ray->dis_f = ray->dis_f * cos(fish);
-
-	height = ((BLOCK * WIN_H) / (ray->dis_f * BLOCK));
-
-	draw_start = (int)((WIN_H / 2.0) - (height / 2.0));
-	if (draw_start < 0)
-		draw_start = 0;
-
-	draw_end = (int)((WIN_H / 2.0) + (height / 2.0));
-	if (draw_end > WIN_H)
-		draw_end = WIN_H;
-
-	offset_x = get_texture_offset_x(game, ray);
-	step_texture = (double)BLOCK / height;
-	tex_pos = (draw_start - ((WIN_H / 2.0) - (height / 2.0))) * step_texture;
-	y = draw_start;
-	
-	while (y < draw_end)
+	rcast = game->engine->rcast;
+	fish_eye(game, ray);
+	funct(ray, rcast->draw_start, rcast->draw_end, rcast->height);
+	rcast->offset_x = get_texture_offset_x(game, ray);
+	rcast->step_texture = (double)BLOCK / rcast->height;
+	rcast->tex_pos = (rcast->draw_start - ((WIN_H / 2.0) - (rcast->height
+					/ 2.0))) * rcast->step_texture;
+	y = rcast->draw_start;
+	while (y < rcast->draw_end)
 	{
-		offset_y = (int)tex_pos;
-		if (offset_y < 0)
-			offset_y = 0;
-		if (offset_y >= BLOCK)
-			offset_y = BLOCK - 1;
-
-		color = get_pixel_color(texture, offset_x, offset_y);
-		my_mlx_pixel_put(game, x_width, y, color);
-
-		tex_pos += step_texture;
+		rcast->offset_y = get_offset_y((int)rcast->tex_pos);
+		rcast->color = get_pixel_color(rcast->texture, rcast->offset_x,
+				rcast->offset_y);
+		my_mlx_pixel_put(game, win_x, y, rcast->color);
+		rcast->tex_pos += rcast->step_texture;
 		y++;
 	}
 }
 
-
-void	texture_wall(t_game *game, t_ray *ray)
+void	get_tex(t_game *game, t_ray *ray)
 {
 	if (!ray->r_side)
 	{
@@ -187,4 +136,3 @@ void	texture_wall(t_game *game, t_ray *ray)
 			game->engine->current = game->engine->ea_img;
 	}
 }
-
