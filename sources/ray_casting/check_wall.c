@@ -3,43 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_wall.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: grial <grial@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:36:40 by grial             #+#    #+#             */
-/*   Updated: 2025/05/27 17:48:14 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/27 23:03:19 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-void	ray_dist_h(t_game *game, t_map *map, t_ray *ray)
-{
-	int	int_x;
-	int	int_y;
-	int	i;
-
-	i = 0;
-	while (i <= 80)
-	{
-		int_x = (int)(ray->ray_x);
-		int_y = (int)(ray->ray_y);
-		if (int_y >= 0 && int_y < map->m_height && int_x >= 0
-			&& int_x < (int)ft_strlen(map->data[int_y])
-			&& map->data[int_y][int_x] == '1')
-		{
-			ray->dis_h = cos(to_rad(ray->r_dir)) * (ray->ray_x
-					- game->player->pos_x) - sin(to_rad(ray->r_dir))
-				* (ray->ray_y - game->player->pos_y);
-			break ;
-		}
-		else
-		{
-			ray->ray_x += ray->del_x;
-			ray->ray_y += ray->del_y;
-			i++;
-		}
-	}
-}
 
 void	wall_dist(t_game *game, t_map *map, t_ray *ray)
 {
@@ -114,7 +85,6 @@ void	ray_dist(t_game *game, t_map *map, t_ray *ray, double *dist)
 	int	i;
 
 	i = 0;
-	printf("fijar 80 a la longitud del mapa.\n");
 	while (i <= 80)
 	{
 		int_x = (int)(ray->ray_x);
