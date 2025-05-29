@@ -34,7 +34,8 @@ SOURCES = 	sources/map_parsing/checks.c \
 			sources/ray_casting/check_wall.c \
 			sources/ray_casting/raycasting_utils.c \
 			sources/ray_casting/rc_fov.c \
-			sources/ray_casting/render_background.c
+			sources/ray_casting/render_background.c \
+			sources/utils/get_pixel_color.c
 
 
 OBJECTS = $(SOURCES:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/05/27 17:49:31 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/29 19:22:10 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	raycasting(t_game *game, t_ray *ray)
 	ray->r_step = (double)FOV / (double)WIN_W;
 	while (win_x < WIN_W)
 	{
-		printf("%f\n", game->player->dir);
 		fix_ang(ray, dir_i, -ang_d);
 		wall_dist(game, game->map, ray);
 		draw_ray(game, ray);
@@ -100,21 +99,22 @@ void	draw_wall(t_game *game, t_ray *ray, int win_x)
 	t_rcast	*rcast;
 	int		y;
 
-	rcast = game->engine->rcast;
+	rcast = game->engine->frame_drawing;
 	fish_eye(game, ray);
-	funct(ray, rcast->draw_start, rcast->draw_end, rcast->height);
-	rcast->offset_x = get_texture_offset_x(game, ray);
-	rcast->step_texture = (double)BLOCK / rcast->height;
-	rcast->tex_pos = (rcast->draw_start - ((WIN_H / 2.0) - (rcast->height
-					/ 2.0))) * rcast->step_texture;
-	y = rcast->draw_start;
-	while (y < rcast->draw_end)
+	funct(ray, frame_drawing->draw_start, frame_drawing->draw_end, frame_drawing->height);
+	printf("hola\n");
+	frame_drawing->offset_x = get_texture_offset_x(game, ray);
+	frame_drawing->step_texture = (double)BLOCK / frame_drawing->height;
+	frame_drawing->tex_pos = (frame_drawing->draw_start - ((WIN_H / 2.0) - (frame_drawing->height
+					/ 2.0))) * frame_drawing->step_texture;
+	y = frame_drawing->draw_start;
+	while (y < frame_drawing->draw_end)
 	{
-		rcast->offset_y = get_offset_y((int)rcast->tex_pos);
-		rcast->color = get_pixel_color(rcast->texture, rcast->offset_x,
-				rcast->offset_y);
-		my_mlx_pixel_put(game, win_x, y, rcast->color);
-		rcast->tex_pos += rcast->step_texture;
+		frame_drawing->offset_y = get_offset_y((int)frame_drawing->tex_pos);
+		frame_drawing->color = get_pixel_color(frame_drawing->texture, frame_drawing->offset_x,
+				frame_drawing->offset_y);
+		my_mlx_pixel_put(game, win_x, y, frame_drawing->color);
+		frame_drawing->tex_pos += frame_drawing->step_texture;
 		y++;
 	}
 }

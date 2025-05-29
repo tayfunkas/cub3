@@ -6,18 +6,18 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/05/27 16:54:14 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/29 19:10:16 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/cub3d.h"
 
-//void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
+// void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
 //			int color);
 void	load_img(t_game *game);
 void	*hook_img(t_game *game, char c);
 int		render(t_game *game);
-//void	raycasting(t_game *game);
+// void	raycasting(t_game *game);
 
 void	init_game(t_game *game)
 {
@@ -88,12 +88,13 @@ void	draw_miniplayer(t_game *game)
 {
 	int	center_x;
 	int	center_y;
+	int	color;
+	int	size;
 
 	center_x = (int)(game->player->pos_x * MIN_S);
 	center_y = (int)(game->player->pos_y * MIN_S);
-	int color = 0xFF0000; // Rojo para el jugador
-	int size = 8;         // Tamaño del jugador (8x8 píxeles)
-	// Dibujamos un cuadrado de 8x8 alrededor de la posición del jugador
+	color = 0xFF0000;
+	size = 8;
 	for (int y = center_y - size / 2; y < center_y + size / 2; y++)
 	{
 		for (int x = center_x - size / 2; x < center_x + size / 2; x++)
@@ -111,7 +112,7 @@ int	render(t_game *game)
 	mlx_clear_window(game->mlx_ptr, game->mlx_window);
 	draw_miniplayer(game);
 	draw_minimap(game);
-	raycasting(game, game->ray);
+	raycasting(game, game->engine->ray);
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player,
 		game->player->pos_y * MIN_S, game->player->pos_x * MIN_S);
 	// draw_fov(game, game->player);

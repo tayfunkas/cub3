@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/05/27 17:17:37 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/29 19:08:42 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,6 @@ void	fix_ang(t_ray *ray, double player_dir, double i)
 		ray->r_dir += 360.0;
 	if (ray->r_dir >= 360.0)
 		ray->r_dir = fmod(ray->r_dir, 360.0);
-}
-
-int	get_pixel_color(t_img *texture, int x, int y)
-{
-	char	*pixel;
-	int		color;
-
-	pixel = texture->addr + (y * texture->line_length + x * (texture->bpp / 8));
-	color = *(int *)pixel;
-	return (color);
 }
 
 void	fish_eye(t_game *game, t_ray *ray)
@@ -69,4 +59,5 @@ int	get_offset_y(int tex_y)
 		return (0);
 	if (tex_y >= BLOCK)
 		return (BLOCK - 1);
+	return (0);
 }

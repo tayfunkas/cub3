@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/27 17:48:14 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/29 19:08:49 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int		key_press(int key, t_game *game);
 int		key_release(int key, t_game *game);
 // rc_fov.c
 void	draw_ray_line(t_game *game, t_player *player, int x_width, float x);
-//void	draw_wall(t_game *game, int x_width, float x, float y, float ang);
+// void	draw_wall(t_game *game, int x_width, float x, float y, float ang);
 int		draw_check_collision(t_game *game, int x_width, float x, float y,
 			float ang);
 float	distance(float x1, float y1, float x2, float y2);
@@ -113,6 +113,13 @@ void	raycasting(t_game *game, t_ray *ray);
 
 //  raycasting_utils.c
 double	to_rad(double ang);
-void	fix_ang(t_ray *ray, double	player_dir, double i);
+void	fix_ang(t_ray *ray, double player_dir, double i);
+void	fish_eye(t_game *game, t_ray *ray);
+void	funct(t_ray *ray, int draw_start, int draw_end, double height);
+int		get_offset_y(int tex_y);
+
+//	get_pixel_color.c
+int		get_pixel_color(t_img *texture, int x, int y);
+void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 
 #endif

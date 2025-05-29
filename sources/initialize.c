@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/23 13:00:44 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/29 19:12:26 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,23 @@ void	initialize_game(t_game **game)
 
 void	initialize_ray(t_game *game)
 {
-	game->ray = malloc(sizeof(t_ray));
-	if (!game->ray)
+	game->engine->ray = malloc(sizeof(t_ray));
+	if (!game->engine->ray)
 	{
 		printf("Error initialize_ray()");
 		return ;
 	}
-	game->ray->r_dir = 0;
-	game->ray->r_step = (double)FOV / (double)WIN_W;
-	game->ray->ray_x = 0.0;
-	game->ray->ray_y = 0.0;
-	game->ray->ray_t = 0.0;
-	game->ray->del_x = 0.0;
-	game->ray->del_y = 0.0;
-	game->ray->dis_f = 0.0;
-	game->ray->dis_h = 0.0;
-	game->ray->dis_v = 0.0;
+	printf("Fix case does not work initialize_ray");
+	game->engine->ray->r_dir = 0;
+	game->engine->ray->r_step = (double)FOV / (double)WIN_W;
+	game->engine->ray->ray_x = 0.0;
+	game->engine->ray->ray_y = 0.0;
+	game->engine->ray->ray_t = 0.0;
+	game->engine->ray->del_x = 0.0;
+	game->engine->ray->del_y = 0.0;
+	game->engine->ray->dis_f = 0.0;
+	game->engine->ray->dis_h = 0.0;
+	game->engine->ray->dis_v = 0.0;
 	return;
 }
 
@@ -100,6 +101,7 @@ void	initialize_engine(t_game *game)
 	game->engine->ceiling_color->r = -1;
 	game->engine->ceiling_color->g = -1;
 	game->engine->ceiling_color->b = -1;
+	game->engine->ray = NULL;
 }
 
 void	initialize_player(t_game *game)

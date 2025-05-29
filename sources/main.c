@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42.fr>                +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:34:02 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/27 22:59:20 by grial            ###   ########.fr       */
+/*   Updated: 2025/05/29 19:08:10 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ int	main(int argc, char **argv)
 	validate_map(game);
 	printf("Map is valid!\n");
 	init_game(game);
-	printf("fijar 80 a la longitud del mapa void	ray_dist();.\n");
+	printf("fijar 80 a la longitud del mapa void	ray_dist();\n");
+	printf("my_mlx_pixel_put, use mlx_pixel_put\n");
+	printf("check if make of cub3d compiles libft\n");
 	free_game(game);
 	printf("All is freed. All good!\n");
 	return (0);
