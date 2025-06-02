@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/05/29 19:08:42 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 10:54:35 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ void	fish_eye(t_game *game, t_ray *ray)
 	ray->dis_f = ray->dis_f * cos(fish);
 }
 
-void	funct(t_ray *ray, int draw_start, int draw_end, double height)
+void	funct(t_ray *ray, t_rcast *rcast)
 {
-	height = ((BLOCK * WIN_H) / (ray->dis_f * BLOCK));
-	draw_start = (int)((WIN_H / 2.0) - (height / 2.0));
-	if (draw_start < 0)
-		draw_start = 0;
-	draw_end = (int)((WIN_H / 2.0) + (height / 2.0));
-	if (draw_end > WIN_H)
-		draw_end = WIN_H;
+	rcast->height = ((BLOCK * WIN_H) / (ray->dis_f * BLOCK));
+	rcast->draw_start = (int)((WIN_H / 2.0) - (rcast->height / 2.0));
+	if (rcast->draw_start < 0)
+		rcast->draw_start = 0;
+	rcast->draw_end = (int)((WIN_H / 2.0) + (rcast->height / 2.0));
+	if (rcast->draw_end > WIN_H)
+		rcast->draw_end = WIN_H;
 }
 
 int	get_offset_y(int tex_y)

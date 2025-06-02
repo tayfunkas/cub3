@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:54 by grial             #+#    #+#             */
-/*   Updated: 2025/05/19 16:18:44 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 15:51:26 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_KEYS_H
 
 # define ESCAPE 65307
+# define SPACE 32
 # define FORWARD 119
 # define BACKWARD 115
 # define LEFT 97

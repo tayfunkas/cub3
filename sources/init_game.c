@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/05/29 19:10:16 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 14:40:56 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ void	load_img(t_game *game)
 		exit(EXIT_FAILURE);
 	}
 	//		###     TEXTURE     ###
+	printf("load_img we should use char *path and not -texture/NO");
 	game->engine->no_img->img = mlx_xpm_file_to_image(game->mlx_ptr,
 			"textures/NO.xpm", &img_width, &img_height);
 	if (!game->engine->no_img->img)
@@ -174,6 +175,16 @@ void	load_img(t_game *game)
 	game->engine->no_img->addr = mlx_get_data_addr(game->engine->no_img->img,
 			&game->engine->no_img->bpp, &game->engine->no_img->line_length,
 			&game->engine->no_img->endian);
+	game->engine->door->img = mlx_xpm_file_to_image(game->mlx_ptr,
+			"textures/DR.xpm", &img_width, &img_height);
+	if (!game->engine->door->img)
+	{
+		ft_putstr_fd("Error: Failed to load player texture\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	game->engine->door->addr = mlx_get_data_addr(game->engine->door->img,
+			&game->engine->door->bpp, &game->engine->door->line_length,
+			&game->engine->door->endian);
 	game->engine->ea_img->img = mlx_xpm_file_to_image(game->mlx_ptr,
 			"textures/EA.xpm", &img_width, &img_height);
 	if (!game->engine->ea_img)

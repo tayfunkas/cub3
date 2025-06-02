@@ -3,21 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   check_wall.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42.fr>                +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:36:40 by grial             #+#    #+#             */
-/*   Updated: 2025/05/27 23:03:19 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 15:46:21 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
+void	dist_to_wall(t_ray *ray);
+
 void	wall_dist(t_game *game, t_map *map, t_ray *ray)
 {
 	vertical_values(game, ray);
-	ray_dist(game, map, ray, &ray->dis_v);
+	ray_dist_vertical(game, map, ray);
 	horizontal_values(game, ray);
-	ray_dist(game, map, ray, &ray->dis_h);
+	ray_dist_horizontal(game, map, ray);
+	dist_to_wall(ray);
+}
+
+void	dist_to_wall(t_ray *ray)
+{
+	if (ray->dis_h < ray->dis_v && ray->dis_h > 0.0)
+	{
+		ray->r_side = 1;
+		ray->dis_f = ray->dis_h;
+		ray->hit_x = ray->ray_hx;
+		ray->hit_y = ray->ray_hy;
+	}
+	else
+	{
+		ray->r_side = 0;
+		ray->dis_f = ray->dis_v;
+		ray->hit_x = ray->ray_vx;
+		ray->hit_y = ray->ray_vy;
+	}
 }
 
 void	vertical_values(t_game *game, t_ray *ray)
@@ -26,24 +47,24 @@ void	vertical_values(t_game *game, t_ray *ray)
 	ray->ray_t = tan(to_rad(ray->r_dir));
 	if (ray->r_dir < 90.0 || ray->r_dir > 270.0)
 	{
-		ray->ray_x = (int)game->player->pos_x + 1;
-		ray->ray_y = (game->player->pos_x - ray->ray_x) * ray->ray_t
+		ray->ray_vx = (int)game->player->pos_x + 1;
+		ray->ray_vy = (game->player->pos_x - ray->ray_vx) * ray->ray_t
 			+ game->player->pos_y;
 		ray->del_x = 1;
 		ray->del_y = -ray->del_x * ray->ray_t;
 	}
 	else if (ray->r_dir > 90.0 && ray->r_dir < 270.0)
 	{
-		ray->ray_x = (int)game->player->pos_x - 0.0001;
-		ray->ray_y = (game->player->pos_x - ray->ray_x) * ray->ray_t
+		ray->ray_vx = (int)game->player->pos_x - 0.0001;
+		ray->ray_vy = (game->player->pos_x - ray->ray_vx) * ray->ray_t
 			+ game->player->pos_y;
 		ray->del_x = -1;
 		ray->del_y = -ray->del_x * ray->ray_t;
 	}
 	else if (ray->r_dir == 90.0 || ray->r_dir == 270.0)
 	{
-		ray->ray_x = game->player->pos_x;
-		ray->ray_y = game->player->pos_y;
+		ray->ray_vx = game->player->pos_x;
+		ray->ray_vy = game->player->pos_y;
 		ray->del_x = 0.0;
 		ray->del_y = 0.0;
 	}
@@ -55,54 +76,119 @@ void	horizontal_values(t_game *game, t_ray *ray)
 	ray->ray_t = 1.0 / tan(to_rad(ray->r_dir));
 	if (ray->r_dir > 0.0 && ray->r_dir < 180.0) // Looking up
 	{
-		ray->ray_y = (int)game->player->pos_y - 0.0001;
-		ray->ray_x = (game->player->pos_y - ray->ray_y) * ray->ray_t
+		ray->ray_hy = (int)game->player->pos_y - 0.000001;
+		ray->ray_hx = (game->player->pos_y - ray->ray_hy) * ray->ray_t
 			+ game->player->pos_x;
 		ray->del_y = -1;
 		ray->del_x = -ray->del_y * ray->ray_t;
 	}
-	else if (ray->r_dir > 180.0 && ray->r_dir < 360.0) // Mirando hacia abajo
+	else if (ray->r_dir > 180.0 && ray->r_dir < 360.0)
 	{
-		ray->ray_y = (int)game->player->pos_y + 1;
-		ray->ray_x = (game->player->pos_y - ray->ray_y) * ray->ray_t
+		ray->ray_hy = (int)game->player->pos_y + 1;
+		ray->ray_hx = (game->player->pos_y - ray->ray_hy) * ray->ray_t
 			+ game->player->pos_x;
 		ray->del_y = 1;
 		ray->del_x = -ray->del_y * ray->ray_t;
 	}
 	else if (ray->r_dir == 0.0 || ray->r_dir == 180.0)
 	{
-		ray->ray_x = game->player->pos_x;
-		ray->ray_y = game->player->pos_y;
+		ray->ray_hx = game->player->pos_x;
+		ray->ray_hy = game->player->pos_y;
 		ray->del_x = 0.0;
 		ray->del_y = 0.0;
 	}
 }
 
-void	ray_dist(t_game *game, t_map *map, t_ray *ray, double *dist)
+void	ray_dist_vertical(t_game *game, t_map *map, t_ray *ray)
 {
-	int	int_x;
-	int	int_y;
-	int	i;
+	double	rx;
+	double	ry;
+	int		int_x;
+	int		int_y;
+	int		i;
 
+	rx = ray->ray_vx;
+	ry = ray->ray_vy;
 	i = 0;
 	while (i <= 80)
 	{
-		int_x = (int)(ray->ray_x);
-		int_y = (int)(ray->ray_y);
+		int_x = (int)rx;
+		int_y = (int)ry;
 		if (int_y >= 0 && int_y < map->m_height && int_x >= 0
 			&& int_x < (int)ft_strlen(map->data[int_y])
-			&& map->data[int_y][int_x] == '1' && map->data[int_y])
+			&& (map->data[int_y][int_x] == '1'
+				|| map->data[int_y][int_x] == 'D'))
 		{
-			*dist = (cos(to_rad(ray->r_dir)) * (ray->ray_x
-						- game->player->pos_x)) - (sin(to_rad(ray->r_dir))
-					* (ray->ray_y - game->player->pos_y));
+			ray->ray_vx = rx;
+			ray->ray_vy = ry;
+			ray->dis_v = sqrt(pow(rx - game->player->pos_x, 2) + pow(ry
+						- game->player->pos_y, 2));
 			break ;
 		}
-		else
-		{
-			ray->ray_x += ray->del_x;
-			ray->ray_y += ray->del_y;
-			i++;
-		}
+		rx += ray->del_x;
+		ry += ray->del_y;
+		i++;
 	}
 }
+
+void	ray_dist_horizontal(t_game *game, t_map *map, t_ray *ray)
+{
+	double	rx;
+	double	ry;
+	int		int_x;
+	int		int_y;
+	int		i;
+
+	rx = ray->ray_hx;
+	ry = ray->ray_hy;
+	i = 0;
+	while (i <= 80)
+	{
+		int_x = (int)rx;
+		int_y = (int)ry;
+		if (int_y >= 0 && int_y < map->m_height && int_x >= 0
+			&& int_x < (int)ft_strlen(map->data[int_y])
+			&& (map->data[int_y][int_x] == '1'
+				|| map->data[int_y][int_x] == 'D'))
+		{
+			ray->ray_hx = rx;
+			ray->ray_hy = ry;
+			ray->dis_h = sqrt(pow(rx - game->player->pos_x, 2) + pow(ry
+						- game->player->pos_y, 2));
+			break ;
+		}
+		rx += ray->del_x;
+		ry += ray->del_y;
+		i++;
+	}
+}
+
+// void	ray_dist(t_game *game, t_map *map, t_ray *ray, double *dist)
+//{
+//	int	int_x;
+//	int	int_y;
+//	int	i;
+//
+//	i = 0;
+//	while (i <= 80)
+//	{
+//		int_x = (int)(ray->ray_x);
+//		int_y = (int)(ray->ray_y);
+//		if (int_y >= 0 && int_y < map->m_height && int_x >= 0
+//			&& int_x < (int)ft_strlen(map->data[int_y])
+//			&& ((map->data[int_y][int_x] == '1' && map->data[int_y])
+//				|| (map->data[int_y][int_x] == 'D' && map->data[int_y])))
+//		{
+//			*dist = (cos(to_rad(ray->r_dir)) * (ray->ray_x
+//						- game->player->pos_x)) - (sin(to_rad(ray->r_dir))
+//					* (ray->ray_y - game->player->pos_y));
+//			break ;
+//		}
+//		else
+//		{
+//			ray->ray_x += ray->del_x;
+//			ray->ray_y += ray->del_y;
+//			i++;
+//		}
+//	}
+//}

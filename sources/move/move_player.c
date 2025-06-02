@@ -6,11 +6,13 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/05/22 17:42:30 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 16:06:39 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+void	open_door(t_player *player, t_map *map);
 
 void	handle_movement(t_game *game)
 {
@@ -33,6 +35,32 @@ void	handle_movement(t_game *game)
 		player_direction(player, TURN_R);
 	if (game->keys[ESCAPE])
 		free_game(game);
+	if (game->keys[SPACE])
+		open_door(player, map);
+}
+
+void	open_door(t_player *player, t_map *map)
+{
+	double	angle;
+	double	dx;
+	double	dy;
+	double	new_x;
+	double	new_y;
+	int		cell_x;
+	int		cell_y;
+
+	angle = player->dir * M_PI / 180.0;
+	dx = cos(angle);
+	dy = -sin(angle);
+
+	new_x = player->pos_x + dx;
+	new_y = player->pos_y + dy;
+
+	cell_x = (int)new_x;
+	cell_y = (int)new_y;
+
+	if (map->data[cell_y][cell_x] == 'D')
+		map->data[cell_y][cell_x] = '0'; // Abrimos la puerta
 }
 
 void	player_direction(t_player *player, int key)
@@ -113,7 +141,7 @@ int	check_collision(t_map *map, float x, float y)
 
 	new_x = (int) floorf(x);
 	new_y = (int) floorf(y);
-	if (map->data[new_y][new_x] != '1')
+	if (map->data[new_y][new_x] != '1' && map->data[new_y][new_x] != 'D')
 		return (1);
 	return (0);
 }

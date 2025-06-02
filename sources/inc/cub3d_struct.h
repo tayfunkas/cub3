@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/05/29 19:22:10 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 15:39:43 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,14 @@ typedef struct s_color
 typedef struct s_ray
 {
 	int			r_side;
-	double		r_height;
 	double		r_dir;
 	double		r_step;
-	double		ray_x;
-	double		ray_y;
+	double		ray_vx;
+	double		ray_vy;
+	double		ray_hx;
+	double		ray_hy;
+	int			hit_x;
+	int			hit_y;
 	double		ray_t;
 	double		del_x;
 	double		del_y;
@@ -63,17 +66,18 @@ typedef struct s_rcast
 typedef struct s_engine
 {
 	t_ray		*ray;
-	t_rcast		*frame_drawing;
+	t_rcast		*rcast;
 	t_img		*frame;
-	t_img		*current;
 	t_img		*no_img;
 	t_img		*so_img;
 	t_img		*we_img;
 	t_img		*ea_img;
+	t_img		*door;
 	char		*no_texture;
 	char		*so_texture;
 	char		*we_texture;
 	char		*ea_texture;
+	char		*door_texture;
 	t_color		*floor_color;
 	t_color		*ceiling_color;
 }				t_engine;

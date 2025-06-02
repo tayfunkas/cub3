@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:34:02 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/29 19:08:10 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 11:30:39 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
 	get_player_init_position(game->map, game->player);
 	printf("Player count after getting position = %d\n", game->player->player_count);
 	if (game->player->player_count == 0)
-		handle_error(game, "No player on the map!");
+	handle_error(game, "No player on the map!");
 	validate_map(game);
 	printf("Map is valid!\n");
 	init_game(game);

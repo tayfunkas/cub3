@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:37 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/10 16:42:57 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 11:22:48 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	check_mapchars(char *line, t_game *game)
 	while (line[i])
 	{
 		if (line[i] != '0' && line[i] != '1' && line[i] != 'N' 
-			&& line[i] != 'S' && line[i] != 'W' 
+			&& line[i] != 'S' && line[i] != 'W' && line[i] != 'D'
 			&& line[i] != 'E' && line[i] != ' ')
 			handle_error(game, "Invalid character in the map");
 		i++;
