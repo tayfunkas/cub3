@@ -26,19 +26,19 @@ run_test() {
         echo -e "${GREEN}Test passed: No exit encountered.${RESET}"
     fi
     # Only run valgrind on Linux
-    # if [[ "$(uname)" == "Linux" ]]; then
+     if [[ "$(uname)" == "Linux" ]]; then
     #     # Run valgrind and capture output
-    #     valgrind_output=$(valgrind --leak-check=full --error-exitcode=1 ./cub3D "$map" 2>&1)
+         valgrind_output=$(valgrind --leak-check=full --error-exitcode=1 ./cub3D "$map" 2>&1)
     #     # Check for memory leaks or errors
-    #     if echo "$valgrind_output" | grep -q "All heap blocks were freed"; then
-    #         echo -e "${GREEN}Memory PASSED: No memory leaks detected.${RESET}"
-    #     else
-    #         echo -e "${RED}Memory issues detected${RESET}"
-    #         echo "$valgrind_output" # Show full valgrind output if there are issues
-    #     fi
-    # else
-    #     echo -e "${YELLOW}Test does not handle nor support memory check on mac OS${RESET}"
-    # fi
+         if echo "$valgrind_output" | grep -q "All heap blocks were freed"; then
+            echo -e "${GREEN}Memory PASSED: No memory leaks detected.${RESET}"
+         else
+             echo -e "${RED}Memory issues detected${RESET}"
+             echo "$valgrind_output" # Show full valgrind output if there are issues
+         fi
+     else
+        echo -e "${YELLOW}Test does not handle nor support memory check on mac OS${RESET}"
+     fi
     # Add a new line after each test
     echo
 }

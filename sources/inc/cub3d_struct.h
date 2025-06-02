@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/06/02 15:39:43 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 16:53:46 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_game
 	void		*mlx_window;
 	char		*map_file;
 	int			*keys;
+	int			error;
 	t_config	*config;
 	t_engine	*engine;
 	t_map		*map;

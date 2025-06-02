@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/03 17:04:28 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/04/25 16:41:08 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ void	parse_texture(t_game *game, char *line, char **texture_path)
 	free(temp);
 	*texture_path = trimmed_line;
 	if (!*texture_path)
-		handle_error(game, "Invalid texture line");
+	{
+		free(trimmed_line);
+		game->error = 1;
+	}
 }
 
 void	check_texture(const char *path, const char *message, t_game *game)
@@ -67,8 +70,8 @@ void	check_images(t_game *game)
 {
 	if (!game->engine)
 		handle_error(game, "Engine not initialized before checking textures.");
-	if (!game->engine->no_texture || !game->engine->so_texture || !game->engine->we_texture 
-		|| !game->engine->ea_texture)
+	if (!game->engine->no_texture || !game->engine->so_texture || 
+		!game->engine->we_texture || !game->engine->ea_texture)
 		handle_error(game, "Missing texture file.");
 	check_texture(game->engine->no_texture, 
 		"North texture is invalid or inaccesible.", game);
@@ -78,4 +81,20 @@ void	check_images(t_game *game)
 		"West texture is invalid or inaccesible.", game);
 	check_texture(game->engine->ea_texture, 
 		"East texture is invalid or inaccesible.", game);
+}
+
+void	check_duplicates_or_missing(t_game *game)
+{
+	if (game->config->no > 1 || game->config->no == 0)
+		game->error = 1;
+	if (game->config->so > 1 || game->config->so == 0)
+		game->error = 1;
+	if (game->config->we > 1 || game->config->we == 0)
+		game->error = 1;
+	if (game->config->ea > 1 || game->config->ea == 0)
+		game->error = 1;
+	if (game->config->f > 1 || game->config->f == 0)
+		game->error = 1;
+	if (game->config->c > 1 || game->config->c == 0)
+		game->error = 1;
 }

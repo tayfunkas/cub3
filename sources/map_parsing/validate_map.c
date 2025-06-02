@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:22 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/07 17:21:59 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 16:48:25 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,19 @@ int	validate_borders(t_map *map)
 	return (1);
 }
 
-void	validate_map(t_game *game)
+static void	check_map_tile(t_game *game, char **map, int x, int y)
+{
+	if (map[x][y] != '0')
+		return ;
+	if (y == 0 || y == game->map->m_width - 1 
+		|| map[x][y - 1] == ' ' || map[x][y + 1] == ' ')
+		handle_error(game, "Open map");
+	if (x == 0 || x == game->map->m_height - 1 
+		|| map[x - 1][y] == ' ' || map[x + 1][y] == ' ')
+		handle_error(game, "Open map");
+}
+
+/*void	validate_map(t_game *game)
 {
 	char	**map;
 	int		x;
@@ -65,6 +77,29 @@ void	validate_map(t_game *game)
 					|| map[x - 1][y] == ' ' || map[x + 1][y] == ' ')
 					handle_error(game, "Open map");
 			}
+			y++;
+		}
+		x++;
+	}
+}*/
+
+void	validate_map(t_game *game)
+{
+	char	**map;
+	int		x;
+	int		y;
+
+	if (!game || !game->map || !game->map->data)
+		handle_error(game, "Map data is not initialized in validate_map");
+	map = game->map->data;
+	pad_map_to_rectangle(game);
+	x = 0;
+	while (x < game->map->m_height)
+	{
+		y = 0;
+		while (y < game->map->m_width)
+		{
+			check_map_tile(game, map, x, y);
 			y++;
 		}
 		x++;
@@ -99,26 +134,3 @@ void	pad_map_to_rectangle(t_game *game)
 		i++;
 	}
 }
-
-/*void	pad_map_to_rectangle(t_game *game)
-{
-	char **map;
-	int max_width;
-
-	max_width = game->map->m_width;
-	map = game->map->data;
-	for (int i = 0; i < game->map->m_height; i++)
-	{
-		int current_len = ft_strlen(map[i]);
-		if (current_len < max_width)
-		{
-			char *padded_line = malloc(sizeof(char) * (max_width + 1));
-			ft_strlcpy(padded_line, map[i], current_len + 1);
-			for (int j = current_len; j < max_width; j++)
-				padded_line[j] = ' ';
-			padded_line[max_width] = '\0';
-			free(map[i]);
-			map[i] = padded_line;
-		}
-	}
-}*/

@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/06/02 14:40:56 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 16:50:49 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ void	init_game(t_game *game)
 
 void	clear_image(t_game *game, int color)
 {
-	int x, y;
+	int	x;
+	int	y;
+
 	y = 0;
 	while (y < WIN_H)
 	{

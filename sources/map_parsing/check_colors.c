@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/15 17:24:20 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/06/02 16:51:11 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ static void	assign_check_color(t_game *game, t_color *color, char **rgb)
 	color->color = rgb_to_hex(color->r, color->g, color->b);
 	if (color-> r < 0 || color-> r > 255 || color->g < 0 
 		|| color->g > 255 || color->b < 0 || color->b > 255)
-		handle_error(game, "Color values must be in range 0-255");
+	{
+		game->error = 1;
+	}
 }
 
 void	parse_color(t_game *game, char *line, t_color *color)
@@ -37,16 +39,15 @@ void	parse_color(t_game *game, char *line, t_color *color)
 	i = 0;
 	rgb = ft_split(line, ',');
 	if (!rgb || ft_arraylen(rgb) != 3)
-		handle_error(game, "Invalid color format");
+	{
+		game->error = 1;
+		return ;
+	}
 	while (i < 3)
 	{
 		trimmed = ft_strtrim(rgb[i], " \n");
 		if (!trimmed || !ft_alldigit(trimmed))
-		{
-			free(trimmed);
-			ft_free_split(rgb);
-			handle_error(game, "Non-numeric or invalid color value!");
-		}
+			game->error = 1;
 		free(rgb[i]);
 		rgb[i] = trimmed;
 		i++;

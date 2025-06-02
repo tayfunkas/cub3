@@ -3,24 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42.fr>                +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:44 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/05/07 17:22:14 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 16:49:08 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/cub3d.h"
 
-int	free_game(t_game *game)
+static void	free_all_others(t_game *game)
 {
-	if (!game)
-		return (0);
-	free_engine_images(game->engine, game->mlx_ptr);
-	free_engine_texture(game->engine);
 	if (game->engine)
 		free(game->engine);
-	free_mini(game->mini, game->mlx_ptr);
+	if (game->mini)
+		free_mini(game->mini, game->mlx_ptr);
 	if (game->mlx_window)
 	{
 		mlx_clear_window(game->mlx_ptr, game->mlx_window);
@@ -34,11 +31,26 @@ int	free_game(t_game *game)
 	}
 	if (game->keys)
 		free(game->keys);
-	free_map(game->map);
 	if (game->player)
 		free(game->player);
 	if (game->config)
 		free(game->config);
+}
+
+int	free_game(t_game *game)
+{
+	if (!game)
+		return (0);
+	free_engine_images(game->engine, game->mlx_ptr);
+	free_engine_texture(game->engine);
+	free_all_others(game);
+	if (game->map)
+		free_map(game->map);
+	if (game->error == 1)
+	{
+		free(game);
+		exit(1);
+	}
 	free(game);
 	exit(0);
 }
@@ -100,9 +112,6 @@ void	free_engine_texture(t_engine *engine)
 
 void	free_mini(t_mini *mini, void *mlx_ptr)
 {
-	printf("Freeing mini struct: %p\n", mini);
-	if (!mini)
-		return ;
 	if (mlx_ptr)
 	{
 		if (mini->wall)
@@ -126,27 +135,24 @@ void	free_mini(t_mini *mini, void *mlx_ptr)
 			mini->player = NULL;
 		}
 	}
-	free(mini);  // always free, no matter what
+	free(mini);
 }
 
 void	free_map(t_map *map)
 {
+	int	i;
+
+	i = 0;
 	if (!map)
-		return;
+		return ;
 	if (map->data)
 	{
-		for (int i = 0; map->data[i]; i++)
+		while (map->data[i])
+		{
 			free(map->data[i]);
+			i++;
+		}
 		free(map->data);
 	}
 	free(map);
-}
-
-
-void	handle_error(t_game *game, const char *error_message)
-{
-	printf("Error\n%s\n", error_message);
-	if (game)
-		free_game(game);
-	exit(1);
 }

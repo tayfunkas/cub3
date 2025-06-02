@@ -24,6 +24,8 @@ SOURCES = 	sources/map_parsing/checks.c \
 			sources/map_parsing/check_textures.c \
 			sources/map_parsing/check_colors.c \
 			sources/map_parsing/parse_map.c \
+	sources/map_parsing/assign_line.c \
+	sources/free_engine.c \
 			sources/free.c \
 			sources/initialize.c \
 			sources/init_game.c \
