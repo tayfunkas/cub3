@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/06/02 10:54:35 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 18:34:51 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,5 @@ int	get_offset_y(int tex_y)
 		return (0);
 	if (tex_y >= BLOCK)
 		return (BLOCK - 1);
-	return (0);
+	return (tex_y);
 }
