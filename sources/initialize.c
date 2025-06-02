@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/02 17:00:42 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 18:13:12 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	initialize_game(t_game **game)
 	(*game)->mlx_ptr = NULL;
 	(*game)->mlx_window = NULL;
 	(*game)->map_file = NULL;
-	(*game)->error = 0;
 	(*game)->keys = ft_calloc(MAX_KEYCODE, sizeof(int));
 	if (!(*game)->keys)
 		handle_error(*game, "Memory allocation failed for keys array.");
@@ -36,6 +35,50 @@ void	initialize_game(t_game **game)
 	initialize_engine(*game);
 	initialize_config(*game);
 	initialize_mini(*game);
+	initialize_ray(*game);
+	initialize_rcast(*game);
+	return ;
+}
+
+void	initialize_rcast(t_game	*game)
+{
+	game->engine->rcast = malloc(sizeof(t_rcast));
+	if (!game->engine->rcast)
+	{
+		printf("Error initialize_rcast()");
+		return ;
+	}
+	printf("Fix case where initialize_rcast does not work");
+	game->engine->rcast->draw_start = 0;
+	game->engine->rcast->draw_end = 0;
+	game->engine->rcast->height = 0;
+	game->engine->rcast->tex_pos = 0;
+	game->engine->rcast->step_texture = 0;
+	game->engine->rcast->offset_x = 0;
+	game->engine->rcast->offset_y = 0;
+	game->engine->rcast->color = 0;
+	game->engine->rcast->texture = NULL;
+	return ;
+}
+
+void	initialize_ray(t_game *game)
+{
+	game->engine->ray = malloc(sizeof(t_ray));
+	if (!game->engine->ray)
+	{
+		printf("Error initialize_ray()");
+		return ;
+	}
+	printf("Fix case does not work initialize_ray");
+	game->engine->ray->r_dir = 0;
+	game->engine->ray->r_step = (double)FOV / (double)WIN_W;
+	game->engine->ray->ray_t = 0.0;
+	game->engine->ray->del_x = 0.0;
+	game->engine->ray->del_y = 0.0;
+	game->engine->ray->dis_f = 0.0;
+	game->engine->ray->dis_h = 0.0;
+	game->engine->ray->dis_v = 0.0;
+	return;
 }
 
 void	initialize_engine(t_game *game)
@@ -49,6 +92,7 @@ void	initialize_engine(t_game *game)
 	game->engine->so_texture = NULL;
 	game->engine->we_texture = NULL;
 	game->engine->ea_texture = NULL;
+	game->engine->door_texture = NULL;
 	game->engine->no_img = malloc(sizeof(t_img));
 	if (!game->engine->no_img)
 		return ;
@@ -104,7 +148,7 @@ void	get_player_init_position(t_map *map, t_player *player)
 	if (!map || !map->data)
 	{
 		printf("Map does not exist\n");
-		return ;
+		return;
 	}
 	x = 0;
 	while (map->data[x])

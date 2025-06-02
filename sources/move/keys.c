@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:29:56 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/02 17:01:21 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 17:17:04 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,6 @@ int	key_release(int key, t_game *game)
 	if (key >= 0 && key < MAX_KEYCODE)
 		game->keys[key] = 0;
 	return (0);
-}
-
-void	player_direction(t_player *player, int key)
-{
-	if (key == TURN_R)
-		player->dir = (player->dir + 4) % 360;
-	else if (key == TURN_L)
-		player->dir = (player->dir - 4 + 360) % 360;
 }
 
 int	mouse_move(int x, int y, t_game *game)

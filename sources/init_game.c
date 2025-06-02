@@ -6,18 +6,15 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/06/02 16:50:49 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 18:22:14 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/cub3d.h"
 
-// void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
-//			int color);
 void	load_img(t_game *game);
 void	*hook_img(t_game *game, char c);
 int		render(t_game *game);
-// void	raycasting(t_game *game);
 
 void	init_game(t_game *game)
 {
@@ -32,6 +29,7 @@ void	init_game(t_game *game)
 	if (!game->engine->frame->img || !game->engine->frame->addr)
 		handle_error(game, "Failed to create or retrieve image data");
 	load_img(game);
+	printf("hola\n");
 	mlx_hook(game->mlx_window, 17, 0, free_game, game);
 	mlx_hook(game->mlx_window, 2, 1L << 0, key_press, game);
 	mlx_hook(game->mlx_window, 3, 1L << 1, key_release, game);
@@ -171,7 +169,7 @@ void	load_img(t_game *game)
 			"textures/NO.xpm", &img_width, &img_height);
 	if (!game->engine->no_img->img)
 	{
-		ft_putstr_fd("Error: Failed to load player texture\n", 2);
+		ft_putstr_fd("Error: Failed to load no texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	game->engine->no_img->addr = mlx_get_data_addr(game->engine->no_img->img,
@@ -181,7 +179,7 @@ void	load_img(t_game *game)
 			"textures/DR.xpm", &img_width, &img_height);
 	if (!game->engine->door->img)
 	{
-		ft_putstr_fd("Error: Failed to load player texture\n", 2);
+		ft_putstr_fd("Error: Failed to load door texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	game->engine->door->addr = mlx_get_data_addr(game->engine->door->img,
@@ -191,7 +189,7 @@ void	load_img(t_game *game)
 			"textures/EA.xpm", &img_width, &img_height);
 	if (!game->engine->ea_img)
 	{
-		ft_putstr_fd("Error: Failed to load player texture\n", 2);
+		ft_putstr_fd("Error: Failed to load ea texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	game->engine->ea_img->addr = mlx_get_data_addr(game->engine->ea_img->img,
@@ -201,7 +199,7 @@ void	load_img(t_game *game)
 			"textures/SO.xpm", &img_width, &img_height);
 	if (!game->engine->so_img)
 	{
-		ft_putstr_fd("Error: Failed to load player texture\n", 2);
+		ft_putstr_fd("Error: Failed to load so texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	game->engine->so_img->addr = mlx_get_data_addr(game->engine->so_img->img,
@@ -211,34 +209,10 @@ void	load_img(t_game *game)
 			"textures/WE.xpm", &img_width, &img_height);
 	if (!game->engine->we_img)
 	{
-		ft_putstr_fd("Error: Failed to load player texture\n", 2);
+		ft_putstr_fd("Error: Failed to load we texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	game->engine->we_img->addr = mlx_get_data_addr(game->engine->we_img->img,
 			&game->engine->we_img->bpp, &game->engine->we_img->line_length,
 			&game->engine->we_img->endian);
-}
-
-int	mouse_move(int x, int y, t_game *game)
-{
-	static int	last_x = -1;
-	int			delta_x;
-
-	(void)y;
-	if (last_x == -1)
-	{
-		last_x = x;
-		return (0);
-	}
-	delta_x = x - last_x;
-	if (delta_x != 0)
-	{
-		game->player->dir -= delta_x * 0.5;
-		if (game->player->dir < 0)
-			game->player->dir += 360;
-		if (game->player->dir >= 360)
-			game->player->dir -= 360;
-		last_x = x;
-	}
-	return (0);
 }

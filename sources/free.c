@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:44 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/02 16:49:08 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 17:17:19 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,60 +55,6 @@ int	free_game(t_game *game)
 	exit(0);
 }
 
-void	free_engine_images(t_engine *engine, void *mlx_ptr)
-{
-	if (!engine)
-		return ;
-	if (engine->no_img)
-	{
-		if (engine->no_img->img)
-			mlx_destroy_image(mlx_ptr, engine->no_img->img);
-		free(engine->no_img);
-		engine->no_img = NULL;
-	}
-	if (engine->so_img)
-	{
-		if (engine->so_img->img)
-			mlx_destroy_image(mlx_ptr, engine->so_img->img);
-		free(engine->so_img);
-		engine->so_img = NULL;
-	}
-	if (engine->we_img)
-	{
-		if (engine->we_img->img)
-			mlx_destroy_image(mlx_ptr, engine->we_img->img);
-		free(engine->we_img);
-		engine->we_img = NULL;
-	}
-	if (engine->ea_img)
-	{
-		if (engine->ea_img->img)
-			mlx_destroy_image(mlx_ptr, engine->ea_img->img);
-		free(engine->ea_img);
-		engine->ea_img = NULL;
-	}
-	if (engine->frame)
-	{
-		if (engine->frame->img)
-			mlx_destroy_image(mlx_ptr, engine->frame->img);
-		free(engine->frame);
-		engine->frame = NULL;
-	}
-}
-
-void	free_engine_texture(t_engine *engine)
-{
-	if (!engine)
-		return ;
-	if (engine->no_texture)
-		free(engine->no_texture);
-	if (engine->so_texture)
-		free(engine->so_texture);
-	if (engine->we_texture)
-		free(engine->we_texture);
-	if (engine->ea_texture)
-		free(engine->ea_texture);
-}
 
 void	free_mini(t_mini *mini, void *mlx_ptr)
 {
