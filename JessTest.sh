@@ -1,6 +1,6 @@
 #!/bin/bash
 # Path to the directory containing the map files
-MAP="./maps/error"
+MAP="./map/not_playable/rgb_errors"
 # MAP="./maps/passing"
 # Define color codes
 RED='\033[0;31m'

@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/25 16:41:08 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:42:34 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ void	check_images(t_game *game)
 		!game->engine->we_texture || !game->engine->ea_texture)
 		handle_error(game, "Missing texture file.");
 	check_texture(game->engine->no_texture, 
-		"North texture is invalid or inaccesible.", game);
+		"NO texture is invalid or inaccesible.", game);
 	check_texture(game->engine->so_texture, 
-		"South texture is invalid or inaccesible.", game);
+		"SO texture is invalid or inaccesible.", game);
 	check_texture(game->engine->we_texture, 
-		"West texture is invalid or inaccesible.", game);
+		"WE texture is invalid or inaccesible.", game);
 	check_texture(game->engine->ea_texture, 
 		"East texture is invalid or inaccesible.", game);
 }
