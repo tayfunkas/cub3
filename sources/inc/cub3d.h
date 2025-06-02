@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/28 18:39:32 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:10:58 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	check_duplicates_or_missing(t_game *game);
 void	check_empty_map(t_game *game, int fd);
 void	check_mapfile_name(t_game *game, char *map);
 bool	check_mapchars(char *line, t_game *game);
+void	check_player_position(t_game *game);
 bool	check_player(char **map, char *line, t_game *game);
 //parse_map.c
 void	parse_file(t_game *game);
@@ -67,6 +68,7 @@ int		ft_is_all_spaces(char *line);
 //validate_map.c
 void	pad_map_to_rectangle(t_game *game);
 void	validate_map(t_game *game);
+void	check_map_tile(t_game *game, char **map, int x, int y);
 int		validate_borders(t_map *map);
 //move
 //keys.c

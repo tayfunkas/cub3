@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:36:03 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/25 17:00:40 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:49:54 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	check_blank_line(t_game *game, char *line, int len)
 			space_count++;
 		i++;
 	}
-	if (len - 1 == space_count)
+	if (i > 0 && i == space_count)
 		handle_error(game, "Invalid blank line within the map.");
 }
 

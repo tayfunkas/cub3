@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:22 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/25 17:04:12 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:02:51 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	validate_borders(t_map *map)
 	return (1);
 }
 
-static void	check_map_tile(t_game *game, char **map, int x, int y)
+void	check_map_tile(t_game *game, char **map, int x, int y)
 {
 	if (map[x][y] != '0')
 		return ;
@@ -51,37 +51,6 @@ static void	check_map_tile(t_game *game, char **map, int x, int y)
 		|| map[x - 1][y] == ' ' || map[x + 1][y] == ' ')
 		handle_error(game, "Open map");
 }
-
-/*void	validate_map(t_game *game)
-{
-	char	**map;
-	int		x;
-	int		y;
-
-	x = 0;
-	if (!game || !game->map || !game->map->data)
-		handle_error(game, "Map data is not initialized in validate_map");
-	map = game->map->data;
-	pad_map_to_rectangle(game);
-	while (x < game->map->m_height)
-	{
-		y = 0;
-		while (y < game->map->m_width)
-		{
-			if (map[x][y] == '0')
-			{
-				if (y == 0 || y == game->map->m_width - 1 
-					|| map[x][y - 1] == ' ' || map[x][y + 1] == ' ')
-					handle_error(game, "Open map");
-				if (x == 0 || x == game->map->m_height - 1 
-					|| map[x - 1][y] == ' ' || map[x + 1][y] == ' ')
-					handle_error(game, "Open map");
-			}
-			y++;
-		}
-		x++;
-	}
-}*/
 
 void	validate_map(t_game *game)
 {
@@ -120,8 +89,8 @@ void	pad_map_to_rectangle(t_game *game)
 		if (ft_strlen(map[i]) < game->map->m_width)
 		{
 			padded_line = malloc(sizeof(char) * (game->map->m_width + 1));
-			ft_strlcpy(padded_line, map[i], ft_strlen(map[i]) + 1);
 			j = ft_strlen(map[i]);
+			ft_strlcpy(padded_line, map[i], j + 1);
 			while (j < game->map->m_width)
 			{
 				padded_line[j] = ' ';

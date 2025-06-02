@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:34:40 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/02/19 13:33:33 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/02 16:25:24 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,9 @@ int	ft_is_all_spaces(char *line)
 		line++;
 	}
 	return (1);
+}
+
+bool	is_valid_tile(char c)
+{
+	return (c == '0' || c == '1');
 }

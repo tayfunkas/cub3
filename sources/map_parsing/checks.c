@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:37 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/13 19:14:22 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:25:13 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,31 @@ bool	check_mapchars(char *line, t_game *game)
 	}
 	free(trimmed);
 	return (true);
+}
+
+void	check_player_position(t_game *game)
+{
+	int		x;
+	int		y;
+	char	**map;
+
+	map = game->map->data;
+	x = game->player->player_x;
+	y = game->player->player_y;
+	if (y == 0 || y == game->map->m_width - 1 
+		|| map[x][y - 1] == ' ' || map[x][y + 1] == ' ')
+		handle_error(game, "Check player position");
+	if (x == 0 || x == game->map->m_height - 1 
+		|| map[x - 1][y] == ' ' || map[x + 1][y] == ' ')
+		handle_error(game, "Check player position");
+	if (!map[y - 1] || (map[y - 1][x] != '0' && map[y - 1][x] != '1'))
+		handle_error(game, "Check player position");
+	if (!map[y + 1] || (map[y + 1][x] != '0' && map[y + 1][x] != '1'))
+		handle_error(game, "Check player position");
+	if (x <= 0 || (map[y][x - 1] != '0' && map[y][x - 1] != '1'))
+		handle_error(game, "Check player position");
+	if (map[y][x + 1] == '\0' || (map[y][x + 1] != '0' && map[y][x + 1] != '1'))
+		handle_error(game, "Check player position");
 }
 
 bool	check_player(char **map, char *line, t_game *game)

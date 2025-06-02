@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/28 15:00:48 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/06/02 13:51:40 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	parse_color(t_game *game, char *line, t_color *color)
 	if (!rgb || ft_arraylen(rgb) != 3)
 	{
 		game->error = 1;
+		ft_free_split(rgb);
 		return ;
 	}
 	while (i < 3)
