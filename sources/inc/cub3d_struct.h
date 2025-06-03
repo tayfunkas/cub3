@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/06/03 17:52:21 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/03 19:53:13 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_img
 	int			endian;
 }				t_img;
 
-typedef struct s_rcast
+typedef struct s_rend
 {
 	int			draw_start;
 	int			draw_end;
@@ -61,12 +61,12 @@ typedef struct s_rcast
 	int			offset_y;
 	int			color;
 	t_img		*texture;
-}				t_rcast;
+}				t_rend;
 
 typedef struct s_engine
 {
 	t_ray		*ray;
-	t_rcast		*rcast;
+	t_rend		*rcast;
 	t_img		*frame;
 	t_img		*no_img;
 	t_img		*so_img;

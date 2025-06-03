@@ -39,7 +39,7 @@ SOURCES = 	sources/map_parsing/checks.c \
 			sources/utils/get_pixel_color.c \
 			sources/mini_map/mini_map.c \
 			sources/ray_casting/check_wall_utils.c \
-			sources/ray_casting/draw_wall.c
+			sources/ray_casting/render.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/03 17:48:11 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/03 19:54:00 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,13 +116,14 @@ void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
 		int color);
 
 //  raycasting.c
-void	raycasting(t_game *game, t_ray *ray);
+void	raycasting(t_game *game, t_ray *ray, t_rend *rcast);
+
 
 //  raycasting_utils.c
 double	to_rad(double ang);
 void	fix_ang(t_ray *ray, double player_dir, double i);
-void	fish_eye(t_game *game, t_ray *ray);
-void	funct(t_ray *ray, t_rcast *rcast);
+void	fix_fisheye(t_game *game, t_ray *ray);
+void	set_wall_draw_limits(t_ray *ray, t_rend *rcast);
 int		get_offset_y(int tex_y);
 
 //	get_pixel_color.c
@@ -134,7 +135,7 @@ void	free_engine_texture(t_engine *engine);
 void	handle_error(t_game *game, const char *error_message);
 
 //	draw_wall.c
-void	draw_wall(t_game *game, t_ray *ray, int win_x);
+void	render_wall_column(t_game *game, t_ray *ray, t_rend *rcast,int win_x);
 void	get_tex(t_game *game, t_ray *ray);
 int		get_texture_offset_x(t_game *game, t_ray *ray);
 

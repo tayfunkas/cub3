@@ -1,28 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_wall.c                                        :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/06/03 15:03:47 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/03 22:12:41 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	draw_wall(t_game *game, t_ray *ray, int win_x)
+int	render(t_game *game)
+{
+	mlx_clear_window(game->mlx_ptr, game->mlx_window);
+	usleep(10000);
+	render_background(game);
+	handle_movement(game);
+	raycasting(game, game->engine->ray);
+	draw_minimap(game);
+	draw_miniplayer(game);
+	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player,
+		game->player->pos_y * MIN_S, game->player->pos_x * MIN_S);
+	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window,
+		game->engine->frame->img, 0, 0);
+	printf("Qué hacen estas dos juntas? render();\n");
+	return (1);
+}
+
+void	render_wall_column(t_game *game, t_ray *ray, t_rend *rcast,int win_x)
 {
 	double	pos_y;
 	int		tex_y;
-	t_rcast	*rcast;
 	int		y;
 
-	rcast = game->engine->rcast;
 	rcast->offset_x = get_texture_offset_x(game, ray);
-	fish_eye(game, ray);
-	funct(ray, rcast);
+	fix_fisheye(game, ray);
+	set_wall_draw_limits(ray, rcast);
 	rcast->step_texture = (double)BLOCK / rcast->height;
 	pos_y = (rcast->draw_start - ((WIN_H / 2.0) - (rcast->height / 2.0)))
 		* rcast->step_texture;

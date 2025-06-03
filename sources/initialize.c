@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/02 18:13:12 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/03 19:53:13 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	initialize_game(t_game **game)
 
 void	initialize_rcast(t_game	*game)
 {
-	game->engine->rcast = malloc(sizeof(t_rcast));
+	game->engine->rcast = malloc(sizeof(t_rend));
 	if (!game->engine->rcast)
 	{
 		printf("Error initialize_rcast()");

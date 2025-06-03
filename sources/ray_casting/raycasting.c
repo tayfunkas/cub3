@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/06/03 16:38:12 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/03 19:54:00 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	draw_wall(t_game *game, t_ray *ray, int win_x);
-void	get_tex(t_game *game, t_ray *ray);
-
-void	raycasting(t_game *game, t_ray *ray)
+void	raycasting(t_game *game, t_ray *ray, t_rend *rcast)
 {
 	int		dir_i;
 	int		win_x;
@@ -29,8 +26,7 @@ void	raycasting(t_game *game, t_ray *ray)
 		fix_ang(ray, dir_i, -ang_d);
 		wall_dist(game, game->map, ray);
 		get_tex(game, ray);
-		draw_wall(game, ray, win_x);
-		//draw_ray(game, ray);
+		render_wall_column(game, ray, rcast ,win_x);
 		ang_d += ray->r_step;
 		win_x += 1;
 	}
