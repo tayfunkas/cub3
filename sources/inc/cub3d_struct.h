@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/06/02 18:21:10 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/03 17:52:21 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ typedef struct s_mini
 
 typedef struct s_map
 {
+	char		**data;
 	int			m_height;
 	int			m_width;
-	char		**data;
 	int			line_count;
 	int			max_size;
 }				t_map;
