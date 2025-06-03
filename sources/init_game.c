@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/06/02 18:22:14 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/03 16:28:58 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	init_game(t_game *game)
 	if (!game->engine->frame->img || !game->engine->frame->addr)
 		handle_error(game, "Failed to create or retrieve image data");
 	load_img(game);
-	printf("hola\n");
 	mlx_hook(game->mlx_window, 17, 0, free_game, game);
 	mlx_hook(game->mlx_window, 2, 1L << 0, key_press, game);
 	mlx_hook(game->mlx_window, 3, 1L << 1, key_release, game);
@@ -56,66 +55,16 @@ void	clear_image(t_game *game, int color)
 	}
 }
 
-void	draw_minimap(t_game *game)
-{
-	int	color;
-
-	int i, j;
-	for (i = 0; i < game->map->m_height; i++)
-	{
-		for (j = 0; j < (int)ft_strlen(game->map->data[i]); j++)
-		{
-			if (game->map->data[i][j] == '1')
-				color = 0xAAAAAA; // gris para muros
-			else if (game->map->data[i][j] == '0')
-				color = 0x222222; // gris oscuro para espacio vacío
-			else
-				color = 0x000000;
-			// negro para cualquier otro (puede ser ajustado)
-			// dibujar bloque de MIN_S x MIN_S píxeles
-			for (int y = 0; y < MIN_S; y++)
-			{
-				for (int x = 0; x < MIN_S; x++)
-				{
-					my_mlx_pixel_put(game, j * MIN_S + x, i * MIN_S + y, color);
-				}
-			}
-		}
-	}
-}
-
-void	draw_miniplayer(t_game *game)
-{
-	int	center_x;
-	int	center_y;
-	int	color;
-	int	size;
-
-	center_x = (int)(game->player->pos_x * MIN_S);
-	center_y = (int)(game->player->pos_y * MIN_S);
-	color = 0xFF0000;
-	size = 8;
-	for (int y = center_y - size / 2; y < center_y + size / 2; y++)
-	{
-		for (int x = center_x - size / 2; x < center_x + size / 2; x++)
-		{
-			my_mlx_pixel_put(game, x, y, color);
-		}
-	}
-}
-
 int	render(t_game *game)
 {
 	render_background(game);
 	handle_movement(game);
 	usleep(10000);
 	mlx_clear_window(game->mlx_ptr, game->mlx_window);
-	draw_miniplayer(game);
-	draw_minimap(game);
 	raycasting(game, game->engine->ray);
+	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player,
 		game->player->pos_y * MIN_S, game->player->pos_x * MIN_S);
-	// draw_fov(game, game->player);
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window,
 		game->engine->frame->img, 0, 0);
 	return (1);

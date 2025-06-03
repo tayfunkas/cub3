@@ -24,8 +24,8 @@ SOURCES = 	sources/map_parsing/checks.c \
 			sources/map_parsing/check_textures.c \
 			sources/map_parsing/check_colors.c \
 			sources/map_parsing/parse_map.c \
-	sources/map_parsing/assign_line.c \
-	sources/free_engine.c \
+			sources/map_parsing/assign_line.c \
+			sources/free_engine.c \
 			sources/free.c \
 			sources/initialize.c \
 			sources/init_game.c \
@@ -35,10 +35,11 @@ SOURCES = 	sources/map_parsing/checks.c \
 			sources/ray_casting/raycasting.c \
 			sources/ray_casting/check_wall.c \
 			sources/ray_casting/raycasting_utils.c \
-			sources/ray_casting/rc_fov.c \
 			sources/ray_casting/render_background.c \
-			sources/utils/get_pixel_color.c
-
+			sources/utils/get_pixel_color.c \
+			sources/mini_map/mini_map.c \
+			sources/ray_casting/check_wall_utils.c \
+			sources/ray_casting/draw_wall.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
