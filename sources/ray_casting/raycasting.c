@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/06/02 15:49:56 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/03 11:01:44 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,24 +89,26 @@ int	get_texture_offset_x(t_game *game, t_ray *ray)
 
 void	draw_wall(t_game *game, t_ray *ray, int win_x)
 {
+	double	pos_y;
+	int		tex_y;
+	
 	t_rcast	*rcast;
 	int		y;
 
 	rcast = game->engine->rcast;
+	rcast->offset_x = get_texture_offset_x(game, ray);
 	fish_eye(game, ray);
 	funct(ray, rcast);
-	rcast->offset_x = get_texture_offset_x(game, ray);
 	rcast->step_texture = (double)BLOCK / rcast->height;
-	rcast->tex_pos = (rcast->draw_start - ((WIN_H / 2.0) - (rcast->height
+	pos_y = (rcast->draw_start - ((WIN_H / 2.0) - (rcast->height
 					/ 2.0))) * rcast->step_texture;
 	y = rcast->draw_start;
 	while (y < rcast->draw_end)
 	{
-		rcast->offset_y = get_offset_y((int)rcast->tex_pos);
-		rcast->color = get_pixel_color(rcast->texture, rcast->offset_x,
-			rcast->offset_y);
+		tex_y = ((int)pos_y) & (64 - 1);
+		rcast->color = get_pixel_color(rcast->texture, rcast->offset_x, tex_y);
 		my_mlx_pixel_put(game, win_x, y, rcast->color);
-		rcast->tex_pos += rcast->step_texture;
+		pos_y += rcast->step_texture;
 		y++;
 	}
 }
