@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/02 13:51:40 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:25:45 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,21 @@ static void	assign_check_color(t_game *game, t_color *color, char **rgb)
 	}
 }
 
+static void	count_commas(t_game *game, const char *line)
+{
+	int	count;
+
+	count = 0;
+	while (*line)
+	{
+		if (*line == ',')
+			count++;
+		line++;
+	}
+	if (count != 2)
+		game->error = 1;
+}
+
 void	parse_color(t_game *game, char *line, t_color *color)
 {
 	char	**rgb;
@@ -31,6 +46,7 @@ void	parse_color(t_game *game, char *line, t_color *color)
 	int		i;
 
 	i = 0;
+	count_commas(game, line);
 	rgb = ft_split(line, ',');
 	if (!rgb || ft_arraylen(rgb) != 3)
 	{
@@ -41,7 +57,7 @@ void	parse_color(t_game *game, char *line, t_color *color)
 	while (i < 3)
 	{
 		trimmed = ft_strtrim(rgb[i], " \n");
-		if (!trimmed || !ft_alldigit(trimmed))
+		if (!trimmed || !*trimmed || !ft_alldigit(trimmed))
 			game->error = 1;
 		free(rgb[i]);
 		rgb[i] = trimmed;
