@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 14:47:11 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 15:57:57 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ void	initialize_mini(t_game *game)
 	game->mini = ft_calloc(1, sizeof(t_mini));
 	if (!game->mini)
 		handle_error(game, "Failed to allocate mini");
-	game->mini->wall = NULL;
-	game->mini->door = NULL;
-	game->mini->floor = NULL;
+	game->mini->mini_wall = NULL;
+	game->mini->mini_door = NULL;
+	game->mini->mini_floor = NULL;
 	game->mini->player = NULL;
 }
 

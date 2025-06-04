@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:36:29 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 15:07:40 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 15:51:38 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,5 +147,5 @@ void	classify_line(t_game *game, char *line)
 		parse_map(game, original_line);
 	}
 	else
-		handle_error(game, "Invalid line in .cub file");
+		game->error = 1;
 }

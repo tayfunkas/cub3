@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:36:03 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/02 16:52:18 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 15:50:25 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	check_blank_line(t_game *game, char *line, int len)
 			space_count++;
 		i++;
 	}
-	if (len - 1 == space_count)
+	if (i > 0 && i == space_count)
 		handle_error(game, "Invalid blank line within the map.");
 }
 

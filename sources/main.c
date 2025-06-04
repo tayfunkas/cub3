@@ -6,11 +6,19 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:34:02 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/02 17:20:29 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 15:50:14 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/cub3d.h"
+
+static void	print_map(char **map)
+{
+	printf("---- MAP DUMP ----\n");
+	for (int i = 0; map[i]; i++)
+		printf("%02d: %s\n", i, map[i]);
+}
+
 
 void	parse_arguments(int argc, char **argv, t_game *game)
 {
@@ -35,12 +43,14 @@ int	main(int argc, char **argv)
 	printf("Texture files are checked!\n");
 	printf("game->map pointer: %p\n", (void *)game->map);
 	get_player_init_position(game->map, game->player);
-	printf("Player count after getting position = %d\n", game->player->player_count);
+	printf("Player count = %d\n", game->player->player_count);
 	if (game->player->player_count == 0)
 		game->error = 1;
 	if (game->error == 1)
-		handle_error(game, "Issue with the map\n");
+		handle_error(game, "Issue with the map file\n");
 	validate_map(game);
+	check_player_position(game); 
+	print_map(game->map->data);
 	printf("Map is valid!\n");
 	init_game(game);
 	printf("fijar 80 a la longitud del mapa void	ray_dist();\n");

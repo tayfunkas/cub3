@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/06/04 15:44:08 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 15:57:26 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ typedef struct s_engine
 
 typedef struct s_mini
 {
-	void		*wall;
-	void		*floor;
-	void		*door;
+	void		*mini_wall;
+	void		*mini_floor;
+	void		*mini_door;
 	void		*player;
 }				t_mini;
 

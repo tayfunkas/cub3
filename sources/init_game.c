@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/06/04 15:11:52 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 15:57:16 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void	clear_image(t_game *game, int color)
 void	*hook_img(t_game *game, char c)
 {
 	if (c == '1')
-		return (game->mini->wall);
+		return (game->mini->mini_wall);
 	else
-		return (game->mini->floor);
+		return (game->mini->mini_floor);
 	return (NULL);
 }
 
@@ -77,16 +77,16 @@ void	load_img(t_game *game)
 		ft_putstr_fd("Error: game->mini not initialized\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	game->mini->wall = mlx_xpm_file_to_image(game->mlx_ptr,
+	game->mini->mini_wall = mlx_xpm_file_to_image(game->mlx_ptr,
 			"textures/mini_map/wall.xpm", &img_width, &img_height);
-	if (!game->mini->wall)
+	if (!game->mini->mini_wall)
 	{
 		ft_putstr_fd("Error: Failed to load wall texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	game->mini->floor = mlx_xpm_file_to_image(game->mlx_ptr,
+	game->mini->mini_floor = mlx_xpm_file_to_image(game->mlx_ptr,
 			"textures/mini_map/floor.xpm", &img_width, &img_height);
-	if (!game->mini->floor)
+	if (!game->mini->mini_floor)
 	{
 		ft_putstr_fd("Error: Failed to load floor texture\n", 2);
 		exit(EXIT_FAILURE);

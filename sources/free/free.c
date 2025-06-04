@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:44 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 15:11:52 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 15:58:15 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,20 @@ void	free_mini(t_mini *mini, void *mlx_ptr)
 {
 	if (mlx_ptr)
 	{
-		if (mini->wall)
+		if (mini->mini_wall)
 		{
-			mlx_destroy_image(mlx_ptr, mini->wall);
-			mini->wall = NULL;
+			mlx_destroy_image(mlx_ptr, mini->mini_wall);
+			mini->mini_wall = NULL;
 		}
-		if (mini->door)
+		if (mini->mini_door)
 		{
-			mlx_destroy_image(mlx_ptr, mini->door);
-			mini->dr_img = NULL;
+			mlx_destroy_image(mlx_ptr, mini->mini_door);
+			mini->mini_door = NULL;
 		}
-		if (mini->floor)
+		if (mini->mini_floor)
 		{
-			mlx_destroy_image(mlx_ptr, mini->floor);
-			mini->floor = NULL;
+			mlx_destroy_image(mlx_ptr, mini->mini_floor);
+			mini->mini_floor = NULL;
 		}
 		if (mini->player)
 		{
