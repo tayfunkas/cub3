@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   open_door.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/06/04 10:40:14 by grial            ###   ########.fr       */
+/*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
+/*   Updated: 2025/06/04 10:44:26 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	raycasting(t_game *game, t_ray *ray, t_rend *rcast)
+void	open_door(t_player *player, t_map *map)
 {
-	int		dir_i;
-	int		win_x;
-	double	ang_d;
+	double	new_x;
+	double	new_y;
+	int		cell_x;
+	int		cell_y;
 
-	dir_i = game->player->dir + (FOV / 2);
-	win_x = 0;
-	ang_d = 0.0;
-	while (win_x < WIN_W)
-	{
-		fix_ang(ray, dir_i, -ang_d);
-		wall_dist(game, game->map, ray);
-		get_tex(game, ray);
-		render_wall_column(game, ray, rcast, win_x);
-		ang_d += ray->r_step;
-		win_x += 1;
-	}
+	new_x = player->pos_x + (cos(player->dir * M_PI / 180.0));
+	new_y = player->pos_y + (-sin(player->dir * M_PI / 180.0));
+	cell_x = (int)new_x;
+	cell_y = (int)new_y;
+	if (map->data[cell_y][cell_x] == 'D')
+		map->data[cell_y][cell_x] = '0';
 }

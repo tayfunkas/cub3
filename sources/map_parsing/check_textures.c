@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/04/25 16:41:08 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:07:40 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,16 @@ void	check_images(t_game *game)
 {
 	if (!game->engine)
 		handle_error(game, "Engine not initialized before checking textures.");
-	if (!game->engine->no_texture || !game->engine->so_texture || 
-		!game->engine->we_texture || !game->engine->ea_texture)
+	if (!game->engine->no_path || !game->engine->so_path || 
+		!game->engine->we_path || !game->engine->ea_path)
 		handle_error(game, "Missing texture file.");
-	check_texture(game->engine->no_texture, 
+	check_texture(game->engine->no_path, 
 		"North texture is invalid or inaccesible.", game);
-	check_texture(game->engine->so_texture, 
+	check_texture(game->engine->so_path, 
 		"South texture is invalid or inaccesible.", game);
-	check_texture(game->engine->we_texture, 
+	check_texture(game->engine->we_path, 
 		"West texture is invalid or inaccesible.", game);
-	check_texture(game->engine->ea_texture, 
+	check_texture(game->engine->ea_path, 
 		"East texture is invalid or inaccesible.", game);
 }
 

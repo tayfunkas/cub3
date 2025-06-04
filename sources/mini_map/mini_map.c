@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/04 12:04:16 by grial             #+#    #+#             */
+/*   Updated: 2025/06/04 14:43:31 by grial            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
 static int	get_minimap_color(char tile)
@@ -47,34 +59,26 @@ void	draw_minimap(t_game *game)
 	}
 }
 
-static void	draw_pixel_square(t_game *game, int x, int y, int size, int color)
-{
-	int	i;
-	int	j;
-
-	i = y - size / 2;
-	while (i < y + size / 2)
-	{
-		j = x - size / 2;
-		while (j < x + size / 2)
-		{
-			my_mlx_pixel_put(game, j, i, color);
-			j++;
-		}
-		i++;
-	}
-}
 
 void	draw_miniplayer(t_game *game)
 {
 	int	center_x;
 	int	center_y;
-	int	color;
-	int	size;
+	int	i;
+	int	j;
 
 	center_x = (int)(game->player->pos_x * MIN_S);
 	center_y = (int)(game->player->pos_y * MIN_S);
-	color = 0xFF0000;
-	size = 4;
-	draw_pixel_square(game, center_x, center_y, size, color);
+
+	i = center_y - PLY_S / 2;
+	while (i < center_y + PLY_S / 2)
+	{
+		j = center_x - PLY_S / 2;
+		while (j < center_x + PLY_S / 2)
+		{
+			my_mlx_pixel_put(game, j, i, PLY_C);
+			j++;
+		}
+		i++;
+	}
 }

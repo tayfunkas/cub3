@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/03 19:54:00 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/06/04 14:48:33 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../minilibx-linux/mlx.h"
 # include "cub3d_keys.h"
 # include "cub3d_struct.h"
+# include "cub3d_config.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
@@ -27,15 +28,6 @@
 # include <unistd.h>
 
 # define M_PI 3.14159265358979323846
-# define WIN_W 1280
-# define WIN_H 720
-# define MIN_S 8
-# define BLOCK 64
-# define STEP 0.07
-# define FOV 60
-
-void	get_player_init_position(t_map *map, t_player *player);
-int		is_player(char c);
 
 // map_parsing
 // assign_line.c
@@ -54,7 +46,7 @@ void	check_images(t_game *game);
 void	parse_texture(t_game *game, char *line, char **texture_path);
 void	check_duplicates_or_missing(t_game *game);
 
-// checks.c
+//	checks.c
 void	check_empty_map(t_game *game, int fd);
 void	check_mapfile_name(t_game *game, char *map);
 bool	check_mapchars(char *line, t_game *game);
@@ -90,11 +82,10 @@ int		check_collision(t_map *map, float x, float y);
 // ray_casting
 // rc_fov.c
 void	draw_ray_line(t_game *game, t_player *player, int x_width, float x);
-int		draw_check_collision(t_game *game, int x_width, float x, float y,
-			float ang);
 float	distance(float x1, float y1, float x2, float y2);
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 
+void	open_door(t_player *player, t_map *map);
 // render_background.c
 void	render_background(t_game *game);
 
@@ -112,14 +103,11 @@ void	ray_dist_vertical(t_game *game, t_map *map, t_ray *ray);
 //	mini_map.c
 void	draw_miniplayer(t_game *game);
 void	draw_minimap(t_game *game);
-void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
-		int color);
 
-//  raycasting.c
+//	raycasting.c
 void	raycasting(t_game *game, t_ray *ray, t_rend *rcast);
 
-
-//  raycasting_utils.c
+//	raycasting_utils.c
 double	to_rad(double ang);
 void	fix_ang(t_ray *ray, double player_dir, double i);
 void	fix_fisheye(t_game *game, t_ray *ray);
@@ -135,27 +123,36 @@ void	free_engine_texture(t_engine *engine);
 void	handle_error(t_game *game, const char *error_message);
 
 //	draw_wall.c
-void	render_wall_column(t_game *game, t_ray *ray, t_rend *rcast,int win_x);
+void	render_wall_column(t_game *game, t_ray *ray, t_rend *rcast, int win_x);
 void	get_tex(t_game *game, t_ray *ray);
 int		get_texture_offset_x(t_game *game, t_ray *ray);
 
-// free.c
+//	free.c
 int		free_game(t_game *game);
 void	free_mini(t_mini *mini, void *mlx_ptr);
 void	free_map(t_map *map);
 
-// init_game.c
+//	init_game.c
 int		key_hook(int key, t_game *game);
 void	init_game(t_game *game);
 int		mouse_move(int x, int y, t_game *game);
 
-// initialize.c
+//	initialize.c
 void	initialize_game(t_game **game);
-void	initialize_player(t_game *game);
-void	initialize_engine(t_game *game);
+void	initialize_img(t_engine *engine);
 void	initialize_mini(t_game *game);
 void	initialize_config(t_game *game);
-void	initialize_rcast(t_game *game);
+void	initialize_render(t_game *game);
 void	initialize_ray(t_game *game);
+
+//	initialize_engine.c
+void	initialize_engine(t_game *game);
+void	initialize_img(t_engine *engine);
+
+//	initialize_player.c
+void	initialize_player(t_game *game);
+void	get_player_init_position(t_map *map, t_player *player);
+int		is_player(char c);
+int		player_dir(char c);
 
 #endif

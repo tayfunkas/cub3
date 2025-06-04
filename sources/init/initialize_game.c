@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize.c                                       :+:      :+:    :+:   */
+/*   initialize_game.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/03 19:53:13 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/06/04 14:47:11 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/cub3d.h"
+#include "../inc/cub3d.h"
 
 void	initialize_game(t_game **game)
 {
@@ -36,19 +36,19 @@ void	initialize_game(t_game **game)
 	initialize_config(*game);
 	initialize_mini(*game);
 	initialize_ray(*game);
-	initialize_rcast(*game);
+	initialize_render(*game);
 	return ;
 }
 
-void	initialize_rcast(t_game	*game)
+void	initialize_render(t_game *game)
 {
 	game->engine->rcast = malloc(sizeof(t_rend));
 	if (!game->engine->rcast)
 	{
-		printf("Error initialize_rcast()");
+		printf("Error initialize_render()");
 		return ;
 	}
-	printf("Fix case where initialize_rcast does not work");
+	printf("Fix case where initialize_render does not work");
 	game->engine->rcast->draw_start = 0;
 	game->engine->rcast->draw_end = 0;
 	game->engine->rcast->height = 0;
@@ -70,102 +70,22 @@ void	initialize_ray(t_game *game)
 		return ;
 	}
 	printf("Fix case does not work initialize_ray");
-	game->engine->ray->r_dir = 0;
 	game->engine->ray->r_step = (double)FOV / (double)WIN_W;
+	game->engine->ray->r_side = 0;
+	game->engine->ray->hit_x = 0;
+	game->engine->ray->hit_y = 0;
+	game->engine->ray->r_dir = 0.0;
+	game->engine->ray->ray_vx = 0.0;
+	game->engine->ray->ray_vy = 0.0;
+	game->engine->ray->ray_hx = 0.0;
+	game->engine->ray->ray_hy = 0.0;
 	game->engine->ray->ray_t = 0.0;
 	game->engine->ray->del_x = 0.0;
 	game->engine->ray->del_y = 0.0;
-	game->engine->ray->dis_f = 0.0;
 	game->engine->ray->dis_h = 0.0;
 	game->engine->ray->dis_v = 0.0;
-	return;
-}
-
-void	initialize_engine(t_game *game)
-{
-	game->engine = malloc(sizeof(t_engine));
-	if (!game->engine)
-		return ;
-	game->engine->frame = malloc(sizeof(t_img)); 
-	game->engine->frame->img = NULL;
-	game->engine->no_texture = NULL;
-	game->engine->so_texture = NULL;
-	game->engine->we_texture = NULL;
-	game->engine->ea_texture = NULL;
-	game->engine->door_texture = NULL;
-	game->engine->no_img = malloc(sizeof(t_img));
-	if (!game->engine->no_img)
-		return ;
-	game->engine->no_img->img = NULL;
-	game->engine->so_img = malloc(sizeof(t_img));
-	if (!game->engine->so_img)
-		return ;
-	game->engine->so_img->img = NULL;
-	game->engine->we_img = malloc(sizeof(t_img));
-	if (!game->engine->we_img)
-		return ;
-	game->engine->we_img->img = NULL;
-	game->engine->ea_img = malloc(sizeof(t_img));
-	if (!game->engine->ea_img)
-		return ;
-	game->engine->ea_img->img = NULL;
-	game->engine->door = malloc(sizeof(t_img));
-	if (!game->engine->door)
-		return ;
-	game->engine->door->img = NULL;
-	
-	game->engine->floor_color = malloc(sizeof(t_color));
-	if (!game->engine->floor_color)
-		return ;
-	game->engine->floor_color->r = -1;
-	game->engine->floor_color->g = -1;
-	game->engine->floor_color->b = -1;
-	game->engine->ceiling_color = malloc(sizeof(t_color));
-	if (!game->engine->ceiling_color)
-		return ;
-	game->engine->ceiling_color->r = -1;
-	game->engine->ceiling_color->g = -1;
-	game->engine->ceiling_color->b = -1;
-	game->engine->ray = NULL;
-}
-
-void	initialize_player(t_game *game)
-{
-	(game)->player = malloc(sizeof(t_player));
-	if (!game->player)
-		handle_error(game, "Memory allocation failed for player structure.");
-	(game)->player->player_count = 0;
-	(game)->player->dir = 0;
-	(game)->player->pos_x = 0;
-	(game)->player->pos_y = 0;
-}
-
-void	get_player_init_position(t_map *map, t_player *player)
-{
-	int	x;
-	int	y;
-
-	if (!map || !map->data)
-	{
-		printf("Map does not exist\n");
-		return;
-	}
-	x = 0;
-	while (map->data[x])
-	{
-		y = 0;
-		while (map->data[x][y])
-		{
-			if (is_player(map->data[x][y]))
-			{
-				player->pos_x = y;
-				player->pos_y = x;
-				player->player_count++;
-			}
-			y++;
-		}
-		x++;
-	}
+	game->engine->ray->dis_f = 0.0;
+	return ;
 }
 
 void	initialize_mini(t_game *game)
@@ -177,13 +97,6 @@ void	initialize_mini(t_game *game)
 	game->mini->door = NULL;
 	game->mini->floor = NULL;
 	game->mini->player = NULL;
-}
-
-int	is_player(char c)
-{
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (1);
-	return (0);
 }
 
 void	initialize_config(t_game *game)

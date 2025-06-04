@@ -27,7 +27,6 @@ SOURCES = 	sources/map_parsing/checks.c \
 			sources/map_parsing/assign_line.c \
 			sources/free_engine.c \
 			sources/free.c \
-			sources/initialize.c \
 			sources/init_game.c \
 			sources/main.c \
 			sources/move/move_player.c \
@@ -39,7 +38,11 @@ SOURCES = 	sources/map_parsing/checks.c \
 			sources/utils/get_pixel_color.c \
 			sources/mini_map/mini_map.c \
 			sources/ray_casting/check_wall_utils.c \
-			sources/ray_casting/render.c
+			sources/ray_casting/render.c \
+			sources/move/open_door.c \
+			sources/init/initialize_engine.c \
+			sources/init/initialize_game.c \
+			sources/init/initialize_player.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:36:29 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/02 17:00:29 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 15:07:40 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@ static int	assign_texturefiles(t_game *game, char *line)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
 	{
-		if (game->engine->no_texture)
+		if (game->engine->no_path)
 			return (1);
-		parse_texture(game, line + 3, &(game->engine->no_texture));
+		parse_texture(game, line + 3, &(game->engine->no_path));
 	}
 	else if (ft_strncmp(line, "SO ", 3) == 0)
 	{
-		if (game->engine->so_texture)
+		if (game->engine->so_path)
 			return (1);
-		parse_texture(game, line + 3, &(game->engine->so_texture));
+		parse_texture(game, line + 3, &(game->engine->so_path));
 	}
 	else if (ft_strncmp(line, "WE ", 3) == 0)
 	{
-		if (game->engine->we_texture)
+		if (game->engine->we_path)
 			return (1);
-		parse_texture(game, line + 3, &(game->engine->we_texture));
+		parse_texture(game, line + 3, &(game->engine->we_path));
 	}
 	else
 		return (0);
@@ -43,9 +43,9 @@ static int	assign_lines(t_game *game, char *line)
 		return (1);
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 	{
-		if (game->engine->ea_texture)
+		if (game->engine->ea_path)
 			return (1);
-		parse_texture(game, line + 3, &(game->engine->ea_texture));
+		parse_texture(game, line + 3, &(game->engine->ea_path));
 	}
 	else if (ft_strncmp(line, "F ", 2) == 0)
 		parse_color(game, line + 2, (game->engine->floor_color));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/06/03 22:12:41 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/06/04 15:11:52 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	render(t_game *game)
 	usleep(10000);
 	render_background(game);
 	handle_movement(game);
-	raycasting(game, game->engine->ray);
+	raycasting(game, game->engine->ray, game->engine->rcast);
 	draw_minimap(game);
 	draw_miniplayer(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player,
@@ -29,7 +29,7 @@ int	render(t_game *game)
 	return (1);
 }
 
-void	render_wall_column(t_game *game, t_ray *ray, t_rend *rcast,int win_x)
+void	render_wall_column(t_game *game, t_ray *ray, t_rend *rcast, int win_x)
 {
 	double	pos_y;
 	int		tex_y;
@@ -56,7 +56,7 @@ void	get_tex(t_game *game, t_ray *ray)
 {
 	if (game->map->data[ray->hit_y][ray->hit_x] == 'D')
 	{
-		game->engine->rcast->texture = game->engine->door;
+		game->engine->rcast->texture = game->engine->dr_img;
 		return ;
 	}
 	if (!ray->r_side)
