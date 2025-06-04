@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:44 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 16:33:20 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 17:19:06 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	free_game(t_game *game)
 	game->config = NULL;
 	if (game->engine)
 		free_engine(game->engine, game->mlx_ptr);
+	free(game->engine);
 	game->engine = NULL;
 	free_all_others(game);
 	if (game->map)
