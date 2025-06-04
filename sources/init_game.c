@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/06/04 15:57:16 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 17:27:30 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_game(t_game *game)
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
 		handle_error(game, "Failed to initialize MLX");
+	game->engine->frame = malloc(sizeof(t_img));
 	game->mlx_window = mlx_new_window(game->mlx_ptr, WIN_W, WIN_H, "cub3D");
 	game->engine->frame->img = mlx_new_image(game->mlx_ptr, WIN_W, WIN_H);
 	game->engine->frame->addr = mlx_get_data_addr(game->engine->frame->img,
