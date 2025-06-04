@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 15:51:43 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 16:33:53 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,11 @@ int		get_offset_y(int tex_y);
 int		get_pixel_color(t_img *texture, int x, int y);
 
 // free_engine.c
-void	free_engine_images(t_engine *engine, void *mlx_ptr);
+void	free_engine(t_engine *engine, void *mlx_ptr);
+void	free_img(void *mlx_ptr, t_img **img);
+void	free_texture_path(t_engine *engine);
 void	free_engine_texture(t_engine *engine);
-void	handle_error(t_game *game, const char *error_message);
+void	free_color(t_color **color);
 
 //	draw_wall.c
 void	render_wall_column(t_game *game, t_ray *ray, t_rend *rcast, int win_x);
@@ -133,6 +135,7 @@ int		get_texture_offset_x(t_game *game, t_ray *ray);
 int		free_game(t_game *game);
 void	free_mini(t_mini *mini, void *mlx_ptr);
 void	free_map(t_map *map);
+void	handle_error(t_game *game, const char *error_message);
 
 //	init_game.c
 int		key_hook(int key, t_game *game);

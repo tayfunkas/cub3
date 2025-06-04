@@ -6,30 +6,33 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 18:48:14 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 16:13:11 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 16:30:37 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/cub3d.h"
+#include "../inc/cub3d.h"
 
-void	free_engine_resources(t_engine *engine, void *mlx_ptr)
+void	free_engine(t_engine *engine, void *mlx_ptr)
 {
+	if (engine->ray)
+		free(engine->ray);
+	engine->ray = NULL;
+	if (engine->rcast)
+		free(engine->rcast);
+	engine->rcast = NULL;
 	free_img(mlx_ptr, &engine->frame);
 	free_img(mlx_ptr, &engine->no_img);
 	free_img(mlx_ptr, &engine->so_img);
 	free_img(mlx_ptr, &engine->we_img);
 	free_img(mlx_ptr, &engine->ea_img);
 	free_img(mlx_ptr, &engine->dr_img);
-
 	free_color(&engine->floor_color);
 	free_color(&engine->ceiling_color);
-
 	free(engine->no_path);
 	free(engine->so_path);
 	free(engine->we_path);
 	free(engine->ea_path);
 	free(engine->dr_path);
-
 	engine->no_path = NULL;
 	engine->so_path = NULL;
 	engine->we_path = NULL;
@@ -37,7 +40,7 @@ void	free_engine_resources(t_engine *engine, void *mlx_ptr)
 	engine->dr_path = NULL;
 }
 
-static void	free_img(void *mlx_ptr, t_img **img)
+void	free_img(void *mlx_ptr, t_img **img)
 {
 	if (*img)
 	{
@@ -48,7 +51,7 @@ static void	free_img(void *mlx_ptr, t_img **img)
 	}
 }
 
-static void	free_texture_path(t_engine *engine)
+void	free_texture_path(t_engine *engine)
 {
 	if (engine->no_path)
 		free(engine->no_path);
@@ -60,7 +63,7 @@ static void	free_texture_path(t_engine *engine)
 		free(engine->ea_path);
 }
 
-static void	free_color(t_color **color)
+void	free_color(t_color **color)
 {
 	if (*color)
 	{

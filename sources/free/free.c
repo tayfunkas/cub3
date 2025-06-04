@@ -6,16 +6,14 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:44 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 15:58:15 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 16:33:20 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/cub3d.h"
+#include "../inc/cub3d.h"
 
 static void	free_all_others(t_game *game)
 {
-	if (game->engine)
-		free(game->engine);
 	if (game->mini)
 		free_mini(game->mini, game->mlx_ptr);
 	if (game->mlx_window)
@@ -25,7 +23,7 @@ static void	free_all_others(t_game *game)
 	}
 	if (game->mlx_ptr)
 	{
-		//mlx_destroy_display(game->mlx_ptr);
+		mlx_destroy_display(game->mlx_ptr);
 		free(game->mlx_ptr);
 		game->mlx_ptr = NULL;
 	}
@@ -41,9 +39,12 @@ int	free_game(t_game *game)
 {
 	if (!game)
 		return (0);
-	free_engine(game);
-	free_engine_images(game->engine, game->mlx_ptr);
-	free_engine_texture(game->engine);
+	if (game->config)
+		free(game->config);
+	game->config = NULL;
+	if (game->engine)
+		free_engine(game->engine, game->mlx_ptr);
+	game->engine = NULL;
 	free_all_others(game);
 	if (game->map)
 		free_map(game->map);
@@ -102,4 +103,13 @@ void	free_map(t_map *map)
 		free(map->data);
 	}
 	free(map);
+}
+
+void	handle_error(t_game *game, const char *error_message)
+{
+	printf("Error\n%s\n", error_message);
+	game->error = 1;
+	if (game)
+		free_game(game);
+	exit(1);
 }
