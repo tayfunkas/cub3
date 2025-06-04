@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:04:16 by grial             #+#    #+#             */
-/*   Updated: 2025/06/04 14:43:31 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 18:00:34 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	draw_minimap(t_game *game)
 	}
 }
 
-
 void	draw_miniplayer(t_game *game)
 {
 	int	center_x;
@@ -69,7 +68,6 @@ void	draw_miniplayer(t_game *game)
 
 	center_x = (int)(game->player->pos_x * MIN_S);
 	center_y = (int)(game->player->pos_y * MIN_S);
-
 	i = center_y - PLY_S / 2;
 	while (i < center_y + PLY_S / 2)
 	{

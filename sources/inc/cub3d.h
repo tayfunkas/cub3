@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 17:36:13 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 18:21:23 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
+# include "cub3d_config.h"
 # include "cub3d_keys.h"
 # include "cub3d_struct.h"
-# include "cub3d_config.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
@@ -142,6 +142,7 @@ void	handle_error(t_game *game, const char *error_message);
 int		key_hook(int key, t_game *game);
 void	init_game(t_game *game);
 int		mouse_move(int x, int y, t_game *game);
+int		render(t_game *game);
 
 //	initialize.c
 void	initialize_game(t_game **game);
@@ -160,5 +161,8 @@ void	initialize_player(t_game *game);
 void	get_player_init_position(t_map *map, t_player *player);
 int		is_player(char c);
 int		player_dir(char c);
+
+//  load_image.c
+void	load_img(t_game *game);
 
 #endif

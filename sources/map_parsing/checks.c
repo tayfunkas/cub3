@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:37 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 17:55:56 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 18:01:41 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	check_mapfile_name(t_game *game, char *map)
 	len = 0;
 	while (map[len])
 		len++;
-	if (map[len - 4] != '.' || map[len - 3] != 'c' 
-		|| map[len - 2] != 'u' || map[len - 1] != 'b')
+	if (map[len - 4] != '.' || map[len - 3] != 'c' || map[len - 2] != 'u'
+		|| map[len - 1] != 'b')
 		handle_error(game, "Only .cub extension is accepted for maps");
 	fd = open(map, O_RDWR);
 	if (fd < 0)
@@ -49,9 +49,9 @@ bool	check_mapchars(char *line, t_game *game)
 	line = trimmed;
 	while (line[i])
 	{
-		if (line[i] != '0' && line[i] != '1' && line[i] != 'N' 
-			&& line[i] != 'S' && line[i] != 'W' && line[i] != 'D'
-			&& line[i] != 'E' && line[i] != ' ')
+		if (line[i] != '0' && line[i] != '1' && line[i] != 'N' && line[i] != 'S'
+			&& line[i] != 'W' && line[i] != 'D' && line[i] != 'E'
+			&& line[i] != ' ')
 		{
 			free(trimmed);
 			return (false);
@@ -70,25 +70,25 @@ void	check_player_position(t_game *game)
 
 	map = game->map->data;
 	y = game->player->pos_x;
-	x = game->player->pos_y;;
-	if (y == 0 || y == game->map->m_width - 1 
-		|| map[x][y - 1] == ' ' || map[x][y + 1] == ' ')
+	x = game->player->pos_y;
+	if (y == 0 || y == game->map->m_width - 1 || map[x][y - 1] == ' '
+		|| map[x][y + 1] == ' ')
 		handle_error(game, "Check player position");
-	if (x == 0 || x == game->map->m_height - 1 
-		|| map[x - 1][y] == ' ' || map[x + 1][y] == ' ')
+	if (x == 0 || x == game->map->m_height - 1 || map[x - 1][y] == ' ' || map[x
+		+ 1][y] == ' ')
 		handle_error(game, "Check player position");
 }
 
 bool	check_player(char **map, char *line, t_game *game)
 {
-	static int	player = 0; 
+	static int	player = 0;
 	int			i;
 
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == 'N' || line[i] == 'S' 
-			|| line[i] == 'W' || line[i] == 'E')
+		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
+			|| line[i] == 'E')
 		{
 			player++;
 			if (player > 1)

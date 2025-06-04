@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:36:40 by grial             #+#    #+#             */
-/*   Updated: 2025/06/03 14:54:04 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 18:10:29 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ray_dist_vertical(t_game *game, t_map *map, t_ray *ray)
 	rx = ray->ray_vx;
 	ry = ray->ray_vy;
 	i = 0;
-	while (i <= 80)
+	while (i <= (map->vision * 2))
 	{
 		int_x = (int)rx;
 		int_y = (int)ry;
@@ -120,7 +120,7 @@ void	ray_dist_horizontal(t_game *game, t_map *map, t_ray *ray)
 	rx = ray->ray_hx;
 	ry = ray->ray_hy;
 	i = 0;
-	while (i <= 80)
+	while (i <= (map->vision * 2))
 	{
 		int_x = (int)rx;
 		int_y = (int)ry;

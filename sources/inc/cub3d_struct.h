@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/06/04 15:57:26 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 18:08:44 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_map
 	char		**data;
 	int			m_height;
 	int			m_width;
+	int			vision;
 	int			line_count;
 	int			max_size;
 }				t_map;

@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:44 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 17:19:06 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 18:00:55 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	free_game(t_game *game)
 	free(game);
 	exit(0);
 }
-
 
 void	free_mini(t_mini *mini, void *mlx_ptr)
 {
