@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:37 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 17:43:54 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 17:55:56 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	check_player_position(t_game *game)
 	char	**map;
 
 	map = game->map->data;
-	x = game->player->pos_x;
-	y = game->player->pos_y;
+	y = game->player->pos_x;
+	x = game->player->pos_y;;
 	if (y == 0 || y == game->map->m_width - 1 
 		|| map[x][y - 1] == ' ' || map[x][y + 1] == ' ')
 		handle_error(game, "Check player position");
