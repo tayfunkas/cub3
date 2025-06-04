@@ -28,6 +28,7 @@ SOURCES = 	sources/map_parsing/checks.c \
 			sources/free_engine.c \
 			sources/free.c \
 			sources/init_game.c \
+			sources/load_image.c \
 			sources/main.c \
 			sources/move/move_player.c \
 			sources/move/keys.c \
