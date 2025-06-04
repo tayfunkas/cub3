@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 15:51:33 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 17:03:43 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	rgb_to_hex(int r, int g, int b)
 {
-	return (r << 16) | (g << 8) | b;
+	return ((r << 16) | (g << 8) | b);
 }
 
 static void	assign_check_color(t_game *game, t_color *color, char **rgb)
@@ -28,21 +28,6 @@ static void	assign_check_color(t_game *game, t_color *color, char **rgb)
 	{
 		game->error = 1;
 	}
-}
-
-static void	count_commas(t_game *game, const char *line)
-{
-	int	count;
-
-	count = 0;
-	while (*line)
-	{
-		if (*line == ',')
-			count++;
-		line++;
-	}
-	if (count != 2)
-		game->error = 1;
 }
 
 void	parse_color(t_game *game, char *line, t_color *color)

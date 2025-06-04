@@ -26,6 +26,7 @@ SOURCES = 	sources/map_parsing/checks.c \
 			sources/map_parsing/parse_map.c \
 			sources/map_parsing/assign_line.c \
 			sources/init_game.c \
+			sources/load_image.c \
 			sources/main.c \
 			sources/move/move_player.c \
 			sources/move/keys.c \

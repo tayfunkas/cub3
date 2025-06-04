@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/06/04 17:27:30 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 17:36:09 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	clear_image(t_game *game, int color)
 	}
 }
 
-
 void	*hook_img(t_game *game, char c)
 {
 	if (c == '1')
@@ -66,13 +65,11 @@ void	*hook_img(t_game *game, char c)
 	return (NULL);
 }
 
-void	load_img(t_game *game)
+/*void	load_img(t_game *game)
 {
 	int	img_width;
 	int	img_height;
 
-	// game->mini = malloc(sizeof(t_mini));
-	//		###     MINIMAP     ###
 	if (!game->mini)
 	{
 		ft_putstr_fd("Error: game->mini not initialized\n", 2);
@@ -99,7 +96,6 @@ void	load_img(t_game *game)
 		ft_putstr_fd("Error: Failed to load player texture\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	//		###     TEXTURE     ###
 	printf("load_img we should use char *path and not -texture/NO");
 	game->engine->no_img->img = mlx_xpm_file_to_image(game->mlx_ptr,
 			"textures/NO.xpm", &img_width, &img_height);
@@ -151,4 +147,4 @@ void	load_img(t_game *game)
 	game->engine->we_img->addr = mlx_get_data_addr(game->engine->we_img->img,
 			&game->engine->we_img->bpp, &game->engine->we_img->line_length,
 			&game->engine->we_img->endian);
-}
+}*/

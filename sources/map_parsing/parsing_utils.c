@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:34:40 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/02 16:25:24 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/06/04 17:03:55 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,19 @@ int	ft_is_all_spaces(char *line)
 bool	is_valid_tile(char c)
 {
 	return (c == '0' || c == '1');
+}
+
+void	count_commas(t_game *game, const char *line)
+{
+	int	count;
+
+	count = 0;
+	while (*line)
+	{
+		if (*line == ',')
+			count++;
+		line++;
+	}
+	if (count != 2)
+		game->error = 1;
 }
