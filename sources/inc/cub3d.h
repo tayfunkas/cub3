@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 15:51:43 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/04 17:05:28 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ char	**append_line_to_map(char **map, char *line, t_game *game);
 char	*ft_strtrim_spaces(char *line);
 int		ft_arraylen(char **array);
 int		ft_is_all_spaces(char *line);
+void	count_commas(t_game *game, const char *line);
 
 // validate_map.c
 void	pad_map_to_rectangle(t_game *game);
