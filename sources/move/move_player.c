@@ -6,11 +6,13 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/06/04 14:56:13 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/05 12:14:53 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+int	corner_wall(t_map *map, t_player *player, float new_y, float new_x);
 
 void	handle_movement(t_game *game)
 {
@@ -70,7 +72,7 @@ void	player_move(t_player *player, t_map *map, int key)
 		new_x = player->pos_x - dx;
 		new_y = player->pos_y - dy;
 	}
-	if (check_collision(map, new_x, new_y))
+	if (check_collision(map, new_x, new_y) && corner_wall(map, player, new_y, new_x))
 	{
 		player->pos_x = new_x;
 		player->pos_y = new_y;
@@ -94,7 +96,7 @@ void	player_strafe(t_player *player, t_map *map, int key)
 	dy = sin(angle) * STEP;
 	new_x = player->pos_x + dx;
 	new_y = player->pos_y + dy;
-	if (check_collision(map, new_x, new_y))
+	if (check_collision(map, new_x, new_y) && corner_wall(map, player, new_y, new_x))
 	{
 		player->pos_x = new_x;
 		player->pos_y = new_y;
@@ -111,4 +113,35 @@ int	check_collision(t_map *map, float x, float y)
 	if (map->data[new_y][new_x] != '1' && map->data[new_y][new_x] != 'D')
 		return (1);
 	return (0);
+}
+
+int	corner_wall(t_map *map, t_player *player, float new_y, float new_x)
+{
+	if (new_y < player->pos_y) // mira hacia arriba
+	{
+		if (new_x > player->pos_x) // mira hacia la derecha
+		{
+			if (!check_collision(map, new_x + STEP, player->pos_y))
+				return (0);
+		}
+		if (new_x < player->pos_x) // mira hacia la izquierda
+		{
+			if (!check_collision(map, new_x - STEP, player->pos_y))
+				return (0);
+		}
+	}
+	if (new_y > player->pos_y) // mira hacia abajo
+	{
+		if (new_x > player->pos_x)
+		{
+			if (!check_collision(map, new_x + STEP, player->pos_y))
+				return (0);
+		}
+		if (new_x < player->pos_x)
+		{
+			if (!check_collision(map, new_x - STEP, player->pos_y))
+				return (0);
+		}
+	}
+	return (1);
 }
