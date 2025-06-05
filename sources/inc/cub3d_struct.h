@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/06/05 13:12:41 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/05 16:13:19 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ typedef struct s_player
 	int			dir;
 	double		pos_x;
 	double		pos_y;
+	double		prev_dist;
+	double		new_dist;
 }				t_player;
 
 typedef struct s_config

@@ -6,13 +6,13 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/06/05 13:10:24 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/05 16:21:08 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	corner_wall(t_map *map, t_player *player, float new_y, float new_x);
+int		corner_wall(t_map *map, t_player *player, float new_y, float new_x);
 
 void	handle_movement(t_game *game)
 {
@@ -37,11 +37,21 @@ void	handle_movement(t_game *game)
 		free_game(game);
 	if (game->keys[SPACE])
 		open_door(player, map);
-	check_close(game->player, game->map, game->engine->rcast)
+	check_close(game->player, game->map, game->engine->rcast);
 }
-void check_close(t_game *player, t_map *map, t_rend *rcast)
+
+void	check_close(t_player *player, t_map *map, t_rend *rcast)
 {
-	
+	player->new_dist = sqrt(pow(map->pos_x - player->pos_x, 2) + pow(map->pos_y
+				- player->pos_y, 2));
+	if (player->new_dist < player->prev_dist)
+		rcast->fps += 100;
+	else
+		rcast->fps -= 100;
+	if (rcast->fps > 50000000)
+		rcast->fps = 50000000;
+	if (rcast->fps < -50000000)
+		rcast->fps = -50000000;
 }
 void	player_direction(t_player *player, int key)
 {
@@ -76,7 +86,8 @@ void	player_move(t_player *player, t_map *map, int key)
 		new_x = player->pos_x - dx;
 		new_y = player->pos_y - dy;
 	}
-	if (check_collision(map, new_x, new_y) && corner_wall(map, player, new_y, new_x))
+	if (check_collision(map, new_x, new_y) && corner_wall(map, player, new_y,
+			new_x))
 	{
 		player->pos_x = new_x;
 		player->pos_y = new_y;
@@ -100,11 +111,11 @@ void	player_strafe(t_player *player, t_map *map, int key)
 	dy = sin(angle) * STEP;
 	new_x = player->pos_x + dx;
 	new_y = player->pos_y + dy;
-	if (check_collision(map, new_x, new_y) && corner_wall(map, player, new_y, new_x))
+	if (check_collision(map, new_x, new_y) && corner_wall(map, player, new_y,
+			new_x))
 	{
 		player->pos_x = new_x;
 		player->pos_y = new_y;
-		
 	}
 }
 
