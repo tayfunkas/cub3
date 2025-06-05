@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/06/04 15:11:52 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/05 11:36:05 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,16 @@ void	get_tex(t_game *game, t_ray *ray)
 		game->engine->rcast->texture = game->engine->dr_img;
 		return ;
 	}
-	if (!ray->r_side)
+	if (ray->r_side)
 	{
-		if (ray->r_dir >= 90 && ray->r_dir <= 270)
+		if (ray->r_dir >= 180 && ray->r_dir <= 360)
 			game->engine->rcast->texture = game->engine->so_img;
 		else
 			game->engine->rcast->texture = game->engine->no_img;
 	}
 	else
 	{
-		if (ray->r_dir >= 180 && ray->r_dir <= 360)
+		if (ray->r_dir >= 90 && ray->r_dir <= 270)
 			game->engine->rcast->texture = game->engine->we_img;
 		else
 			game->engine->rcast->texture = game->engine->ea_img;
