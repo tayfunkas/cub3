@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:34:02 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 18:22:06 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/05 12:39:41 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ int	main(int argc, char **argv)
 	check_player_position(game);
 	printf("Map is valid!\n");
 	init_game(game);
-	printf("fijar 80 a la longitud del mapa void	ray_dist(void);\n");
+	free_game(game);
+	printf("REMOVE DOOR ON MANDATORY\n");
 	printf("my_mlx_pixel_put, use mlx_pixel_put\n");
 	printf("check if make of cub3d compiles libft\n");
-	free_game(game);
 	printf("All is freed. All good!\n");
 	return (0);
 }

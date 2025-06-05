@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 17:08:36 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/05 12:41:39 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	initialize_render(t_game *game)
 		return ;
 	}
 	printf("Fix case where initialize_render does not work");
+	game->engine->rcast->fps = 0;
 	game->engine->rcast->draw_start = 0;
 	game->engine->rcast->draw_end = 0;
 	game->engine->rcast->height = 0;

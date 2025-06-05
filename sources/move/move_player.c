@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/06/05 12:17:57 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/05 13:10:24 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,12 @@ void	handle_movement(t_game *game)
 		free_game(game);
 	if (game->keys[SPACE])
 		open_door(player, map);
+	check_close(game->player, game->map, game->engine->rcast)
 }
-
+void check_close(t_game *player, t_map *map, t_rend *rcast)
+{
+	
+}
 void	player_direction(t_player *player, int key)
 {
 	if (key == TURN_R)
@@ -100,6 +104,7 @@ void	player_strafe(t_player *player, t_map *map, int key)
 	{
 		player->pos_x = new_x;
 		player->pos_y = new_y;
+		
 	}
 }
 
