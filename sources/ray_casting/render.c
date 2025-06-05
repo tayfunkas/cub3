@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/06/04 15:11:52 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/05 13:22:18 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	render(t_game *game)
 		game->player->pos_y * MIN_S, game->player->pos_x * MIN_S);
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window,
 		game->engine->frame->img, 0, 0);
-	printf("Qué hacen estas dos juntas? render();\n");
 	return (1);
 }
 
