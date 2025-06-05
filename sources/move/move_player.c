@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/06/05 12:14:53 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/05 12:17:57 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,33 +115,14 @@ int	check_collision(t_map *map, float x, float y)
 	return (0);
 }
 
-int	corner_wall(t_map *map, t_player *player, float new_y, float new_x)
+int	corner_wall(t_map *map, t_player *p, float new_y, float new_x)
 {
-	if (new_y < player->pos_y) // mira hacia arriba
+	if (new_y != p->pos_y && new_x != p->pos_x)
 	{
-		if (new_x > player->pos_x) // mira hacia la derecha
-		{
-			if (!check_collision(map, new_x + STEP, player->pos_y))
-				return (0);
-		}
-		if (new_x < player->pos_x) // mira hacia la izquierda
-		{
-			if (!check_collision(map, new_x - STEP, player->pos_y))
-				return (0);
-		}
-	}
-	if (new_y > player->pos_y) // mira hacia abajo
-	{
-		if (new_x > player->pos_x)
-		{
-			if (!check_collision(map, new_x + STEP, player->pos_y))
-				return (0);
-		}
-		if (new_x < player->pos_x)
-		{
-			if (!check_collision(map, new_x - STEP, player->pos_y))
-				return (0);
-		}
+		if (new_x > p->pos_x && !check_collision(map, new_x + STEP, p->pos_y))
+			return (0);
+		if (new_x < p->pos_x && !check_collision(map, new_x - STEP, p->pos_y))
+			return (0);
 	}
 	return (1);
 }
