@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/06 13:45:38 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 14:37:04 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	get_exit(t_map *map)
 	int	y;
 
 	x = 0;
+	y = 0;
 	if (!map || !map->data)
 	{
 		printf("Map does not exist\n");

@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:22 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 15:50:20 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 14:36:52 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	validate_map(t_game *game)
 		}
 		x++;
 	}
+	get_exit(game->map);
 }
 
 void	pad_map_to_rectangle(t_game *game)

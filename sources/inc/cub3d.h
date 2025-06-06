@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/06 11:57:19 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 14:35:07 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	ray_dist_vertical(t_game *game, t_map *map, t_ray *ray);
 //	mini_map.c
 void	draw_miniplayer(t_game *game);
 void	draw_map(t_game *game);
+void	get_exit(t_map *map);
 
 //	raycasting.c
 void	raycasting(t_game *game, t_ray *ray, t_rend *rcast);
