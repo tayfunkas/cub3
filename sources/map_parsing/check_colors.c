@@ -6,7 +6,7 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 17:03:43 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:48:32 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	assign_check_color(t_game *game, t_color *color, char **rgb)
 	color->g = ft_atoi(rgb[1]);
 	color->b = ft_atoi(rgb[2]);
 	color->color = rgb_to_hex(color->r, color->g, color->b);
-	if (color-> r < 0 || color-> r > 255 || color->g < 0 
+	if (!color || color-> r < 0 || color-> r > 255 || color->g < 0 
 		|| color->g > 255 || color->b < 0 || color->b > 255)
 	{
 		game->error = 1;
@@ -51,7 +51,8 @@ void	parse_color(t_game *game, char *line, t_color *color)
 		if (!trimmed || !*trimmed || !ft_alldigit(trimmed))
 			game->error = 1;
 		free(rgb[i]);
-		rgb[i] = trimmed;
+		rgb[i] = ft_strdup(trimmed);
+		free(trimmed);
 		i++;
 	}
 	assign_check_color(game, color, rgb);

@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/06/05 16:21:08 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 12:02:12 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,6 @@ void	handle_movement(t_game *game)
 	check_close(game->player, game->map, game->engine->rcast);
 }
 
-void	check_close(t_player *player, t_map *map, t_rend *rcast)
-{
-	player->new_dist = sqrt(pow(map->pos_x - player->pos_x, 2) + pow(map->pos_y
-				- player->pos_y, 2));
-	if (player->new_dist < player->prev_dist)
-		rcast->fps += 100;
-	else
-		rcast->fps -= 100;
-	if (rcast->fps > 50000000)
-		rcast->fps = 50000000;
-	if (rcast->fps < -50000000)
-		rcast->fps = -50000000;
-}
 void	player_direction(t_player *player, int key)
 {
 	if (key == TURN_R)
