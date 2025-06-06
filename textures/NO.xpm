@@ -2,7 +2,7 @@
 static char *1[] = {
 /* columns rows colors chars-per-pixel */
 "64 64 1 1 ",
-" . c ForestGreen",
+"  c 0xFFFFFF",
 /* pixels */
 "                                                                ",
 "                                                                ",

@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/06/06 11:57:16 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 14:22:10 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	render_wall_column(t_game *game, t_ray *ray, t_rend *rcast, int win_x)
 	y = rcast->draw_start;
 	while (y < rcast->draw_end)
 	{
-		if (rcast->fps > 6000000)
-			rcast->fps = 0;
 		tex_y = ((int)pos_y) & (64 - 1);
 		rcast->color = get_pixel_color(rcast->texture, rcast->offset_x, tex_y);
 		my_mlx_pixel_put(game, win_x, y, rcast->color + rcast->fps);

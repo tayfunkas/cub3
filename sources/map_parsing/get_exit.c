@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/05 13:13:56 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 13:45:38 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	get_exit(t_map *map)
 		x = 0;
 		while (map->data[y][x])
 		{
-			if (map->data[y][x] == 'E')
+			if (map->data[y][x] == 'Q')
 			{
 				map->pos_x = x;
 				map->pos_y = y;
