@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:04:16 by grial             #+#    #+#             */
-/*   Updated: 2025/06/06 11:27:39 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 11:38:56 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	draw_raya(t_game *game, t_ray *ray);
 void	draw_ray(t_game *game, t_ray *ray);
+void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
+		int color);
 
 void	draw_minimap(t_game *game)
 {
@@ -59,4 +61,28 @@ void	draw_ray(t_game *game, t_ray *ray)
 	draw_line(game, game->player->pos_x * (double)MIN_S, game->player->pos_y
 		* (double)MIN_S, end_x * (double)MIN_S, end_y * (double)MIN_S,
 		0xFF0F0F);
+}
+
+void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
+		int color)
+{
+	float	dx;
+	float	dy;
+	float	steps;
+	int		i;
+
+	dx = x1 - x0;
+	dy = y1 - y0;
+	float x_inc, y_inc;
+	steps = fmaxf(fabsf(dx), fabsf(dy));
+	if (steps == 0)
+		return ;
+	x_inc = dx / steps;
+	y_inc = dy / steps;
+	for (i = 0; i < steps; i++)
+	{
+		my_mlx_pixel_put(game, (int)x0, (int)y0, color);
+		x0 += x_inc;
+		y0 += y_inc;
+	}
 }
