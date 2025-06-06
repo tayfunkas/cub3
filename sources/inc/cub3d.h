@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 18:21:23 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 11:22:50 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	player_strafe(t_player *player, t_map *map, int key);
 int		check_collision(t_map *map, float x, float y);
 
 // ray_casting
+void	draw_minimap(t_game *game);
 // rc_fov.c
 void	draw_ray_line(t_game *game, t_player *player, int x_width, float x);
 float	distance(float x1, float y1, float x2, float y2);
@@ -105,7 +106,7 @@ void	ray_dist_vertical(t_game *game, t_map *map, t_ray *ray);
 
 //	mini_map.c
 void	draw_miniplayer(t_game *game);
-void	draw_minimap(t_game *game);
+void	draw_map(t_game *game);
 
 //	raycasting.c
 void	raycasting(t_game *game, t_ray *ray, t_rend *rcast);

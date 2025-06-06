@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:04:16 by grial             #+#    #+#             */
-/*   Updated: 2025/06/04 18:00:34 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 11:19:15 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	draw_minimap_tile(t_game *game, int i, int j, int color)
 	}
 }
 
-void	draw_minimap(t_game *game)
+void	draw_map(t_game *game)
 {
 	int	i;
 	int	j;

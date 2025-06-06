@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/06/05 16:29:27 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 11:36:20 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	render(t_game *game)
 	handle_movement(game);
 	raycasting(game, game->engine->ray, game->engine->rcast);
 	draw_minimap(game);
+	draw_map(game);
 	draw_miniplayer(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player,
 		game->player->pos_y * MIN_S, game->player->pos_x * MIN_S);
