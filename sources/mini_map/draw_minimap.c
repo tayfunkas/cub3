@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:04:16 by grial             #+#    #+#             */
-/*   Updated: 2025/06/06 11:27:39 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 13:29:00 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	draw_ray(t_game *game, t_ray *ray)
 	}
 	end_x = game->player->pos_x + cos(to_rad(ray->r_dir)) * ray->dis_f;
 	end_y = game->player->pos_y - sin(to_rad(ray->r_dir)) * ray->dis_f;
-	draw_line(game, game->player->pos_x * (double)MIN_S, game->player->pos_y
-		* (double)MIN_S, end_x * (double)MIN_S, end_y * (double)MIN_S,
-		0xFF0F0F);
+	//draw_line(game, game->player->pos_x * (double)MIN_S, game->player->pos_y
+	//	* (double)MIN_S, end_x * (double)MIN_S, end_y * (double)MIN_S,
+	//	0xFF0F0F);
 }
