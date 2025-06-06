@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:22 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 15:50:20 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 14:34:31 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@ int	validate_borders(t_map *map)
 	y = 0;
 	while (x < map->m_width)
 	{
-		if (map->data[0][x] != '1' && map->data[0][x] != ' ')
+		if ((map->data[0][x] != '1' && map->data[0][x] != ' ' 
+				|| map->data[0][x] == 'D'))
 			return (0);
-		if (map->data[map->m_height - 1][x] != '1' 
-			&& map->data[map->m_height -1][x] != ' ')
+		if ((map->data[map->m_height - 1][x] != '1' 
+			&& map->data[map->m_height -1][x] != ' ') || map->data[0][x] == 'D')
 			return (0);
 		x++;
 	}
 	while (y < map->m_height)
 	{
-		if (map->data[y][0] != '1' && map->data[y][0] != ' ')
+		if ((map->data[y][0] != '1' && map->data[y][0] != ' ') || map->data[0][x] == 'D')
 			return (0);
 		if (map->data[y][map->m_width - 1] != '1' 
 			&& map->data[y][map->m_width -1] != ' ')
@@ -42,7 +43,10 @@ int	validate_borders(t_map *map)
 
 void	check_map_tile(t_game *game, char **map, int x, int y)
 {
-	if (map[x][y] != '0')
+	bool	horizontal;
+	bool	vertical;
+
+	if (map[x][y] != '0' && map[x][y] != 'D' && map[x][y] != 'Q')
 		return ;
 	if (y == 0 || y == game->map->m_width - 1 
 		|| map[x][y - 1] == ' ' || map[x][y + 1] == ' ')
@@ -50,6 +54,13 @@ void	check_map_tile(t_game *game, char **map, int x, int y)
 	if (x == 0 || x == game->map->m_height - 1 
 		|| map[x - 1][y] == ' ' || map[x + 1][y] == ' ')
 		handle_error(game, "Open map");
+	if (map[x][y] == 'D')
+	{
+		horizontal = (map[x][y - 1] == '1' && map[x][y + 1] == '1');
+		vertical = (map[x - 1][y] == '1' && map[x + 1][y] == '1');
+		if (!(horizontal || vertical))
+			handle_error(game, "Door must be between walls");
+	}
 }
 
 void	validate_map(t_game *game)
