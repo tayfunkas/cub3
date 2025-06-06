@@ -6,43 +6,11 @@
 /*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:22 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/06 15:15:44 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/06/06 15:36:40 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-/*int	validate_borders(t_map *map)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	while (x < map->m_width)
-	{
-		if ((map->data[0][x] != '1' && map->data[0][x] != ' ') 
-				|| map->data[0][x] == 'D' || map->data[0][x] == 'Q')
-			return (0);
-		if ((map->data[map->m_height - 1][x] != '1' 
-			&& map->data[map->m_height -1][x] != ' ') 
-			|| map->data[0][x] == 'D' || map->data[0][x] == 'Q')
-			return (0);
-		x++;
-	}
-	while (y < map->m_height)
-	{
-		if ((map->data[y][0] != '1' && map->data[y][0] != ' ') 
-		|| map->data[0][x] == 'D' || map->data[0][x] == 'Q')
-			return (0);
-		if ((map->data[y][map->m_width - 1] != '1' 
-			&& map->data[y][map->m_width -1] != ' ') 
-			|| map->data[0][x] == 'D' || map->data[0][x] == 'Q')
-			return (0);
-		y++;
-	}
-	return (1);
-}*/
 
 int	is_invalid_border_tile(char c)
 {
