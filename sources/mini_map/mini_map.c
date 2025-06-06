@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:04:16 by grial             #+#    #+#             */
-/*   Updated: 2025/06/06 11:19:15 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:19:51 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ static int	get_minimap_color(char tile)
 	if (tile == '0')
 		return (0x222222);
 	return (0x000000);
+	if (tile == 'D')
+		return (0X00FF00)
+	if (tile == 'Q')
+		return (0X00FFFF)
 }
 
 static void	draw_minimap_tile(t_game *game, int i, int j, int color)
