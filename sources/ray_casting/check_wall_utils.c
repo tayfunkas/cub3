@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:36:40 by grial             #+#    #+#             */
-/*   Updated: 2025/06/04 18:10:29 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 13:26:24 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	vertical_values(t_game *game, t_ray *ray)
 	}
 	else if (ray->r_dir > 90.0 && ray->r_dir < 270.0)
 	{
-		ray->ray_vx = (int)game->player->pos_x - 0.0001;
+		ray->ray_vx = (int)game->player->pos_x - 0.000001;
 		ray->ray_vy = (game->player->pos_x - ray->ray_vx) * ray->ray_t
 			+ game->player->pos_y;
 		ray->del_x = -1;
