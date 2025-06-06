@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 20:11:41 by grial             #+#    #+#             */
-/*   Updated: 2024/04/24 19:07:23 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:27:02 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,4 @@ int	ft_atoi(const char *nptr)
 	}
 	return (num * sig);
 }
-/*
-#include <stdio.h>
 
-int	main(void)
-{
-
-	char	*c = "    123456a7";
-	int	x = ft_atoi(c);
-	printf("%s", c);
-}*/

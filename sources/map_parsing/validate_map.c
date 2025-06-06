@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:22 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/06 14:36:52 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:15:44 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	validate_borders(t_map *map)
+/*int	validate_borders(t_map *map)
 {
 	int	x;
 	int	y;
@@ -21,19 +21,60 @@ int	validate_borders(t_map *map)
 	y = 0;
 	while (x < map->m_width)
 	{
-		if (map->data[0][x] != '1' && map->data[0][x] != ' ')
+		if ((map->data[0][x] != '1' && map->data[0][x] != ' ') 
+				|| map->data[0][x] == 'D' || map->data[0][x] == 'Q')
 			return (0);
-		if (map->data[map->m_height - 1][x] != '1' 
-			&& map->data[map->m_height -1][x] != ' ')
+		if ((map->data[map->m_height - 1][x] != '1' 
+			&& map->data[map->m_height -1][x] != ' ') 
+			|| map->data[0][x] == 'D' || map->data[0][x] == 'Q')
 			return (0);
 		x++;
 	}
 	while (y < map->m_height)
 	{
-		if (map->data[y][0] != '1' && map->data[y][0] != ' ')
+		if ((map->data[y][0] != '1' && map->data[y][0] != ' ') 
+		|| map->data[0][x] == 'D' || map->data[0][x] == 'Q')
 			return (0);
-		if (map->data[y][map->m_width - 1] != '1' 
-			&& map->data[y][map->m_width -1] != ' ')
+		if ((map->data[y][map->m_width - 1] != '1' 
+			&& map->data[y][map->m_width -1] != ' ') 
+			|| map->data[0][x] == 'D' || map->data[0][x] == 'Q')
+			return (0);
+		y++;
+	}
+	return (1);
+}*/
+
+int	is_invalid_border_tile(char c)
+{
+	if (c == '1' || c == ' ')
+		return (0);
+	if (c == 'D' || c == 'Q')
+		return (1);
+	return (1);
+}
+
+int	validate_borders(t_map *map)
+{
+	int	x;
+	int	y;
+	int	last_row;
+	int	last_col;
+
+	last_row = map->m_height - 1;
+	last_col = map->m_width - 1;
+	x = 0;
+	while (x < map->m_width)
+	{
+		if (is_invalid_border_tile(map->data[0][x]) 
+			|| is_invalid_border_tile(map->data[last_row][x]))
+			return (0);
+		x++;
+	}
+	y = 0;
+	while (y < map->m_height)
+	{
+		if (is_invalid_border_tile(map->data[y][0]) 
+			|| is_invalid_border_tile(map->data[y][last_col]))
 			return (0);
 		y++;
 	}
@@ -42,7 +83,10 @@ int	validate_borders(t_map *map)
 
 void	check_map_tile(t_game *game, char **map, int x, int y)
 {
-	if (map[x][y] != '0')
+	bool	horizontal;
+	bool	vertical;
+
+	if (map[x][y] != '0' && map[x][y] != 'D' && map[x][y] != 'Q')
 		return ;
 	if (y == 0 || y == game->map->m_width - 1 
 		|| map[x][y - 1] == ' ' || map[x][y + 1] == ' ')
@@ -50,6 +94,13 @@ void	check_map_tile(t_game *game, char **map, int x, int y)
 	if (x == 0 || x == game->map->m_height - 1 
 		|| map[x - 1][y] == ' ' || map[x + 1][y] == ' ')
 		handle_error(game, "Open map");
+	if (map[x][y] == 'D')
+	{
+		horizontal = (map[x][y - 1] == '1' && map[x][y + 1] == '1');
+		vertical = (map[x - 1][y] == '1' && map[x + 1][y] == '1');
+		if (!(horizontal || vertical))
+			handle_error(game, "Door must be between walls");
+	}
 }
 
 void	validate_map(t_game *game)
