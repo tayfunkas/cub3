@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/06 14:32:48 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:12:21 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	check_close(t_player *player, t_map *map, t_rend *rcast)
 
 	i = 1;
 	player->new_dist = sqrt(pow(map->pos_x - player->pos_x, 2) + pow(map->pos_y
-		- player->pos_y, 2));
+				- player->pos_y, 2));
 	if (player->new_dist < player->prev_dist - 1)
 	{
-		player->prev_dist = player->new_dist +1;
+		player->prev_dist = player->new_dist + 1;
 		rcast->fps += (int)(65793 * i);
 		i += 0.2;
 	}

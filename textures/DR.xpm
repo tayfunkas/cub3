@@ -1,5 +1,5 @@
 /* XPM */
-static char *1[] = {
+static char *DR[] = {
 /* columns rows colors chars-per-pixel */
 "64 64 1 1 ",
 " . c ForestGreen",

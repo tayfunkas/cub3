@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/06 14:32:31 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:12:17 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	get_player_init_position(t_map *map, t_player *player)
 				player->pos_y = x + 0.5;
 				player->player_count++;
 				player->dir = player_dir(map->data[x][y]);
-				player->prev_dist = sqrt(pow(map->pos_x - player->pos_x, 2) + pow(map->pos_y
-				- player->pos_y, 2));
+				player->prev_dist = sqrt(pow(map->pos_x - player->pos_x, 2)
+						+ pow(map->pos_y - player->pos_y, 2));
 				player->new_dist = 0;
 			}
 			y++;

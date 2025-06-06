@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:04:16 by grial             #+#    #+#             */
-/*   Updated: 2025/06/06 11:38:56 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:12:40 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	draw_raya(t_game *game, t_ray *ray);
 void	draw_ray(t_game *game, t_ray *ray);
 void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
-		int color);
+			int color);
 
 void	draw_minimap(t_game *game)
 {
@@ -46,8 +46,8 @@ void	draw_raya(t_game *game, t_ray *ray)
 
 void	draw_ray(t_game *game, t_ray *ray)
 {
-	double end_x;
-	double end_y;
+	double	end_x;
+	double	end_y;
 
 	ray->dis_f = ray->dis_v;
 	ray->r_side = 0;
@@ -66,10 +66,10 @@ void	draw_ray(t_game *game, t_ray *ray)
 void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
 		int color)
 {
-	float	dx;
-	float	dy;
-	float	steps;
-	int		i;
+	float dx;
+	float dy;
+	float steps;
+	int i;
 
 	dx = x1 - x0;
 	dy = y1 - y0;

@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/06/06 14:22:10 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:12:12 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	render_wall_column(t_game *game, t_ray *ray, t_rend *rcast, int win_x)
 	double	pos_y;
 	int		tex_y;
 	int		y;
-	
+
 	rcast->offset_x = get_texture_offset_x(game, ray);
 	fix_fisheye(game, ray);
 	set_wall_draw_limits(ray, rcast);
