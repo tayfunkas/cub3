@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/06/04 18:08:44 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/05 16:13:19 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_img
 
 typedef struct s_rend
 {
+	int			fps;
+	int			close;
 	int			draw_start;
 	int			draw_end;
 	double		height;
@@ -98,6 +100,9 @@ typedef struct s_map
 	int			vision;
 	int			line_count;
 	int			max_size;
+	int			exit;
+	int			pos_x;
+	int			pos_y;
 }				t_map;
 
 typedef struct s_player
@@ -106,6 +111,8 @@ typedef struct s_player
 	int			dir;
 	double		pos_x;
 	double		pos_y;
+	double		prev_dist;
+	double		new_dist;
 }				t_player;
 
 typedef struct s_config

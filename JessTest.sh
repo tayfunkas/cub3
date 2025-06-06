@@ -1,7 +1,7 @@
 #!/bin/bash
 # Path to the directory containing the map files
-#MAP="./maps/error"
-MAP="./cub3D_tester/not_playable"
+MAP="./maps/passing"
+#MAP="map/not_playable/not_playable"
 # Define color codes
 RED='\033[0;31m'
 GREEN='\033[0;32m'

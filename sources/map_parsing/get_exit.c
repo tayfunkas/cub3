@@ -1,33 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   get_exit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/06/06 11:54:53 by grial            ###   ########.fr       */
+/*   Created: 2025/01/02 09:33:31 by tkasapog          #+#    #+#             */
+/*   Updated: 2025/06/06 14:37:04 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	raycasting(t_game *game, t_ray *ray, t_rend *rcast)
+void	get_exit(t_map *map)
 {
-	int		dir_i;
-	int		win_x;
-	double	ang_d;
+	int	x;
+	int	y;
 
-	dir_i = game->player->dir + (FOV / 2);
-	win_x = 0;
-	ang_d = 0.0;
-	while (win_x < WIN_W)
+	x = 0;
+	y = 0;
+	if (!map || !map->data)
 	{
-		fix_ang(ray, dir_i, -ang_d);
-		wall_dist(game, game->map, ray);
-		get_tex(game, ray);
-		render_wall_column(game, ray, rcast, win_x);
-		ang_d += ray->r_step;
-		win_x += 1;
+		printf("Map does not exist\n");
+		return ;
+	}
+	while (map->data[y])
+	{
+		x = 0;
+		while (map->data[y][x])
+		{
+			if (map->data[y][x] == 'Q')
+			{
+				map->pos_x = x;
+				map->pos_y = y;
+				map->exit++;
+			}
+			x++;
+		}
+		y++;
 	}
 }

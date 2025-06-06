@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:34:02 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 18:22:06 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:29:16 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,17 @@ int	main(int argc, char **argv)
 
 	game = NULL;
 	initialize_game(&game);
-	printf("Game struct initialized succesfully!\n");
 	parse_arguments(argc, argv, game);
-	printf("Arguments parsed succesfully!\n");
 	parse_file(game);
-	printf("Map file parsed succesfully!\n");
 	check_images(game);
-	printf("Texture files are checked!\n");
-	printf("game->map pointer: %p\n", (void *)game->map);
 	get_player_init_position(game->map, game->player);
-	printf("Player count = %d\n", game->player->player_count);
 	if (game->player->player_count == 0)
 		game->error = 1;
 	if (game->error == 1)
-		handle_error(game, "Issue with the map file\n");
+		handle_error(game, "Issue with the map file");
 	validate_map(game);
 	check_player_position(game);
-	printf("Map is valid!\n");
 	init_game(game);
-	printf("fijar 80 a la longitud del mapa void	ray_dist(void);\n");
-	printf("my_mlx_pixel_put, use mlx_pixel_put\n");
-	printf("check if make of cub3d compiles libft\n");
 	free_game(game);
-	printf("All is freed. All good!\n");
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/06/05 13:22:18 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/06/06 14:22:10 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	render(t_game *game)
 	handle_movement(game);
 	raycasting(game, game->engine->ray, game->engine->rcast);
 	draw_minimap(game);
-	draw_miniplayer(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player,
 		game->player->pos_y * MIN_S, game->player->pos_x * MIN_S);
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window,
@@ -33,7 +32,7 @@ void	render_wall_column(t_game *game, t_ray *ray, t_rend *rcast, int win_x)
 	double	pos_y;
 	int		tex_y;
 	int		y;
-
+	
 	rcast->offset_x = get_texture_offset_x(game, ray);
 	fix_fisheye(game, ray);
 	set_wall_draw_limits(ray, rcast);
@@ -45,7 +44,7 @@ void	render_wall_column(t_game *game, t_ray *ray, t_rend *rcast, int win_x)
 	{
 		tex_y = ((int)pos_y) & (64 - 1);
 		rcast->color = get_pixel_color(rcast->texture, rcast->offset_x, tex_y);
-		my_mlx_pixel_put(game, win_x, y, rcast->color);
+		my_mlx_pixel_put(game, win_x, y, rcast->color + rcast->fps);
 		pos_y += rcast->step_texture;
 		y++;
 	}
@@ -58,16 +57,16 @@ void	get_tex(t_game *game, t_ray *ray)
 		game->engine->rcast->texture = game->engine->dr_img;
 		return ;
 	}
-	if (!ray->r_side)
+	if (ray->r_side)
 	{
-		if (ray->r_dir >= 90 && ray->r_dir <= 270)
+		if (ray->r_dir >= 180 && ray->r_dir <= 360)
 			game->engine->rcast->texture = game->engine->so_img;
 		else
 			game->engine->rcast->texture = game->engine->no_img;
 	}
 	else
 	{
-		if (ray->r_dir >= 180 && ray->r_dir <= 360)
+		if (ray->r_dir >= 90 && ray->r_dir <= 270)
 			game->engine->rcast->texture = game->engine->we_img;
 		else
 			game->engine->rcast->texture = game->engine->ea_img;

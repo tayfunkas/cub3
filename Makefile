@@ -43,7 +43,10 @@ SOURCES = 	sources/map_parsing/checks.c \
 			sources/init/initialize_game.c \
 			sources/init/initialize_player.c \
 			sources/free/free_engine.c \
-			sources/free/free.c
+			sources/free/free.c \
+			sources/mini_map/draw_minimap.c \
+			sources/animations/animation.c \
+			sources/map_parsing/get_exit.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

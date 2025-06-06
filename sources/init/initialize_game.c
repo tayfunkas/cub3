@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_game.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 17:08:36 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/06 15:27:42 by tkasapog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	initialize_render(t_game *game)
 		printf("Error initialize_render()");
 		return ;
 	}
-	printf("Fix case where initialize_render does not work");
+	game->engine->rcast->fps = 0;
 	game->engine->rcast->draw_start = 0;
 	game->engine->rcast->draw_end = 0;
 	game->engine->rcast->height = 0;
@@ -69,7 +69,6 @@ void	initialize_ray(t_game *game)
 		printf("Error initialize_ray()");
 		return ;
 	}
-	printf("Fix case does not work initialize_ray");
 	game->engine->ray->r_step = (double)FOV / (double)WIN_W;
 	game->engine->ray->r_side = 0;
 	game->engine->ray->hit_x = 0;
