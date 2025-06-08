@@ -12,13 +12,21 @@ LBMLX_PATH = minilibx-linux
 LBMLX_LIB = $(LBMLX_PATH)/libmlx.a
 INC_MLX = -L$(LBMLX_PATH) -lmlx -lXext -lX11 -lm -lz
 
+# Si el sistema es Darwin (macOS), usamos la versión de Mac de la MLX
+ifeq ($(UNAME_S),Darwin)
+	LBMLX_PATH = minilibx-mac
+	LBMLX_LIB = $(LBMLX_PATH)/libmlx.a
+	INC_MLX = -L$(LBMLX_PATH) -lmlx -framework OpenGL -framework AppKit
+endif
+
 # Libft
 LIBFT_PATH = ./libft
 LIBFT_LIB = $(LIBFT_PATH)/libft.a
 INC_LIB = -L$(LIBFT_PATH) -lft
 
 # Fuentes y objetos
-SOURCES = 	sources/free/free.c \
+SOURCES = 	sources/animations/animation.c \
+			sources/free/free.c \
 			sources/free/free_engine.c \
 			sources/init/initialize_engine.c \
 			sources/init/initialize_game.c \

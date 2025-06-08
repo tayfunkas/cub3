@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:51:00 by grial             #+#    #+#             */
-/*   Updated: 2025/06/04 18:21:37 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/08 22:01:20 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	init_game(t_game *game)
 	mlx_hook(game->mlx_window, 17, 0, free_game, game);
 	mlx_hook(game->mlx_window, 2, 1L << 0, key_press, game);
 	mlx_hook(game->mlx_window, 3, 1L << 1, key_release, game);
-	mlx_hook(game->mlx_window, 6, PointerMotionMask, mouse_move, game);
+	//mlx_hook(game->mlx_window, 6, PointerMotionMask, mouse_move, game);
 	mlx_loop_hook(game->mlx_ptr, render, game);
 	mlx_loop(game->mlx_ptr);
 }

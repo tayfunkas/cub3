@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/06 14:35:07 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/08 23:52:33 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 # define CUB3D_H
 
 # include "../libft/libft.h"
-# include "../minilibx-linux/mlx.h"
+# include "../minilibx-mac/mlx.h"
 # include "cub3d_config.h"
 # include "cub3d_keys.h"
 # include "cub3d_struct.h"
-# include <X11/X.h>
-# include <X11/keysym.h>
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
@@ -27,9 +25,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define M_PI 3.14159265358979323846
-
 // map_parsing
+
+//	animination.c
+void	animation(t_game *game, t_engine *eng);
 // assign_line.c
 void	check_line_config(t_game *game, char *line);
 void	classify_line(t_game *game, char *line);
@@ -164,8 +163,10 @@ void	initialize_player(t_game *game);
 void	get_player_init_position(t_map *map, t_player *player);
 int		is_player(char c);
 int		player_dir(char c);
+void	player_exit(t_game *game, t_player *player, t_map *map);
 
 //  load_image.c
 void	load_img(t_game *game);
+void	load_img_and_check(void *mlx, t_img *img, char *path, t_game *game);
 
 #endif

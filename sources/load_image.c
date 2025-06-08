@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:19:35 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 17:34:18 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/06/08 23:06:38 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	exit_with_error(char *msg)
 	exit(EXIT_FAILURE);
 }
 
-static void	load_img_and_check(void *mlx, t_img *img, char *path, t_game *game)
+void	load_img_and_check(void *mlx, t_img *img, char *path, t_game *game)
 {
 	int		width;
 	int		height;

@@ -6,7 +6,7 @@
 /*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:04:16 by grial             #+#    #+#             */
-/*   Updated: 2025/06/06 15:19:51 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/06/08 22:01:32 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static int	get_minimap_color(char tile)
 		return (0x222222);
 	return (0x000000);
 	if (tile == 'D')
-		return (0X00FF00)
+		return (0X00FF00);
 	if (tile == 'Q')
-		return (0X00FFFF)
+		return (0X00FFFF);
 }
 
 static void	draw_minimap_tile(t_game *game, int i, int j, int color)

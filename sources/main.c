@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasapog <tkasapog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:34:02 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/06 15:29:16 by tkasapog         ###   ########.fr       */
+/*   Updated: 2025/06/09 00:35:29 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int	main(int argc, char **argv)
 	parse_arguments(argc, argv, game);
 	parse_file(game);
 	check_images(game);
+	validate_map(game);
 	get_player_init_position(game->map, game->player);
 	if (game->player->player_count == 0)
 		game->error = 1;
 	if (game->error == 1)
 		handle_error(game, "Issue with the map file");
-	validate_map(game);
 	check_player_position(game);
 	init_game(game);
 	free_game(game);

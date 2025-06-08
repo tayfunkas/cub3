@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_player.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/06 15:12:17 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/08 23:09:30 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	get_player_init_position(t_map *map, t_player *player)
 	int	y;
 
 	x = 0;
-	if (!map || !map->data)
-		return ;
 	while (map->data[x])
 	{
 		y = 0;
@@ -45,6 +43,7 @@ void	get_player_init_position(t_map *map, t_player *player)
 				player->prev_dist = sqrt(pow(map->pos_x - player->pos_x, 2)
 						+ pow(map->pos_y - player->pos_y, 2));
 				player->new_dist = 0;
+				map->data[x][y] = '0';
 			}
 			y++;
 		}

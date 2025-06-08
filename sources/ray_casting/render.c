@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/06/06 15:12:12 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/09 00:34:16 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	render(t_game *game)
 	handle_movement(game);
 	raycasting(game, game->engine->ray, game->engine->rcast);
 	draw_minimap(game);
-	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window, game->mini->player,
-		game->player->pos_y * MIN_S, game->player->pos_x * MIN_S);
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window,
 		game->engine->frame->img, 0, 0);
+	game->engine->rcast->fps++;
+	animation(game, game->engine);
 	return (1);
 }
 
@@ -44,7 +44,7 @@ void	render_wall_column(t_game *game, t_ray *ray, t_rend *rcast, int win_x)
 	{
 		tex_y = ((int)pos_y) & (64 - 1);
 		rcast->color = get_pixel_color(rcast->texture, rcast->offset_x, tex_y);
-		my_mlx_pixel_put(game, win_x, y, rcast->color + rcast->fps);
+		my_mlx_pixel_put(game, win_x, y, rcast->color);
 		pos_y += rcast->step_texture;
 		y++;
 	}

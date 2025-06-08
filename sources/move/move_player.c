@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/06/06 13:38:52 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/08 23:13:47 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	handle_movement(t_game *game)
 	if (game->keys[SPACE])
 		open_door(player, map);
 	check_close(game->player, game->map, game->engine->rcast);
+	player_exit(game, game->player, game->map);
 }
 
 void	player_direction(t_player *player, int key)
