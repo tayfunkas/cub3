@@ -18,35 +18,35 @@ LIBFT_LIB = $(LIBFT_PATH)/libft.a
 INC_LIB = -L$(LIBFT_PATH) -lft
 
 # Fuentes y objetos
-SOURCES = 	sources/map_parsing/checks.c \
-			sources/map_parsing/parsing_utils.c \
-			sources/map_parsing/validate_map.c \
-			sources/map_parsing/check_textures.c \
-			sources/map_parsing/check_colors.c \
-			sources/map_parsing/parse_map.c \
-			sources/map_parsing/assign_line.c \
-			sources/init_game.c \
-			sources/load_image.c \
-			sources/main.c \
-			sources/move/move_player.c \
-			sources/move/keys.c \
-			sources/ray_casting/raycasting.c \
-			sources/ray_casting/check_wall.c \
-			sources/ray_casting/raycasting_utils.c \
-			sources/ray_casting/render_background.c \
-			sources/utils/get_pixel_color.c \
-			sources/mini_map/mini_map.c \
-			sources/ray_casting/check_wall_utils.c \
-			sources/ray_casting/render.c \
-			sources/move/open_door.c \
+SOURCES = 	sources/free/free.c \
+			sources/free/free_engine.c \
 			sources/init/initialize_engine.c \
 			sources/init/initialize_game.c \
 			sources/init/initialize_player.c \
-			sources/free/free_engine.c \
-			sources/free/free.c \
+			sources/init_game.c \
+			sources/load_image.c \
+			sources/main.c \
+			sources/map_parsing/assign_line.c \
+			sources/map_parsing/check_colors.c \
+			sources/map_parsing/check_textures.c \
+			sources/map_parsing/checks.c \
+			sources/map_parsing/get_exit.c \
+			sources/map_parsing/parse_map.c \
+			sources/map_parsing/parsing_utils.c \
+			sources/map_parsing/validate_map.c \
 			sources/mini_map/draw_minimap.c \
-			sources/animations/animation.c \
-			sources/map_parsing/get_exit.c
+			sources/mini_map/mini_map.c \
+			sources/move/keys.c \
+			sources/move/move_player.c \
+			sources/move/move_utils.c \
+			sources/move/open_door.c \
+			sources/ray_casting/check_wall.c \
+			sources/ray_casting/check_wall_utils.c \
+			sources/ray_casting/raycasting.c \
+			sources/ray_casting/raycasting_utils.c \
+			sources/ray_casting/render.c \
+			sources/ray_casting/render_background.c \
+			sources/utils/get_pixel_color.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
