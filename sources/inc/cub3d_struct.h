@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/06/09 15:55:31 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/09 17:54:09 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_engine
 	char			*dr_path;
 	t_color			*floor_color;
 	t_color			*ceiling_color;
+	int				animation;
 }					t_engine;
 
 typedef struct s_mini

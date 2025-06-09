@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:04:16 by grial             #+#    #+#             */
-/*   Updated: 2025/06/09 16:39:44 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/09 17:54:30 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	alloc_imgs(t_engine *engine)
 
 void	animation(t_game *game, t_engine *engine)
 {
-	if (engine->rcast->fps == 40)
+	if (engine->rcast->fps == 40 && engine->animation)
 	{
 		delete_previous_img(game, engine);
 		if (!alloc_imgs(engine))
@@ -61,7 +61,7 @@ void	animation(t_game *game, t_engine *engine)
 			game);
 		engine->rcast->fps = 0;
 	}
-	else if (engine->rcast->fps == 20)
+	else if (engine->rcast->fps == 20 && engine->animation)
 	{
 		delete_previous_img(game, engine);
 		if (!alloc_imgs(engine))

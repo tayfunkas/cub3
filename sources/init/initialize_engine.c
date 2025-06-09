@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/09 15:42:53 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/09 17:54:54 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	initialize_engine(t_game *game)
 	game->engine->we_path = NULL;
 	game->engine->ea_path = NULL;
 	game->engine->dr_path = NULL;
+	game->engine->animation = 1;
 }
 
 void	initialize_img(t_engine *engine)

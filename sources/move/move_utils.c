@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/06/09 15:24:40 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/09 17:55:21 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,5 @@ void	check_close(t_player *player, t_map *map, t_rend *rcast)
 void	player_exit(t_game *game, t_player *player, t_map *map)
 {
 	if (map->data[(int)player->pos_y][(int)player->pos_x] == 'Q')
-		printf("End.\n");
-	(void)game;
+		game->engine->animation = 0;
 }

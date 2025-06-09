@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/06/09 17:46:03 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/09 17:52:42 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ void	render_exit(t_game *game, t_ray *ray, t_rend *rcast)
 		fix_ang(ray, dir_i, -ang_d);
 		exit_dist(game, game->map, ray);
 		if (is_exit(game->map, ray->hit_y, ray->hit_x))
-		{
-			printf("Exit.\n");
 			render_exit_column(game, ray, rcast, win_x);
-		}
 		ang_d += ray->r_step;
 		win_x += 1;
 	}
