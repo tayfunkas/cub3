@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:51 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 17:27:19 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/09 15:42:53 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,8 @@ void	initialize_img(t_engine *engine)
 	if (!engine->dr_img)
 		return ;
 	engine->dr_img->img = NULL;
+	engine->ex_img = malloc(sizeof(t_img));
+	if (!engine->ex_img)
+		return ;
+	engine->ex_img->img = NULL;
 }

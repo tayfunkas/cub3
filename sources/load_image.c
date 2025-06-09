@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:19:35 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/08 23:06:38 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/06/09 15:58:52 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,17 @@ void	load_img_and_check(void *mlx, t_img *img, char *path, t_game *game)
 static void	load_engine_textures(t_game *game)
 {
 	load_img_and_check(game->mlx_ptr, game->engine->no_img,
-		"textures/NO.xpm", game);
+		game->engine->no_path, game);
 	load_img_and_check(game->mlx_ptr, game->engine->dr_img,
 		"textures/DR.xpm", game);
 	load_img_and_check(game->mlx_ptr, game->engine->ea_img,
-		"textures/EA.xpm", game);
+		game->engine->ea_path, game);
 	load_img_and_check(game->mlx_ptr, game->engine->so_img,
-		"textures/SO.xpm", game);
+		game->engine->so_path, game);
 	load_img_and_check(game->mlx_ptr, game->engine->we_img,
-		"textures/WE.xpm", game);
+		game->engine->we_path, game);
+	load_img_and_check(game->mlx_ptr, game->engine->ex_img,
+		"textures/EX.xpm", game);
 }
 
 static void	load_mini_textures(t_game *game)

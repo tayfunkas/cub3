@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/08 23:52:33 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/06/09 16:07:53 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 # define CUB3D_H
 
 # include "../libft/libft.h"
-# include "../minilibx-mac/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "cub3d_config.h"
 # include "cub3d_keys.h"
 # include "cub3d_struct.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
@@ -25,6 +27,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# define M_PI 3.14159265358979323846
 // map_parsing
 
 //	animination.c
@@ -168,5 +171,16 @@ void	player_exit(t_game *game, t_player *player, t_map *map);
 //  load_image.c
 void	load_img(t_game *game);
 void	load_img_and_check(void *mlx, t_img *img, char *path, t_game *game);
+
+//  render_exit.c
+void	render_exit(t_game *game, t_ray *ray, t_rend *rcast);
+void	render_exit_column(t_game *game, t_ray *ray, t_rend *rcast, int win_x);
+void	exit_dist(t_game *game, t_map *map, t_ray *ray);
+void	dist_to_exit(t_ray *ray);
+
+//  check_exit_utils.c
+int		is_exit(t_map *map, int int_y, int int_x);
+void	exit_dist_vertical(t_game *game, t_map *map, t_ray *ray);
+void	exit_dist_horizontal(t_game *game, t_map *map, t_ray *ray);
 
 #endif

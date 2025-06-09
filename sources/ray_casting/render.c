@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/06/09 00:34:16 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/06/09 16:12:49 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	render(t_game *game)
 	render_background(game);
 	handle_movement(game);
 	raycasting(game, game->engine->ray, game->engine->rcast);
+	render_exit(game, game->engine->ray, game->engine->rcast);
 	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window,
 		game->engine->frame->img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:04:16 by grial             #+#    #+#             */
-/*   Updated: 2025/06/06 15:12:40 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/09 14:50:23 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ void	draw_ray(t_game *game, t_ray *ray)
 void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
 		int color)
 {
-	float dx;
-	float dy;
-	float steps;
-	int i;
+	float	dx;
+	float	dy;
+	float	steps;
+	int		i;
 
 	dx = x1 - x0;
 	dy = y1 - y0;

@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 18:48:14 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/04 18:00:46 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/09 15:50:10 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	free_engine(t_engine *engine, void *mlx_ptr)
 	free_img(mlx_ptr, &engine->we_img);
 	free_img(mlx_ptr, &engine->ea_img);
 	free_img(mlx_ptr, &engine->dr_img);
+	free_img(mlx_ptr, &engine->ex_img);
 	free_color(&engine->floor_color);
 	free_color(&engine->ceiling_color);
 	free(engine->no_path);

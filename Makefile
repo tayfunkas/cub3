@@ -12,13 +12,6 @@ LBMLX_PATH = minilibx-linux
 LBMLX_LIB = $(LBMLX_PATH)/libmlx.a
 INC_MLX = -L$(LBMLX_PATH) -lmlx -lXext -lX11 -lm -lz
 
-# Si el sistema es Darwin (macOS), usamos la versión de Mac de la MLX
-ifeq ($(UNAME_S),Darwin)
-	LBMLX_PATH = minilibx-mac
-	LBMLX_LIB = $(LBMLX_PATH)/libmlx.a
-	INC_MLX = -L$(LBMLX_PATH) -lmlx -framework OpenGL -framework AppKit
-endif
-
 # Libft
 LIBFT_PATH = ./libft
 LIBFT_LIB = $(LIBFT_PATH)/libft.a
@@ -50,9 +43,11 @@ SOURCES = 	sources/animations/animation.c \
 			sources/move/open_door.c \
 			sources/ray_casting/check_wall.c \
 			sources/ray_casting/check_wall_utils.c \
+			sources/ray_casting/check_exit_utils.c \
 			sources/ray_casting/raycasting.c \
 			sources/ray_casting/raycasting_utils.c \
 			sources/ray_casting/render.c \
+			sources/ray_casting/render_exit.c \
 			sources/ray_casting/render_background.c \
 			sources/utils/get_pixel_color.c
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:33:44 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/08 22:01:01 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/06/09 14:44:24 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	free_all_others(t_game *game)
 	}
 	if (game->mlx_ptr)
 	{
-		//mlx_destroy_display(game->mlx_ptr);
+		mlx_destroy_display(game->mlx_ptr);
 		free(game->mlx_ptr);
 		game->mlx_ptr = NULL;
 	}
