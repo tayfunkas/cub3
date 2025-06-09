@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:36:40 by grial             #+#    #+#             */
-/*   Updated: 2025/06/09 17:47:35 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/09 18:04:05 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ int	is_exit(t_map *map, int int_y, int int_x)
 	if (int_y >= 0 && int_y < map->m_height && int_x >= 0
 		&& int_x < (int)ft_strlen(map->data[int_y])
 		&& map->data[int_y][int_x] == 'Q')
-	{
-		printf("%i : %i\n", int_y, int_x);
 		return (1);
-	}
 	else
 		return (0);
 }

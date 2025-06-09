@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/09 16:07:53 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/09 17:59:29 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	player_direction(t_player *player, int key);
 void	player_move(t_player *player, t_map *map, int key);
 void	player_strafe(t_player *player, t_map *map, int key);
 int		check_collision(t_map *map, float x, float y);
-void	check_close(t_player *player, t_map *map, t_rend *rcast);
 
 // ray_casting
 void	draw_minimap(t_game *game);
