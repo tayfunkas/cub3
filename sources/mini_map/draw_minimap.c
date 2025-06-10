@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:04:16 by grial             #+#    #+#             */
-/*   Updated: 2025/06/09 14:50:23 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/10 23:55:12 by gabrielrial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,30 +58,32 @@ void	draw_ray(t_game *game, t_ray *ray)
 	}
 	end_x = game->player->pos_x + cos(to_rad(ray->r_dir)) * ray->dis_f;
 	end_y = game->player->pos_y - sin(to_rad(ray->r_dir)) * ray->dis_f;
-	draw_line(game, game->player->pos_x * (double)MIN_S, game->player->pos_y
-		* (double)MIN_S, end_x * (double)MIN_S, end_y * (double)MIN_S,
-		0xFF0F0F);
+	draw_line(game, end_x * (double)MIN_S, end_y * (double)MIN_S);
 }
 
-void	draw_line(t_game *game, float x0, float y0, float x1, float y1,
-		int color)
+void	draw_line(t_game *game, float x1, float y1)
 {
+	float	x0;
+	float	y0;
 	float	dx;
 	float	dy;
 	float	steps;
-	int		i;
 
+	x0 = game->player->pos_x + MIN_S;
+	y0 = game->player->pos_y + MIN_S;
 	dx = x1 - x0;
 	dy = y1 - y0;
-	float x_inc, y_inc;
 	steps = fmaxf(fabsf(dx), fabsf(dy));
+
 	if (steps == 0)
 		return ;
-	x_inc = dx / steps;
-	y_inc = dy / steps;
-	for (i = 0; i < steps; i++)
+
+	float	x_inc = dx / steps;
+	float	y_inc = dy / steps;
+
+	for (int i = 0; i < steps; i++)
 	{
-		my_mlx_pixel_put(game, (int)x0, (int)y0, color);
+		my_mlx_pixel_put(game, (int)x0, (int)y0, COLOR);
 		x0 += x_inc;
 		y0 += y_inc;
 	}
