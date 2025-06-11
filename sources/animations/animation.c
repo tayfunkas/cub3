@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:04:16 by grial             #+#    #+#             */
-/*   Updated: 2025/06/11 11:12:22 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/11 11:35:10 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	delete_previous_img(t_game *game, t_engine *engine)
 	free_img(game->mlx_ptr, &engine->so_img);
 	free_img(game->mlx_ptr, &engine->we_img);
 	free_img(game->mlx_ptr, &engine->ea_img);
-	free_img(game->mlx_ptr, &engine->dr_img);
 	free_img(game->mlx_ptr, &engine->ex_img);
 }
 
@@ -28,7 +27,6 @@ static int	alloc_imgs(t_engine *engine)
 	engine->so_img = malloc(sizeof(t_img));
 	engine->we_img = malloc(sizeof(t_img));
 	engine->ea_img = malloc(sizeof(t_img));
-	engine->dr_img = malloc(sizeof(t_img));
 	engine->ex_img = malloc(sizeof(t_img));
 	if (!engine->no_img || !engine->so_img || !engine->we_img || !engine->ea_img
 		|| !engine->dr_img)

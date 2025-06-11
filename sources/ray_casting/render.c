@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:53:10 by grial             #+#    #+#             */
-/*   Updated: 2025/06/11 11:21:50 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/11 11:34:25 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,9 @@ int	render(t_game *game)
 	usleep(10000);
 	render_background(game);
 	handle_movement(game);
-	printf("A.a\n");
 	raycasting(game, game->engine->ray, game->engine->rcast);
 	render_exit(game, game->engine->ray, game->engine->rcast);
-	printf("A.b\n");
 	draw_minimap(game);
-	printf("A.c\n");
 	mlx_put_image_to_window(game->mlx_ptr, game->mlx_window,
 		game->engine->frame->img, 0, 0);
 	game->engine->rcast->fps++;
