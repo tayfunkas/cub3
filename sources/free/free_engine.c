@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 18:48:14 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/09 15:50:10 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/11 12:40:32 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,10 @@ void	free_engine(t_engine *engine, void *mlx_ptr)
 	free(engine->so_path);
 	free(engine->we_path);
 	free(engine->ea_path);
-	free(engine->dr_path);
 	engine->no_path = NULL;
 	engine->so_path = NULL;
 	engine->we_path = NULL;
 	engine->ea_path = NULL;
-	engine->dr_path = NULL;
 }
 
 void	free_img(void *mlx_ptr, t_img **img)

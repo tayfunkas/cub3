@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/06/11 11:12:39 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/11 12:46:55 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ typedef struct s_engine
 	char			*so_path;
 	char			*we_path;
 	char			*ea_path;
-	char			*dr_path;
 	t_color			*floor_color;
 	t_color			*ceiling_color;
 	int				animation;

@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:04:16 by grial             #+#    #+#             */
-/*   Updated: 2025/06/11 11:35:10 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/11 12:47:39 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static int	alloc_imgs(t_engine *engine)
 	engine->so_img->img = NULL;
 	engine->we_img->img = NULL;
 	engine->ea_img->img = NULL;
-	engine->dr_img->img = NULL;
 	engine->ex_img->img = NULL;
 	return (1);
 }
