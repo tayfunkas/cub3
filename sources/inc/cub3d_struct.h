@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:29:35 by grial             #+#    #+#             */
-/*   Updated: 2025/06/09 17:54:09 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/11 11:12:39 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_ray
 	double			dis_h;
 	double			dis_v;
 	double			dis_f;
+	double			drw_x0;
+	double			drw_y0;
 }					t_ray;
 
 typedef struct s_img

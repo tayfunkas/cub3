@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:04:16 by grial             #+#    #+#             */
-/*   Updated: 2025/06/09 17:54:30 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/11 11:12:22 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,39 +42,29 @@ static int	alloc_imgs(t_engine *engine)
 	return (1);
 }
 
-void	animation(t_game *game, t_engine *engine)
+void	animation(t_game *game, t_engine *en)
 {
-	if (engine->rcast->fps == 40 && engine->animation)
+	if (en->rcast->fps == 40 && en->animation)
 	{
-		delete_previous_img(game, engine);
-		if (!alloc_imgs(engine))
+		delete_previous_img(game, en);
+		if (!alloc_imgs(en))
 			return ;
-		load_img_and_check(game->mlx_ptr, engine->no_img, "textures/NO.xpm",
-			game);
-		load_img_and_check(game->mlx_ptr, engine->ea_img, "textures/EA.xpm",
-			game);
-		load_img_and_check(game->mlx_ptr, engine->so_img, "textures/SO.xpm",
-			game);
-		load_img_and_check(game->mlx_ptr, engine->we_img, "textures/WE.xpm",
-			game);
-		load_img_and_check(game->mlx_ptr, engine->ex_img, "textures/EX.xpm",
-			game);
-		engine->rcast->fps = 0;
+		load_img_and_check(game->mlx_ptr, en->no_img, "textures/NO.xpm", game);
+		load_img_and_check(game->mlx_ptr, en->ea_img, "textures/EA.xpm", game);
+		load_img_and_check(game->mlx_ptr, en->so_img, "textures/SO.xpm", game);
+		load_img_and_check(game->mlx_ptr, en->we_img, "textures/WE.xpm", game);
+		load_img_and_check(game->mlx_ptr, en->ex_img, "textures/EX.xpm", game);
+		en->rcast->fps = 0;
 	}
-	else if (engine->rcast->fps == 20 && engine->animation)
+	else if (en->rcast->fps == 20 && en->animation)
 	{
-		delete_previous_img(game, engine);
-		if (!alloc_imgs(engine))
+		delete_previous_img(game, en);
+		if (!alloc_imgs(en))
 			return ;
-		load_img_and_check(game->mlx_ptr, engine->no_img, "textures/EA.xpm",
-			game);
-		load_img_and_check(game->mlx_ptr, engine->ea_img, "textures/WE.xpm",
-			game);
-		load_img_and_check(game->mlx_ptr, engine->so_img, "textures/NO.xpm",
-			game);
-		load_img_and_check(game->mlx_ptr, engine->we_img, "textures/SO.xpm",
-			game);
-		load_img_and_check(game->mlx_ptr, engine->ex_img, "textures/EX1.xpm",
-			game);
+		load_img_and_check(game->mlx_ptr, en->no_img, "textures/EA.xpm", game);
+		load_img_and_check(game->mlx_ptr, en->ea_img, "textures/WE.xpm", game);
+		load_img_and_check(game->mlx_ptr, en->so_img, "textures/NO.xpm", game);
+		load_img_and_check(game->mlx_ptr, en->we_img, "textures/SO.xpm", game);
+		load_img_and_check(game->mlx_ptr, en->ex_img, "textures/EX1.xpm", game);
 	}
 }

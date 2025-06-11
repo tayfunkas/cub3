@@ -6,13 +6,11 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:12:05 by grial             #+#    #+#             */
-/*   Updated: 2025/06/09 17:58:56 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/11 11:12:33 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-int		corner_wall(t_map *map, t_player *player, float new_y, float new_x);
 
 void	handle_movement(t_game *game)
 {
@@ -116,16 +114,4 @@ int	check_collision(t_map *map, float x, float y)
 	if (map->data[new_y][new_x] != '1' && map->data[new_y][new_x] != 'D')
 		return (1);
 	return (0);
-}
-
-int	corner_wall(t_map *map, t_player *p, float new_y, float new_x)
-{
-	if (new_y != p->pos_y && new_x != p->pos_x)
-	{
-		if (new_x > p->pos_x && !check_collision(map, new_x + STEP, p->pos_y))
-			return (0);
-		if (new_x < p->pos_x && !check_collision(map, new_x - STEP, p->pos_y))
-			return (0);
-	}
-	return (1);
 }

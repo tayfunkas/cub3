@@ -6,7 +6,7 @@
 /*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:22:08 by tkasapog          #+#    #+#             */
-/*   Updated: 2025/06/09 17:59:29 by grial            ###   ########.fr       */
+/*   Updated: 2025/06/11 11:09:09 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	player_direction(t_player *player, int key);
 void	player_move(t_player *player, t_map *map, int key);
 void	player_strafe(t_player *player, t_map *map, int key);
 int		check_collision(t_map *map, float x, float y);
+int		corner_wall(t_map *map, t_player *player, float new_y, float new_x);
 
 // ray_casting
 void	draw_minimap(t_game *game);
@@ -181,5 +182,9 @@ void	dist_to_exit(t_ray *ray);
 int		is_exit(t_map *map, int int_y, int int_x);
 void	exit_dist_vertical(t_game *game, t_map *map, t_ray *ray);
 void	exit_dist_horizontal(t_game *game, t_map *map, t_ray *ray);
+
+void	draw_raya(t_game *game, t_ray *ray);
+void	draw_ray(t_game *game, t_ray *ray);
+void	draw_line(t_game *game, t_ray *ray, float x1, float y1);
 
 #endif

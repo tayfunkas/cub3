@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_config.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrielrial <gabrielrial@student.42.fr>    +#+  +:+       +#+        */
+/*   By: grial <grial@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:01:03 by grial             #+#    #+#             */
-/*   Updated: 2025/06/10 23:55:56 by gabrielrial      ###   ########.fr       */
+/*   Updated: 2025/06/11 11:05:17 by grial            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define MIN_S 8
 # define PLY_S 4
 # define PLY_C 0xFF0F0F
-# define RAY_C 
+# define RAY_C 0xFF0F0F
 
 //  BLOCK
 # define BLOCK 64
