@@ -1,0 +1,15 @@
+/* XPM */
+static char *floor[] = {
+/* columns rows colors chars-per-pixel */
+"8 8 1 1",
+"  c black",
+/* pixels */
+"        ",
+"        ",
+"        ",
+"        ",
+"        ",
+"        ",
+"        ",
+"        "
+};
