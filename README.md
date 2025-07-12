@@ -35,10 +35,10 @@
 
 ## 🛠️ Usage
 
-1. **Compile** the bonus version:
-   Go into the bonus file
-   make
-2. ./cub3D maps/passing/bonus2.cub
+1. **Compile** the bonus version:  
+   From the project root directory, simply run:  
+    make bonus
+2. ./cub3D_bonus maps/passing/bonus2.cub
 
 Note: Playing the game requires the MiniLibX graphics library. The project includes a local copy that is used during compilation.
 
