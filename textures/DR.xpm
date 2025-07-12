@@ -1,14 +1,18 @@
 /* XPM */
-static char *DR[] = {
+static char *EA[] = {
 /* columns rows colors chars-per-pixel */
 "64 64 1 1 ",
-" . c black",
+"  c black",
 /* pixels */
-"       1       1       1       1       1       1        1       ",
-"       1       1       1       1       1       1        1       ",
-"       1       1       1       1       1       1        1       ",
-"       1       1       1       1       1       1        1       ",
-
+"                                                                ",
+"                                                                ",
+"                                                                ",
+"                                                                ",
+"                                                                ",
+"                                                                ",
+"                                                                ",
+"                                                                ",
+"                                                                ",
 "                                                                ",
 "                                                                ",
 "                                                                ",

@@ -1,86 +1,127 @@
+# Nombre del ejecutable
 NAME = cub3D
+BONUS_NAME = cub3D_bonus
 
+# Compilador y flags
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -rf
 
-# Detectar sistema operativo
-UNAME_S := $(shell uname -s)
-
-# Configuración por defecto (Linux)
-LBMLX_PATH = minilibx-linux
-LBMLX_LIB = $(LBMLX_PATH)/libmlx.a
-INC_MLX = -L$(LBMLX_PATH) -lmlx -lXext -lX11 -lm -lz
-
-# Libft
+# Librerías externas
 LIBFT_PATH = ./libft
 LIBFT_LIB = $(LIBFT_PATH)/libft.a
 INC_LIB = -L$(LIBFT_PATH) -lft
 
-# Fuentes y objetos
-SOURCES = 	sources/animations/animation.c \
-			sources/free/free.c \
-			sources/free/free_engine.c \
-			sources/init/initialize_engine.c \
-			sources/init/initialize_game.c \
-			sources/init/initialize_player.c \
-			sources/init_game.c \
-			sources/load_image.c \
-			sources/main.c \
-			sources/map_parsing/assign_line.c \
-			sources/map_parsing/check_colors.c \
-			sources/map_parsing/check_textures.c \
-			sources/map_parsing/checks.c \
-			sources/map_parsing/get_exit.c \
-			sources/map_parsing/parse_map.c \
-			sources/map_parsing/parsing_utils.c \
-			sources/map_parsing/validate_map.c \
-			sources/mini_map/draw_minimap.c \
-			sources/mini_map/mini_map.c \
-			sources/move/keys.c \
-			sources/move/move_player.c \
-			sources/move/move_utils.c \
-			sources/move/open_door.c \
-			sources/ray_casting/check_wall.c \
-			sources/ray_casting/check_wall_utils.c \
-			sources/ray_casting/check_exit_utils.c \
-			sources/ray_casting/raycasting.c \
-			sources/ray_casting/raycasting_utils.c \
-			sources/ray_casting/render.c \
-			sources/ray_casting/render_exit.c \
-			sources/ray_casting/render_background.c \
-			sources/utils/get_pixel_color.c
+LBMLX_PATH = ./minilibx-linux
+LBMLX_LIB = $(LBMLX_PATH)/libmlx.a
+INC_MLX = -L$(LBMLX_PATH) -lmlx -lXext -lX11 -lm -lz
 
-OBJECTS = $(SOURCES:.c=.o)
+# Fuentes Mandatory
+SRC = \
+	Mandatory/animations/animation.c \
+	Mandatory/free/free.c \
+	Mandatory/free/free_engine.c \
+	Mandatory/init/initialize_engine.c \
+	Mandatory/init/initialize_game.c \
+	Mandatory/init/initialize_player.c \
+	Mandatory/init_game.c \
+	Mandatory/load_image.c \
+	Mandatory/main.c \
+	Mandatory/map_parsing/assign_line.c \
+	Mandatory/map_parsing/check_colors.c \
+	Mandatory/map_parsing/check_textures.c \
+	Mandatory/map_parsing/checks.c \
+	Mandatory/map_parsing/get_exit.c \
+	Mandatory/map_parsing/parse_map.c \
+	Mandatory/map_parsing/parsing_utils.c \
+	Mandatory/map_parsing/validate_map.c \
+	Mandatory/mini_map/draw_minimap.c \
+	Mandatory/mini_map/mini_map.c \
+	Mandatory/move/keys.c \
+	Mandatory/move/move_player.c \
+	Mandatory/move/move_utils.c \
+	Mandatory/move/open_door.c \
+	Mandatory/ray_casting/check_wall.c \
+	Mandatory/ray_casting/check_wall_utils.c \
+	Mandatory/ray_casting/check_exit_utils.c \
+	Mandatory/ray_casting/raycasting.c \
+	Mandatory/ray_casting/raycasting_utils.c \
+	Mandatory/ray_casting/render.c \
+	Mandatory/ray_casting/render_exit.c \
+	Mandatory/ray_casting/render_background.c \
+	Mandatory/utils/get_pixel_color.c
 
-# Compilación principal
+# Fuentes Bonus
+SRC_BONUS = \
+	Bonus/animations/animation.c \
+	Bonus/free/free.c \
+	Bonus/free/free_engine.c \
+	Bonus/init/initialize_engine.c \
+	Bonus/init/initialize_game.c \
+	Bonus/init/initialize_player.c \
+	Bonus/init_game.c \
+	Bonus/load_image.c \
+	Bonus/main.c \
+	Bonus/map_parsing/assign_line.c \
+	Bonus/map_parsing/check_colors.c \
+	Bonus/map_parsing/check_textures.c \
+	Bonus/map_parsing/checks.c \
+	Bonus/map_parsing/get_exit.c \
+	Bonus/map_parsing/parse_map.c \
+	Bonus/map_parsing/parsing_utils.c \
+	Bonus/map_parsing/validate_map.c \
+	Bonus/mini_map/draw_minimap.c \
+	Bonus/mini_map/mini_map.c \
+	Bonus/move/keys.c \
+	Bonus/move/move_player.c \
+	Bonus/move/move_utils.c \
+	Bonus/move/open_door.c \
+	Bonus/ray_casting/check_wall.c \
+	Bonus/ray_casting/check_wall_utils.c \
+	Bonus/ray_casting/check_exit_utils.c \
+	Bonus/ray_casting/raycasting.c \
+	Bonus/ray_casting/raycasting_utils.c \
+	Bonus/ray_casting/render.c \
+	Bonus/ray_casting/render_exit.c \
+	Bonus/ray_casting/render_background.c \
+	Bonus/utils/get_pixel_color.c
+
+# Objetos
+OBJ = $(SRC:.c=.o)
+OBJ_BONUS = $(SRC_BONUS:.c=.o)
+
+# Reglas
 all: $(NAME)
 
-$(NAME): $(OBJECTS) $(LIBFT_LIB) $(LBMLX_LIB)
-	$(CC) $(CFLAGS) $(OBJECTS) $(INC_LIB) $(INC_MLX) -o $(NAME)
+$(NAME): $(OBJ) $(LIBFT_LIB) $(LBMLX_LIB)
+	$(CC) $(CFLAGS) $(OBJ) $(INC_LIB) $(INC_MLX) -o $(NAME)
 
-# Compilar libft
+bonus: $(BONUS_NAME)
+
+$(BONUS_NAME): $(OBJ_BONUS) $(LIBFT_LIB) $(LBMLX_LIB)
+	$(CC) $(CFLAGS) $(OBJ_BONUS) $(INC_LIB) $(INC_MLX) -o $(BONUS_NAME)
+
+# Compilar libft y MLX
 $(LIBFT_LIB):
 	make -C $(LIBFT_PATH)
 
-# Compilar MLX
 $(LBMLX_LIB):
 	make -C $(LBMLX_PATH)
 
-# Compilar archivos .o
+# Compilación de objetos
 %.o: %.c
-	$(CC) $(CFLAGS) -I$(LBMLX_PATH) -I$(LIBFT_PATH) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(LIBFT_PATH) -I$(LBMLX_PATH) -c $< -o $@
 
-# Limpiar
+# Limpieza
 clean:
-	$(RM) $(OBJECTS)
+	$(RM) $(OBJ) $(OBJ_BONUS)
 	make -C $(LIBFT_PATH) clean
 	make -C $(LBMLX_PATH) clean
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(BONUS_NAME)
 	make -C $(LIBFT_PATH) fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
