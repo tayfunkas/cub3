@@ -1,6 +1,6 @@
 # Cub3D
 
-**Cub3D** is a 3D raycasting project developed as part of the 42 curriculum. This bonus version extends the mandatory project by introducing animated walls and a dynamic game mechanic: walls cycle through colors until the player reaches a specific point in the map — the black spot — which stabilizes the environment.
+**Cub3D** is a 3D raycasting project developed as part of the 42 curriculum. This bonus version extends the mandatory project by introducing animated walls and a dynamic game mechanic: walls cycle through colors until the player reaches a specific point in the map — the black spot — which stabilizes the environment. This is a group project and I had the pleasure of working with Gabriel [https://github.com/gabrielrial]. While Gabril tackled the raycasting logic, I focused on parsing and validation. 
 
 ---
 
@@ -42,5 +42,6 @@
 
 Note: Playing the game requires the MiniLibX graphics library. The project includes a local copy that is used during compilation.
 
-[Screencast from 07-11-2025 04:02:09 PM.webm](https://github.com/user-attachments/assets/ac3db405-257e-4285-920e-ec1c3b6d5178)
+[ezgif-1615db326c0e32.webm](https://github.com/user-attachments/assets/1efc9034-9c49-4970-a2ee-f316d1261cfb)
+
 
